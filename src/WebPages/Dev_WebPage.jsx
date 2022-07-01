@@ -8,6 +8,7 @@ import AddClient from '../components/AddClient';
 import ManageClients from '../components/ManageClients';
 import Image from '../components/images/BackgroundImage_Default.jpg'
 import AddContract from '../components/AddContract';
+import ManageProfile from '../components/ManageProfile';
 import 'bootstrap/dist/css/bootstrap.min.css';
 class MainPage extends Component {
     state = {  } 
@@ -34,7 +35,7 @@ class MainPage extends Component {
             {/*<ManageContract/> */}
             
          {/*<AddContract/> */}
-         <AddContract/>
+        <ManageProfile/>
         </div>
         </div>
         );

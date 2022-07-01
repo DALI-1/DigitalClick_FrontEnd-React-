@@ -66,8 +66,8 @@ class NavBar extends Component {
         
         
         <NavDropdown title="Profile" id="navbarScrollingDropdown">
-          <NavDropdown.Item href="Manage Profile3">Manage Profile</NavDropdown.Item>
-          <NavDropdown.Item href="Settings">Settings</NavDropdown.Item>
+          <NavDropdown.Item href="ManageProfile">Manage Profile</NavDropdown.Item>
+         
           <NavDropdown.Divider />
           <NavDropdown.Item href="Logout">
             Logout

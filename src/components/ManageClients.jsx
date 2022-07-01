@@ -77,7 +77,7 @@ class ManageClients extends Component {
   </div>
 </div>
 
-                     <a class="btn btn-outline-primary btn-sm" href="#" data-abc="true">View Contracts</a>
+                     <a class="btn btn-outline-primary btn-sm" href="ManageClientContracts" data-abc="true">View Contracts</a>
 
 
                        <Form>
@@ -133,7 +133,7 @@ class ManageClients extends Component {
   </div>
 </div>
 
-                     <a class="btn btn-outline-primary btn-sm" href="#" data-abc="true">View Contracts</a>
+                     <a class="btn btn-outline-primary btn-sm" href="ManageClientContracts" data-abc="true">View Contracts</a>
 
 
                        <Form>
@@ -191,7 +191,7 @@ class ManageClients extends Component {
   </div>
 </div>
 
-                     <a class="btn btn-outline-primary btn-sm" href="#" data-abc="true">View Contracts</a>
+                     <a class="btn btn-outline-primary btn-sm" href="ManageClientContracts" data-abc="true">View Contracts</a>
 
 
                        <Form>

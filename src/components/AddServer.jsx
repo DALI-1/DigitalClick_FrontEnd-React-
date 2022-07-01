@@ -103,10 +103,10 @@ class AddServer extends Component {
       
 
 
+      <div class="row justify-content-center">
+      <button type="button" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">Add Server</button>
+</div>
       
-      <Button variant="primary" type="submit">
-        Add Server
-      </Button>
     </Form>
     </MDBContainer>
 

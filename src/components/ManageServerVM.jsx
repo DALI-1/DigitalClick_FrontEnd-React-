@@ -42,9 +42,16 @@ export function Popup() {
   );
 }
 
+
+
+
 class ManageContract extends Component {
-    state = {  modalShow:false } 
-    render() { 
+    state = { modalShow:false } 
+    
+   
+
+    render()
+    { 
         return (
             <reactElement>
 <Container>
@@ -61,7 +68,7 @@ class ManageContract extends Component {
         />
         <Button variant="outline-success">Search</Button>
       </Form>
-        <p class="text-justify" style={{color:"Black"}}>Contracts Management Table</p>
+        <p class="text-justify" style={{color:"Black"}}>The Server Contracts</p>
         <br/>
         <Table striped bordered hover responsive>
       <thead>
@@ -79,9 +86,15 @@ class ManageContract extends Component {
           <th> Edit</th>
         </tr>
       </thead>
+
+
+
+
+
+
+
+
       <tbody>
-        
-        
         <tr>
           <td>1</td>
           <td>IBM X1056020</td>
@@ -96,9 +109,9 @@ class ManageContract extends Component {
           <td>
 
           <Container>
-          <Row>
+      <Row>
       <Col>
-      <IconButton  href="EditContract" aria-label="delete" size="large">
+      <IconButton href="EditContract" aria-label="delete" size="large">
   <AddIcon fontSize="inherit" />
 </IconButton>
       </Col>
@@ -106,7 +119,7 @@ class ManageContract extends Component {
       <Popup  show={this.state.modalShow}
         onHide={() => this.state.modalShow=true}/>
       </Col>
-     
+      
       </Row>
       
     </Container>
@@ -116,6 +129,7 @@ class ManageContract extends Component {
 
           </td>
         </tr>
+        
         
       </tbody>
     </Table>

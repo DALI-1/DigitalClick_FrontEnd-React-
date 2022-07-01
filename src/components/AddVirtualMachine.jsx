@@ -40,10 +40,10 @@ class AddVirtualMachine extends Component {
       
 
 
+      <div class="row justify-content-center">
+      <button type="button" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">Add Virtual Machine</button>
+</div>
       
-      <Button variant="primary" type="submit">
-        Add Virtual Machine
-      </Button>
     </Form>
     </MDBContainer>
 

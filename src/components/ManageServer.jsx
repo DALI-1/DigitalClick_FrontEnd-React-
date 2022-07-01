@@ -44,7 +44,7 @@ class MangeServer extends Component {
                      <p class="text-muted"> MAC:D1-1E-D0-0A-C9-C6</p>
                      <p class="text-muted"> System:Ubuntu</p><a class="btn btn-outline-primary btn-sm" href="#" data-abc="true">View Virtual Machines</a>
                      <br></br>
-                     <a class="btn btn-outline-primary btn-sm" href="#" data-abc="true">View Contracts</a>
+                     <a class="btn btn-outline-primary btn-sm" href="ManageServerContracts" data-abc="true">View Contracts</a>
 
 
                        <Form>
@@ -75,7 +75,7 @@ class MangeServer extends Component {
                      <p class="text-muted"> MAC:D1-1E-D0-0A-C9-C6</p>
                      <p class="text-muted"> System:Ubuntu</p><a class="btn btn-outline-primary btn-sm" href="#" data-abc="true">View Virtual Machines</a>
                      <br></br>
-                     <a class="btn btn-outline-primary btn-sm" href="#" data-abc="true">View Contracts</a>
+                     <a class="btn btn-outline-primary btn-sm" href="ManageServerContracts" data-abc="true">View Contracts</a>
                      <Form>
                       <Form.Check 
                     type="switch"
@@ -101,7 +101,7 @@ class MangeServer extends Component {
                      <p class="text-muted"> MAC:D1-1E-D0-0A-C9-C6</p>
                      <p class="text-muted"> System:Ubuntu</p><a class="btn btn-outline-primary btn-sm" href="#" data-abc="true">View Virtual Machines</a>
                      <br></br>
-                     <a class="btn btn-outline-primary btn-sm" href="#" data-abc="true">View Contracts</a>
+                     <a class="btn btn-outline-primary btn-sm" href="ManageServerContracts" data-abc="true">View Contracts</a>
                      <Form>
                       <Form.Check 
                     type="switch"

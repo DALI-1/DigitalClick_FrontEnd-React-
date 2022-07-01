@@ -230,12 +230,12 @@ class AddClient extends Component {
 
       
       
-
+      <div class="row justify-content-center">
+      <button type="button" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">Add Client</button>
+</div>
 
       
-      <Button variant="primary" type="submit">
-        Add Client
-      </Button>
+      
 
       
     </Form>
