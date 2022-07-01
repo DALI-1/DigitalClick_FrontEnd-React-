@@ -42,8 +42,8 @@ class MangeServer extends Component {
                      <p class="text-muted"> Server: IBM System x3650 </p>
                      <p class="text-muted"> IP:192.4.8.14</p>
                      <p class="text-muted"> MAC:D1-1E-D0-0A-C9-C6</p>
-                     <p class="text-muted"> System:Ubuntu</p><a class="btn btn-outline-primary btn-sm" href="#" data-abc="true">View Virtual Machines</a>
-                     <br></br>
+                     <p class="text-muted"> System:Ubuntu</p><a class="btn btn-outline-primary btn-sm" href="ManageServerVM" data-abc="true">View Virtual Machines</a>
+                     <br/>
                      <a class="btn btn-outline-primary btn-sm" href="ManageServerContracts" data-abc="true">View Contracts</a>
 
 
@@ -73,7 +73,7 @@ class MangeServer extends Component {
                      <p class="text-muted"> Server: IBM System x3650 </p>
                      <p class="text-muted"> IP:192.4.8.14</p>
                      <p class="text-muted"> MAC:D1-1E-D0-0A-C9-C6</p>
-                     <p class="text-muted"> System:Ubuntu</p><a class="btn btn-outline-primary btn-sm" href="#" data-abc="true">View Virtual Machines</a>
+                     <p class="text-muted"> System:Ubuntu</p><a class="btn btn-outline-primary btn-sm" href="ManageServerVM" data-abc="true">View Virtual Machines</a>
                      <br></br>
                      <a class="btn btn-outline-primary btn-sm" href="ManageServerContracts" data-abc="true">View Contracts</a>
                      <Form>
@@ -99,7 +99,7 @@ class MangeServer extends Component {
                      <p class="text-muted"> Server: IBM System x3650 </p>
                      <p class="text-muted"> IP:192.4.8.14</p>
                      <p class="text-muted"> MAC:D1-1E-D0-0A-C9-C6</p>
-                     <p class="text-muted"> System:Ubuntu</p><a class="btn btn-outline-primary btn-sm" href="#" data-abc="true">View Virtual Machines</a>
+                     <p class="text-muted"> System:Ubuntu</p><a class="btn btn-outline-primary btn-sm" href="ManageServerVM" data-abc="true">View Virtual Machines</a>
                      <br></br>
                      <a class="btn btn-outline-primary btn-sm" href="ManageServerContracts" data-abc="true">View Contracts</a>
                      <Form>

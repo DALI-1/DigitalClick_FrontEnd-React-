@@ -68,21 +68,18 @@ class ManageContract extends Component {
         />
         <Button variant="outline-success">Search</Button>
       </Form>
-        <p class="text-justify" style={{color:"Black"}}>The Server Contracts</p>
+        <p class="text-justify" style={{color:"Black"}}>The Server VM partitions</p>
         <br/>
         <Table striped bordered hover responsive>
       <thead>
         <tr>
-          <th># Contract ID</th>
-          <th>Server Name</th>
+          <th>#  ID</th>
+         
           <th>Virtual Machine</th>
           <th>Client</th>
-          <th>Payment Type</th>
-          <th>Price</th>
+          
           <th>Next Facturation date</th>
-          <th>Backup</th>
-          <th>SSL Ending date</th>
-          <th>Access status tempass</th>
+          
           <th> Edit</th>
         </tr>
       </thead>
@@ -97,15 +94,12 @@ class ManageContract extends Component {
       <tbody>
         <tr>
           <td>1</td>
-          <td>IBM X1056020</td>
+          
           <td>VMWare V1.5.2.3</td>
           <td><a href="#"><Image  roundedCircle={true} style={{width: '50px',height:'50px'}} src={require('./images/EXIST_Logo.png')}/></a></td>
-          <td>Monthly</td>
-          <td>50$</td>
+          
           <td>15/09/2020</td>
-          <td>Yes</td>
-          <td>15/09/2022</td>
-          <td>Normal</td>
+          
           <td>
 
           <Container>
