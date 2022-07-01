@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
+import Image from 'react-bootstrap/Image'
 class AddServer extends Component {
     state = {  } 
     render() { 
@@ -9,7 +10,8 @@ class AddServer extends Component {
           <div class="shadow  p-5  mb-5 mt-5 bg-light rounded" >
                 <div class="shadow  p-1  mb-1  bg-light rounded">
                 <div class="d-flex justify-content-center mb-4">
-                <img  src={require('./images/Server_Default_Small.png')} alt="Category"/>
+                <Image  roundedCircle={true} style={{width: '150px',height:'150px'}} src={require('./images/Server_Logo.gif')}/>
+                
                 </div>
                 </div>
                 <MDBContainer style={{marginTop:"30px"}}>

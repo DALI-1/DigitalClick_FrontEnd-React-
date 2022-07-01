@@ -98,7 +98,7 @@ class ManageClients extends Component {
                <div class="col-md-4 col-sm-6">
                  <div class="card mb-30"><a class="card-img-tiles" href="#" data-abc="true">
                      <div class="inner">
-                       <div class="main-img"><img src={require('./images/EXIST_Logo.png')} alt="Category"/></div>
+                       <div class="main-img"><img src={require('./images/Delice_Logo.jpg')} alt="Category"/></div>
                        <div class="thumblist"><img src={require('./images/Client_Default_Picture.png')} alt="Category"/><img src={require('./images/Tunisia_Flag.png')} alt="Category"/></div>
                      </div></a>
                    <div class="card-body text-center">
@@ -156,7 +156,7 @@ class ManageClients extends Component {
                <div class="col-md-4 col-sm-6">
                  <div class="card mb-30"><a class="card-img-tiles" href="#" data-abc="true">
                      <div class="inner">
-                       <div class="main-img"><img src={require('./images/EXIST_Logo.png')} alt="Category"/></div>
+                       <div class="main-img"><img src={require('./images/Delice_Logo.jpg')} alt="Category"/></div>
                        <div class="thumblist"><img src={require('./images/Client_Default_Picture.png')} alt="Category"/><img src={require('./images/Tunisia_Flag.png')} alt="Category"/></div>
                      </div></a>
                    <div class="card-body text-center">

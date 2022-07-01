@@ -56,7 +56,7 @@ class NavBar extends Component {
         </NavDropdown>
         <NavDropdown title="Manage Contracts" id="navbarScrollingDropdown">
           <NavDropdown.Item href="ManageContracts">Consult Contracts</NavDropdown.Item>
-          <NavDropdown.Item href="AddClient">Add New Contract</NavDropdown.Item>
+          <NavDropdown.Item href="AddContract">Add New Contract</NavDropdown.Item>
           <NavDropdown.Divider />
           
         </NavDropdown>

@@ -7,6 +7,7 @@ import AddVirtualMachine from '../components/AddVirtualMachine';
 import AddClient from '../components/AddClient';
 import ManageClients from '../components/ManageClients';
 import Image from '../components/images/BackgroundImage_Default.jpg'
+import AddContract from '../components/AddContract';
 import 'bootstrap/dist/css/bootstrap.min.css';
 class MainPage extends Component {
     state = {  } 
@@ -31,8 +32,9 @@ class MainPage extends Component {
               {/*<AddClient/> */}
              {/*<ManageClients/> */}
             {/*<ManageContract/> */}
-            <AddServer/>
-         
+            
+         {/*<AddContract/> */}
+         <AddContract/>
         </div>
         </div>
         );
