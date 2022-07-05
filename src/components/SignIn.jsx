@@ -57,16 +57,17 @@ export default function SignIn() {
             Sign in
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <TextField
+          <TextField
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="Username"
+              label="Username"
+              name="Username"
+              autoComplete="Username"
               autoFocus
             />
+            
             <TextField
               margin="normal"
               required
@@ -77,6 +78,7 @@ export default function SignIn() {
               id="password"
               autoComplete="current-password"
             />
+           
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
