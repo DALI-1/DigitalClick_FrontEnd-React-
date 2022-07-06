@@ -1,4 +1,5 @@
-import * as React from 'react';
+
+import React, { useState,useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,6 +13,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+
 
 function Copyright(props) {
   return (
@@ -29,13 +31,67 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
+  let [SignInMessage, setSignInMessage] = React.useState("");
+
+  const CallSignUpAPI = async (url) => {
+    try {
+      const response = await fetch(url);
+      const json = await response.json();
+      
+      return(json)
+    } catch (error) {
+      console.log("error", error);
+      return("Error:Yes");
+    }
+  };
+
+
+  useEffect(() => {
+   
+}, []);
+
+
+
+
+
+
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    let Username= data.get('Username')
+    let First_Name= data.get('First_Name')
+    let Last_Name=data.get('Last_Name')
+    let Password=data.get('Password')
+    let C_Password= data.get('C_Password')
+    const url = "http://localhost:8000/api/SignUp?Username="+Username+"&Password="+Password+"&C_Password="+C_Password+"&First_Name="+First_Name+"&Last_Name="+Last_Name;
+    let added=0
+    let Json=CallSignUpAPI(url)
+     Json.then((result)=>{
+      for( var property in result)
+      {
+        if(property==="UserAdded" && result[property]==="Yes")
+        {
+               
+               added=1
+               setSignInMessage("User Successfully Added!")
+               setTimeout(() => {  console.log("World!"); }, 2000);
+               window.location.replace('/SignIn')
+               
+        }
+      }
+      if(added===0)
+      {
+        
+        setSignInMessage("Error Username exist or the Password is wrong!")
+      }
+      
+
+     }
+     );
+    
+    
   };
 
   return (
@@ -61,10 +117,10 @@ export default function SignUp() {
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="First_Name"
                   required
                   fullWidth
-                  id="firstName"
+                  id="First_Name"
                   label="First Name"
                   autoFocus
                 />
@@ -73,22 +129,13 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  id="lastName"
+                  id="Last_Name"
                   label="Last Name"
-                  name="lastName"
+                  name="Last_Name"
                   autoComplete="family-name"
                 />
               </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                />
-              </Grid>
+              
               <Grid item xs={12} sm={12}>
                 <TextField
                   required
@@ -103,9 +150,9 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  name="password"
+                  name="Password"
                   label="Password"
-                  type="password"
+                  type="Password"
                   id="password"
                   autoComplete="new-password"
                 />
@@ -114,10 +161,10 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  name="ConfirmPassword"
+                  name="C_Password"
                   label="ConfirmPassword"
                   type="password"
-                  id="Confirmpassword"
+                  id="C_password"
                   autoComplete="new-password"
                 />
               </Grid>
@@ -136,6 +183,11 @@ export default function SignUp() {
             >
               Sign Up
             </Button>
+            <Grid container justifyContent="center">
+              <Grid item>
+                <h4>{SignInMessage}</h4>
+              </Grid>
+            </Grid>
             <Grid container justifyContent="flex-end">
               <Grid item>
                 <Link href="#" variant="body2">
