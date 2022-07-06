@@ -16,9 +16,20 @@ import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import FormControl from 'react-bootstrap/FormControl';
 import Image from 'react-bootstrap/Image'
-
+import Cookies from 'universal-cookie';
 class NavBar extends Component {
     state = {  } 
+
+
+
+    HandleLogout= ()=>{
+       const cookies = new Cookies()
+       cookies.remove("Username")
+       cookies.remove("Password")
+       cookies.remove("AccessToken")
+       window.location.replace('/SignIn')
+      
+    }
 
     render() { 
         return (
@@ -69,7 +80,8 @@ class NavBar extends Component {
           <NavDropdown.Item href="ManageProfile">Manage Profile</NavDropdown.Item>
          
           <NavDropdown.Divider />
-          <NavDropdown.Item href="Logout">
+          <NavDropdown.Item onClick={this.HandleLogout}>
+
             Logout
           </NavDropdown.Item>
         </NavDropdown>

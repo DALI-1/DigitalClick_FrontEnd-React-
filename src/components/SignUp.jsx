@@ -13,6 +13,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Cookies from 'universal-cookie';
 
 
 function Copyright(props) {
@@ -76,7 +77,13 @@ export default function SignUp() {
                
                added=1
                setSignInMessage("User Successfully Added!")
-               setTimeout(() => {  console.log("World!"); }, 2000);
+               setTimeout(() => {   }, 2000);
+               const cookies = new Cookies();
+               cookies.remove("Username");
+               cookies.remove("Password");
+               cookies.remove("AccessToken");
+
+               
                window.location.replace('/SignIn')
                
         }

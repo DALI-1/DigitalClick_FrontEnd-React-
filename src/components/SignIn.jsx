@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -12,6 +13,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Cookies from 'universal-cookie';
+import {useEffect} from 'react';
 
 function Copyright(props) {
   return (
@@ -29,13 +32,153 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
+  let [SignInMessage, setSignInMessage] = React.useState("");
+ 
+  let [Token, setToken] = React.useState("");
+  var CryptoJS = require("crypto-js");
+  const cookies = new Cookies();
+
+    
+  useEffect(() => {
+   
+    let Username_Check=cookies.get("Username")
+    let Password_Check=cookies.get("Password")
+    if(Username_Check || Password_Check)
+  {
+    
+
+    
+    handleCookie()
+   
+    
+  }
+  else
+  {
+    
+  }  
+
+
+  }, []); 
+  
+  
+  
+
+  
+  const CallSignInAPI = async (url) => {
+    try {
+      const response = await fetch(url);
+      const json = await response.json();
+      
+      return(json)
+    } catch (error) {
+      console.log("error", error);
+      return("Error:Yes");
+    }
+  };
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+      let Username=data.get('Username')
+      let Password=data.get('Password')
+      const url = "http://localhost:8000/api/SignIn?Username="+Username+"&Password="+Password
+    let Json=CallSignInAPI(url)
+    let LoggedIn=0
+    Json.then((result)=>{
+      for( var property in result)
+      {
+        if(property==="UserValidated" && result[property]==="Yes")
+        {
+               
+                    LoggedIn=1;
+
+                    setToken(result['Token'])
+
+                    var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(Password), 'DigitalClick').toString();
+                  // var bytes = CryptoJS.AES.decrypt(ciphertext, 'my-secret-key@123');
+                  // var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+                  //To Decrypte use this!
+                    
+                    cookies.set('Username', Username);
+                cookies.set('AccessToken',result['Token']);
+                cookies.set('Password', ciphertext);
+                setSignInMessage("You have been logged in Successfully!")
+                setTimeout(() => {   }, 2000);
+                window.location.replace('/')
+                  //  console.Log(result['Token']);
+              // console.Log("Logged in!");
+               
+        }
+      }
+      if(LoggedIn===0)
+      {
+        setSignInMessage("Error! Wrong password or Username")
+        
+        //console.Log("Wrong password or Username!");
+      }
+      
+
+     }
+     );
+
+
+  
+  };
+
+
+
+  const handleCookie = () => {
+   
+      let Username=cookies.get("Username")
+      let Password_ciphered=cookies.get("Password")
+      var bytes = CryptoJS.AES.decrypt(Password_ciphered, 'DigitalClick');
+       var Password = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+
+
+
+      const url = "http://localhost:8000/api/SignIn?Username="+Username+"&Password="+Password
+    let Json=CallSignInAPI(url)
+    let LoggedIn=0
+    Json.then((result)=>{
+      for( var property in result)
+      {
+        if(property==="UserValidated" && result[property]==="Yes")
+        {
+               
+                    LoggedIn=1;
+
+                    setToken(result['Token'])
+
+                    var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(Password), 'DigitalClick').toString();
+                  // var bytes = CryptoJS.AES.decrypt(ciphertext, 'my-secret-key@123');
+                  // var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+                  //To Decrypte use this!
+                    
+                    cookies.set('Username', Username);
+                cookies.set('AccessToken',result['Token']);
+                cookies.set('Password', ciphertext);
+                setSignInMessage("You have been logged in Successfully!")
+               
+                window.location.replace('/')
+                  //  console.Log(result['Token']);
+              // console.Log("Logged in!");
+               
+        }
+      }
+      if(LoggedIn===0)
+      {
+        setSignInMessage("Error! Wrong password or Username")
+        
+        //console.Log("Wrong password or Username!");
+      }
+      
+
+     }
+     );
+
+
+  
   };
 
   return (
@@ -65,6 +208,7 @@ export default function SignIn() {
               label="Username"
               name="Username"
               autoComplete="Username"
+              
               autoFocus
             />
             
@@ -72,10 +216,11 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
-              name="password"
+              name="Password"
               label="Password"
               type="password"
-              id="password"
+              
+              id="Password"
               autoComplete="current-password"
             />
            
@@ -91,6 +236,11 @@ export default function SignIn() {
             >
               Sign In
             </Button>
+            <Grid container justifyContent="center">
+              <Grid item>
+                <h4>{SignInMessage}</h4>
+              </Grid>
+            </Grid>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
@@ -98,7 +248,7 @@ export default function SignIn() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="SignUp" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
