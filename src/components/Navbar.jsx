@@ -56,6 +56,7 @@ class NavBar extends Component {
           <NavDropdown.Item href="ManageServers">Consult Servers</NavDropdown.Item>
           <NavDropdown.Item href="AddServer">Add New Server</NavDropdown.Item>
           <NavDropdown.Item href="AddVirtualMachine">Add New VirtualMachine</NavDropdown.Item>
+          <NavDropdown.Item href="AddOS">Add New OperatingSystem</NavDropdown.Item>
           <NavDropdown.Divider />
           
         </NavDropdown>

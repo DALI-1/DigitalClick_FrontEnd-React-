@@ -14,6 +14,7 @@ import ManageContracts from './WebPages/ManageContracts_WebPage.jsx';
 import ManageServerVM from './WebPages/ManageServerVM_WebPage.jsx';
 import ManageServerContracts from './WebPages/ManageServerContracts_WebPage.jsx';
 import ManageClientContracts from './WebPages/ManageClientContracts_WebPage.jsx';
+import AddOS from './WebPages/AddOS_WebPage.jsx';
 import ManageProfile from './WebPages/ManageProfile_WebPage.jsx';
 import DevPage from './WebPages/Dev_WebPage.jsx';
 import AddContract from './WebPages/AddContract_WebPage.jsx';
@@ -42,6 +43,7 @@ function App() {
         <Route exact path="/AddVirtualMachine" component={AddVirtualMachine}/>
         <Route exact path="/AddContract" component={AddContract}/>
         <Route exact path="/EditContract" component={EditContract}/>
+        <Route exact path="/AddOS" component={AddOS}/>
         
         <Route exact path="/" component={Home}/>
         </Switch>
