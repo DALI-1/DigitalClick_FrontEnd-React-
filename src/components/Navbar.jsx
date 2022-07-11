@@ -57,6 +57,9 @@ class NavBar extends Component {
           <NavDropdown.Item href="AddServer">Add New Server</NavDropdown.Item>
           <NavDropdown.Item href="AddVirtualMachine">Add New VirtualMachine</NavDropdown.Item>
           <NavDropdown.Item href="AddOS">Add New OperatingSystem</NavDropdown.Item>
+          <NavDropdown.Item href="AddVMCompany">Add VM Company</NavDropdown.Item>
+          <NavDropdown.Item href="AddOSCompany">Add OS Company</NavDropdown.Item>
+          <NavDropdown.Item href="AddServiceProvider">Add Service Provider</NavDropdown.Item>
           <NavDropdown.Divider />
           
         </NavDropdown>
@@ -67,8 +70,10 @@ class NavBar extends Component {
           
         </NavDropdown>
         <NavDropdown title="Manage Contracts" id="navbarScrollingDropdown">
-          <NavDropdown.Item href="ManageContracts">Consult Contracts</NavDropdown.Item>
-          <NavDropdown.Item href="AddContract">Add New Contract</NavDropdown.Item>
+          <NavDropdown.Item href="ManageContracts">Consult Server Parition Contracts</NavDropdown.Item>
+          <NavDropdown.Item href="ManageContracts">Consult Server  Contracts</NavDropdown.Item>
+          <NavDropdown.Item href="AddContract">Add New Server Partition Contract</NavDropdown.Item>
+          <NavDropdown.Item href="AddContract">Add New Server Contract</NavDropdown.Item>
           <NavDropdown.Divider />
           
         </NavDropdown>

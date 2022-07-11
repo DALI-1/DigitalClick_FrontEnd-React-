@@ -82,14 +82,108 @@ class AddServer extends Component {
         style={{color: 'black'}}
         >Operating System:</Form.Label>
         <Form.Select required>
-          <option>Linux</option>
-          <option>Windows</option>
+          <option>Ubuntu 1.2</option>
+          <option>Windows 11</option>
         </Form.Select>
        
         <Form.Text className="text-muted">
           
         </Form.Text>
       </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label
+        style={{color: 'black'}}
+        >Number of Sockets:</Form.Label>
+        <Form.Control type="number"  placeholder="Enter Number of Sockets " />
+        <Form.Text className="text-muted">
+          
+        </Form.Text>
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label
+        style={{color: 'black'}}
+        >Number of Virtual Cores </Form.Label>
+        <Form.Control type="number"  placeholder="Enter Number of VCores per CPU " />
+        <Form.Text className="text-muted">
+          
+        </Form.Text>
+      </Form.Group>
+
+      
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label
+        style={{color: 'black'}}
+        >RAM:</Form.Label>
+        <Form.Control type="number"  placeholder="Enter RAM size" />
+        <Form.Text className="text-muted">
+          
+        </Form.Text>
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label
+        style={{color: 'black'}}
+        >Server Type:</Form.Label>
+        <Form.Select required>
+          <option>Real Machine</option>
+          <option>Virtual Machine</option>
+        </Form.Select>
+        
+       
+        <Form.Text className="text-muted">
+          
+        </Form.Text>
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label
+        style={{color: 'black'}}
+        >Service Provider:</Form.Label>
+        <Form.Select required>
+          <option>Provider 1</option>
+          <option>Provider 2</option>
+          <option>Provider 3</option>
+        </Form.Select>
+       
+        <Form.Text className="text-muted">
+          
+        </Form.Text>
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label
+        style={{color: 'black'}}
+        >Bought Date: </Form.Label>
+        <Form.Control type="date"  />
+        <Form.Text className="text-muted">
+          
+        </Form.Text>
+      </Form.Group>
+      
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label
+        style={{color: 'black'}}
+        >Payment Type:</Form.Label>
+        <Form.Select required>
+          <option>Per Month</option>
+          <option>Per Semester</option>
+          <option>Per Year</option>
+        </Form.Select>
+       
+        <Form.Text className="text-muted">
+          
+        </Form.Text>
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label
+        style={{color: 'black'}}
+        >Next Facturation Date : </Form.Label>
+        <Form.Control type="date"  />
+        <Form.Text className="text-muted">
+          
+        </Form.Text>
+      </Form.Group>
+
+
 
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label

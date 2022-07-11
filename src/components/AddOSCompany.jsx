@@ -18,34 +18,22 @@ class AddVirtualMachine extends Component {
                 <MDBContainer style={{marginTop:"30px"}}>
 
 <Form>
-<Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label
-        style={{color: 'black'}}
-        >OS Company:</Form.Label>
-        <Form.Select required>
-          <option>Windows</option>
-          <option>Linux</option>
-        </Form.Select>
-       
-        <Form.Text className="text-muted">
-          
-        </Form.Text>
-      </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >OS Name:</Form.Label>
-        <Form.Control type="text" placeholder="OS name here" />
+        >OS Company name:</Form.Label>
+        <Form.Control type="text" placeholder="OS Company name here" />
         <Form.Text className="text-muted">
           
         </Form.Text>
       </Form.Group>
+    
 
       
 
 
       <div class="row justify-content-center">
-      <button type="button" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">Add OperatingSystem</button>
+      <button type="button" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">Add OS Company</button>
 </div>
       
     </Form>

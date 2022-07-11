@@ -68,18 +68,19 @@ class ManageContract extends Component {
         />
         <Button variant="outline-success">Search</Button>
       </Form>
-        <p class="text-justify" style={{color:"Black"}}>The Server VM partitions</p>
+        <p class="text-justify" style={{color:"Black"}}>The Partitions disks</p>
         <br/>
-        <Table striped bordered hover responsive>
+        <Table  bordered hover responsive>
       <thead>
         <tr>
-          <th>#  ID</th>
-         
-          <th>Virtual Machine</th>
-          <th>Client</th>
-          
-          <th>Next Facturation date</th>
-          
+          <th>#ID</th>
+          <th>Disk image:</th> 
+          <th>Disk Provider:</th>
+          <th>Disk Model:</th> 
+              
+          <th>Disk Type:</th>
+          <th>Disk Total size:</th>
+          <th>Partition Allocated size:</th>
           <th> Edit</th>
         </tr>
       </thead>
@@ -94,11 +95,13 @@ class ManageContract extends Component {
       <tbody>
         <tr>
           <td>1</td>
+          <td><a href="#"><Image  roundedCircle={true} style={{width: '50px',height:'50px'}} src={require('./images/Disk_Default_Picture.jpg')}/></a></td>
+          <td>ASUS</td>
+          <td>XBA1546</td>
           
-          <td>VMWare V1.5.2.3</td>
-          <td><a href="#"><Image  roundedCircle={true} style={{width: '50px',height:'50px'}} src={require('./images/EXIST_Logo.png')}/></a></td>
-          
-          <td>15/09/2020</td>
+          <td>M.2</td>
+          <td>512 GB</td>
+          <td>100 GB</td>
           
           <td>
 
@@ -117,10 +120,68 @@ class ManageContract extends Component {
       </Row>
       
     </Container>
-            
-            
-            
+          
+          </td>
+        </tr>
 
+        <tr>
+          <td>1</td>
+          <td><a href="#"><Image  roundedCircle={true} style={{width: '50px',height:'50px'}} src={require('./images/Disk_Default_Picture.jpg')}/></a></td>
+          <td>ASUS</td>
+          <td>XBA1546</td>
+          
+          <td>M.2</td>
+          <td>512 GB</td>
+          <td>100 GB</td>
+          
+          <td>
+
+          <Container>
+      <Row>
+      <Col>
+      <IconButton href="EditContract" aria-label="delete" size="large">
+  <AddIcon fontSize="inherit" />
+</IconButton>
+      </Col>
+      <Col>
+      <Popup  show={this.state.modalShow}
+        onHide={() => this.state.modalShow=true}/>
+      </Col>
+      
+      </Row>
+      
+    </Container>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td><a href="#"><Image  roundedCircle={true} style={{width: '50px',height:'50px'}} src={require('./images/Disk_Default_Picture.jpg')}/></a></td>
+          <td>ASUS</td>
+          <td>XBA1546</td>
+          
+          <td>M.2</td>
+          <td>512 GB</td>
+          <td>100 GB</td>
+          
+          <td>
+
+          <Container>
+      <Row>
+      <Col>
+      <IconButton href="EditContract" aria-label="delete" size="large">
+  <AddIcon fontSize="inherit" />
+</IconButton>
+      </Col>
+      <Col>
+      <Popup  show={this.state.modalShow}
+        onHide={() => this.state.modalShow=true}/>
+      </Col>
+      
+      </Row>
+      
+    </Container>
+          
           </td>
         </tr>
         

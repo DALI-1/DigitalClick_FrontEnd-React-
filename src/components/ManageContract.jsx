@@ -63,19 +63,21 @@ class ManageContract extends Component {
       </Form>
         <p class="text-justify" style={{color:"Black"}}>Contracts Management Table</p>
         <br/>
-        <Table striped bordered hover responsive>
+        <Table  bordered hover responsive>
       <thead>
         <tr>
           <th># Contract ID</th>
           <th>Server Name</th>
-          <th>Virtual Machine</th>
+          <th>Partition Name</th>
           <th>Client</th>
           <th>Payment Type</th>
           <th>Price</th>
+          <th>Start Facturation Date</th>
           <th>Next Facturation date</th>
           <th>Backup</th>
           <th>SSL Ending date</th>
           <th>Access status tempass</th>
+          <th>Description</th>
           <th> Edit</th>
         </tr>
       </thead>
@@ -85,14 +87,99 @@ class ManageContract extends Component {
         <tr>
           <td>1</td>
           <td>IBM X1056020</td>
-          <td>VMWare V1.5.2.3</td>
+          <td>Partition 1</td>
           <td><a href="#"><Image  roundedCircle={true} style={{width: '50px',height:'50px'}} src={require('./images/EXIST_Logo.png')}/></a></td>
           <td>Monthly</td>
           <td>50$</td>
           <td>15/09/2020</td>
+          <td>15/09/20025</td>
           <td>Yes</td>
           <td>15/09/2022</td>
           <td>Normal</td>
+          <td>Some info here</td>
+          <td>
+
+          <Container>
+          <Row>
+      <Col>
+      <IconButton  href="EditContract" aria-label="delete" size="large">
+  <AddIcon fontSize="inherit" />
+</IconButton>
+      </Col>
+      <Col>
+      <Popup  show={this.state.modalShow}
+        onHide={() => this.state.modalShow=true}/>
+      </Col>
+     
+      </Row>
+      
+    </Container>
+            
+            
+            
+
+          </td>
+        </tr>
+
+
+
+
+        <tr>
+          <td>1</td>
+          <td>IBM X1056020</td>
+          <td>Partition 1</td>
+          <td><a href="#"><Image  roundedCircle={true} style={{width: '50px',height:'50px'}} src={require('./images/EXIST_Logo.png')}/></a></td>
+          <td>Monthly</td>
+          <td>50$</td>
+          <td>15/09/2020</td>
+          <td>15/09/20025</td>
+          <td>Yes</td>
+          <td>15/09/2022</td>
+          <td>Normal</td>
+          <td>Some info here</td>
+          <td>
+
+          <Container>
+          <Row>
+      <Col>
+      <IconButton  href="EditContract" aria-label="delete" size="large">
+  <AddIcon fontSize="inherit" />
+</IconButton>
+      </Col>
+      <Col>
+      <Popup  show={this.state.modalShow}
+        onHide={() => this.state.modalShow=true}/>
+      </Col>
+     
+      </Row>
+      
+    </Container>
+            
+            
+            
+
+          </td>
+        </tr>
+
+
+
+
+
+
+
+        <tr>
+          <td>1</td>
+          <td>IBM X1056020</td>
+          <td>Partition 1</td>
+          <td><a href="#"><Image  roundedCircle={true} style={{width: '50px',height:'50px'}} src={require('./images/EXIST_Logo.png')}/></a></td>
+          <td>Monthly</td>
+          <td>50$</td>
+          <td>15/09/2020</td>
+          <td>15/09/20025</td>
+          <td>Yes</td>
+          <td>15/09/2022</td>
+          <td>Normal</td>
+          <td>Some info here</td>
           <td>
 
           <Container>

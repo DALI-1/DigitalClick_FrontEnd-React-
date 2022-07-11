@@ -18,15 +18,20 @@ class AddVirtualMachine extends Component {
                 <MDBContainer style={{marginTop:"30px"}}>
 
 <Form>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+<Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >VM Company name:</Form.Label>
-        <Form.Control type="text" placeholder="VM Company name here" />
+        >VM Company:</Form.Label>
+        <Form.Select required>
+          <option>Company 1</option>
+          <option>Company 2</option>
+        </Form.Select>
+       
         <Form.Text className="text-muted">
           
         </Form.Text>
       </Form.Group>
+      
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}

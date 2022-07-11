@@ -1,13 +1,14 @@
 import React,{Component} from 'react';
+
+
 import ManageServer from '../components/ManageServer';
 import Image from '../components/images/BackgroundImage_Default.jpg';
 import NotificationBell from '../components/Notification.jsx';
 import AddServer from '../components/AddServer';
-import AddVirtualMachine from '../components/AddVirtualMachine';
+import AddServiceProvider from '../components/AddServiceProvider';
 import AddClient from '../components/AddClient';
 import ManageClients from '../components/ManageClients';
-import ManageServerVM from '../components/ManageServerVM';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 class MainPage extends Component {
     state = {  } 
     render() { 
@@ -24,20 +25,17 @@ class MainPage extends Component {
       borderwidth:"20px"
       
     }}>
-           
-      
-      {/* <ManageServer/> */}
-      
-        {/*<AddServer/> */}
-         {/*<AddVirtualMachine/> */}
-          {/*<AddClient/> */}
-         {/*<ManageClients/> */}
-        {/*<ManageContract/> */}
-        <ManageServerVM/>
-      
-    </div>
-    </div>
-    
+          {/* <ManageServer/> */}
+          
+            {/*<AddServer/> */}
+             {/*<AddVirtualMachine/> */}
+              {/*<AddClient/> */}
+             {/*<ManageClients/> */}
+            {/*<ManageContract/> */}
+            <AddServiceProvider/>
+         
+        </div>
+        </div>
         );
     }
 }

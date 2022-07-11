@@ -50,11 +50,11 @@ class addContract extends Component {
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Rented Virtual Machine:</Form.Label>
+        >Rented Partition:</Form.Label>
         <Form.Select required>
           <option>None (The whole server)</option>
-          <option>Virtual Machine 1</option>
-          <option>Virtual Machine 2</option>
+          <option>Parition 1</option>
+          <option>Partition 2</option>
         </Form.Select>
        
         <Form.Text className="text-muted">
@@ -114,11 +114,12 @@ class addContract extends Component {
 
     </div>
     <div class="col-md">
+    
     <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Next Facturation date</Form.Label>
-        <Form.Control required disabled  type="int" value={"15/09/2022"} style={{
+        >Start Facturation date</Form.Label>
+        <Form.Control required   type="date"  style={{
             
         }}  />
         <Form.Text className="text-muted">
@@ -164,6 +165,19 @@ class addContract extends Component {
         style={{color: 'black'}}
         >Access Status Temppass</Form.Label>
         <Form.Control   type="text"  placeholder="Enter Access Status Temppass" />
+        <Form.Text className="text-muted">
+          
+        </Form.Text>
+      </Form.Group>
+        </div>  
+
+
+        <div class="col-md">
+    <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label
+        style={{color: 'black'}}
+        >Description</Form.Label>
+        <Form.Control   type="text"  placeholder="Enter Description" />
         <Form.Text className="text-muted">
           
         </Form.Text>
