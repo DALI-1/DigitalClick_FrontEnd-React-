@@ -42,9 +42,16 @@ export function Popup() {
   );
 }
 
+
+
+
 class ManageContract extends Component {
-    state = {  modalShow:false } 
-    render() { 
+    state = { modalShow:false } 
+    
+   
+
+    render()
+    { 
         return (
             <reactElement>
 <Container>
@@ -52,6 +59,7 @@ class ManageContract extends Component {
         <Col>
         <div class="shadow-lg p-3 mb-3 bg-body rounded">
         <div class="shadow-lg p-3 mb-3 bg-body rounded">
+           
         <Form className="d-flex" style={{float:"Right",margin:'1px'}}>
         <FormControl
           type="search"
@@ -61,148 +69,127 @@ class ManageContract extends Component {
         />
         <Button variant="outline-success">Search</Button>
       </Form>
-        <p class="text-justify" style={{color:"Black"}}>Contracts Management Table</p>
-        <br/>
+        <p class="text-justify" style={{color:"Black"}}>The Partitions disks:</p>
+        
+        <a class="btn btn-outline-primary btn-sm" href="AddDisk" data-abc="true" style={{margin:"10px",padding:"10px"}}>Add New Disk </a>
+        <a class="btn btn-outline-primary btn-sm" href="CreateDiskPartition" data-abc="true" style={{margin:"10px",padding:"10px"}}>Create Partition</a>
         <Table  bordered hover responsive>
+          
       <thead>
         <tr>
-          <th># Contract ID</th>
-          <th>Server Name</th>
-          <th>Partition Name</th>
-          <th>Client</th>
-          <th>Payment Type</th>
-          <th>Price</th>
-          <th>Start Facturation Date</th>
-          <th>Next Facturation date</th>
-          <th>Backup</th>
-          <th>SSL Ending date</th>
-          <th>Access status tempass</th>
-          <th>Description</th>
+          <th>#ID</th>
+          <th>Disk image:</th> 
+          <th>Disk Provider:</th>
+          <th>Disk Model:</th> 
+              
+          <th>Disk Type:</th>
+          <th>Disk Total size:</th>
+          <th>Partition Allocated size:</th>
+          <th>Partition Used size:</th>
           <th> Edit</th>
         </tr>
       </thead>
+
+
+
+
+
+
+
+
       <tbody>
+        <tr>
+          <td>1</td>
+          <td><a href="#"><Image  roundedCircle={true} style={{width: '50px',height:'50px'}} src={require('./images/Disk_Default_Picture.jpg')}/></a></td>
+          <td>ASUS</td>
+          <td>XBA1546</td>
+          
+          <td>M.2</td>
+          <td>512 GB</td>
+          <td>100 GB</td>
+          <td>20 GB</td>
+          <td>
+
+          <Container>
+      <Row>
+      <Col>
+      <IconButton href="EditContract" aria-label="delete" size="large">
+  <AddIcon fontSize="inherit" />
+</IconButton>
+      </Col>
+      <Col>
+      <Popup  show={this.state.modalShow}
+        onHide={() => this.state.modalShow=true}/>
+      </Col>
+      
+      </Row>
+      
+    </Container>
+          
+          </td>
+        </tr>
+
+        <tr>
+          <td>2</td>
+          <td><a href="#"><Image  roundedCircle={true} style={{width: '50px',height:'50px'}} src={require('./images/Disk_Default_Picture.jpg')}/></a></td>
+          <td>ASUS</td>
+          <td>XBA1546</td>
+          
+          <td>M.2</td>
+          <td>512 GB</td>
+          <td>100 GB</td>
+          <td>20 GB</td>
+          <td>
+
+          <Container>
+      <Row>
+      <Col>
+      <IconButton href="EditContract" aria-label="delete" size="large">
+  <AddIcon fontSize="inherit" />
+</IconButton>
+      </Col>
+      <Col>
+      <Popup  show={this.state.modalShow}
+        onHide={() => this.state.modalShow=true}/>
+      </Col>
+      
+      </Row>
+      
+    </Container>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><a href="#"><Image  roundedCircle={true} style={{width: '50px',height:'50px'}} src={require('./images/Disk_Default_Picture.jpg')}/></a></td>
+          <td>ASUS</td>
+          <td>XBA1546</td>
+          
+          <td>M.2</td>
+          <td>512 GB</td>
+          <td>100 GB</td>
+          <td>20 GB</td>
+          <td>
+
+          <Container>
+      <Row>
+      <Col>
+      <IconButton href="EditContract" aria-label="delete" size="large">
+  <AddIcon fontSize="inherit" />
+</IconButton>
+      </Col>
+      <Col>
+      <Popup  show={this.state.modalShow}
+        onHide={() => this.state.modalShow=true}/>
+      </Col>
+      
+      </Row>
+      
+    </Container>
+          
+          </td>
+        </tr>
         
-        
-        <tr>
-          <td>1</td>
-          <td>IBM X1056020</td>
-          <td>Partition 1</td>
-          <td><a href="#"><Image  roundedCircle={true} style={{width: '50px',height:'50px'}} src={require('./images/EXIST_Logo.png')}/></a></td>
-          <td>Monthly</td>
-          <td>50$</td>
-          <td>15/09/2020</td>
-          <td>15/09/20025</td>
-          <td>Yes</td>
-          <td>15/09/2022</td>
-          <td>Normal</td>
-          <td>Some info here</td>
-          <td>
-
-          <Container>
-          <Row>
-      <Col>
-      <IconButton  href="EditContract" aria-label="delete" size="large">
-  <AddIcon fontSize="inherit" />
-</IconButton>
-      </Col>
-      <Col>
-      <Popup  show={this.state.modalShow}
-        onHide={() => this.state.modalShow=true}/>
-      </Col>
-     
-      </Row>
-      
-    </Container>
-            
-            
-            
-
-          </td>
-        </tr>
-
-
-
-
-        <tr>
-          <td>1</td>
-          <td>IBM X1056020</td>
-          <td>Partition 1</td>
-          <td><a href="#"><Image  roundedCircle={true} style={{width: '50px',height:'50px'}} src={require('./images/EXIST_Logo.png')}/></a></td>
-          <td>Monthly</td>
-          <td>50$</td>
-          <td>15/09/2020</td>
-          <td>15/09/20025</td>
-          <td>Yes</td>
-          <td>15/09/2022</td>
-          <td>Normal</td>
-          <td>Some info here</td>
-          <td>
-
-          <Container>
-          <Row>
-      <Col>
-      <IconButton  href="EditContract" aria-label="delete" size="large">
-  <AddIcon fontSize="inherit" />
-</IconButton>
-      </Col>
-      <Col>
-      <Popup  show={this.state.modalShow}
-        onHide={() => this.state.modalShow=true}/>
-      </Col>
-     
-      </Row>
-      
-    </Container>
-            
-            
-            
-
-          </td>
-        </tr>
-
-
-
-
-
-
-
-        <tr>
-          <td>1</td>
-          <td>IBM X1056020</td>
-          <td>Partition 1</td>
-          <td><a href="#"><Image  roundedCircle={true} style={{width: '50px',height:'50px'}} src={require('./images/EXIST_Logo.png')}/></a></td>
-          <td>Monthly</td>
-          <td>50$</td>
-          <td>15/09/2020</td>
-          <td>15/09/20025</td>
-          <td>Yes</td>
-          <td>15/09/2022</td>
-          <td>Normal</td>
-          <td>Some info here</td>
-          <td>
-
-          <Container>
-          <Row>
-      <Col>
-      <IconButton  href="EditContract" aria-label="delete" size="large">
-  <AddIcon fontSize="inherit" />
-</IconButton>
-      </Col>
-      <Col>
-      <Popup  show={this.state.modalShow}
-        onHide={() => this.state.modalShow=true}/>
-      </Col>
-     
-      </Row>
-      
-    </Container>
-            
-            
-            
-
-          </td>
-        </tr>
         
       </tbody>
     </Table>

@@ -160,9 +160,9 @@ class MangeServer extends Component {
 <Container>
   <Row>
     <Col> 
-    <TextField id="standard-basic" label="S.Name" variant="standard" size="small"/></Col>
+    <TextField id="standard-basic" label="P.Name" variant="standard" size="small"/></Col>
     <Col> 
-    <TextField id="standard-basic" label="S.Location" variant="standard" size="small"/></Col>
+    <TextField id="standard-basic" label="Virtual Machine" variant="standard" size="small"/></Col>
                      
   </Row>
   <Row>
@@ -172,103 +172,41 @@ class MangeServer extends Component {
     <TextField id="standard-basic" label="MAC Adress" variant="standard" size="small"/></Col>
                  
   </Row>
-  <Row>
-    <Col>
-                    
-    <TextField id="standard-basic" label="BIOS" variant="standard" size="small"/>        
-    
-
-
-                     </Col>
-                     <Col> 
-    <TextField id="standard-basic" label="Nb Sockets" variant="standard" size="small"/></Col>
-                     
-  </Row>
+  
   <Row>
   <Col> 
-    <TextField id="standard-basic" label="Nb V-Cores" variant="standard" size="small"/></Col>
+    <TextField id="standard-basic" label="Allocated Cores" variant="standard" size="small"/></Col>
     <Col> 
-    <TextField id="standard-basic" label="RAM" variant="standard" size="small"/></Col>
+    <TextField id="standard-basic" label="Allocated RAM" variant="standard" size="small"/></Col>
                      
   </Row>
-  
-  <Row>
+ 
     
-    
-    <Form.Group className="" controlId="formBasicEmail" style={{marginTop:"10px"}}>
-    
-    <Form.Select required>
-      <option>Tunisia</option>
-      <option>USA</option>
-      <option>Libya</option>
-    </Form.Select>
-   
-    <Form.Text className="text-muted">
-      
-    </Form.Text>
-  </Form.Group>
-
-
-  </Row>
-
-
-
-  <Row>
-  
-  <Form.Group className="" controlId="formBasicEmail" style={{marginTop:"10px"}}>
-    
-    <Form.Select required>
-      <option>Windows 11</option>
-      <option>Windows 7</option>
-      <option>Ubunto</option>
-    </Form.Select>
-   
-    <Form.Text className="text-muted">
-      
-    </Form.Text>
-  </Form.Group>
-  
-    </Row>
-
-
-<Row>
-    
-    <Form.Group className="" controlId="formBasicEmail" style={{marginTop:"10px"}}>
-    
-    <Form.Select required>
-      <option>Real Machine</option>
-      <option>Virtual Machine</option>
-      
-    </Form.Select>
-   
-    <Form.Text className="text-muted">
-      
-    </Form.Text>
-  </Form.Group>
-    
-    
-    
-
-                     
-  </Row>
-  <Row>
+  <Row>   
   <Form.Group className="" controlId="formBasicEmail" style={{marginTop:"10px"}}>
   
-    <Form.Select required>
-      <option>Backup Enabled</option>
-      <option>Backup Disabled</option>
-      
-    </Form.Select>
-   
-    <Form.Text className="text-muted">
-      
-    </Form.Text>
-  </Form.Group>
+  <Form.Select required>
+    <option>Backup Disabled</option>
+    <option>Backup Enabled</option>
+    
+  </Form.Select>
+ 
+  <Form.Text className="text-muted">
+    
+  </Form.Text>
+</Form.Group>
   </Row>
   <Row>
-  <a class="btn btn-outline-primary btn-sm" href="ManageServerPartitionDisks" data-abc="true"  style={{marginRight:"10px",marginTop:"10px",color:"Black",backgroundColor:"white", borderColor:"#CFD3D6"}}>Manage Server disks</a>
-  </Row>
+    
+    
+    
+    <a class="btn btn-outline-primary btn-sm" href="ManageServerDisks" data-abc="true"  style={{marginleft:"50px",marginTop:"10px",padding:"10px",color:"Black",backgroundColor:"white", borderColor:"#CFD3D6"}}>Edit Disks</a>
+
+    
   
+
+  </Row>
+
 
 </Container>
                       
@@ -278,8 +216,8 @@ class MangeServer extends Component {
                        </div>
                       
                        <div class="thumblist">
-                       <Image  src={require('./images/Server_Logo.gif')} class="img-fluid" alt="Responsive image"/>
-                       <Image src={require('./images/Tunisia_Flag.png')} class="img-fluid" alt="Responsive image"/>
+                       <Image  src={require('./images/Partition_Logo.gif')} class="img-fluid" alt="Responsive image"/>
+                       
                         
                         
                         </div>
@@ -291,7 +229,7 @@ class MangeServer extends Component {
     <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Bought Date: </Form.Label>
+        >Creation Date: </Form.Label>
         <Form.Control type="date"  />
         <Form.Text className="text-muted">
           
@@ -343,16 +281,23 @@ class MangeServer extends Component {
     </Col>
                      
     <Col><nobr>
-      
-    <Form.Group className="mt-2" controlId="formBasicEmail">
-        <Form.Label
+    <Col>
+    <Form.Group className="" controlId="formBasicEmail" style={{marginTop:"10px"}}>
+    <Form.Label
         style={{color: 'black'}}
-        >Service Provider: </Form.Label>
-        <Form.Control type="text"  />
-        <Form.Text className="text-muted">
-          
-        </Form.Text>
-      </Form.Group>
+        >Client : </Form.Label>
+    <Form.Select required>
+      <option>Client #1</option>
+      <option>Client #2</option>
+      
+    </Form.Select>
+   
+    <Form.Text className="text-muted">
+      
+    </Form.Text>
+  </Form.Group>
+    </Col>
+    
       
       </nobr></Col>
                      
@@ -368,7 +313,7 @@ class MangeServer extends Component {
                      
                      
                     <Button variant="primary m-4" size="lg">
-          Save Server Information
+          Save Partition Information
         </Button>
                    </div>
                  </div>

@@ -3,21 +3,28 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import Image from 'react-bootstrap/Image'
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 class AddServer extends Component {
     state = {  } 
     render() { 
         return ( 
+          <div class="d-flex justify-content-center" style={{margin:"10px"}}>
           <div class="shadow  p-5  mb-5 mt-5 bg-light rounded" >
                 <div class="shadow  p-1  mb-1  bg-light rounded">
                 <div class="d-flex justify-content-center mb-4">
-                <Image  roundedCircle={true} style={{width: '150px',height:'150px'}} src={require('./images/Server_Logo.gif')}/>
+                <Image  style={{width: '150px',height:'150px'}} src={require('./images/Server_Logo.gif')}/>
                 
                 </div>
                 </div>
                 <MDBContainer style={{marginTop:"30px"}}>
+                  
 
 <Form>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+<Container>
+      <Row>
+        <Col><Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
         >Server name:</Form.Label>
@@ -25,9 +32,8 @@ class AddServer extends Component {
         <Form.Text className="text-muted">
           
         </Form.Text>
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      </Form.Group></Col>
+        <Col>  <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
         >Server IP Adress:</Form.Label>
@@ -35,9 +41,8 @@ class AddServer extends Component {
         <Form.Text className="text-muted">
           
         </Form.Text>
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      </Form.Group></Col>
+        <Col> <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
         >Server MAC Adress:</Form.Label>
@@ -45,10 +50,8 @@ class AddServer extends Component {
         <Form.Text className="text-muted">
           
         </Form.Text>
-      </Form.Group>
-
-      
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      </Form.Group></Col>
+        <Col> <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
         >Server Country:</Form.Label>
@@ -60,10 +63,10 @@ class AddServer extends Component {
         <Form.Text className="text-muted">
           
         </Form.Text>
-      </Form.Group>
-
-
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      </Form.Group></Col>
+      </Row>
+      <Row>
+        <Col><Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
         >Server City:</Form.Label>
@@ -75,9 +78,8 @@ class AddServer extends Component {
         <Form.Text className="text-muted">
           
         </Form.Text>
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      </Form.Group></Col>
+        <Col><Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
         >Operating System:</Form.Label>
@@ -89,9 +91,8 @@ class AddServer extends Component {
         <Form.Text className="text-muted">
           
         </Form.Text>
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      </Form.Group></Col>
+        <Col><Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
         >Number of Sockets:</Form.Label>
@@ -99,8 +100,8 @@ class AddServer extends Component {
         <Form.Text className="text-muted">
           
         </Form.Text>
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      </Form.Group></Col>
+        <Col><Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
         >Number of Virtual Cores </Form.Label>
@@ -108,10 +109,20 @@ class AddServer extends Component {
         <Form.Text className="text-muted">
           
         </Form.Text>
-      </Form.Group>
+      </Form.Group></Col>
+      </Row>
 
-      
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Row>
+        <Col><Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label
+        style={{color: 'black'}}
+        >BIOS : </Form.Label>
+        <Form.Control type="text"  placeholder="Enter BIOS  "  />
+        <Form.Text className="text-muted">
+          
+        </Form.Text>
+      </Form.Group></Col>
+        <Col><Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
         >RAM:</Form.Label>
@@ -119,8 +130,8 @@ class AddServer extends Component {
         <Form.Text className="text-muted">
           
         </Form.Text>
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      </Form.Group></Col>
+        <Col> <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
         >Server Type:</Form.Label>
@@ -133,9 +144,8 @@ class AddServer extends Component {
         <Form.Text className="text-muted">
           
         </Form.Text>
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      </Form.Group></Col>
+        <Col><Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
         >Service Provider:</Form.Label>
@@ -148,8 +158,10 @@ class AddServer extends Component {
         <Form.Text className="text-muted">
           
         </Form.Text>
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      </Form.Group></Col>
+      </Row>
+      <Row>
+        <Col><Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
         >Bought Date: </Form.Label>
@@ -157,9 +169,8 @@ class AddServer extends Component {
         <Form.Text className="text-muted">
           
         </Form.Text>
-      </Form.Group>
-      
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      </Form.Group></Col>
+        <Col><Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
         >Payment Type:</Form.Label>
@@ -172,8 +183,8 @@ class AddServer extends Component {
         <Form.Text className="text-muted">
           
         </Form.Text>
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      </Form.Group></Col>
+        <Col> <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
         >Next Facturation Date : </Form.Label>
@@ -181,11 +192,11 @@ class AddServer extends Component {
         <Form.Text className="text-muted">
           
         </Form.Text>
-      </Form.Group>
-
-
-
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      </Form.Group></Col>
+        
+      </Row>
+      <Row>
+       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
         >Description:</Form.Label>
@@ -194,8 +205,10 @@ class AddServer extends Component {
           
         </Form.Text>
       </Form.Group>
-      
-
+      </Row>
+  
+    </Container>
+     
 
       <div class="row justify-content-center">
       <button type="button" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">Add Server</button>
@@ -209,7 +222,7 @@ class AddServer extends Component {
 
     </div>
 
-        
+     </div>   
 
         );
     }

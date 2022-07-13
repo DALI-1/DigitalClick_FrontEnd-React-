@@ -1,14 +1,20 @@
+
 import React,{Component} from 'react';
+import ManageServer from '../components/ManageServer';
 
-
+import NotificationBell from '../components/Notification.jsx';
+import AddServer from '../components/AddServer';
+import AddVirtualMachine from '../components/AddVirtualMachine';
+import AddClient from '../components/AddClient';
+import ManageClients from '../components/ManageClients';
 import Image from '../components/images/BackgroundImage_Default.jpg'
-
-import ManageProfile from '../components/ManageProfile';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ManageDiskParitions from '../components/ManageDiskPartitions';
 class MainPage extends Component {
     state = {  } 
     render() { 
         return (
+          
           <div class="shadow-lg p-3 m-3  bg-body rounded">
           <div class="shadow-lg p-3 m-3  bg-body rounded"style={{
         backgroundColor:"rgba(237, 238, 240,0.9)",
@@ -28,11 +34,11 @@ class MainPage extends Component {
               {/*<AddClient/> */}
              {/*<ManageClients/> */}
             {/*<ManageContract/> */}
+            <ManageDiskParitions/> 
+         
+        </div>
+        </div>
             
-         {/*<AddContract/> */}
-        <ManageProfile/>
-        </div>
-        </div>
         );
     }
 }

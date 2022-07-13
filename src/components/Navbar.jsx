@@ -70,10 +70,10 @@ class NavBar extends Component {
           
         </NavDropdown>
         <NavDropdown title="Manage Contracts" id="navbarScrollingDropdown">
-          <NavDropdown.Item href="ManageContracts">Consult Server Parition Contracts</NavDropdown.Item>
-          <NavDropdown.Item href="ManageContracts">Consult Server  Contracts</NavDropdown.Item>
-          <NavDropdown.Item href="AddContract">Add New Server Partition Contract</NavDropdown.Item>
-          <NavDropdown.Item href="AddContract">Add New Server Contract</NavDropdown.Item>
+          <NavDropdown.Item href="ManagePartitionContracts">Consult Server Parition Contracts</NavDropdown.Item>
+          <NavDropdown.Item href="ManageServersContracts">Consult Server  Contracts</NavDropdown.Item>
+          <NavDropdown.Item href="AddPartitionContract">Add New Server Partition Contract</NavDropdown.Item>
+          <NavDropdown.Item href="AddServerContract">Add New Server Contract</NavDropdown.Item>
           <NavDropdown.Divider />
           
         </NavDropdown>

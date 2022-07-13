@@ -15,8 +15,9 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Modal from 'react-bootstrap/Modal';
 import TextField from '@mui/material/TextField';
+import UploadDragDrop from './UploadDragDrop';
 import Image from 'react-bootstrap/Image'
-import { MDBDropdown, MDBDropdownMenu, MDBDropdownToggle, MDBDropdownItem, MDBDropdownLink } from 'mdb-react-ui-kit';
+
 
 
 export function Popup() {
@@ -50,7 +51,54 @@ export function Popup() {
   );
 }
 class MangeServer extends Component {
-    state = { modalShow:false } 
+    state = { 
+      PhoneNumberList: [0],
+      EmailList: [0],
+      modalShow:false
+     } 
+
+
+
+     AddNewEmailInput = () => {
+      this.setState({EmailList:[...this.state.EmailList,this.state.EmailList[this.state.EmailList.length-1]+1]})
+      
+ 
+    };
+    RemoveNewEmailInput = () => {
+      if(this.state.EmailList.length>1)
+      {
+
+      let NewState=this.state.EmailList.slice(0,this.state.EmailList.length-1);
+      this.setState({EmailList:[...NewState]})
+      
+      }
+ 
+    };
+
+
+
+
+
+
+
+    AddNewPhoneInput = () => {
+      this.setState({PhoneNumberList:[...this.state.PhoneNumberList,this.state.PhoneNumberList[this.state.PhoneNumberList.length-1]+1]})
+      
+ 
+    };
+
+    
+    RemoveNewPhoneInput = () => {
+      if(this.state.PhoneNumberList.length>1)
+      {
+
+      let NewState=this.state.PhoneNumberList.slice(0,this.state.PhoneNumberList.length-1);
+      this.setState({PhoneNumberList:[...NewState]})
+      
+      }
+ 
+    };
+
 
     constructor()
     {
@@ -160,41 +208,24 @@ class MangeServer extends Component {
 <Container>
   <Row>
     <Col> 
-    <TextField id="standard-basic" label="S.Name" variant="standard" size="small"/></Col>
+    <TextField id="standard-basic" label="F.Name" variant="standard" size="small"/></Col>
     <Col> 
-    <TextField id="standard-basic" label="S.Location" variant="standard" size="small"/></Col>
+    <TextField id="standard-basic" label="L.Name" variant="standard" size="small"/></Col>
                      
   </Row>
   <Row>
   <Col> 
-    <TextField id="standard-basic" label="IP Adress" variant="standard" size="small"/></Col>
+    <TextField id="standard-basic" label="Company Name" variant="standard" size="small"/></Col>
     <Col> 
-    <TextField id="standard-basic" label="MAC Adress" variant="standard" size="small"/></Col>
+    <TextField id="standard-basic" label="Company Adress" variant="standard" size="small"/></Col>
                  
   </Row>
-  <Row>
-    <Col>
-                    
-    <TextField id="standard-basic" label="BIOS" variant="standard" size="small"/>        
-    
-
-
-                     </Col>
-                     <Col> 
-    <TextField id="standard-basic" label="Nb Sockets" variant="standard" size="small"/></Col>
-                     
-  </Row>
-  <Row>
-  <Col> 
-    <TextField id="standard-basic" label="Nb V-Cores" variant="standard" size="small"/></Col>
-    <Col> 
-    <TextField id="standard-basic" label="RAM" variant="standard" size="small"/></Col>
-                     
-  </Row>
+  
   
   <Row>
-    
-    
+  <Col> 
+    <TextField id="standard-basic" label="Company City" variant="standard" size="small"/></Col>
+    <Col>
     <Form.Group className="" controlId="formBasicEmail" style={{marginTop:"10px"}}>
     
     <Form.Select required>
@@ -208,66 +239,12 @@ class MangeServer extends Component {
     </Form.Text>
   </Form.Group>
 
-
+</Col>
   </Row>
 
 
 
-  <Row>
   
-  <Form.Group className="" controlId="formBasicEmail" style={{marginTop:"10px"}}>
-    
-    <Form.Select required>
-      <option>Windows 11</option>
-      <option>Windows 7</option>
-      <option>Ubunto</option>
-    </Form.Select>
-   
-    <Form.Text className="text-muted">
-      
-    </Form.Text>
-  </Form.Group>
-  
-    </Row>
-
-
-<Row>
-    
-    <Form.Group className="" controlId="formBasicEmail" style={{marginTop:"10px"}}>
-    
-    <Form.Select required>
-      <option>Real Machine</option>
-      <option>Virtual Machine</option>
-      
-    </Form.Select>
-   
-    <Form.Text className="text-muted">
-      
-    </Form.Text>
-  </Form.Group>
-    
-    
-    
-
-                     
-  </Row>
-  <Row>
-  <Form.Group className="" controlId="formBasicEmail" style={{marginTop:"10px"}}>
-  
-    <Form.Select required>
-      <option>Backup Enabled</option>
-      <option>Backup Disabled</option>
-      
-    </Form.Select>
-   
-    <Form.Text className="text-muted">
-      
-    </Form.Text>
-  </Form.Group>
-  </Row>
-  <Row>
-  <a class="btn btn-outline-primary btn-sm" href="ManageServerPartitionDisks" data-abc="true"  style={{marginRight:"10px",marginTop:"10px",color:"Black",backgroundColor:"white", borderColor:"#CFD3D6"}}>Manage Server disks</a>
-  </Row>
   
 
 </Container>
@@ -278,10 +255,8 @@ class MangeServer extends Component {
                        </div>
                       
                        <div class="thumblist">
-                       <Image  src={require('./images/Server_Logo.gif')} class="img-fluid" alt="Responsive image"/>
-                       <Image src={require('./images/Tunisia_Flag.png')} class="img-fluid" alt="Responsive image"/>
-                        
-                        
+                       <img src={require('./images/Client_Logo.gif')} class="img-fluid" alt="Responsive image"/>
+                       
                         </div>
                      </div></a>
                    <div class="card-body text-center">
@@ -291,84 +266,69 @@ class MangeServer extends Component {
     <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Bought Date: </Form.Label>
-        <Form.Control type="date"  />
+        >Company Logo:</Form.Label>
+        <UploadDragDrop/>
+
+        
         <Form.Text className="text-muted">
           
         </Form.Text>
       </Form.Group>
                      </nobr></Col>
-                     <Col><nobr>
+                        
+  </Row>
+  <Row>
+    
+    {this.state.PhoneNumberList.map((Inputlist)=>{ return(
+        <MDBCol size="6">
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label
+        style={{color: 'black'}}
+        >Phone number {Inputlist}:</Form.Label>
+        <Form.Control required type="text" placeholder={'Enter PhoneNumber '+Inputlist}  />
+        <Form.Text className="text-muted">
+        
+          
+        </Form.Text>
+      </Form.Group>
+      </MDBCol>
 
-                     <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label
-        style={{color: 'black'}}
-        >Description: </Form.Label>
-        <Form.Control type="text"  />
-        <Form.Text className="text-muted">
-          
-        </Form.Text>
+      )
+      })}
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Button variant="outline-primary" onClick={this.AddNewPhoneInput}>Add</Button>{' '}
+      <Button variant="outline-primary" onClick={this.RemoveNewPhoneInput}>Remove</Button>{' '}
       </Form.Group>
-                      </nobr></Col>
-    <Col><nobr>
-      
-    <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label
-        style={{color: 'black'}}
-        >Next Facturation Date : </Form.Label>
-        <Form.Control type="date"  />
-        <Form.Text className="text-muted">
-          
-        </Form.Text>
-      </Form.Group>
-      </nobr></Col>
-                     
-  </Row>
-  <Row>
-    <Col>
-    <Form.Group className="" controlId="formBasicEmail" style={{marginTop:"10px"}}>
-    <Form.Label
-        style={{color: 'black'}}
-        >Payment Type : </Form.Label>
-    <Form.Select required>
-      <option>Monthly</option>
-      <option>Weekly</option>
-      
-    </Form.Select>
-   
-    <Form.Text className="text-muted">
-      
-    </Form.Text>
-  </Form.Group>
-    </Col>
-                     
-    <Col><nobr>
-      
-    <Form.Group className="mt-2" controlId="formBasicEmail">
-        <Form.Label
-        style={{color: 'black'}}
-        >Service Provider: </Form.Label>
-        <Form.Control type="text"  />
-        <Form.Text className="text-muted">
-          
-        </Form.Text>
-      </Form.Group>
-      
-      </nobr></Col>
+    
                      
   </Row>
   <Row>
     
-    
+  {this.state.EmailList.map((Inputlist)=>{ return(
+        <MDBCol size="6">
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label
+        style={{color: 'black'}}
+        >Email Adress {Inputlist}:</Form.Label>
+        <Form.Control required type="Email" placeholder={'Enter Email Adress '+Inputlist}  />
+        <Form.Text className="text-muted">
+        
+          
+        </Form.Text>
+      </Form.Group>
+      </MDBCol>
+      )
+      })}
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Button variant="outline-primary" onClick={this.AddNewEmailInput}>Add</Button>{' '}
+      <Button variant="outline-primary" onClick={this.RemoveNewEmailInput}>Remove</Button>{' '}
+      </Form.Group>
                      
   </Row>
   
                     </Container>
-                    
-                     
-                     
-                    <Button variant="primary m-4" size="lg">
-          Save Server Information
+                    <Button variant="primary" size="lg">
+          Save Client Information
         </Button>
                    </div>
                  </div>

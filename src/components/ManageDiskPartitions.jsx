@@ -72,20 +72,17 @@ class ManageContract extends Component {
       </Form>
         <p class="text-justify" style={{color:"Black"}}>The Partitions disks:</p>
         
-        <a class="btn btn-outline-primary btn-sm" href="AddDisk" data-abc="true" style={{margin:"10px",padding:"10px"}}>Add New Disk </a>
         
+        <a class="btn btn-outline-primary btn-sm" href="CreateDiskPartition" data-abc="true" style={{margin:"10px",padding:"10px"}}>Create Partition</a>
         <Table  bordered hover responsive>
           
       <thead>
         <tr>
           <th class="text-center">#ID</th>
-          <th class="text-center">Disk image:</th> 
-          <th class="text-center">Disk Provider:</th>
-          <th class="text-center">Disk Model:</th> 
-              
-          <th class="text-center">Disk Type:</th>
-          <th class="text-center">Disk Total size:</th>
-          <th class="text-center">Disk Total Usage</th>
+          <th class="text-center">Partition Picture:</th>
+          <th class="text-center">Partition Name:</th>
+          <th class="text-center">Disk Allocated Size:</th>
+          <th class="text-center">Disk Used Size</th>
           <th class="text-center"> Edit</th>
         </tr>
       </thead>
@@ -101,10 +98,8 @@ class ManageContract extends Component {
         <tr>
           <td class="text-center">1</td>
           <td class="text-center"><a href="#"><Image  roundedCircle={true} style={{width: '50px',height:'50px'}} src={require('./images/Disk_Default_Picture.jpg')}/></a></td>
-          <td class="text-center">ASUS</td>
-          <td class="text-center">XBA1546</td>
+          <td class="text-center">Partition 1</td>
           
-          <td class="text-center">M.2</td>
           <td class="text-center">512 GB</td>
           <td class="text-center">100 GB</td>
           
@@ -112,12 +107,7 @@ class ManageContract extends Component {
 
           <Container>
       <Row>
-      <Col>
-      <IconButton href="ManageDiskPartitions" aria-label="delete" size="large">
-  <Split fontSize="inherit" />
-</IconButton>
-
-      </Col>
+      
       <Col>
       <IconButton href="EditContract" aria-label="delete" size="large">
   <AddIcon fontSize="inherit" />

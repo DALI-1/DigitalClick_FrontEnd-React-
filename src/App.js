@@ -11,21 +11,29 @@ import AddClient from './WebPages/AddClient_WebPage.jsx';
 
 import Home from './WebPages/Home_WebPage.jsx';
 import ManageClients from './WebPages/ManageClients_WebPage.jsx';
-import ManageContracts from './WebPages/ManageContracts_WebPage.jsx';
+import ManagePartitionContracts from './WebPages/ManagePartitionContracts_WebPage.jsx';
 import ManageServerPartitions from './WebPages/ManageServer_Partitions_WebPage.jsx';
 import ManagePartitionDisks from './WebPages/ManagePartitionDisks_WebPage.jsx';
 import AddServiceProvider from './WebPages/AddServiceProvider_WebPage.jsx';
 import ManageServerContracts from './WebPages/ManageServerContracts_WebPage.jsx';
+import ManageServersContracts from './WebPages/ManageServersContracts_WebPage.jsx';
 import EditServer from './WebPages/EditServer_WebPage.jsx';
+import EditPartition from './WebPages/EditPartition_WebPage.jsx';
 import ManageClientContracts from './WebPages/ManageClientContracts_WebPage.jsx';
 import AddOS from './WebPages/AddOS_WebPage.jsx';
 import AddOSCompany from './WebPages/AddOSCompany_WebPage.jsx';
+import EditClient from './WebPages/EditClient_WebPage.jsx';
 import ManageProfile from './WebPages/ManageProfile_WebPage.jsx';
+import AddServerContract from './WebPages/AddServerContract_WebPage';
+import AddDisk from './WebPages/AddDisk_WebPage';
 import DevPage from './WebPages/Dev_WebPage.jsx';
-import AddContract from './WebPages/AddContract_WebPage.jsx';
+import AddPartitionContract from './WebPages/AddPartitionContract_WebPage.jsx';
 import EditContract from './WebPages/EditContract_WebPage.jsx';
 import SignUp from './WebPages/SignUp_WebPage.jsx'
+import CreateDiskPartition from './WebPages/CreateDiskPartition_WebPage.jsx'
 import SignIn from './WebPages/SignIn_WebPage.jsx'
+import ManageDiskParitions from './WebPages/ManageDiskPartitions_WebPage.jsx'
+import ManageServerPartitionDisks from './WebPages/ManageServerPartitionDisks_WebPage.jsx'
 import {BrowserRouter as Router,Route,Switch} from "react-router-dom";
 
 function App() {
@@ -34,11 +42,12 @@ function App() {
         <Switch>
        
         <Route exact path="/Dev" component={DevPage}/>
-        <Route exact path="/ManageContracts" component={ManageContracts}/>
+        <Route exact path="/ManagePartitionContracts" component={ManagePartitionContracts}/>
         <Route exact path="/ManageServerContracts" component={ManageServerContracts}/>
         <Route exact path="/SignIn" component={SignIn}/>
         <Route exact path="/SignUp" component={SignUp}/>
-        <Route exact path="/ManageServerVM" component={ManagePartitionDisks}/>
+        <Route exact path="/ManagePartitionDisks" component={ManagePartitionDisks}/>
+        
         <Route exact path="/ManageClientContracts" component={ManageClientContracts}/>
         <Route exact path="/ManageClients" component={ManageClients}/>
         <Route exact path="/ManageServers" component={ManageServers}/>
@@ -47,13 +56,22 @@ function App() {
         <Route exact path="/AddClient" component={AddClient}/>
         <Route exact path="/AddServer" component={AddServer}/>
         <Route exact path="/AddVirtualMachine" component={AddVirtualMachine}/>
-        <Route exact path="/AddContract" component={AddContract}/>
+        <Route exact path="/AddPartitionContract" component={AddPartitionContract}/>
         <Route exact path="/EditContract" component={EditContract}/>
         <Route exact path="/AddOS" component={AddOS}/>
         <Route exact path="/AddVMCompany" component={AddVMCompany}/>
         <Route exact path="/AddOSCompany" component={AddOSCompany}/>
         <Route exact path="/AddServiceProvider" component={AddServiceProvider}/>
         <Route exact path="/ManageServerPartitions" component={ManageServerPartitions}/>
+        <Route exact path="/ManageServersContracts" component={ManageServersContracts}/>
+        <Route exact path="/EditClient" component={EditClient}/>
+        <Route exact path="/EditPartition" component={EditPartition}/>
+        <Route exact path="/AddServerContract" component={AddServerContract}/>
+        <Route exact path="/AddDisk" component={AddDisk}/>
+        <Route exact path="/CreateDiskPartition" component={CreateDiskPartition}/>
+        <Route exact path="/ManageServerPartitionDisks" component={ManageServerPartitionDisks}/>
+        <Route exact path="/ManageDiskPartitions" component={ManageDiskParitions}/>
+       
         <Route exact path="/" component={Home}/>
         </Switch>
       

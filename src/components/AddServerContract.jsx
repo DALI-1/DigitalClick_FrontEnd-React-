@@ -12,7 +12,7 @@ class addContract extends Component {
     state = {  } 
     render() { 
         return (
-
+          <div class="d-flex justify-content-center" style={{margin:"10px"}}>
             <div class="shadow  p-5  mb-5 mt-5 bg-light rounded" >
                 <div class="shadow  p-1  mb-1  bg-light rounded">
                 <div class="d-flex justify-content-center mb-4">
@@ -50,11 +50,11 @@ class addContract extends Component {
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Rented Partition:</Form.Label>
+        >Payment Type: </Form.Label>
         <Form.Select required>
-          <option>None (The whole server)</option>
-          <option>Parition 1</option>
-          <option>Partition 2</option>
+          <option>Per Month</option>
+          <option>Per Year</option>
+          <option>Per Semester</option>
         </Form.Select>
        
         <Form.Text className="text-muted">
@@ -82,25 +82,7 @@ class addContract extends Component {
       </MDBCol>
     </div>
     <div class="row">
-    <div class="col-md">
-    <MDBCol size="6">
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label
-        style={{color: 'black'}}
-        >Payment Type: </Form.Label>
-        <Form.Select required>
-          <option>Per Month</option>
-          <option>Per Year</option>
-          <option>Per Semester</option>
-        </Form.Select>
-       
-        <Form.Text className="text-muted">
-          
-        </Form.Text>
-      </Form.Group>
-      </MDBCol>
-
-</div>
+    
 <div class="col-md">
 <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
@@ -196,7 +178,7 @@ class addContract extends Component {
 
 
 <div class="row">
-<button type="button" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">Create Contract</button>
+<button type="button" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">Create Server Contract</button>
       
 </div>
       
@@ -207,6 +189,7 @@ class addContract extends Component {
 
 
 
+    </div>
     </div>
 
 

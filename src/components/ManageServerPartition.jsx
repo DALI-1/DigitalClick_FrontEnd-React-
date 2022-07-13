@@ -12,6 +12,7 @@ import AddIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Modal from 'react-bootstrap/Modal';
+import Image from 'react-bootstrap/Image'
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 
 export function Popup() {
@@ -149,7 +150,7 @@ class MangeServer extends Component {
                                     <div class="row">
                <div class="col-md-4 col-sm-6" id="ProductsContainerID">
                       
-                 <div class="card m-30"><a class="card-img-tiles" href="#" data-abc="true">
+                 <div class="card m-2"><a class="card-img-tiles" href="#" data-abc="true">
                      <div class="inner">
                        <div class="main-img">
 <Container>
@@ -186,6 +187,10 @@ class MangeServer extends Component {
   
                      
   </Row>
+  <Row>
+                     <Col><nobr><label style={{fontSize:"10px"}}> Backup</label>
+                     <p style={{fontSize:"10px"}} class="text-muted">Disabled</p></nobr></Col>             
+  </Row>
   
 
 </Container>
@@ -196,7 +201,7 @@ class MangeServer extends Component {
                        </div>
                       
                        <div class="thumblist">
-                       <img src={require('./images/Partition_Logo.webp')} class="img-fluid" alt="Responsive image"/>
+                       <Image roundedCircle={true} src={require('./images/Partition_Logo.gif')} class="img-fluid" alt="Responsive image"/>
                        
                         
                         <Container>
@@ -206,7 +211,7 @@ class MangeServer extends Component {
       </Row>
                         <Row>
       <Col>
-      <IconButton  href="EditContract" aria-label="delete" size="large">
+      <IconButton  href="EditPartition" aria-label="delete" size="large">
   <AddIcon fontSize="inherit" />
 </IconButton>
       </Col>
@@ -249,235 +254,13 @@ class MangeServer extends Component {
                     
                      
                      
-                     <a class="btn btn-outline-primary btn-sm" href="ManageServerVM" data-abc="true" style={{margin:"10px",padding:"10px"}}>View Allocated Disks</a>
+                     <a class="btn btn-outline-primary btn-sm" href="ManagePartitionDisks" data-abc="true" style={{margin:"10px",padding:"10px"}}>View Allocated Disks</a>
                      
                      <a class="btn btn-outline-primary btn-sm" href="ManageServerContracts" data-abc="true" style={{margin:"10px",padding:"10px"}}>View The Contract</a>
                    </div>
                  </div>
                </div>
 
-               <div class="col-md-4 col-sm-6" id="ProductsContainerID">
-                      
-                      <div class="card m-30"><a class="card-img-tiles" href="#" data-abc="true">
-                          <div class="inner">
-                            <div class="main-img">
-     <Container>
-       
-       <Row>
-       <Col><nobr><label style={{fontSize:"10px"}}>IP-Address:</label>
-                          <p style={{fontSize:"10px"}} class="text-muted">192.168.1.2</p></nobr></Col>
-         <Col><nobr><label style={{fontSize:"10px"}}>MAC-Address:</label>
-                          <p style={{fontSize:"10px"}} class="text-muted">00-10-FA-6E-D6-ED</p></nobr></Col>
-                      
-       </Row>
-       <Row>
-         <Col><nobr><label style={{fontSize:"10px"}}>OS</label>
-                          <p style={{fontSize:"10px"}} class="text-muted">Windows 11</p></nobr></Col>
-                          <Col><nobr><label style={{fontSize:"10px"}}> Virtual Machine:</label>
-                          <p style={{fontSize:"10px"}} class="text-muted">VM Ware 1.3</p></nobr></Col>
-                          
-                          
-       </Row>
-       <Row>
-       <Col><nobr><label style={{fontSize:"10px"}}>Allocated V-Cores:</label>
-                          <p style={{fontSize:"10px"}} class="text-muted">2</p></nobr></Col>
-         <Col><nobr><label style={{fontSize:"10px"}}> Allocated RAM:</label>
-                          <p style={{fontSize:"10px"}} class="text-muted">1 GB</p></nobr></Col>
-                          
-       </Row>
-       <Row>
-         <Col><nobr><label style={{fontSize:"10px"}}> Allocated Disks:</label>
-                          <p style={{fontSize:"10px"}} class="text-muted">2</p></nobr>
-             
-                          </Col>
-                          <Col><nobr><label style={{fontSize:"10px"}}> Partition Name:</label>
-                          <p style={{fontSize:"10px"}} class="text-muted">Partition 1</p></nobr></Col>
-       
-                          
-       </Row>
-       
-     
-     </Container>
-                           
-                          
-                          
-                          
-                            </div>
-                           
-                            <div class="thumblist">
-                            <img src={require('./images/Partition_Logo.webp')} class="img-fluid" alt="Responsive image"/>
-                            
-                             
-                             <Container>
-                             <Row>
-          
-          
-           </Row>
-                             <Row>
-           <Col>
-           <IconButton  href="EditContract" aria-label="delete" size="large">
-       <AddIcon fontSize="inherit" />
-     </IconButton>
-           </Col>
-           <Col>
-           <Popup  show={this.state.modalShow}
-             onHide={() => this.state.modalShow=true}/>
-           </Col>
-          
-           </Row>
-                             </Container>
-                             </div>
-                          </div></a>
-                        <div class="card-body text-center">
-                         <Container>
-                         <Row>
-         <Col><nobr><label style={{fontSize:"10px"}}>Creation Date:</label>
-                          <p style={{fontSize:"10px"}} class="text-muted">20/07/2007</p></nobr></Col>
-                         
-         <Col><nobr><label style={{fontSize:"10px"}}>Next Facturation Date:</label>
-                          <p style={{fontSize:"10px"}} class="text-muted">10/09/2022</p></nobr></Col>
-                          
-       </Row>
-       <Row>
-         <Col><nobr><label style={{fontSize:"10px"}}>Payment Type:</label>
-                          <p style={{fontSize:"10px"}} class="text-muted">Monthly</p></nobr></Col>
-                          <Col><nobr><label style={{fontSize:"10px"}}>Client:</label>
-                          <a href=""><p style={{fontSize:"10px"}} class="text-muted">Client #1</p></a></nobr></Col>
-                          
-         <Col><nobr><label style={{fontSize:"10px"}}>Description:</label>
-                          <p style={{fontSize:"10px"}} class="text-muted">Info</p></nobr></Col>
-                          
-       </Row>
-       <Row>
-         
-         
-                          
-       </Row>
-       
-                         </Container>
-                         
-                          
-                          
-                          <a class="btn btn-outline-primary btn-sm" href="ManageServerVM" data-abc="true" style={{margin:"10px",padding:"10px"}}>View Allocated Disks</a>
-                          
-                          <a class="btn btn-outline-primary btn-sm" href="ManageServerContracts" data-abc="true" style={{margin:"10px",padding:"10px"}}>View The Contract</a>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-4 col-sm-6" id="ProductsContainerID">
-                      
-                      <div class="card m-30"><a class="card-img-tiles" href="#" data-abc="true">
-                          <div class="inner">
-                            <div class="main-img">
-     <Container>
-       
-       <Row>
-       <Col><nobr><label style={{fontSize:"10px"}}>IP-Address:</label>
-                          <p style={{fontSize:"10px"}} class="text-muted">192.168.1.2</p></nobr></Col>
-         <Col><nobr><label style={{fontSize:"10px"}}>MAC-Address:</label>
-                          <p style={{fontSize:"10px"}} class="text-muted">00-10-FA-6E-D6-ED</p></nobr></Col>
-                      
-       </Row>
-       <Row>
-         <Col><nobr><label style={{fontSize:"10px"}}>OS</label>
-                          <p style={{fontSize:"10px"}} class="text-muted">Windows 11</p></nobr></Col>
-                          <Col><nobr><label style={{fontSize:"10px"}}> Virtual Machine:</label>
-                          <p style={{fontSize:"10px"}} class="text-muted">VM Ware 1.3</p></nobr></Col>
-                          
-                          
-       </Row>
-       <Row>
-       <Col><nobr><label style={{fontSize:"10px"}}>Allocated V-Cores:</label>
-                          <p style={{fontSize:"10px"}} class="text-muted">2</p></nobr></Col>
-         <Col><nobr><label style={{fontSize:"10px"}}> Allocated RAM:</label>
-                          <p style={{fontSize:"10px"}} class="text-muted">1 GB</p></nobr></Col>
-                          
-       </Row>
-       <Row>
-         <Col><nobr><label style={{fontSize:"10px"}}> Allocated Disks:</label>
-                          <p style={{fontSize:"10px"}} class="text-muted">2</p></nobr>
-             
-                          </Col>
-                          <Col><nobr><label style={{fontSize:"10px"}}> Partition Name:</label>
-                          <p style={{fontSize:"10px"}} class="text-muted">Partition 1</p></nobr></Col>
-       
-                          
-       </Row>
-       
-     
-     </Container>
-                           
-                          
-                          
-                          
-                            </div>
-                           
-                            <div class="thumblist">
-                            <img src={require('./images/Partition_Logo.webp')} class="img-fluid" alt="Responsive image"/>
-                            
-                             
-                             <Container>
-                             <Row>
-          
-          
-           </Row>
-                             <Row>
-           <Col>
-           <IconButton  href="EditContract" aria-label="delete" size="large">
-       <AddIcon fontSize="inherit" />
-     </IconButton>
-           </Col>
-           <Col>
-           <Popup  show={this.state.modalShow}
-             onHide={() => this.state.modalShow=true}/>
-           </Col>
-          
-           </Row>
-                             </Container>
-                             </div>
-                          </div></a>
-                        <div class="card-body text-center">
-                         <Container>
-                         <Row>
-         <Col><nobr><label style={{fontSize:"10px"}}>Creation Date:</label>
-                          <p style={{fontSize:"10px"}} class="text-muted">20/07/2007</p></nobr></Col>
-                         
-         <Col><nobr><label style={{fontSize:"10px"}}>Next Facturation Date:</label>
-                          <p style={{fontSize:"10px"}} class="text-muted">10/09/2022</p></nobr></Col>
-                          
-       </Row>
-       <Row>
-         <Col><nobr><label style={{fontSize:"10px"}}>Payment Type:</label>
-                          <p style={{fontSize:"10px"}} class="text-muted">Monthly</p></nobr></Col>
-                          <Col><nobr><label style={{fontSize:"10px"}}>Client:</label>
-                          <a href=""><p style={{fontSize:"10px"}} class="text-muted">Client #1</p></a></nobr></Col>
-                          
-         <Col><nobr><label style={{fontSize:"10px"}}>Description:</label>
-                          <p style={{fontSize:"10px"}} class="text-muted">Info</p></nobr></Col>
-                          
-       </Row>
-       <Row>
-         
-         
-                          
-       </Row>
-       
-                         </Container>
-                         
-                          
-                          
-                          <a class="btn btn-outline-primary btn-sm" href="ManageServerVM" data-abc="true" style={{margin:"10px",padding:"10px"}}>View Allocated Disks</a>
-                          
-                          <a class="btn btn-outline-primary btn-sm" href="ManageServerContracts" data-abc="true" style={{margin:"10px",padding:"10px"}}>View The Contract</a>
-                        </div>
-                      </div>
-                    </div>
-               
-
-              
-               
-               
                
                
              </div>

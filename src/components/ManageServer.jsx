@@ -12,6 +12,7 @@ import AddIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Modal from 'react-bootstrap/Modal';
+import Image from 'react-bootstrap/Image'
 
 export function Popup() {
   const [show, setShow] = useState(false);
@@ -148,7 +149,7 @@ class MangeServer extends Component {
                                     <div class="row">
                <div class="col-md-4 col-sm-6" id="ProductsContainerID">
                       
-                 <div class="card m-30"><a class="card-img-tiles" href="#" data-abc="true">
+                 <div class="card m-2"><a class="card-img-tiles" href="#" data-abc="true">
                      <div class="inner">
                        <div class="main-img">
 <Container>
@@ -182,11 +183,18 @@ class MangeServer extends Component {
   </Row>
   <Row>
     <Col><nobr><label style={{fontSize:"10px"}}>Number of Disks:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">4</p></nobr></Col>
+                     <p style={{fontSize:"10px"}} class="text-muted">4</p>
+                  
+                     </nobr></Col>
+                     <Col><nobr><label style={{fontSize:"10px"}}>BIOS</label>
+                     <p style={{fontSize:"10px"}} class="text-muted">BIOS V1</p></nobr></Col>
     <Col><nobr><label style={{fontSize:"10px"}}>Server Type:</label>
                      <p style={{fontSize:"10px"}} class="text-muted">Real Machine</p></nobr></Col>
+                     <Col><nobr><label style={{fontSize:"10px"}}>Backup:</label>
+                     <p style={{fontSize:"10px"}} class="text-muted">Enabled</p></nobr></Col>              
                      
   </Row>
+  
   
 
 </Container>
@@ -197,8 +205,8 @@ class MangeServer extends Component {
                        </div>
                       
                        <div class="thumblist">
-                       <img src={require('./images/Server_Default_icon.png')} class="img-fluid" alt="Responsive image"/>
-                       <img src={require('./images/Tunisia_Flag.png')} class="img-fluid" alt="Responsive image"/>
+                       <Image  src={require('./images/Server_Logo.gif')} class="img-fluid" alt="Responsive image"/>
+                       <Image  src={require('./images/Tunisia_Flag.png')} class="img-fluid" alt="Responsive image"/>
                         
                         <Container>
                         <Row>
@@ -207,7 +215,7 @@ class MangeServer extends Component {
       </Row>
                         <Row>
       <Col>
-      <IconButton  href="EditContract" aria-label="delete" size="large">
+      <IconButton  href="EditServer" aria-label="delete" size="large">
   <AddIcon fontSize="inherit" />
 </IconButton>
       </Col>
@@ -249,231 +257,15 @@ class MangeServer extends Component {
                     
                      
                      
-                     <a class="btn btn-outline-primary btn-sm" href="ManageServerPartitions" data-abc="true" style={{margin:"10px",padding:"10px"}}>View Virtual Machines</a>
+                     <a class="btn btn-outline-primary btn-sm" href="ManageServerPartitions" data-abc="true" style={{margin:"10px",padding:"10px"}}>View VM Partitions </a>
                      
                      <a class="btn btn-outline-primary btn-sm" href="ManageServerContracts" data-abc="true" style={{margin:"10px",padding:"10px"}}>View Contracts</a>
                    </div>
                  </div>
                </div>
 
-               <div class="col-md-4 col-sm-6" id="ProductsContainerID">
-                      
-                 <div class="card m-30"><a class="card-img-tiles" href="#" data-abc="true">
-                     <div class="inner">
-                       <div class="main-img">
-<Container>
-  <Row>
-    <Col> <nobr><label style={{fontSize:"10px"}}>Server:</label>
-                     <p style={{fontSize:"10px"}}class="text-muted">IBM X3650 </p></nobr></Col>
-    <Col><nobr><label style={{fontSize:"10px"}}>Server Location:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">Sfax</p></nobr></Col>
-                     
-  </Row>
-  <Row>
-  <Col><nobr><label style={{fontSize:"10px"}}>IP-Address:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">192.168.1.2</p></nobr></Col>
-    <Col><nobr><label style={{fontSize:"10px"}}>MAC-Address:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">00-10-FA-6E-D6-ED</p></nobr></Col>
-                 
-  </Row>
-  <Row>
-    <Col><nobr><label style={{fontSize:"10px"}}>OS</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">Windows 11</p></nobr></Col>
-    <Col><nobr><label style={{fontSize:"10px"}}>Number of Sockets:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">2</p></nobr></Col>
-                     
-  </Row>
-  <Row>
-    <Col><nobr><label style={{fontSize:"10px"}}>Number of V-Cores:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">16</p></nobr></Col>
-    <Col><nobr><label style={{fontSize:"10px"}}>RAM</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">16gb</p></nobr></Col>
-                     
-  </Row>
-  <Row>
-    <Col><nobr><label style={{fontSize:"10px"}}>Number of Disks:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">4</p></nobr></Col>
-    <Col><nobr><label style={{fontSize:"10px"}}>Server Type:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">Real Machine</p></nobr></Col>
-                     
-  </Row>
-  
-
-</Container>
-                      
-                     
-                     
-                     
-                       </div>
-                      
-                       <div class="thumblist">
-                       <img src={require('./images/Server_Default_icon.png')} class="img-fluid" alt="Responsive image"/>
-                       <img src={require('./images/Tunisia_Flag.png')} class="img-fluid" alt="Responsive image"/>
-                        
-                        <Container>
-                        <Row>
-     
-     
-      </Row>
-                        <Row>
-      <Col>
-      <IconButton  href="EditContract" aria-label="delete" size="large">
-  <AddIcon fontSize="inherit" />
-</IconButton>
-      </Col>
-      <Col>
-      <Popup  show={this.state.modalShow}
-        onHide={() => this.state.modalShow=true}/>
-      </Col>
-     
-      </Row>
-                        </Container>
-                        </div>
-                     </div></a>
-                   <div class="card-body text-center">
-                    <Container>
-                    <Row>
-    <Col><nobr><label style={{fontSize:"10px"}}>Bought Date:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">20/07/2007</p></nobr></Col>
-                     <Col><nobr><label style={{fontSize:"10px"}}>Description:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">Pour les test</p></nobr></Col>
-    <Col><nobr><label style={{fontSize:"10px"}}>Next Facturation Date:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">10/09/2022</p></nobr></Col>
-                     
-  </Row>
-  <Row>
-    <Col><nobr><label style={{fontSize:"10px"}}>Payment Type:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">Monthly</p></nobr></Col>
-                     
-    <Col><nobr><label style={{fontSize:"10px"}}>Server Provider:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">ONH</p></nobr></Col>
-                     
-  </Row>
-  <Row>
-    
-    
-                     
-  </Row>
-  
-                    </Container>
-                    
-                     
-                     
-                     <a class="btn btn-outline-primary btn-sm" href="ManageServerPartitions" data-abc="true" style={{margin:"10px",padding:"10px"}}>View Virtual Machines</a>
-                     
-                     <a class="btn btn-outline-primary btn-sm" href="ManageServerContracts" data-abc="true" style={{margin:"10px",padding:"10px"}}>View Contracts</a>
-                   </div>
-                 </div>
-               </div>
-               <div class="col-md-4 col-sm-6" id="ProductsContainerID">
-                      
-                 <div class="card m-30"><a class="card-img-tiles" href="#" data-abc="true">
-                     <div class="inner">
-                       <div class="main-img">
-<Container>
-  <Row>
-    <Col> <nobr><label style={{fontSize:"10px"}}>Server:</label>
-                     <p style={{fontSize:"10px"}}class="text-muted">IBM X3650 </p></nobr></Col>
-    <Col><nobr><label style={{fontSize:"10px"}}>Server Location:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">Sfax</p></nobr></Col>
-                     
-  </Row>
-  <Row>
-  <Col><nobr><label style={{fontSize:"10px"}}>IP-Address:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">192.168.1.2</p></nobr></Col>
-    <Col><nobr><label style={{fontSize:"10px"}}>MAC-Address:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">00-10-FA-6E-D6-ED</p></nobr></Col>
-                 
-  </Row>
-  <Row>
-    <Col><nobr><label style={{fontSize:"10px"}}>OS</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">Windows 11</p></nobr></Col>
-    <Col><nobr><label style={{fontSize:"10px"}}>Number of Sockets:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">2</p></nobr></Col>
-                     
-  </Row>
-  <Row>
-    <Col><nobr><label style={{fontSize:"10px"}}>Number of V-Cores:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">16</p></nobr></Col>
-    <Col><nobr><label style={{fontSize:"10px"}}>RAM</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">16gb</p></nobr></Col>
-                     
-  </Row>
-  <Row>
-    <Col><nobr><label style={{fontSize:"10px"}}>Number of Disks:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">4</p></nobr></Col>
-    <Col><nobr><label style={{fontSize:"10px"}}>Server Type:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">Real Machine</p></nobr></Col>
-                     
-  </Row>
-  
-
-</Container>
-                      
-                     
-                     
-                     
-                       </div>
-                      
-                       <div class="thumblist">
-                       <img src={require('./images/Server_Default_icon.png')} class="img-fluid" alt="Responsive image"/>
-                       <img src={require('./images/Tunisia_Flag.png')} class="img-fluid" alt="Responsive image"/>
-                        
-                        <Container>
-                        <Row>
-     
-     
-      </Row>
-                        <Row>
-      <Col>
-      <IconButton  href="EditContract" aria-label="delete" size="large">
-  <AddIcon fontSize="inherit" />
-</IconButton>
-      </Col>
-      <Col>
-      <Popup  show={this.state.modalShow}
-        onHide={() => this.state.modalShow=true}/>
-      </Col>
-     
-      </Row>
-                        </Container>
-                        </div>
-                     </div></a>
-                   <div class="card-body text-center">
-                    <Container>
-                    <Row>
-    <Col><nobr><label style={{fontSize:"10px"}}>Bought Date:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">20/07/2007</p></nobr></Col>
-                     <Col><nobr><label style={{fontSize:"10px"}}>Description:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">Pour les test</p></nobr></Col>
-    <Col><nobr><label style={{fontSize:"10px"}}>Next Facturation Date:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">10/09/2022</p></nobr></Col>
-                     
-  </Row>
-  <Row>
-    <Col><nobr><label style={{fontSize:"10px"}}>Payment Type:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">Monthly</p></nobr></Col>
-                     
-    <Col><nobr><label style={{fontSize:"10px"}}>Server Provider:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">ONH</p></nobr></Col>
-                     
-  </Row>
-  <Row>
-    
-    
-                     
-  </Row>
-  
-                    </Container>
-                    
-                     
-                     
-                     <a class="btn btn-outline-primary btn-sm" href="ManageServerPartitions" data-abc="true" style={{margin:"10px",padding:"10px"}}>View Virtual Machines</a>
-                     
-                     <a class="btn btn-outline-primary btn-sm" href="ManageServerContracts" data-abc="true" style={{margin:"10px",padding:"10px"}}>View Contracts</a>
-                   </div>
-                 </div>
-               </div>
+             
+              
                
                
                
