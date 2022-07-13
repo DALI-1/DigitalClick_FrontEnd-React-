@@ -88,16 +88,10 @@ class ManageContract extends Component {
       </thead>
 
 
-
-
-
-
-
-
       <tbody>
         <tr>
           <td class="text-center">1</td>
-          <td class="text-center"><a href="#"><Image  roundedCircle={true} style={{width: '50px',height:'50px'}} src={require('./images/Disk_Default_Picture.jpg')}/></a></td>
+          <td class="text-center"><a href="#"><Image  roundedCircle={true} style={{width: '50px',height:'50px'}} src={require('./images/Partition_Logo.webp')}/></a></td>
           <td class="text-center">Partition 1</td>
           
           <td class="text-center">512 GB</td>
@@ -109,7 +103,7 @@ class ManageContract extends Component {
       <Row>
       
       <Col>
-      <IconButton href="EditContract" aria-label="delete" size="large">
+      <IconButton href="EditDiskPartition" aria-label="delete" size="large">
   <AddIcon fontSize="inherit" />
 </IconButton>
 

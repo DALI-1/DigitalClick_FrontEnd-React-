@@ -229,7 +229,8 @@ class MangeServer extends Component {
                     <Row>
     <Col><nobr><label style={{fontSize:"10px"}}>Creation Date:</label>
                      <p style={{fontSize:"10px"}} class="text-muted">20/07/2007</p></nobr></Col>
-                    
+                     <Col><nobr><label style={{fontSize:"10px"}}>Description:</label>
+                     <a href=""><p style={{fontSize:"10px"}} class="text-muted">Server info here</p></a></nobr></Col>
     <Col><nobr><label style={{fontSize:"10px"}}>Next Facturation Date:</label>
                      <p style={{fontSize:"10px"}} class="text-muted">10/09/2022</p></nobr></Col>
                      

@@ -54,7 +54,7 @@ class AddServer extends Component {
 
       
       <div class="row justify-content-center">
-      <button type="button" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark" style={{margin:"10px"}}>Create Partition</button>
+      <button type="button" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark" style={{margin:"10px"}}>Save Partition</button>
 </div>
       
     </Form>

@@ -119,7 +119,7 @@ class ManageContract extends Component {
 
       </Col>
       <Col>
-      <IconButton href="EditContract" aria-label="delete" size="large">
+      <IconButton href="EditDisk" aria-label="delete" size="large">
   <AddIcon fontSize="inherit" />
 </IconButton>
 

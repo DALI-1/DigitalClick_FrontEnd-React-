@@ -12,49 +12,70 @@ class AddServer extends Component {
           <div class="shadow  p-5  mb-5 mt-5 bg-light rounded" >
                 <div class="shadow  p-1  mb-1  bg-light rounded">
                 <div class="d-flex justify-content-center mb-4">
-                <Image  style={{width: '150px',height:'150px'}} src={require('./images/Partition_Logo.webp')}/>
+                <Image  style={{width: '150px',height:'150px'}} src={require('./images/SSD_Logo.gif')}/>
                 
                 </div>
                 </div>
                 <MDBContainer style={{marginTop:"30px"}}>
 
 <Form>
-     
-<Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Partition Name:</Form.Label>
-        <Form.Control type="text"  placeholder="Partition total size " />
+        >Disk Provider:</Form.Label>
+        <Form.Control required type="text" placeholder="Enter Server name" />
         <Form.Text className="text-muted">
           
         </Form.Text>
       </Form.Group>
-     
-
 
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Partition Size:</Form.Label>
-        <Form.Control type="number"  placeholder="Partition total size " />
+        >Disk Model:</Form.Label>
+        <Form.Control required type="text" minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" placeholder="Enter Server IP " />
         <Form.Text className="text-muted">
           
         </Form.Text>
       </Form.Group>
+
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Partition Used Size:</Form.Label>
-        <Form.Control type="number"  placeholder="Partition Used size " />
+        >Disk Type:</Form.Label>
+        <Form.Select required>
+          <option>HDD</option>
+          <option>SSD</option>
+          <option>M.2</option>
+        </Form.Select>
+       
+        <Form.Text className="text-muted">
+          
+        </Form.Text>
+      </Form.Group>
+
+
+      
+
+     
+
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label
+        style={{color: 'black'}}
+        >Disk Total size:</Form.Label>
+        <Form.Control type="number"  placeholder="Enter Disk total size " />
         <Form.Text className="text-muted">
           
         </Form.Text>
       </Form.Group>
     
+<div class="d-flex justify-content-center" style={{margin:"10px"}}>
+<UploadDragDrop/>
 
+</div>
       
       <div class="row justify-content-center">
-      <button type="button" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark" style={{margin:"10px"}}>Create Partition</button>
+      <button type="button" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark" style={{margin:"10px"}}>Save Disk</button>
 </div>
       
     </Form>

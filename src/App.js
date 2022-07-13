@@ -31,8 +31,10 @@ import AddPartitionContract from './WebPages/AddPartitionContract_WebPage.jsx';
 import EditContract from './WebPages/EditContract_WebPage.jsx';
 import SignUp from './WebPages/SignUp_WebPage.jsx'
 import CreateDiskPartition from './WebPages/CreateDiskPartition_WebPage.jsx'
+import EditDiskPartition from './WebPages/EditDiskPartition_WebPage.jsx'
 import SignIn from './WebPages/SignIn_WebPage.jsx'
 import ManageDiskParitions from './WebPages/ManageDiskPartitions_WebPage.jsx'
+import EditDisk from './WebPages/EditDisk_WebPage.jsx'
 import ManageServerPartitionDisks from './WebPages/ManageServerPartitionDisks_WebPage.jsx'
 import {BrowserRouter as Router,Route,Switch} from "react-router-dom";
 
@@ -71,7 +73,8 @@ function App() {
         <Route exact path="/CreateDiskPartition" component={CreateDiskPartition}/>
         <Route exact path="/ManageServerPartitionDisks" component={ManageServerPartitionDisks}/>
         <Route exact path="/ManageDiskPartitions" component={ManageDiskParitions}/>
-       
+        <Route exact path="/EditDisk" component={EditDisk}/>
+        <Route exact path="/EditDiskPartition" component={EditDiskPartition}/>
         <Route exact path="/" component={Home}/>
         </Switch>
       

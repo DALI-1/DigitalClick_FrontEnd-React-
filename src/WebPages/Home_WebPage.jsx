@@ -7,7 +7,7 @@ import AddServer from '../components/AddServer';
 import AddVirtualMachine from '../components/AddVirtualMachine';
 import AddClient from '../components/AddClient';
 import ManageClients from '../components/ManageClients';
-import Image1 from '../components/images/Landing_Page.jpg'
+import Image1 from '../components/images/Landing_Page.png'
 import Image from 'react-bootstrap/Image'
 import Button from '@mui/material/Button';
 import Cookies from 'universal-cookie';
@@ -88,7 +88,7 @@ class Home extends Component {
       backgroundSize:'Cover',
       borderradius: "20px",
       borderwidth:"20px"
-      ,height:"490px"
+      ,height:"560px"
       
     }}>
         <div class="d-flex justify-content-center">

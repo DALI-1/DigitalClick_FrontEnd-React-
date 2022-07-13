@@ -200,7 +200,7 @@ class MangeServer extends Component {
     
     
     
-    <a class="btn btn-outline-primary btn-sm" href="ManageServerDisks" data-abc="true"  style={{marginleft:"50px",marginTop:"10px",padding:"10px",color:"Black",backgroundColor:"white", borderColor:"#CFD3D6"}}>Edit Disks</a>
+    <a class="btn btn-outline-primary btn-sm" href="ManagePartitionDisks" data-abc="true"  style={{marginleft:"50px",marginTop:"10px",padding:"10px",color:"Black",backgroundColor:"white", borderColor:"#CFD3D6"}}>Edit Disks</a>
 
     
   
