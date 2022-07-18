@@ -4,6 +4,50 @@ import Form from 'react-bootstrap/Form';
 import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
 class AddVirtualMachine extends Component {
     state = {  } 
+    SERVERAPICALL = async (url) => {
+      try {
+        const response = await fetch(url,{
+          method: "GET",
+          headers: {
+            "access-control-allow-origin" : "*",
+            "Content-type": "application/json; charset=UTF-8"
+          }});
+        const json = await response.json();
+        
+        return(json)
+      } catch (error) {
+        console.log("error", error);
+        return("Error:Yes");
+      }
+    };
+
+    handlesubmit=(props)=>
+    {
+
+       props.preventDefault();
+       let PropsString=""
+       let i=0
+       let url="http://127.0.0.1:8000/api/CreateServiceProvider"
+       for(i=0;i<3;i++)
+       {
+        if(i==0)
+        {
+          PropsString='?'+props.target[i].name+'='+props.target[i].value
+        }
+        else
+        {
+          PropsString=PropsString+"&"+props.target[i].name+"="+props.target[i].value
+        }
+        
+
+       }
+      
+       this.SERVERAPICALL(url+PropsString)
+
+
+
+    
+    }
     render() { 
         return ( 
           <div class="shadow  p-5  mb-5 mt-5 bg-light rounded" >
@@ -17,12 +61,12 @@ class AddVirtualMachine extends Component {
 
                 <MDBContainer style={{marginTop:"30px"}}>
 
-<Form>
+<Form method="GET" action="http://localhost:8000/api/CreateServiceProvider" onSubmit={this.handlesubmit}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
         >Service Provider Company name:</Form.Label>
-        <Form.Control type="text" placeholder="Provider Company name" />
+        <Form.Control type="text" placeholder="Provider Company name" name="Service_Provider_Company_Name" />
         <Form.Text className="text-muted">
           
         </Form.Text>
@@ -31,7 +75,8 @@ class AddVirtualMachine extends Component {
         <Form.Label
         style={{color: 'black'}}
         >Service Provider Email:</Form.Label>
-        <Form.Control type="email" placeholder="xx@gmail.com" />
+        <Form.Control type="email" placeholder="xx@gmail.com"
+        name="Service_Provider_Email" />
         <Form.Text className="text-muted">
           
         </Form.Text>
@@ -40,18 +85,15 @@ class AddVirtualMachine extends Component {
         <Form.Label
         style={{color: 'black'}}
         >Service Provider Phone Number</Form.Label>
-        <Form.Control type="number" placeholder="Phone Number here" />
+        <Form.Control type="number" placeholder="Phone Number here" 
+        name="Service_Provider_PhoneNumber"/>
         <Form.Text className="text-muted">
           
         </Form.Text>
       </Form.Group>
     
-
-      
-
-
       <div class="row justify-content-center">
-      <button type="button" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">Add Service Provider</button>
+      <button type="submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">Add Service Provider</button>
 </div>
       
     </Form>
