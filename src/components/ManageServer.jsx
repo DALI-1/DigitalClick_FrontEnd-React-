@@ -15,12 +15,44 @@ import Modal from 'react-bootstrap/Modal';
 import Image from 'react-bootstrap/Image'
 import { render } from '@testing-library/react';
 import LoadingSpinner from './LoadingSpinner';
+import { Route, Redirect } from 'react-router'
 
-export function Popup() {
+export function Popup(props) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+ const CallAPI = async (url) => {
+    try {
+      const response = await fetch(url,{
+        method: "GET",
+        headers: {
+          "access-control-allow-origin" : "*",
+          "Content-type": "application/json; charset=UTF-8"
+        }});
+      const json = await response.json();
+      
+      return(json)
+    } catch (error) {
+      console.log("error", error);
+      return("Error:Yes");
+    }
+  };
+
+
+
+  const handleDelete = ()=>{
+
+let url="http://localhost:8000/api/RemoveServerByID?ServerID="+props.Server_ID
+  CallAPI(url);
+  console.log(url);
+    setShow(false);
+    setTimeout(function () {
+      window.location.replace('ManageServers')
+  }, 1000);
+    
+    
+  }
 
   return (
     <>
@@ -33,12 +65,12 @@ export function Popup() {
         <Modal.Header closeButton>
           <Modal.Title>Delete</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Are you sure you want to delete?</Modal.Body>
+        <Modal.Body>{"Are you sure you want to delete server ID"}</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             No don't delete
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleDelete}>
             Yes Delete
           </Button>
         </Modal.Footer>
@@ -56,7 +88,12 @@ class MangeServer extends Component {
 
      CallServerListAPI = async (url) => {
       try {
-        const response = await fetch(url);
+        const response = await fetch(url,{
+          method: "GET",
+          headers: {
+            "access-control-allow-origin" : "*",
+            "Content-type": "application/json; charset=UTF-8"
+          }});
         const json = await response.json();
         
         return(json)
@@ -177,8 +214,13 @@ class MangeServer extends Component {
                            this.state.Servers.map((server)=>{
           
                             return(
-                              <div class="col-md-4 col-sm-6" id="ProductsContainerID">      
-                           <div class="card m-2"><a class="card-img-tiles" href="#" data-abc="true">
+                              
+                              <div class="col-md-4 col-sm-6" id="ProductsContainerID">    
+                               
+                           <div class="card m-2 shadow">
+                            
+                            <a class="card-img-tiles" href="#" data-abc="true">
+                            
                                <div class="inner">
                                  <div class="main-img">
           <Container>
@@ -235,7 +277,7 @@ class MangeServer extends Component {
                                 
                                  <div class="thumblist">
                                  <Image  src={require('./images/Server_Logo.gif')} class="img-fluid" alt="Responsive image"/>
-                                 <Image  src={require('./images/Tunisia_Flag.png')} class="img-fluid" alt="Responsive image"/>
+                                 <Image  src={'https://countryflagsapi.com/png/'+server.Server_Country} class="img-fluid" />
                                   
                                   <Container>
                                   <Row>
@@ -244,13 +286,15 @@ class MangeServer extends Component {
                 </Row>
                                   <Row>
                 <Col>
-                <IconButton  href="EditServer" aria-label="delete" size="large">
+                <IconButton  href={"EditServer?ServerID="+server.Server_ID} aria-label="delete" size="large">
             <AddIcon fontSize="inherit" />
           </IconButton>
                 </Col>
                 <Col>
                 <Popup  show={this.state.modalShow}
-                  onHide={() => this.state.modalShow=true}/>
+                  onHide={() => this.state.modalShow=true}
+                  Server_ID={server.Server_ID}
+                  />
                 </Col>
                
                 </Row>
@@ -261,19 +305,19 @@ class MangeServer extends Component {
                               <Container>
                               <Row>
               <Col><nobr><label style={{fontSize:"10px"}}>Bought Date:</label>
-                               <p style={{fontSize:"10px"}} class="text-muted">20/07/2007</p></nobr></Col>
+                               <p style={{fontSize:"10px"}} class="text-muted">{server.created_at}</p></nobr></Col>
                                <Col><nobr><label style={{fontSize:"10px"}}>Description:</label>
-                               <p style={{fontSize:"10px"}} class="text-muted">Pour les test</p></nobr></Col>
+                               <p style={{fontSize:"10px"}} class="text-muted">{server.Description}</p></nobr></Col>
               <Col><nobr><label style={{fontSize:"10px"}}>Next Facturation Date:</label>
-                               <p style={{fontSize:"10px"}} class="text-muted">10/09/2022</p></nobr></Col>
+                               <p style={{fontSize:"10px"}} class="text-muted">{server.NextFacturationDate}</p></nobr></Col>
                                
             </Row>
             <Row>
               <Col><nobr><label style={{fontSize:"10px"}}>Payment Type:</label>
-                               <p style={{fontSize:"10px"}} class="text-muted">Monthly</p></nobr></Col>
+                               <p style={{fontSize:"10px"}} class="text-muted">{server.Server_Type}</p></nobr></Col>
                                
               <Col><nobr><label style={{fontSize:"10px"}}>Server Provider:</label>
-                               <p style={{fontSize:"10px"}} class="text-muted">ONH</p></nobr></Col>
+                               <p style={{fontSize:"10px"}} class="text-muted">{server.service_Provider_Company_Name}</p></nobr></Col>
                                
             </Row>
             <Row>
@@ -292,6 +336,7 @@ class MangeServer extends Component {
                              </div>
                            </div>
                          </div>
+                         
           
                             )
                            })

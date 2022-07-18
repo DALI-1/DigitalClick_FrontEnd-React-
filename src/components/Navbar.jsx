@@ -20,7 +20,18 @@ import Cookies from 'universal-cookie';
 class NavBar extends Component {
     state = {  } 
 
+    handlesearch=(props)=>
+    {
+      props.preventDefault();
+     let Res=window.find(props.target[0].value)
+     console.log(Res)
+     if(Res==false)
+     {
+      alert("Nothing found!")
+     }
 
+      
+    }
 
     HandleLogout= ()=>{
        const cookies = new Cookies()
@@ -95,14 +106,15 @@ class NavBar extends Component {
         <Image roundedCircle={true} style={{width: '50px',height:'50px'}} src={require('./images/Default_Avatar_Male.png')}/>
         
       </Nav>
-      <Form className="d-flex">
+      <Form className="d-flex" onSubmit={this.handlesearch}>
         <FormControl
           type="search"
           placeholder="Search"
           className="me-2"
           aria-label="Search"
+          name="SearchInput"
         />
-        <Button variant="outline-success">Search</Button>
+        <Button variant="outline-success" type='submit'>Search</Button>
       </Form>
     </Navbar.Collapse>
   </Container>

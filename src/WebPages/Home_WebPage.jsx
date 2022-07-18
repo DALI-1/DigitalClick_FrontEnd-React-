@@ -91,7 +91,8 @@ class Home extends Component {
       ,height:"560px"
       
     }}>
-        <div class="d-flex justify-content-center">
+     {/*
+      <div class="d-flex justify-content-center">
          <Image   src={require('../components/images/Digital_Click.gif')} style={{
                 marginTop:"10px",
                 Height:"200px",
@@ -102,6 +103,7 @@ class Home extends Component {
             
           
             </div>
+      */}  
             
         </div>
         </div>
