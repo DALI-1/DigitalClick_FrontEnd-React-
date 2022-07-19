@@ -14,6 +14,8 @@ import AddIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Modal from 'react-bootstrap/Modal';
+import LoadingSpinner from './LoadingSpinner';
+import { createRef } from 'react';
 export function Popup() {
   const [show, setShow] = useState(false);
 
@@ -46,130 +48,226 @@ export function Popup() {
 }
 
 class ManageClients extends Component {
-    state = {  modalShow:false} 
+    state = {  modalShow:false,Clients:[],isLoading: true} 
+    constructor()
+    {
+      super()
+      this.PhoneNumbers=createRef("")
+    }
+     
+
+    CallServerListAPI = async (url) => {
+      try {
+        const response = await fetch(url,{
+          method: "GET",
+          headers: {
+            "access-control-allow-origin" : "*",
+            "Content-type": "application/json; charset=UTF-8"
+          }});
+        const json = await response.json();
+        
+        return(json)
+      } catch (error) {
+        console.log("error", error);
+        return("Error:Yes");
+      }
+    };
+
+    TurnoffLoadingScreen=()=>{
+      setTimeout(function () {
+    }, 1000);
+  
+      this.setState({isLoading: false})
+    }
+    componentDidMount(){
+      
+    let url="http://localhost:8000/api/GetAllClients"
+   let res=this.CallServerListAPI(url)
+     
+    res.then((result)=>{
+       let Client_List=[]
+      
+      result.map((Client)=>{
+        Client_List.push(Client) 
+      }
+      )
+      
+      this.setState({Clients:Client_List}, () => {
+        this.TurnoffLoadingScreen();
+    })
+      
+     }
+     );
+    }
+    
     render() { 
+
+      if(this.state.isLoading)
+      {
+        return (
+          <div class="d-flex justify-content-center" style={{margin:"10px"}}>
+          <LoadingSpinner id="Spinner"/>         
+      </div>
+        )
+       
+      }
+      else
+      {
         return (
 
 
-            <div class="container mt-10"  >
-              
-                            	
-                               
-                                    <div class="row">
-               <div class="col-md-4 col-sm-6">
-                 <div class="card m-2">
-                  <a class="card-img-tiles" href="#" data-abc="true">
-                     <div class="inner">
-                       <div class="main-img">
-                       <img src={require('./images/Delice_Logo.jpg')} alt="Category"/>
-                       <Container>
-  <Row>
-    <Col> <nobr><label style={{fontSize:"10px"}}>First Name :</label>
-                     <p style={{fontSize:"10px"}}class="text-muted">Mohamed Ali </p></nobr></Col>
-    <Col><nobr><label style={{fontSize:"10px"}}>Last Name:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">Gargouri</p></nobr></Col>
-                     
-  </Row>
-  <Row>
-  <Col><nobr><label style={{fontSize:"10px"}}>Company Name:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">SOMEF</p></nobr></Col>
-    <Col><nobr><label style={{fontSize:"10px"}}>Client Nationality:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">Tunisia</p></nobr></Col>
-                 
-  </Row>
-  <Row>
-    <Col><nobr><label style={{fontSize:"10px"}}>Company City:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">Sfax</p></nobr></Col>
-    <Col><nobr><label style={{fontSize:"10px"}}>Company Adress:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">Route Lafrane km 5.5</p></nobr></Col>
-                     
-  </Row>
+          <div class="container mt-10"  >
+            
+                            
+                             
+                                  <div class="row">
+                     {this.state.Clients.map((Client)=>{
 
-  
+                         
+                           let url1="http://localhost:8000/api/GetClientNumbers?&Client_ID="+Client.Client_ID
+
+                           let res=this.CallServerListAPI(url1)
+                           let Phone_List=[]
+                           res.then((result)=>{
+                                               
+                             result.map((PhoneNumber)=>{
+                              Phone_List.push(PhoneNumber) 
+                             }
+                             ) 
+                            }
+                            );
+                            this.PhoneNumbers=Phone_List;
+                            
+
+                      return(
+<div class="col-md-4 col-sm-6">
+               <div class="card m-2">
+                <a class="card-img-tiles" href="#" data-abc="true">
+                   <div class="inner">
+                     <div class="main-img">
+                     <img src={require('./images/Delice_Logo.jpg')} alt="Category"/>
+                     <Container>
+<Row>
+  <Col> <nobr><label style={{fontSize:"10px"}}>First Name :</label>
+                   <p style={{fontSize:"10px"}}class="text-muted">{Client.First_Name} </p></nobr></Col>
+  <Col><nobr><label style={{fontSize:"10px"}}>Last Name:</label>
+                   <p style={{fontSize:"10px"}} class="text-muted">{Client.Last_Name}</p></nobr></Col>
+                   
+</Row>
+<Row>
+<Col><nobr><label style={{fontSize:"10px"}}>Company Name:</label>
+                   <p style={{fontSize:"10px"}} class="text-muted">{Client.Company_Name}</p></nobr></Col>
+  <Col><nobr><label style={{fontSize:"10px"}}>Client Nationality:</label>
+                   <p style={{fontSize:"10px"}} class="text-muted">{Client.C_Nationality}</p></nobr></Col>
+               
+</Row>
+<Row>
+  <Col><nobr><label style={{fontSize:"10px"}}>Company City:</label>
+                   <p style={{fontSize:"10px"}} class="text-muted">{Client.C_City}</p></nobr></Col>
+  <Col><nobr><label style={{fontSize:"10px"}}>Company Adress:</label>
+                   <p style={{fontSize:"10px"}} class="text-muted">{Client.Company_Adress}</p></nobr></Col>
+                   
+</Row>
+
+
 
 </Container>
 
 
 
-                       </div>
-                       <div class="thumblist"><img src={require('./images/Client_Logo.gif')} alt="Category"/>
-                      
-                       <Container>
-                        <Row>
-     
-     
-      </Row>
-                        <Row>
-      <Col>
-      <IconButton  href="EditClient" aria-label="delete" size="large">
-  <AddIcon fontSize="inherit" />
+                     </div>
+                     <div class="thumblist"><img src={require('./images/Client_Logo.gif')} alt="Category"/>
+                    
+                     <Container>
+                      <Row>
+   
+   
+    </Row>
+                      <Row>
+    <Col>
+    <IconButton  href="EditClient" aria-label="delete" size="large">
+<AddIcon fontSize="inherit" />
 </IconButton>
-      </Col>
-      <Col>
-      <Popup  show={this.state.modalShow}
-        onHide={() => this.state.modalShow=true}/>
-      </Col>
-     
-      </Row>
-                        </Container>
-                       </div>
-                     </div></a>
-                   <div class="card-body text-center">
-                     
-                     
-                     
-                     <div class="container">
-  <div class="row">
-    <div class="col-md">
-    <DropdownButton id="dropdown-basic-button" title="Numbers List"style={{margin:"10px"}} >
-    <Dropdown.Item >56705203</Dropdown.Item>
-  <Dropdown.Item >200408188</Dropdown.Item>
-  <Dropdown.Item >97705230</Dropdown.Item>
+    </Col>
+    <Col>
+    <Popup  show={this.state.modalShow}
+      onHide={() => this.state.modalShow=true}/>
+    </Col>
+   
+    </Row>
+                      </Container>
+                     </div>
+                   </div></a>
+                 <div class="card-body text-center">
+                   
+                   
+                   
+                   <div class="container">
+<div class="row">
+  <div class="col-md">
+  <DropdownButton id="dropdown-basic-button" title="Numbers List"style={{margin:"10px"}} >
+
+    
+            <Dropdown.Item ></Dropdown.Item>
+         
+
+    
 </DropdownButton>
-      
-    </div>
-    <div class="col-md">
-     
-       
-<DropdownButton id="dropdown-basic-button" title="E-mails List" style={{margin:"10px"}}>
-  <Dropdown.Item >Ahmed@gmail.com</Dropdown.Item>
-  <Dropdown.Item >Melek@Yahoo.fr</Dropdown.Item>
-  <Dropdown.Item >gb@Outlock.com</Dropdown.Item>
-</DropdownButton>
-    </div>
     
   </div>
+  <div class="col-md">
+   
+     
+<DropdownButton id="dropdown-basic-button" title="E-mails List" style={{margin:"10px"}}>
+<Dropdown.Item >Ahmed@gmail.com</Dropdown.Item>
+<Dropdown.Item >Melek@Yahoo.fr</Dropdown.Item>
+<Dropdown.Item >gb@Outlock.com</Dropdown.Item>
+</DropdownButton>
+  </div>
+  
+</div>
 </div>
 
-                     <a class="btn btn-outline-primary btn-sm" href="ManageClientContracts" data-abc="true">View Contracts</a>
+                   <a class="btn btn-outline-primary btn-sm" href="ManageClientContracts" data-abc="true">View Contracts</a>
 
 
 
 
 
 
-                   </div>
                  </div>
                </div>
+             </div>
+
+                      );
+                     })
+
+
+                     }
+
 
              
-               
-               
+
+           
+             
+             
 
 
-               
-               </div>
-
-
-
-               
+             
              </div>
 
 
 
+             
+           </div>
 
 
-        );
+
+
+
+      );
+      }
+        
     }
 }
  

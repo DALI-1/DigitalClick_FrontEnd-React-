@@ -158,6 +158,8 @@ class MangeServer extends Component {
 
   }
   TurnoffLoadingScreen=()=>{
+    setTimeout(function () {
+  }, 1000);
 
     this.setState({isLoading: false})
   }

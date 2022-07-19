@@ -1,4 +1,4 @@
-import React,{Component,delay} from 'react';
+import React,{Component} from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
@@ -140,11 +140,6 @@ this.TurnoffLoadingScreen();
 );
 
 }
-
-
-
-
-
     render() { 
       if(this.state.isLoading)
       {

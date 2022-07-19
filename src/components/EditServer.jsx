@@ -12,7 +12,7 @@ import { createRef } from 'react';
 
 
 class MangeServer extends Component {
-  state = { modalShow:false,Servers:[],isLoading: true} 
+  state = { modalShow:false,Servers:[],isLoading: true,OSs:null,countries:null,ServiceProviders:null,SOS:null} 
   
     constructor()
     {
@@ -21,7 +21,7 @@ class MangeServer extends Component {
       this.inputref=createRef();
     }
 
-     CallServerListAPI = async (url) => {
+    SERVERAPICALL = async (url) => {
       try {
         
         const response = await fetch(url,{
@@ -93,13 +93,14 @@ class MangeServer extends Component {
 
 
   TurnoffLoadingScreen=()=>{
+    setTimeout(function () {
+     
+  }, 2000);
 
     this.setState({isLoading: false})
   }
   componentDidMount(){
-    setTimeout(function() {
-   
-    }, 1000);
+    
     
     this.CheckIdentification(); 
     const cookies = new Cookies();
@@ -111,8 +112,70 @@ class MangeServer extends Component {
     const id = queryParams.get('ServerID');
       var Password = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
     let url ="http://localhost:8000/api/GetServerByID?Username="+Username+"&Password="+Password+"&ServerID="+id
-   
-  let Json= this.CallServerListAPI(url) 
+    let url1="http://127.0.0.1:8000/api/GetAllOSs"
+    let url2="https://restcountries.com/v3.1/all"
+    let url3="http://127.0.0.1:8000/api/GetAllServiceProviders"
+    let url4 ="http://localhost:8000/api/GetServerOSProvider?&ServerID="+id
+    let Res=null
+    Res=this.SERVERAPICALL(url1)
+    Res.then((result)=>{
+    let OSs_List=[]
+    result.map((server)=>{
+    OSs_List.push(server) 
+    }
+    )
+    
+    this.setState({OSs:OSs_List})
+    }
+    );
+
+    Res=this.SERVERAPICALL(url4)
+    Res.then((result)=>{
+    let SOS_List=[]
+    result.map((server)=>{
+    SOS_List.push(server) 
+    }
+    )
+    /*SOS:Server Operating System*/
+    this.setState({SOS:SOS_List})
+    }
+    );
+    
+    Res=this.SERVERAPICALL(url3)
+    Res.then((result)=>{
+    let ServiceProviders_List=[]
+    result.map((server)=>{
+    ServiceProviders_List.push(server) 
+    }
+    )
+    
+    this.setState({ServiceProviders:ServiceProviders_List})
+    }
+    );
+    
+    Res=this.SERVERAPICALL(url2)
+    Res.then((result)=>{
+    let Countries_List=[]
+    result.map((Country)=>{
+    Countries_List.push(Country) 
+    }
+    )
+    
+    this.setState({countries:Countries_List}, () => {
+    this.TurnoffLoadingScreen();
+    })
+    
+    }
+    );
+    
+
+
+
+
+
+
+
+  let Json= this.SERVERAPICALL(url) 
   Json.then(
     (result)=>{
      let Server_List=[]
@@ -149,8 +212,13 @@ class MangeServer extends Component {
         
         return (
 
+        
           this.state.Servers.map((server)=>{
+           
+             
 
+            
+             
             
             
            
@@ -206,11 +274,18 @@ class MangeServer extends Component {
               
               <Form.Group className="" controlId="formBasicEmail" style={{marginTop:"10px"}}>
               
-              <Form.Select required>
-                <option>Tunisia</option>
-                <option>USA</option>
-                <option>Libya</option>
-              </Form.Select>
+              <Form.Select required
+        name="Server_Country" value={server.Server_Country}
+        >
+        {
+        this.state.countries.map((Country)=>{
+          
+          return(
+            <option>{Country.name.common } </option>
+          )
+        })
+       } 
+        </Form.Select>
              
               <Form.Text className="text-muted">
                 
@@ -226,11 +301,19 @@ class MangeServer extends Component {
             
             <Form.Group className="" controlId="formBasicEmail" style={{marginTop:"10px"}}>
               
-              <Form.Select required>
-                <option selected>Windows 11</option>
-                <option >Windows 7</option>
-                <option >Ubunto</option>
-              </Form.Select>
+            <Form.Select required
+        name="Server_OperatingSystem_ID"  onChange={this.onChangeHandler}  >
+          
+        {
+        this.state.OSs.map((OS)=>{
+          
+          return(
+            <option id={OS.OperatingSystem_ID}>{OS.OperatingSystem_Company_Name +" "+OS.OperatingSystem_Name } </option>
+          )
+        })
+       } 
+       
+        </Form.Select>
              
               <Form.Text className="text-muted">
                 
@@ -262,7 +345,9 @@ class MangeServer extends Component {
             </Row>
             <Row>
             <Form.Group className="" controlId="formBasicEmail" style={{marginTop:"10px"}}>
-            
+            {
+
+            }
               <Form.Select required>
                 <option>Backup Enabled</option>
                 <option>Backup Disabled</option>
@@ -288,7 +373,7 @@ class MangeServer extends Component {
                                 
                                  <div class="thumblist">
                                  <Image  src={require('./images/Server_Logo.gif')} class="img-fluid" alt="Responsive image"/>
-                                 <Image src={require('./images/Tunisia_Flag.png')} class="img-fluid" alt="Responsive image"/>
+                                 <Image src={'https://countryflagsapi.com/png/'+server.Server_Country} class="img-fluid" alt="Responsive image"/>
                                   
                                   
                                   </div>
@@ -296,24 +381,14 @@ class MangeServer extends Component {
                              <div class="card-body text-center">
                               <Container>
                               <Row>
-              <Col><nobr>
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Label
-                  style={{color: 'black'}}
-                  >Bought Date: </Form.Label>
-                  <Form.Control type="date"  />
-                  <Form.Text className="text-muted">
-                    
-                  </Form.Text>
-                </Form.Group>
-                               </nobr></Col>
+            
                                <Col><nobr>
           
                                <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label
                   style={{color: 'black'}}
                   >Description: </Form.Label>
-                  <Form.Control type="text"  />
+                  <Form.Control type="text" defaultValue={server.Description} />
                   <Form.Text className="text-muted">
                     
                   </Form.Text>
@@ -325,7 +400,7 @@ class MangeServer extends Component {
                   <Form.Label
                   style={{color: 'black'}}
                   >Next Facturation Date : </Form.Label>
-                  <Form.Control type="date"  />
+                  <Form.Control type="date" defaultValue={server.NextFacturationDate} />
                   <Form.Text className="text-muted">
                     
                   </Form.Text>
@@ -353,15 +428,26 @@ class MangeServer extends Component {
                                
               <Col><nobr>
                 
-              <Form.Group className="mt-2" controlId="formBasicEmail">
-                  <Form.Label
-                  style={{color: 'black'}}
-                  >Service Provider: </Form.Label>
-                  <Form.Control type="text"  />
-                  <Form.Text className="text-muted">
-                    
-                  </Form.Text>
-                </Form.Group>
+              <Form.Group className="mb-1" controlId="formBasicEmail">
+        <Form.Label
+        style={{color: 'black'}}
+        >Service Provider:</Form.Label>
+        <Form.Select required
+        name="Service_Provider_ID" onChange={this.onChangeHandler2}>
+        {
+        this.state.ServiceProviders.map((SV)=>{
+          
+          return(
+            <option id={SV.Service_Provider_ID}>{SV.service_Provider_Company_Name} </option>
+          )
+        })
+       } 
+        </Form.Select>
+       
+        <Form.Text className="text-muted">
+          
+        </Form.Text>
+      </Form.Group>
                 
                 </nobr></Col>
                                
@@ -393,6 +479,9 @@ class MangeServer extends Component {
                        </div>
 
             )
+
+          
+            
           }
           
           
