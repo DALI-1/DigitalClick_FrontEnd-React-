@@ -12,7 +12,7 @@ import { createRef } from 'react';
 
 
 class MangeServer extends Component {
-  state = { modalShow:false,Servers:[],isLoading: true,OSs:null,countries:null,ServiceProviders:null,SOS:null} 
+  state = { modalShow:false,Servers:[],isLoading: true,OSs:[],countries:[],ServiceProviders:[],SOS:[]} 
   
     constructor()
     {
@@ -112,6 +112,7 @@ class MangeServer extends Component {
     const id = queryParams.get('ServerID');
       var Password = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
     let url ="http://localhost:8000/api/GetServerByID?Username="+Username+"&Password="+Password+"&ServerID="+id
+    
     let url1="http://127.0.0.1:8000/api/GetAllOSs"
     let url2="https://restcountries.com/v3.1/all"
     let url3="http://127.0.0.1:8000/api/GetAllServiceProviders"
@@ -185,6 +186,7 @@ class MangeServer extends Component {
 
       TempRes.map((server)=>{  
       Server_List.push(server) 
+      
     }
     )
     
@@ -212,17 +214,11 @@ class MangeServer extends Component {
         
         return (
 
-        
+       
           this.state.Servers.map((server)=>{
-           
-             
-
             
-             
-            
-            
-           
-
+            const queryParams = new URLSearchParams(window.location.search);
+            let srvid = queryParams.get('ServerID');
             return(
                       
                       
@@ -360,7 +356,7 @@ class MangeServer extends Component {
             </Form.Group>
             </Row>
             <Row>
-            <a class="btn btn-outline-primary btn-sm" href="ManagePartitionDisks" data-abc="true"  style={{marginRight:"10px",marginTop:"10px",color:"Black",backgroundColor:"white", borderColor:"#CFD3D6"}}>Manage Server disks</a>
+            <a class="btn btn-outline-primary btn-sm" href={"ManagePartitionDisks?ServerID="+srvid} data-abc="true"  style={{marginRight:"10px",marginTop:"10px",color:"Black",backgroundColor:"white", borderColor:"#CFD3D6"}}>Manage Server disks</a>
             </Row>
             
           
