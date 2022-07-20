@@ -16,11 +16,42 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Modal from 'react-bootstrap/Modal';
 import LoadingSpinner from './LoadingSpinner';
 import { createRef } from 'react';
-export function Popup() {
+export function Popup(props) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const CallAPI = async (url) => {
+    try {
+      const response = await fetch(url,{
+        method: "GET",
+        headers: {
+          "access-control-allow-origin" : "*",
+          "Content-type": "application/json; charset=UTF-8"
+        }});
+      const json = await response.json();
+      
+      return(json)
+    } catch (error) {
+      console.log("error", error);
+      return("Error:Yes");
+    }
+  };
+
+
+
+  const handleDelete = ()=>{
+
+let url="http://localhost:8000/api/RemoveClientByID?ClientID="+props.Client_ID
+  CallAPI(url);
+  console.log(url);
+    setShow(false);
+    setTimeout(function () {
+      window.location.replace('ManageClients')
+  }, 1000);
+    
+    
+  }
 
   return (
     <>
@@ -33,12 +64,12 @@ export function Popup() {
         <Modal.Header closeButton>
           <Modal.Title>Delete</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Are you sure you want to delete?</Modal.Body>
+        <Modal.Body>Are you sure you want to delete? </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             No don't delete
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleDelete}>
             Yes Delete
           </Button>
         </Modal.Footer>
@@ -52,7 +83,7 @@ class ManageClients extends Component {
     constructor()
     {
       super()
-      this.PhoneNumbers=createRef("")
+      this.PhoneNumbers=[];
     }
      
 
@@ -138,6 +169,7 @@ class ManageClients extends Component {
                             );
                             this.PhoneNumbers=Phone_List;
                             
+                            
 
                       return(
 <div class="col-md-4 col-sm-6">
@@ -191,7 +223,7 @@ class ManageClients extends Component {
     </Col>
     <Col>
     <Popup  show={this.state.modalShow}
-      onHide={() => this.state.modalShow=true}/>
+      onHide={() => this.state.modalShow=true} Client_ID={Client.Client_ID}/>
     </Col>
    
     </Row>
@@ -207,12 +239,24 @@ class ManageClients extends Component {
   <div class="col-md">
   <DropdownButton id="dropdown-basic-button" title="Numbers List"style={{margin:"10px"}} >
 
-    
-            <Dropdown.Item ></Dropdown.Item>
-         
+    {
+
+this.PhoneNumbers.map((PhoneNumber)=>
+      {
+
+        return(
+
+          
+            <Dropdown.Item >{PhoneNumber.Phone_Number}</Dropdown.Item>
+        );
+
+      })
+    }
+            
+  </DropdownButton>     
 
     
-</DropdownButton>
+
     
   </div>
   <div class="col-md">

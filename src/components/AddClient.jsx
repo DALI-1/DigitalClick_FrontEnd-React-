@@ -37,6 +37,25 @@ class AddClient extends Component {
     handlesubmit=(props)=>
     {
       props.preventDefault();
+      let i=0
+      let nbarguments=10+this.state.PhoneNumberList.length+this.state.EmailList.length
+    let url="http://127.0.0.1:8000/api/AddClient"
+    let PropsString=""
+
+    for(i=0;i<nbarguments;i++)
+    {
+     if(i==0 &&props.target[i].value!="")
+     {
+       PropsString='?'+props.target[i].name+'='+props.target[i].value
+     }
+     else if(props.target[i].value!="")
+     {           
+        PropsString=PropsString+"&"+props.target[i].name+"="+props.target[i].value 
+     }
+     
+    }
+  
+    this.SERVERAPICALL(url+PropsString)
       
     }
   
@@ -86,13 +105,19 @@ this.TurnoffLoadingScreen();
 handleUpload = (e) =>{
 
   const fd=new FormData()
+
+
+
+  axios.defaults.withCredentials = false;
+  axios.defaults.headers.post['Access-Control-Allow-Origin'] = 'http://127.0.0.1:8000/api/UploadIMG';
+  
   fd.append(
    "ClientPFP",e.target.files[0] 
   )
     axios({
       method: 'post',
       url: "http://127.0.0.1:8000/api/UploadIMG",
-   
+    
       data: fd,
   }).then(res => {
     // listarChamados.innerHTML = res.data;
@@ -151,6 +176,15 @@ handleUpload = (e) =>{
           
         </Form.Text>
       </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label
+        style={{color: 'black'}}
+        >Client Adress:</Form.Label>
+        <Form.Control required type="text" placeholder="Client Adress here"  name="Adress" />
+        <Form.Text className="text-muted">
+          
+        </Form.Text>
+      </Form.Group>
       <MDBRow>
       <MDBCol size="6">
       <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -198,7 +232,7 @@ handleUpload = (e) =>{
         <Form.Label
         style={{color: 'black'}}
         >Company Logo:</Form.Label>
-        <Form.Control required type="file" placeholder="Enter the Company Image"  name="ClientPFP" onChange={this.handleUpload} />  
+        <Form.Control  type="file" placeholder="Enter the Company Image"  name="ClientPFP"  />  
         <Form.Text className="text-muted">
           
         </Form.Text>
@@ -271,7 +305,7 @@ handleUpload = (e) =>{
         <Form.Label
         style={{color: 'black'}}
         >Email Adress {Inputlist}:</Form.Label>
-        <Form.Control required type="Email" placeholder={'Enter Email Adress '+Inputlist}  name={"Email_"+Inputlist} />
+        <Form.Control required type="Email" placeholder={'Enter Email Adress '+Inputlist} name={"Email_"+Inputlist} />
         <Form.Text className="text-muted">
         
           

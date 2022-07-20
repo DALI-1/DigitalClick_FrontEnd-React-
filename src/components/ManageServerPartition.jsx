@@ -14,12 +14,45 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Modal from 'react-bootstrap/Modal';
 import Image from 'react-bootstrap/Image'
 import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
-
-export function Popup() {
+import LoadingSpinner from './LoadingSpinner';
+export function Popup(props) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+
+  const CallAPI = async (url) => {
+    try {
+      const response = await fetch(url,{
+        method: "GET",
+        headers: {
+          "access-control-allow-origin" : "*",
+          "Content-type": "application/json; charset=UTF-8"
+        }});
+      const json = await response.json();
+      
+      return(json)
+    } catch (error) {
+      console.log("error", error);
+      return("Error:Yes");
+    }
+  };
+
+
+
+  const handleDelete = ()=>{
+
+let url="http://localhost:8000/api/RemovePartitionByID?PartitionID="+props.Partition_ID
+  CallAPI(url);
+  console.log(url);
+    setShow(false);
+    setTimeout(function () {
+      window.location.replace('ManageServerPartitions?ServerID'+props.Partition_ID)
+  }, 1000);
+    
+    
+  }
 
   return (
     <>
@@ -37,7 +70,7 @@ export function Popup() {
           <Button variant="secondary" onClick={handleClose}>
             No don't delete
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleDelete}>
             Yes Delete
           </Button>
         </Modal.Footer>
@@ -46,7 +79,7 @@ export function Popup() {
   );
 }
 class MangeServer extends Component {
-    state = { modalShow:false } 
+    state = { modalShow:false,isLoading: true,Paritions:[] } 
 
     constructor()
     {
@@ -64,7 +97,22 @@ class MangeServer extends Component {
         return("Error:Yes");
       }
     };
-
+    CallServerListAPI = async (url) => {
+      try {
+        const response = await fetch(url,{
+          method: "GET",
+          headers: {
+            "access-control-allow-origin" : "*",
+            "Content-type": "application/json; charset=UTF-8"
+          }});
+        const json = await response.json();
+        
+        return(json)
+      } catch (error) {
+        console.log("error", error);
+        return("Error:Yes");
+      }
+    };
     CheckIdentification= ()=>
   {
     var CryptoJS = require("crypto-js");
@@ -100,55 +148,79 @@ class MangeServer extends Component {
         }
         if(LoggedIn===0)
         {
-          window.location.replace('/SignIn')
-         
+          window.location.replace('/SignIn')         
         }
-        
-  
        }
-       );
-     
+       );   
        }
        else
        {
-        window.location.replace('/SignIn')
-        
+        window.location.replace('/SignIn')       
        } 
-
   }
+  TurnoffLoadingScreen=()=>{
+    setTimeout(function () {
+  }, 1000);
+
+    this.setState({isLoading: false})
+  }
+  componentDidMount(){
+    this.CheckIdentification(); 
+    const cookies = new Cookies();
+    var CryptoJS = require("crypto-js");
+    let Username=cookies.get("Username")
+    let Password_ciphered=cookies.get("Password")
+    var bytes = CryptoJS.AES.decrypt(Password_ciphered, 'DigitalClick');
+      var Password = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+      const queryParams = new URLSearchParams(window.location.search);
+      let srvid = queryParams.get('ServerID');
+    let url ="http://localhost:8000/api/GetServerPartitions?ServerID="+srvid
+    
+  let Json= this.CallServerListAPI(url)
+   
+  Json.then((result)=>{
+     let Partitions_List=[]
+    
+    result.map((server)=>{
+      Partitions_List.push(server) 
+    }
+    )
+    
+    this.setState({Paritions:Partitions_List}, () => {
+      this.TurnoffLoadingScreen();
+  })
+    
+   }
+   );
   
+}
     render() {
-    /*  this.CheckIdentification(); 
-      const cookies = new Cookies();
-      var CryptoJS = require("crypto-js");
-      let Username=cookies.get("Username")
-      let Password_ciphered=cookies.get("Password")
-      var bytes = CryptoJS.AES.decrypt(Password_ciphered, 'DigitalClick');
-        var Password = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-      let url ="http://localhost:8000/api/GetAllServers?Username="+Username+"&Password="+Password
-    let Json= this.CallServerListAPI(url) 
-    Json.then((result)=>{
-      
-      for( let key in result)
+      if(this.state.isLoading)
       {
-        this.Servers=result
-
-        
-
-        
-        
-        
+        return (
+          <div class="d-flex justify-content-center" style={{margin:"10px"}}>
+          <LoadingSpinner id="Spinner"/>         
+      </div>
+        )
       }
-      
-
-     }
-     );*/
-     
-
+      else
+      {  
+     const queryParams = new URLSearchParams(window.location.search);
+     let srvid = queryParams.get('ServerID');
         return (
 <div class="container mt-10" >
+<a class="btn btn-outline-primary btn-sm" href={"AddServerPartition?ServerID="+srvid} data-abc="true" style={{margin:"10px",padding:"10px"}}>Add Partition</a>
                                     <div class="row">
-               <div class="col-md-4 col-sm-6" id="ProductsContainerID">
+
+
+                                      {
+                                        this.state.Paritions.map((Partition)=>
+                                        {
+
+
+
+                                          return(
+                                            <div class="col-md-4 col-sm-6" id="ProductsContainerID">
                       
                  <div class="card m-2"><a class="card-img-tiles" href="#" data-abc="true">
                      <div class="inner">
@@ -157,39 +229,39 @@ class MangeServer extends Component {
   
   <Row>
   <Col><nobr><label style={{fontSize:"10px"}}>IP-Address:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">192.168.1.2</p></nobr></Col>
+                     <p style={{fontSize:"10px"}} class="text-muted">{Partition.SVMP_IP_Adress}</p></nobr></Col>
     <Col><nobr><label style={{fontSize:"10px"}}>MAC-Address:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">00-10-FA-6E-D6-ED</p></nobr></Col>
+                     <p style={{fontSize:"10px"}} class="text-muted">{Partition.SVMP_MAC_Adress}</p></nobr></Col>
                  
   </Row>
   <Row>
     <Col><nobr><label style={{fontSize:"10px"}}>OS</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">Windows 11</p></nobr></Col>
+                     <p style={{fontSize:"10px"}} class="text-muted">{Partition.OperatingSystem_Company_Name+" "+Partition.OperatingSystem_Name}</p></nobr></Col>
                      <Col><nobr><label style={{fontSize:"10px"}}> Virtual Machine:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">VM Ware 1.3</p></nobr></Col>
+                     <p style={{fontSize:"10px"}} class="text-muted">{Partition.VMProvider_Company_Name+" "+Partition.VM_Name}</p></nobr></Col>
                      
                      
   </Row>
   <Row>
   <Col><nobr><label style={{fontSize:"10px"}}>Allocated V-Cores:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">2</p></nobr></Col>
+                     <p style={{fontSize:"10px"}} class="text-muted">{Partition.Nb_Allocated_Cores}</p></nobr></Col>
     <Col><nobr><label style={{fontSize:"10px"}}> Allocated RAM:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">1 GB</p></nobr></Col>
+                     <p style={{fontSize:"10px"}} class="text-muted">{Partition.Allocated_RAM} GB</p></nobr></Col>
                      
   </Row>
   <Row>
     <Col><nobr><label style={{fontSize:"10px"}}> Allocated Disks:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">2</p></nobr>
+                     <p style={{fontSize:"10px"}} class="text-muted">NOT AVAILABLE</p></nobr>
         
                      </Col>
                      <Col><nobr><label style={{fontSize:"10px"}}> Partition Name:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">Partition 1</p></nobr></Col>
+                     <p style={{fontSize:"10px"}} class="text-muted">{Partition.PartitionName}</p></nobr></Col>
   
                      
   </Row>
   <Row>
                      <Col><nobr><label style={{fontSize:"10px"}}> Backup</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">Disabled</p></nobr></Col>             
+                     <p style={{fontSize:"10px"}} class="text-muted">{Partition.Backup}</p></nobr></Col>             
   </Row>
   
 
@@ -217,7 +289,8 @@ class MangeServer extends Component {
       </Col>
       <Col>
       <Popup  show={this.state.modalShow}
-        onHide={() => this.state.modalShow=true}/>
+        onHide={() => this.state.modalShow=true}
+        Partition_ID={Partition.ServerVMPartition_ID}/>
       </Col>
      
       </Row>
@@ -228,21 +301,21 @@ class MangeServer extends Component {
                     <Container>
                     <Row>
     <Col><nobr><label style={{fontSize:"10px"}}>Creation Date:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">20/07/2007</p></nobr></Col>
+                     <p style={{fontSize:"10px"}} class="text-muted">{Partition.SVMP_IP_Adress}</p></nobr></Col>
                      <Col><nobr><label style={{fontSize:"10px"}}>Description:</label>
-                     <a href=""><p style={{fontSize:"10px"}} class="text-muted">Server info here</p></a></nobr></Col>
+                     <a href=""><p style={{fontSize:"10px"}} class="text-muted">{Partition.SVMP_IP_Adress}</p></a></nobr></Col>
     <Col><nobr><label style={{fontSize:"10px"}}>Next Facturation Date:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">10/09/2022</p></nobr></Col>
+                     <p style={{fontSize:"10px"}} class="text-muted">NOT AVAILABLE YET</p></nobr></Col>
                      
   </Row>
   <Row>
     <Col><nobr><label style={{fontSize:"10px"}}>Payment Type:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">Monthly</p></nobr></Col>
+                     <p style={{fontSize:"10px"}} class="text-muted">NOT AVAILABLE YET</p></nobr></Col>
                      <Col><nobr><label style={{fontSize:"10px"}}>Client:</label>
-                     <a href=""><p style={{fontSize:"10px"}} class="text-muted">Client #1</p></a></nobr></Col>
+                     <a href=""><p style={{fontSize:"10px"}} class="text-muted">NOT AVAILABLE YET</p></a></nobr></Col>
                      
     <Col><nobr><label style={{fontSize:"10px"}}>Description:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">Info</p></nobr></Col>
+                     <p style={{fontSize:"10px"}} class="text-muted">{Partition.SVMP_IP_Adress}</p></nobr></Col>
                      
   </Row>
   <Row>
@@ -262,6 +335,12 @@ class MangeServer extends Component {
                  </div>
                </div>
 
+
+                                          )
+                                        })
+                                      }
+               
+
                
                
              </div>
@@ -269,6 +348,7 @@ class MangeServer extends Component {
              </div>
 
         );
+      }
     }
 }
  

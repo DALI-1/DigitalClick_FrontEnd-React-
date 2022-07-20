@@ -332,9 +332,9 @@ class MangeServer extends Component {
                               
                                
                                
-                               <a class="btn btn-outline-primary btn-sm" href="ManageServerPartitions" data-abc="true" style={{margin:"10px",padding:"10px"}}>View VM Partitions </a>
+                               <a class="btn btn-outline-primary btn-sm" href={"ManageServerPartitions?ServerID="+server.Server_ID} data-abc="true" style={{margin:"10px",padding:"10px"}}>View VM Partitions </a>
                                
-                               <a class="btn btn-outline-primary btn-sm" href="ManageServerContracts" data-abc="true" style={{margin:"10px",padding:"10px"}}>View Contracts</a>
+                               <a class="btn btn-outline-primary btn-sm" href={"ManageServerContracts?ServerID="+server.Server_ID} data-abc="true" style={{margin:"10px",padding:"10px"}}>View Contracts</a>
                              </div>
                            </div>
                          </div>

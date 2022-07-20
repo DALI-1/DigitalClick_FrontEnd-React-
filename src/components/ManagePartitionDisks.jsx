@@ -18,6 +18,9 @@ export function Popup() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+
+
+
   return (
     <>
     <IconButton aria-label="delete" size="large" onClick={handleShow}>
@@ -47,12 +50,49 @@ export function Popup() {
 
 
 class ManageContract extends Component {
-    state = { modalShow:false } 
+    state = { modalShow:false,Disks:[] } 
     
-   
+    SERVERAPICALL = async (url) => {
+      try {
+        const response = await fetch(url,{
+          method: "GET",
+          headers: {
+            "access-control-allow-origin" : "*",
+            "Content-type": "application/json; charset=UTF-8"
+          }});
+        const json = await response.json();
+        
+        return(json)
+      } catch (error) {
+        console.log("error", error);
+        return("Error:Yes");
+      }
+    };
+       componentDidMount =()=>
+{
+  const queryParams = new URLSearchParams(window.location.search);
+      let srvid = queryParams.get('ServerID');
+let Json=null 
+let url="http://127.0.0.1:8000/api/GetServerDisks?ServerID="+srvid
+console.log(url)
+Json=this.SERVERAPICALL(url)
+Json.then((result)=>{
+let Disks_List=[]
+result.map((Disk)=>{
+Disks_List.push(Disk) 
+}
+)
+this.setState({Disks:Disks_List}
+)
+}
+);
+
+}
 
     render()
     { 
+      const queryParams = new URLSearchParams(window.location.search);
+      let srvid = queryParams.get('ServerID');
         return (
             <reactElement>
 <Container>
@@ -70,10 +110,10 @@ class ManageContract extends Component {
         />
         <Button variant="outline-success">Search</Button>
       </Form>
-        <p class="text-justify" style={{color:"Black"}}>The Partitions disks:</p>
+        <p class="text-justify" style={{color:"Black"}}>The Server disks:</p>
         
-        <a class="btn btn-outline-primary btn-sm" href="AddDisk" data-abc="true" style={{margin:"10px",padding:"10px"}}>Add New Disk </a>
-        
+        <a class="btn btn-outline-primary btn-sm" href={"AddDisk?ServerID="+srvid} data-abc="true" style={{margin:"10px",padding:"10px"}}>Add New Disk </a>
+        <a class="btn btn-outline-primary btn-sm" href={"AddDiskProvider?ServerID="+srvid} data-abc="true" style={{margin:"10px",padding:"10px"}}>Add Disk Provider </a>
         <Table  bordered hover responsive>
           
       <thead>
@@ -89,31 +129,29 @@ class ManageContract extends Component {
           <th class="text-center"> Edit</th>
         </tr>
       </thead>
-
-
-
-
-
-
-
-
       <tbody>
-        <tr>
-          <td class="text-center">1</td>
+
+        {
+          this.state.Disks.map((Disk)=>{
+
+
+return(
+<tr>
+          <td class="text-center">{Disk.Disk_ID}</td>
           <td class="text-center"><a href="#"><Image  roundedCircle={true} style={{width: '50px',height:'50px'}} src={require('./images/Disk_Default_Picture.jpg')}/></a></td>
-          <td class="text-center">ASUS</td>
-          <td class="text-center">XBA1546</td>
+          <td class="text-center">{Disk.DProvider_Company_Name}</td>
+          <td class="text-center">{Disk.Disk_Model}</td>
+          <td class="text-center">{Disk.Disk_Type}</td>
+          <td class="text-center">{Disk.Total_Size}</td>
+          <td class="text-center">NOT AVAILABLE</td>
           
-          <td class="text-center">M.2</td>
-          <td class="text-center">512 GB</td>
-          <td class="text-center">100 GB</td>
           
           <td>
 
           <Container>
       <Row>
       <Col>
-      <IconButton href="ManageDiskPartitions" aria-label="delete" size="large">
+      <IconButton href={"ManageDiskPartitions?DiskID="+Disk.Disk_ID} aria-label="delete" size="large">
   <Split fontSize="inherit" />
 </IconButton>
 
@@ -135,6 +173,13 @@ class ManageContract extends Component {
           
           </td>
         </tr>
+
+)
+            
+
+          })
+        }
+        
 
         
         
