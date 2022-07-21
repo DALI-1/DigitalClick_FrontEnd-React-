@@ -11,11 +11,44 @@ import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-export function Popup() {
+import Cookies from 'universal-cookie';
+import LoadingSpinner from './LoadingSpinner';
+export function Popup(props) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+ const CallAPI = async (url) => {
+    try {
+      const response = await fetch(url,{
+        method: "GET",
+        headers: {
+          "access-control-allow-origin" : "*",
+          "Content-type": "application/json; charset=UTF-8"
+        }});
+      const json = await response.json();
+      
+      return(json)
+    } catch (error) {
+      console.log("error", error);
+      return("Error:Yes");
+    }
+  };
+
+
+
+  const handleDelete = ()=>{
+
+let url="http://localhost:8000/api/RemoveServerContractByID?ServerContractID="+props.ServerContract_ID
+  CallAPI(url);
+  console.log(url);
+    setShow(false);
+    setTimeout(function () {
+      window.location.replace('ManageServerContracts')
+  }, 1000);
+    
+    
+  }
 
   return (
     <>
@@ -28,12 +61,12 @@ export function Popup() {
         <Modal.Header closeButton>
           <Modal.Title>Delete</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Are you sure you want to delete?</Modal.Body>
+        <Modal.Body>{"Are you sure you want to delete "}</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             No don't delete
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleDelete}>
             Yes Delete
           </Button>
         </Modal.Footer>
@@ -44,96 +77,206 @@ export function Popup() {
 
 
 
-
 class ManageContract extends Component {
-    state = { modalShow:false } 
-    
-   
+  state = { modalShow:false,Contracts:[],isLoading: true
+      
+  } 
 
-    render()
-    { 
+
+   CallServerListAPI = async (url) => {
+    try {
+      const response = await fetch(url,{
+        method: "GET",
+        headers: {
+          "access-control-allow-origin" : "*",
+          "Content-type": "application/json; charset=UTF-8"
+        }});
+      const json = await response.json();
+      
+      return(json)
+    } catch (error) {
+      console.log("error", error);
+      return("Error:Yes");
+    }
+  };
+
+  CheckIdentification= ()=>
+{
+  var CryptoJS = require("crypto-js");
+  const cookies = new Cookies();
+  let Username=cookies.get("Username")
+    let Password_ciphered=cookies.get("Password")
+     if(Username || Password)
+     {
+      var bytes = CryptoJS.AES.decrypt(Password_ciphered, 'DigitalClick');
+      var Password = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
+      const url = "http://localhost:8000/api/SignIn?Username="+Username+"&Password="+Password
+      const CallSignInAPI = async (url) => {
+        try {
+          const response = await fetch(url);
+          const json = await response.json();
+          
+          return(json)
+        } catch (error) {
+          console.log("error", error);
+          return("Error:Yes");
+        }
+      };
+    let Json=CallSignInAPI(url)
+    let LoggedIn=0
+    Json.then((result)=>{
+      for( var property in result)
+      {
+        if(property==="UserValidated" && result[property]==="Yes")
+        {
+
+                    LoggedIn=1;  
+        }
+      }
+      if(LoggedIn===0)
+      {
+        window.location.replace('/SignIn')
+       
+      }
+      
+
+     }
+     );
+   
+     }
+     else
+     {
+      window.location.replace('/SignIn')
+      
+     } 
+
+
+     
+
+}
+TurnoffLoadingScreen=()=>{
+  setTimeout(function () {
+}, 1000);
+
+  this.setState({isLoading: false})
+}
+componentDidMount(){
+  this.CheckIdentification(); 
+  const queryParams = new URLSearchParams(window.location.search);
+            let srvid = queryParams.get('ServerID');
+  let url ="http://localhost:8000/api/GetServerContractsByID?ServerID="+srvid
+let Json= this.CallServerListAPI(url)
+ 
+Json.then((result)=>{
+   let Contract_List=[]
+  
+  result.map((server)=>{
+    Contract_List.push(server) 
+  }
+  )
+  
+  this.setState({Contracts:Contract_List}, () => {
+    this.TurnoffLoadingScreen();
+})
+  
+ }
+ );
+
+}
+    render() { 
+
+      if(this.state.isLoading)
+      {
+        return (
+          <div class="d-flex justify-content-center" style={{margin:"10px"}}>
+          <LoadingSpinner id="Spinner"/>         
+      </div>
+        )
+       
+      }
+      else
+      {
         return (
             <reactElement>
 <Container>
       <Row>
         <Col>
         <div class="shadow-lg p-3 mb-3 bg-body rounded">
-        <div class="shadow-lg p-3 mb-3 bg-body rounded">
-        <Form className="d-flex" style={{float:"Right",margin:'1px'}}>
-        <FormControl
-          type="search"
-          placeholder="Search"
-          className="me-2"
-          aria-label="Search"
-        />
-        <Button variant="outline-success">Search</Button>
-      </Form>
-        <p class="text-justify" style={{color:"Black"}}>The Server Contracts</p>
-        <br/>
-        <Table striped bordered hover responsive>
+        <div class="d-flex justify-content-center mt-1">
+                <Image roundedCircle={true} style={{width: '70px',height:'70px'}} src={require('./images/Contract_Logo.gif')}/>
+                
+                </div>
+        
+        <p class="text-justify" style={{color:"Black"}}>Server Contracts Management Table</p>
+        
+        <Table  bordered hover responsive>
       <thead>
         <tr>
           <th># Contract ID</th>
           <th>Server Name</th>
-          <th>Virtual Machine</th>
-          <th>Client</th>
+          
+          <th>Client Name</th>
           <th>Payment Type</th>
           <th>Price</th>
+          <th>Start Facturation Date</th>
           <th>Next Facturation date</th>
-          <th>Backup</th>
+          
           <th>SSL Ending date</th>
           <th>Access status tempass</th>
+          
           <th> Edit</th>
         </tr>
       </thead>
-
-
-
-
-
-
-
-
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>IBM X1056020</td>
-          <td>VMWare V1.5.2.3</td>
-          <td><a href="#"><Image  roundedCircle={true} style={{width: '50px',height:'50px'}} src={require('./images/EXIST_Logo.png')}/></a></td>
-          <td>Monthly</td>
-          <td>50$</td>
-          <td>15/09/2020</td>
-          <td>Yes</td>
-          <td>15/09/2022</td>
-          <td>Normal</td>
+        
+        {
+
+          this.state.Contracts.map((Contract)=>
+          {
+
+
+            return(
+<tr>
+          <td>{Contract.SContract_ID}</td>
+          <td>{Contract.Server_Name}</td>
+          
+          <td>{Contract.First_Name+' '+Contract.Last_Name}</td>
+          <td>{Contract.Payment_Type}</td>
+          <td>{Contract.Rent_price+" TND"}</td>
+          <td>{Contract.created_at}</td>
+          <td>{Contract.Next_Facturation_Date}</td>
+  
+          <td>{Contract.SSL_Ending_Date}</td>
+          <td>{Contract.Access_status_Temppass}</td>
+          
           <td>
 
           <Container>
-      <Row>
+          <Row>
       <Col>
-      <IconButton href="EditContract" aria-label="delete" size="large">
+      <IconButton  href="EditContract" aria-label="delete" size="large">
   <AddIcon fontSize="inherit" />
 </IconButton>
       </Col>
       <Col>
       <Popup  show={this.state.modalShow}
-        onHide={() => this.state.modalShow=true}/>
+        onHide={() => this.state.modalShow=true}
+        ServerContract_ID={Contract.SContract_ID}/>
       </Col>
-      
+     
       </Row>
       
     </Container>
-            
-            
-            
-
           </td>
-        </tr>
-        
-        
+        </tr> 
+
+            )
+          })
+        }
+         
       </tbody>
     </Table>
-    </div>   
+      
     </div>
         </Col>
         
@@ -146,6 +289,7 @@ class ManageContract extends Component {
     
             </reactElement>
         );
+      }
     }
 }
  

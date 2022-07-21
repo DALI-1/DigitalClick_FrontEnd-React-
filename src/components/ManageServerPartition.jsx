@@ -38,20 +38,14 @@ export function Popup(props) {
       return("Error:Yes");
     }
   };
-
-
-
   const handleDelete = ()=>{
-
 let url="http://localhost:8000/api/RemovePartitionByID?PartitionID="+props.Partition_ID
   CallAPI(url);
   console.log(url);
     setShow(false);
     setTimeout(function () {
-      window.location.replace('ManageServerPartitions?ServerID'+props.Partition_ID)
-  }, 1000);
-    
-    
+      //window.location.replace('ManageServerPartitions?ServerID='+props.Server_ID)
+  }, 1000);   
   }
 
   return (
@@ -290,7 +284,8 @@ class MangeServer extends Component {
       <Col>
       <Popup  show={this.state.modalShow}
         onHide={() => this.state.modalShow=true}
-        Partition_ID={Partition.ServerVMPartition_ID}/>
+        Partition_ID={Partition.ServerVMPartition_ID}
+        Server_ID={srvid}/>
       </Col>
      
       </Row>
@@ -330,7 +325,7 @@ class MangeServer extends Component {
                      
                      <a class="btn btn-outline-primary btn-sm" href="ManagePartitionDisks" data-abc="true" style={{margin:"10px",padding:"10px"}}>View Allocated Disks</a>
                      
-                     <a class="btn btn-outline-primary btn-sm" href="ManageServerContracts" data-abc="true" style={{margin:"10px",padding:"10px"}}>View The Contract</a>
+                    
                    </div>
                  </div>
                </div>

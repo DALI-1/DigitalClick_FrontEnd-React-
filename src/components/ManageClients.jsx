@@ -172,8 +172,8 @@ class ManageClients extends Component {
                             
 
                       return(
-<div class="col-md-4 col-sm-6">
-               <div class="card m-2">
+<div class="col-md-4 col-sm-6 ">
+               <div class="card m-2 shadow-sm" >
                 <a class="card-img-tiles" href="#" data-abc="true">
                    <div class="inner">
                      <div class="main-img">

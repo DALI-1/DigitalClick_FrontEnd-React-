@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React,{Component,useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
@@ -7,7 +7,34 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import LoadingSpinner from './LoadingSpinner';
 import Col from 'react-bootstrap/Col';
-import Cities from './tn.json';
+import Alert from 'react-bootstrap/Alert';
+
+function AlertDismissible() {
+  const [show, setShow] = useState(true);
+
+  return (
+    <>
+      <Alert show={show} variant="success">
+        <Alert.Heading>How's it going?!</Alert.Heading>
+        <p>
+          Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget
+          lacinia odio sem nec elit. Cras mattis consectetur purus sit amet
+          fermentum.
+        </p>
+        <hr />
+        <div className="d-flex justify-content-end">
+          <Button onClick={() => setShow(false)} variant="outline-success">
+            Close me y'all!
+          </Button>
+        </div>
+      </Alert>
+
+      {!show && <Button onClick={() => setShow(true)}>Show Alert</Button>}
+    </>
+  );
+}
+
+
 class AddServer extends Component {
   state = { OSs:[], isLoading:true,VMs:[] }
   
@@ -315,6 +342,7 @@ this.setState({VMs:VMs_List},()=>{
 
       <div class="row justify-content-center">
       <button type="Submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">Create Partition</button>
+     
 </div>
       
     </Form>

@@ -251,7 +251,7 @@ class MangeServer extends Component {
               <Col><nobr><label style={{fontSize:"10px"}}>Number of V-Cores:</label>
                                <p style={{fontSize:"10px"}} class="text-muted">{server.Nb_Cores}</p></nobr></Col>
               <Col><nobr><label style={{fontSize:"10px"}}>RAM</label>
-                               <p style={{fontSize:"10px"}} class="text-muted">{server.RAM}</p></nobr></Col>
+                               <p style={{fontSize:"10px"}} class="text-muted">{server.RAM+"GB"}</p></nobr></Col>
                                
             </Row>
             <Row>
