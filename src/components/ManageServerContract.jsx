@@ -212,9 +212,8 @@ Json.then((result)=>{
         <Table  bordered hover responsive>
       <thead>
         <tr>
-          <th># Contract ID</th>
-          <th>Server Name</th>
-          
+          <th># Contract ID</th> 
+          <th>Partition Name</th>       
           <th>Client Name</th>
           <th>Payment Type</th>
           <th>Price</th>
@@ -224,7 +223,7 @@ Json.then((result)=>{
           <th>SSL Ending date</th>
           <th>Access status tempass</th>
           
-          <th> Edit</th>
+          
         </tr>
       </thead>
       <tbody>
@@ -237,9 +236,8 @@ Json.then((result)=>{
 
             return(
 <tr>
-          <td>{Contract.SContract_ID}</td>
-          <td>{Contract.Server_Name}</td>
-          
+          <td>{Contract.PContract_ID}</td>
+          <td>{Contract.PartitionName}</td>     
           <td>{Contract.First_Name+' '+Contract.Last_Name}</td>
           <td>{Contract.Payment_Type}</td>
           <td>{Contract.Rent_price+" TND"}</td>
@@ -249,25 +247,7 @@ Json.then((result)=>{
           <td>{Contract.SSL_Ending_Date}</td>
           <td>{Contract.Access_status_Temppass}</td>
           
-          <td>
-
-          <Container>
-          <Row>
-      <Col>
-      <IconButton  href="EditContract" aria-label="delete" size="large">
-  <AddIcon fontSize="inherit" />
-</IconButton>
-      </Col>
-      <Col>
-      <Popup  show={this.state.modalShow}
-        onHide={() => this.state.modalShow=true}
-        ServerContract_ID={Contract.SContract_ID}/>
-      </Col>
-     
-      </Row>
-      
-    </Container>
-          </td>
+          
         </tr> 
 
             )

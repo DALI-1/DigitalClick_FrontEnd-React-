@@ -1,13 +1,8 @@
 
 
 import React,{Component} from 'react';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Notification from './Notification'
-
-
-
-
 import Button from 'react-bootstrap/Button';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
@@ -17,17 +12,28 @@ import Container from 'react-bootstrap/Container';
 import FormControl from 'react-bootstrap/FormControl';
 import Image from 'react-bootstrap/Image'
 import Cookies from 'universal-cookie';
+import {Popup} from './Popup2.jsx'
 class NavBar extends Component {
-    state = {  } 
+    state = { Show:false } 
 
+    constructor()
+    {
+
+super();
+    }
     handlesearch=(props)=>
     {
       props.preventDefault();
      let Res=window.find(props.target[0].value)
-     console.log(Res)
+    
      if(Res==false)
      {
-      alert("Nothing found!")
+      
+      this.setState({Show:true},()=>{
+        this.forceUpdate()
+      })
+
+   
      }
 
       
@@ -71,34 +77,24 @@ class NavBar extends Component {
           <NavDropdown.Item href="AddVMCompany">Add VM Company</NavDropdown.Item>
           <NavDropdown.Item href="AddOSCompany">Add OS Company</NavDropdown.Item>
           <NavDropdown.Item href="AddServiceProvider">Add Service Provider</NavDropdown.Item>
-          <NavDropdown.Divider />
-          
+          <NavDropdown.Divider />          
         </NavDropdown>
         <NavDropdown title="Manage Client" id="navbarScrollingDropdown">
           <NavDropdown.Item href="ManageClients">Consult Clients</NavDropdown.Item>
           <NavDropdown.Item href="AddClient">Add New Client</NavDropdown.Item>
-          <NavDropdown.Divider />
-          
+          <NavDropdown.Divider />         
         </NavDropdown>
         <NavDropdown title="Manage Contracts" id="navbarScrollingDropdown">
           <NavDropdown.Item href="ManagePartitionContracts">Consult Server Parition Contracts</NavDropdown.Item>
           <NavDropdown.Item href="ManageServersContracts">Consult Server  Contracts</NavDropdown.Item>
           <NavDropdown.Item href="AddPartitionContract">Add New Server Partition Contract</NavDropdown.Item>
           <NavDropdown.Item href="AddServerContract">Add New Server Contract</NavDropdown.Item>
-          <NavDropdown.Divider />
-          
-        </NavDropdown>
-
-
-
-        
-        
+          <NavDropdown.Divider />        
+        </NavDropdown>     
         <NavDropdown title="Profile" id="navbarScrollingDropdown">
-          <NavDropdown.Item href="ManageProfile">Manage Profile</NavDropdown.Item>
-         
+          <NavDropdown.Item href="ManageProfile">Manage Profile</NavDropdown.Item>         
           <NavDropdown.Divider />
           <NavDropdown.Item onClick={this.HandleLogout}>
-
             Logout
           </NavDropdown.Item>
         </NavDropdown>
@@ -115,6 +111,7 @@ class NavBar extends Component {
           name="SearchInput"
         />
         <Button variant="outline-success" type='submit'>Search</Button>
+        <Popup status={this.state.Show}/>
       </Form>
     </Navbar.Collapse>
   </Container>

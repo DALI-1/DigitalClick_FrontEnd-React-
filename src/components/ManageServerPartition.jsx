@@ -216,7 +216,7 @@ class MangeServer extends Component {
                                           return(
                                             <div class="col-md-4 col-sm-6" id="ProductsContainerID">
                       
-                 <div class="card m-2"><a class="card-img-tiles" href="#" data-abc="true">
+                 <div class="card m-2 shadow"><a class="card-img-tiles" href="#" data-abc="true">
                      <div class="inner">
                        <div class="main-img">
 <Container>
@@ -323,7 +323,7 @@ class MangeServer extends Component {
                     
                      
                      
-                     <a class="btn btn-outline-primary btn-sm" href="ManagePartitionDisks" data-abc="true" style={{margin:"10px",padding:"10px"}}>View Allocated Disks</a>
+                    {/*  <a class="btn btn-outline-primary btn-sm" href="ManagePartitionDisks" data-abc="true" style={{margin:"10px",padding:"10px"}}>View Allocated Disks</a>*/}
                      
                     
                    </div>

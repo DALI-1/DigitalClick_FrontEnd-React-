@@ -74,7 +74,6 @@ class ManageContract extends Component {
       let srvid = queryParams.get('ServerID');
 let Json=null 
 let url="http://127.0.0.1:8000/api/GetServerDisks?ServerID="+srvid
-console.log(url)
 Json=this.SERVERAPICALL(url)
 Json.then((result)=>{
 let Disks_List=[]
@@ -101,15 +100,7 @@ this.setState({Disks:Disks_List}
         <div class="shadow-lg p-3 mb-3 bg-body rounded">
         <div class="shadow-lg p-3 mb-3 bg-body rounded">
            
-        <Form className="d-flex" style={{float:"Right",margin:'1px'}}>
-        <FormControl
-          type="search"
-          placeholder="Search"
-          className="me-2"
-          aria-label="Search"
-        />
-        <Button variant="outline-success">Search</Button>
-      </Form>
+       
         <p class="text-justify" style={{color:"Black"}}>The Server disks:</p>
         
         <a class="btn btn-outline-primary btn-sm" href={"AddDisk?ServerID="+srvid} data-abc="true" style={{margin:"10px",padding:"10px"}}>Add New Disk </a>
@@ -151,7 +142,7 @@ return(
           <Container>
       <Row>
       <Col>
-      <IconButton href={"ManageDiskPartitions?DiskID="+Disk.Disk_ID} aria-label="delete" size="large">
+      <IconButton href={"ManageDiskPartitions?DiskID="+Disk.Disk_ID+"&ServerID="+srvid} aria-label="delete" size="large">
   <Split fontSize="inherit" />
 </IconButton>
 

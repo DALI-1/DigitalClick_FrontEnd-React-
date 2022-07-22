@@ -197,7 +197,7 @@ class MangeServer extends Component {
       if(this.state.isLoading)
       {
         return (
-          <div class="d-flex justify-content-center" style={{margin:"10px"}}>
+          <div className="d-flex justify-content-center" style={{margin:"10px"}}>
           <LoadingSpinner id="Spinner"/>         
       </div>
         )
@@ -208,7 +208,7 @@ class MangeServer extends Component {
         return (
          
 
-          <div class="container mt-10" >
+          <div className="container mt-10" >
  
                                               <div class="row">                       
                           {
@@ -217,14 +217,14 @@ class MangeServer extends Component {
           
                             return(
                               
-                              <div class="col-md-4 col-sm-6" id="ProductsContainerID">    
+                              <div className="col-md-6 col-sm-1" id="ProductsContainerID">    
                                
-                           <div class="card m-2 shadow">
+                           <div className="card m-2 shadow">
                             
-                            <a class="card-img-tiles" href="#" data-abc="true">
+                            <a className="card-img-tiles" href="#" data-abc="true">
                             
-                               <div class="inner">
-                                 <div class="main-img">
+                               <div className="inner">
+                                 <div className="main-img">
           <Container>
             <Row>
               <Col> <nobr><label style={{fontSize:"10px"}}>Server:</label>
@@ -261,11 +261,15 @@ class MangeServer extends Component {
                                </nobr></Col>
                                <Col><nobr><label style={{fontSize:"10px"}}>BIOS</label>
                                <p style={{fontSize:"10px"}} class="text-muted">{server.BIOS}</p></nobr></Col>
-              <Col><nobr><label style={{fontSize:"10px"}}>Server Type:</label>
+                         
+                               
+            </Row>
+            <Row>
+            <Col><nobr><label style={{fontSize:"10px"}}>Server Type:</label>
                                <p style={{fontSize:"10px"}} class="text-muted">{server.Server_Type}</p></nobr></Col>
                                <Col><nobr><label style={{fontSize:"10px"}}>Backup:</label>
-                               <p style={{fontSize:"10px"}} class="text-muted">{server.Backup}</p></nobr></Col>              
-                               
+                               <p style={{fontSize:"10px"}} class="text-muted">{server.Backup}</p></nobr></Col>  
+
             </Row>
             
             
