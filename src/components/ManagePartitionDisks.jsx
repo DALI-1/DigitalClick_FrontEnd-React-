@@ -113,9 +113,7 @@ this.setState({Disks:Disks_List}
 )
 }
 );
-
 }
-
     render()
     { 
       const queryParams = new URLSearchParams(window.location.search);
@@ -173,7 +171,7 @@ return(
 
       </Col>
       <Col>
-      <IconButton href="EditDisk" aria-label="delete" size="large">
+      <IconButton href={"EditDisk?DiskID="+Disk.Disk_ID+"&ServerID="+srvid} aria-label="delete" size="large">
   <AddIcon fontSize="inherit" />
 </IconButton>
 

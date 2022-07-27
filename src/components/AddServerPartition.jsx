@@ -11,7 +11,7 @@ import Alert from 'react-bootstrap/Alert';
 import Modal from 'react-bootstrap/Modal';
 
 class AddServer extends Component {
-  state = { OSs:[], isLoading:true,VMs:[],Status:false,Status:false }
+  state = { OSs:[], isLoading:true,VMs:[],Status:false }
   
   
 
@@ -43,7 +43,7 @@ class AddServer extends Component {
     let PropsString=""
     let i=0
     let url="http://127.0.0.1:8000/api/CreateServerPartition"
-    for(i=0;i<10;i++)
+    for(i=0;i<9;i++)
     {
      if(i==0)
      {
@@ -57,11 +57,7 @@ class AddServer extends Component {
         PropsString=PropsString+"&"+props.target[i].name+"="+this.SelectedOSID
         
       }
-      else if(props.target[i].name=="VM_ID")
-      {
-        
-        PropsString=PropsString+"&"+props.target[i].name+"="+this.SelectedVMID
-      }
+      
       else
       {
         PropsString=PropsString+"&"+props.target[i].name+"="+props.target[i].value
@@ -72,6 +68,7 @@ class AddServer extends Component {
     }
     const queryParams = new URLSearchParams(window.location.search);
     let srvid = queryParams.get('ServerID');
+    console.log(url+PropsString)
     this.SERVERAPICALL(url+PropsString)
     setTimeout(() => {window.location.replace("ManageServerPartitions?ServerID="+srvid)}, 2000);
 
@@ -152,7 +149,6 @@ this.setState({VMs:VMs_List},()=>{
                 <div class="shadow  p-1  mb-1  bg-light rounded">
                 <div class="d-flex justify-content-center mb-4">
                 <Image  style={{width: '150px',height:'150px'}} src={require('./images/Server_Logo.gif')}/>
-                
                 </div>
                 </div>
                 <MDBContainer style={{marginTop:"30px"}}>
@@ -171,7 +167,11 @@ this.setState({VMs:VMs_List},()=>{
           
         </Form.Text>
       </Form.Group></Col>
+      
   </Row>
+
+
+  
       <Row>
         
         <Col>  <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -247,24 +247,23 @@ this.setState({VMs:VMs_List},()=>{
         </Form.Text>
       </Form.Group></Col>
         
-        <Col><Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label
-        style={{color: 'black'}}
-        >Backup Status:</Form.Label>
-        <Form.Select required
-        name="Backup">
-       
-            <option >Activated</option>
-            <option >Disabled</option>
-        </Form.Select>
-       
-        <Form.Text className="text-muted">
-          
-        </Form.Text>
-      </Form.Group></Col>
+        
       </Row>
       <Row>
-        
+      <Form.Group className="mb-3" controlId="formBasicEmail">  
+          <Form.Label
+                style={{color: 'black'}}
+                >Backup </Form.Label>      
+            <Form.Select required name="Backup" >
+              <option>Enabled</option>
+              <option>Disabled</option>
+              
+            </Form.Select>
+           
+            <Form.Text className="text-muted">
+              
+            </Form.Text>
+          </Form.Group>
         
       </Row>
       <Row>
@@ -279,29 +278,7 @@ this.setState({VMs:VMs_List},()=>{
       </Form.Group>
       </Row>
       <Row>
-      <Col>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label
-        style={{color: 'black'}}
-        >Virtual Machine:</Form.Label>
-        <Form.Select required
-        name="VM_ID"  onChange={this.onChangeHandler2}>
-          
-        {
-        this.state.VMs.map((VM)=>{
-          
-          return(
-            <option id={VM.VM_ID}>{VM.VMProvider_Company_Name +" "+VM.VM_Name} </option>
-          )
-        })
-       } 
-       
-        </Form.Select>
-       
-        <Form.Text className="text-muted">
-          
-        </Form.Text>
-      </Form.Group></Col>
+      
       </Row>
       <Row>
       <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -313,10 +290,7 @@ this.setState({VMs:VMs_List},()=>{
         </Form.Text>
       </Form.Group>
       </Row>
-  
     </Container>
-     
-
       <div class="row justify-content-center">
       <button type="Submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">Create Partition</button>
      

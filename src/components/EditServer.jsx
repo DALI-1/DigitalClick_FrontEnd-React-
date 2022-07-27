@@ -9,10 +9,10 @@ import TextField from '@mui/material/TextField';
 import Image from 'react-bootstrap/Image'
 import LoadingSpinner from './LoadingSpinner';
 import { createRef } from 'react';
-
+import Modal from 'react-bootstrap/Modal';
 
 class MangeServer extends Component {
-  state = { modalShow:false,Servers:[[]],isLoading: true,OSs:[],countries:[],ServiceProviders:[],SOS:[],Provider_ID:"",OperatingSystem_ID:"",Server_Country:""} 
+  state = { modalShow:false,Servers:[[]],isLoading: true,OSs:[],countries:[],ServiceProviders:[],SOS:[],Provider_ID:"",OperatingSystem_ID:"",Server_Country:"",Status:false} 
     constructor()
     {
       super()
@@ -47,6 +47,9 @@ class MangeServer extends Component {
     handlesubmit=(props)=>
   {
     props.preventDefault();
+    const queryParams = new URLSearchParams(window.location.search);
+    let srvid = queryParams.get('ServerID');
+    this.setState({Status:true});
     let PropsString=""
     let i=0
     let url="http://127.0.0.1:8000/api/EditServer"
@@ -79,7 +82,7 @@ class MangeServer extends Component {
     }
  
     this.SERVERAPICALL(url+PropsString)
-
+    setTimeout(() => {window.location.replace("EditServer?ServerID="+srvid)}, 2000);
 
   }
 
@@ -271,6 +274,8 @@ class MangeServer extends Component {
           this.state.Servers[0].map((server)=>{   
             const queryParams = new URLSearchParams(window.location.search);
             let srvid = queryParams.get('ServerID');
+            console.log(server.NextFacturationDate)
+
             return(
                       
                       
@@ -417,7 +422,7 @@ Gérer les disques du serveur</a>
                   <Form.Label
                   style={{color: 'black'}}
                   >Description </Form.Label>
-                  <Form.Control type="text" name="Description" defaultValue={server.Description} />
+                  <Form.Control type="text" name="Description" required defaultValue={server.Description} />
                   <Form.Text className="text-muted">
                     
                   </Form.Text>
@@ -441,12 +446,14 @@ Gérer les disques du serveur</a>
                   <Form.Label
                   style={{color: 'black'}}
                   >Prochaine date de Facturation</Form.Label>
-                  <Form.Control type="date" name="NextFacturationDate" defaultValue={server.NextFacturationDate} />
+                  <Form.Control type="date" name="NextFacturationDate" required defaultValue={server.NextFacturationDate} />
                   <Form.Text className="text-muted">
                     
                   </Form.Text>
                 </Form.Group>
                 </nobr></Col>
+
+                
                                
             </Row>
             <Row>
@@ -501,6 +508,21 @@ Gérer les disques du serveur</a>
                     
 Enregistrer les informations du serveur
                   </Button>
+
+                  
+                <Modal
+        size="lg"
+        show={this.state.Status}
+        onHide={() => {this.setState({Status:false})}}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-modal-sizes-title-lg">
+                  Server Management:
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Server Updated successfully</Modal.Body>
+      </Modal>
                 
                              </div>
                              

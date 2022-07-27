@@ -13,7 +13,7 @@ class MainPage extends Component {
     state = {  } 
     render() { 
         return (
-          <div class="shadow-lg p-3 m-3  bg-body rounded">
+          
           <div class="shadow-lg p-3 m-3  bg-body rounded"style={{
         backgroundColor:"rgba(237, 238, 240,0.9)",
         /* backgroundImage: `url(${Image})`, */
@@ -35,7 +35,7 @@ class MainPage extends Component {
             <AddOS/>
          
         </div>
-        </div>
+        
         );
     }
 }

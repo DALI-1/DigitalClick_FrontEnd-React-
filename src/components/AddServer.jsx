@@ -246,7 +246,7 @@ this.TurnoffLoadingScreen();
         style={{color: 'black'}}
         >Operating System:</Form.Label>
         <Form.Select required
-        name="Server_OperatingSystem_ID"  onChange={this.onChangeHandler}>
+        name="Server_OperatingSystem_ID"  onChange={this.onChangeHandler} defaultValue="Tunisia">
           
         {
         this.state.OSs.map((OS)=>{

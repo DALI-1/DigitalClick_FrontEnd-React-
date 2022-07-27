@@ -9,8 +9,9 @@ import TextField from '@mui/material/TextField';
 import Image from 'react-bootstrap/Image'
 import LoadingSpinner from './LoadingSpinner';
 import { createRef } from 'react';
+import Modal from 'react-bootstrap/Modal';
 class MangeServer extends Component {
-  state = { modalShow:false,Servers:[[]],isLoading: true,OSs:[],countries:[],ServiceProviders:[],SOS:[],Provider_ID:"",OperatingSystem_ID:"",Server_Country:""} 
+  state = { modalShow:false,Servers:[[]],isLoading: true,OSs:[],countries:[],ServiceProviders:[],SOS:[],Provider_ID:"",OperatingSystem_ID:"",Server_Country:"",Status:false } 
   constructor()
   {
     super()
@@ -20,35 +21,32 @@ class MangeServer extends Component {
     const index = e.target.selectedIndex;   
       const el = e.target.childNodes[index]     
       const option =  el.getAttribute('id');
-      this.state.OperatingSystem_ID=option;  
-     
+      this.state.OperatingSystem_ID=option;     
   }
   onChangeHandler2 = (e) => {
     const index = e.target.selectedIndex;   
       const el = e.target.childNodes[index]     
       const option =  el.getAttribute('id');
-      this.state.Provider_ID=option;  
-   
+      this.state.Provider_ID=option;   
   }
   handleflagchange=(e)=>
   {
-    
     const index = e.target.selectedIndex;   
       const el = e.target.childNodes[index]     
-      const option =  el.getAttribute('id');
-      
+      const option =  el.getAttribute('id');  
       this.state.Server_Country=option;
       this.forceUpdate(); 
   }
-
-
   handlesubmit=(props)=>
 {
   props.preventDefault();
+  const queryParams = new URLSearchParams(window.location.search);
+  let srvid = queryParams.get('ServerID');
+  this.setState({Status:true})
   let PropsString=""
   let i=0
-  let url="http://127.0.0.1:8000/api/EditServer"
-  for(i=0;i<17;i++)
+  let url="http://127.0.0.1:8000/api/EditServerVM"
+  for(i=0;i<10;i++)
   {
    if(i==0)
    {
@@ -56,16 +54,9 @@ class MangeServer extends Component {
    }
    else
    {
-    if(props.target[i].name=="Server_OperatingSystem_ID")
+    if(props.target[i].name=="OperatingSystem_ID")
     {
-      
       PropsString=PropsString+"&"+props.target[i].name+"="+this.state.OperatingSystem_ID
-      
-    }
-    else if(props.target[i].name=="Service_Provider_ID")
-    {
-      
-      PropsString=PropsString+"&"+props.target[i].name+"="+this.state.Provider_ID
     }
     else
     {
@@ -75,8 +66,9 @@ class MangeServer extends Component {
    }
    
   }
-
+console.log(url+PropsString)
   this.SERVERAPICALL(url+PropsString)
+  setTimeout(() => {window.location.replace('/ManageServerPartitions?ServerID='+srvid)}, 2000);
 
 
 }
@@ -156,12 +148,9 @@ TurnoffLoadingScreen=()=>{
   setTimeout(function () {
    
 }, 2000);
-
   this.setState({isLoading: false})
 }
 componentDidMount(){
-  
-  
   this.CheckIdentification(); 
   const cookies = new Cookies();
   var CryptoJS = require("crypto-js");
@@ -171,9 +160,7 @@ componentDidMount(){
   const id = queryParams.get('ServerID');
   const pid = queryParams.get('ServerVMPartition_ID');
   let url ="http://localhost:8000/api/GetPartitionByID?PartitionID="+pid
-  
   let url1="http://127.0.0.1:8000/api/GetAllOSs"
-  let url2="http://127.0.0.1:8000/api/GetAllVMs"
   let url3="http://127.0.0.1:8000/api/GetAllServiceProviders"
   let url4 ="http://localhost:8000/api/GetServerOSProvider?&ServerID="+id
   let Res=null
@@ -200,7 +187,6 @@ componentDidMount(){
   this.setState({SOS:SOS_List})
   }
   );
-  
   Res=this.SERVERAPICALL(url3)
   Res.then((result)=>{
   let ServiceProviders_List=[]
@@ -208,23 +194,11 @@ componentDidMount(){
   ServiceProviders_List.push(server) 
   }
   )
-  
   this.setState({ServiceProviders:ServiceProviders_List})
   }
   );
   
-  Res=this.SERVERAPICALL(url2)
-  Res.then((result)=>{
-  let Countries_List=[]
-  result.map((Country)=>{
-  Countries_List.push(Country) 
-  }
-  )
-  
-  this.setState({countries:Countries_List})
-  
-  }
-  );
+ 
 
 
 let Json= this.SERVERAPICALL(url) 
@@ -268,6 +242,7 @@ Json.then(
         this.state.Servers[0].map((server)=>{   
           const queryParams = new URLSearchParams(window.location.search);
           let srvid = queryParams.get('ServerID');
+          let pid = queryParams.get('ServerVMPartition_ID');
           return(
                     
                     
@@ -285,15 +260,15 @@ Json.then(
           <Row>
             <Col> 
             
-            <TextField id="standard-basic" label="Nom du VM" name="Server_Name" variant="standard" size="small" contentEditable="true" defaultValue={server.PartitionName}/></Col>
+            <TextField id="standard-basic" label="Nom du VM" name="PartitionName" variant="standard" size="small" contentEditable="true" defaultValue={server.PartitionName}/></Col>
             
                              
           </Row>
           <Row>
           <Col> 
-            <TextField id="standard-basic" label="IP Adress" name="Server_IP_Adress" variant="standard" size="small" defaultValue={server.SVMP_IP_Adress}/></Col>
+            <TextField id="standard-basic" label="IP Adress" name="SVMP_IP_Adress" variant="standard" size="small" defaultValue={server.SVMP_IP_Adress}/></Col>
             <Col> 
-            <TextField id="standard-basic" label="MAC Adress" name="Server_MAC_Adress" variant="standard" size="small" defaultValue={server.SVMP_MAC_Adress}/></Col>
+            <TextField id="standard-basic" label="MAC Adress" name="SVMP_MAC_Adress" variant="standard" size="small" defaultValue={server.SVMP_MAC_Adress}/></Col>
                 
           </Row>
           <Row>
@@ -302,9 +277,9 @@ Json.then(
           </Row>
           <Row>
           <Col> 
-            <TextField id="standard-basic" name="Nb_Cores" label="Nombre des cores" variant="standard" size="small" defaultValue={server.Nb_Allocated_Cores}/></Col>
+            <TextField id="standard-basic" name="Nb_Allocated_Cores" label="Nombre des cores" variant="standard" size="small" defaultValue={server.Nb_Allocated_Cores}/></Col>
             <Col> 
-            <TextField id="standard-basic" name="RAM" label="Taille du RAM" variant="standard" size="small" defaultValue={server.Allocated_RAM}/></Col>
+            <TextField id="standard-basic" name="Allocated_RAM" label="Taille du RAM" variant="standard" size="small" defaultValue={server.Allocated_RAM}/></Col>
                              
           </Row>
           
@@ -317,7 +292,7 @@ Json.then(
                 >Operating System </Form.Label>    
           <Form.Select required
           
-      name="Server_OperatingSystem_ID"  onChange={this.onChangeHandler} defaultValue={server.OperatingSystem_Company_Name +" "+server.OperatingSystem_Name}  >          
+      name="OperatingSystem_ID"  onChange={this.onChangeHandler} defaultValue={server.OperatingSystem_Company_Name +" "+server.OperatingSystem_Name}  >          
       {
       this.state.OSs.map((OS)=>{     
         return(
@@ -334,32 +309,7 @@ Json.then(
           </Form.Group>
           
             </Row>
-            <Row>  
-              
-              <Form.Group className="" controlId="formBasicEmail" style={{marginTop:"10px"}}>  
-              <Form.Label
-                style={{color: 'black'}}
-                >Virtual Machine System </Form.Label>  
-              <Form.Select required
-              
-          name="VM_ID"  onChange={this.onChangeHandler} defaultValue={server.OperatingSystem_Company_Name +" "+server.OperatingSystem_Name}  >          
-          {
-          this.state.countries.map((OS)=>{     
-            return(
-              <option id={OS.VM_ID}>{OS.VMProvider_Company_Name +" "+OS.VM_Name } 
-               </option>
-            )
-          })
-         } 
-         
-          </Form.Select>
-               
-                <Form.Text className="text-muted">
-                  
-                </Form.Text>
-              </Form.Group>
-              
-                </Row>
+            
         
         
         <Row>
@@ -417,18 +367,40 @@ Json.then(
                   <Form.Text className="text-muted">
                     
                   </Form.Text>
-                </Form.Group>
-                                
+                </Form.Group> 
 
-                             
+                 <Form.Group className="mb-1" controlId="formBasicEmail">
+                 
+                  <Form.Control type="text" hidden name="ServerVMPartition_ID" defaultValue={pid} />
+                  <Form.Text className="text-muted">
+                    
+                  </Form.Text>
+                </Form.Group>     
+
+
+
+                            
           </Row>
-      
-          
-                            </Container>
+ </Container>
                             <Button  type="submit" variant="btn btn-outline-primary  m-4" size="lg">
-                  
+                 
 Enregistrer les informations du Partition
                 </Button>
+
+
+                <Modal
+        size="lg"
+        show={this.state.Status}
+        onHide={() => {this.setState({Status:false})}}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-modal-sizes-title-lg">
+                  Partition Management:
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Partition Updated successfully</Modal.Body>
+      </Modal>
               
                            </div>
                            

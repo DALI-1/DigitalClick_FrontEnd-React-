@@ -4,9 +4,146 @@ import Form from 'react-bootstrap/Form';
 import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import Image from 'react-bootstrap/Image'
 import UploadDragDrop from './UploadDragDrop';
+import Modal from 'react-bootstrap/Modal';
+import LoadingSpinner from './LoadingSpinner';
 class AddServer extends Component {
-    state = {  } 
+  state = { Partitions:[],SelectedParitionID:"",Status:false,Partition:[],isLoading: true }
+    
+    SERVERAPICALL = async (url) => {
+      try {
+        const response = await fetch(url,{
+          method: "GET",
+          headers: {
+            "access-control-allow-origin" : "*",
+            "Content-type": "application/json; charset=UTF-8"
+          }});
+        const json = await response.json();
+        
+        return(json)
+      } catch (error) {
+        console.log("error", error);
+        return("Error:Yes");
+      }
+    };
+
+    handlePartitionChange=(e)=>{
+      const index = e.target.selectedIndex;   
+      const el = e.target.childNodes[index]     
+      const option =  el.getAttribute('id');
+
+      this.setState({SelectedParitionID:option})
+    }
+    componentDidMount(){
+      const queryParams = new URLSearchParams(window.location.search);
+      let srvrid = queryParams.get('ServerID');
+      let diskPid = queryParams.get('DiskPID');
+      let url ="http://localhost:8000/api/GetServerPartitions?ServerID="+srvrid
+      
+    let Json= this.SERVERAPICALL(url)
+     
+    Json.then((result)=>{
+       let Partitions_List=[]
+      
+      result.map((server,index)=>{
+        if(index==0)
+        {
+          this.setState({SelectedParitionID:server.ServerVMPartition_ID})
+        }
+
+        
+        Partitions_List.push(server) 
+      }
+      )
+      
+      this.setState({Partitions:Partitions_List})
+      
+     }
+     );
+
+
+     url ="http://localhost:8000/api/GetDiskPartitionByID?DiskPID="+diskPid
+
+     Json= this.SERVERAPICALL(url)
+     
+    Json.then((result)=>{
+       let Partitions_List=[]
+      
+      result.map((server,index)=>{
+      
+        Partitions_List.push(server) 
+      }
+      )
+      
+      this.setState({Partition:Partitions_List},()=>{
+        this.TurnoffLoadingScreen();
+      })
+      
+     }
+     );
+    
+  }
+
+  TurnoffLoadingScreen=()=>{
+    setTimeout(function () {
+  }, 1000);
+
+    this.setState({isLoading: false})
+  }
+
+  handlesubmit=(props)=>
+  {
+    props.preventDefault();
+    const queryParams = new URLSearchParams(window.location.search);
+    let DiskID = queryParams.get('Disk_ID');
+    let srvid = queryParams.get('ServerID');
+ 
+    this.setState({Status:true})
+   
+    let PropsString=""
+    let i=0
+    let url="http://127.0.0.1:8000/api/EditPartitionDisk"
+    for(i=0;i<4;i++)
+    {
+     if(i==0)
+     {
+       PropsString='?'+props.target[i].name+'='+props.target[i].value
+     }
+
+     else if(props.target[i].name=="ServerVMPartition_ID")
+     {
+      PropsString=PropsString+"&"+props.target[i].name+"="+this.state.SelectedParitionID
+     }
+     else 
+     {
+        PropsString=PropsString+"&"+props.target[i].name+"="+props.target[i].value
+     }      
+    }
+    console.log(url+PropsString)
+  this.SERVERAPICALL(url+PropsString)
+
+  setTimeout(() => {window.location.replace('/ManageDiskPartitions?ServerID='+srvid+'&DiskID='+DiskID)}, 2000);
+
+  }
     render() { 
+
+     
+      const queryParams = new URLSearchParams(window.location.search);
+      let srvrid = queryParams.get('ServerID');
+      let diskPid = queryParams.get('DiskPID');
+
+
+      if(this.state.isLoading)
+      {
+        return (
+          <div className="d-flex justify-content-center" style={{margin:"10px"}}>
+          <LoadingSpinner id="Spinner"/>         
+      </div>
+        )
+       
+      }
+      else
+      {
+      
         return ( 
           <div class="d-flex justify-content-center" style={{margin:"10px"}}>
           <div class="shadow  p-5  mb-5 mt-5 bg-light rounded" >
@@ -18,57 +155,77 @@ class AddServer extends Component {
                 </div>
                 <MDBContainer style={{marginTop:"30px"}}>
 
-<Form>
-     
+<Form onSubmit={this.handlesubmit}>
+<Form.Group className="mb-3" controlId="formBasicEmail">       
+        <Form.Control type="text" hidden name="DiskPID" value={diskPid} />
+        <Form.Text className="text-muted">         
+        </Form.Text>
+      </Form.Group>  
 <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Partition Name:</Form.Label>
-        <Form.Control type="text"  placeholder="Partition total size " />
-        <Form.Text className="text-muted">
-          
+        >Nom de la partition :</Form.Label>
+        <Form.Control type="text"   name="PartitionValue" defaultValue={this.state.Partition[0].PartitionValue}  />
+        <Form.Text className="text-muted">          
         </Form.Text>
-      </Form.Group>
-     
-
-
+      </Form.Group>  
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Partition Size:</Form.Label>
-        <Form.Control type="number"  placeholder="Partition total size " />
-        <Form.Text className="text-muted">
-          
+        >
+        Taille de la partition:</Form.Label>
+        <Form.Control type="text"   name="PartitionUsage"  defaultValue={this.state.Partition[0].PartitionUsage}/>
+        <Form.Text className="text-muted">         
         </Form.Text>
-      </Form.Group>
+      </Form.Group>    
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Partition Used Size:</Form.Label>
-        <Form.Control type="number"  placeholder="Partition Used size " />
+        >Sélectionnez la partition VM :</Form.Label>
+        <Form.Select required
+        name="ServerVMPartition_ID" onChange={this.handlePartitionChange} defaultValue={this.state.Partition[0].PartitionName}>
+          {
+            this.state.Partitions.map((Partition)=>{
+              return(
+                    <option key={Partition.ServerVMPartition_ID} id={Partition.ServerVMPartition_ID}>{Partition.PartitionName}</option>
+              )
+            })
+          }        
+            
+        </Form.Select>      
         <Form.Text className="text-muted">
           
         </Form.Text>
-      </Form.Group>
-    
-
-      
+      </Form.Group>  
       <div class="row justify-content-center">
-      <button type="button" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark" style={{margin:"10px"}}>Save Partition</button>
+      <button type="submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark" style={{margin:"10px"}}>
+Ajouter une partition</button>
 </div>
       
     </Form>
     </MDBContainer>
 
 
-
+    <Modal
+        size="lg"
+        show={this.state.Status}
+        onHide={() => {this.setState({Status:false})}}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-modal-sizes-title-lg">
+           Partition de disque:
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Partition de disque a été mis à jour!</Modal.Body>
+      </Modal>
 
     </div>
     </div>
 
         
 
-        );
+        );}
     }
 }
  

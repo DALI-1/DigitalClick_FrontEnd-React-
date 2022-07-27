@@ -214,18 +214,21 @@ class MangeServer extends Component {
 <Container>
   
   <Row>
+  <Col><nobr><label style={{fontSize:"10px"}}> Nom du VM:</label>
+                     <p style={{fontSize:"10px"}} class="text-muted">{Partition.PartitionName}</p></nobr></Col>
+  
   <Col><nobr><label style={{fontSize:"10px"}}>IP-Address:</label>
                      <p style={{fontSize:"10px"}} class="text-muted">{Partition.SVMP_IP_Adress}</p></nobr></Col>
-    <Col><nobr><label style={{fontSize:"10px"}}>MAC-Address:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">{Partition.SVMP_MAC_Adress}</p></nobr></Col>
+   
                  
   </Row>
   <Row>
     <Col><nobr><label style={{fontSize:"10px"}}>OS</label>
                      <p style={{fontSize:"10px"}} class="text-muted">{Partition.OperatingSystem_Company_Name+" "+Partition.OperatingSystem_Name}</p></nobr></Col>
-                     <Col><nobr><label style={{fontSize:"10px"}}> Virtual Machine:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">{Partition.VMProvider_Company_Name+" "+Partition.VM_Name}</p></nobr></Col>
                      
+                             
+                     <Col><nobr><label style={{fontSize:"10px"}}> Backup</label>
+                     <p style={{fontSize:"10px"}} class="text-muted">{Partition.Backup}</p></nobr></Col>        
                      
   </Row>
   <Row>
@@ -239,16 +242,13 @@ Core alloués</label>
   <Row>
     <Col><nobr><label style={{fontSize:"10px"}}> Disks alloués:</label>
                      <p style={{fontSize:"10px"}} class="text-muted">NOT AVAILABLE</p></nobr>
-        
                      </Col>
-                     <Col><nobr><label style={{fontSize:"10px"}}> Nom du VM:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">{Partition.PartitionName}</p></nobr></Col>
-  
+                     <Col><nobr><label style={{fontSize:"10px"}}>MAC-Address:</label>
+                     <p style={{fontSize:"10px"}} class="text-muted">{Partition.SVMP_MAC_Adress}</p></nobr></Col>
+                     
                      
   </Row>
-  <Row>
-                     <Col><nobr><label style={{fontSize:"10px"}}> Backup</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">{Partition.Backup}</p></nobr></Col>             
+  <Row>          
   </Row>
   
 
@@ -290,23 +290,20 @@ Core alloués</label>
                     <Row>
     <Col><nobr><label style={{fontSize:"10px"}}>
 Date d'ajout</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">{Partition.SVMP_IP_Adress}</p></nobr></Col>
-                     <Col><nobr><label style={{fontSize:"10px"}}>Description:</label>
-                     <a href=""><p style={{fontSize:"10px"}} class="text-muted">{Partition.SVMP_IP_Adress}</p></a></nobr></Col>
+                     <p style={{fontSize:"10px"}} class="text-muted">{Partition.created_at}</p></nobr></Col>
+                
     <Col><nobr><label style={{fontSize:"10px"}}>
 Prochaine date de Facturation</label>
                      <p style={{fontSize:"10px"}} class="text-muted">NOT AVAILABLE YET</p></nobr></Col>
                      
   </Row>
   <Row>
-    <Col><nobr><label style={{fontSize:"10px"}}>
-Type de paiement</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">NOT AVAILABLE YET</p></nobr></Col>
+   
                      <Col><nobr><label style={{fontSize:"10px"}}>Client:</label>
                      <a href=""><p style={{fontSize:"10px"}} class="text-muted">NOT AVAILABLE YET</p></a></nobr></Col>
                      
     <Col><nobr><label style={{fontSize:"10px"}}>Description:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">{Partition.SVMP_IP_Adress}</p></nobr></Col>
+                     <p style={{fontSize:"10px"}} class="text-muted">{Partition.Description}</p></nobr></Col>
                      
   </Row>
   <Row>

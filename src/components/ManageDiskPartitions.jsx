@@ -159,14 +159,11 @@ class ManageContract extends Component {
           
           <td class="text-center">{Partition.PartitionUsage}</td>
           <td class="text-center">{Partition.PartitionName}</td>
-          
           <td>
-
           <Container>
-      <Row>
-      
+      <Row>  
       <Col>
-      <IconButton href="EditDiskPartition" aria-label="delete" size="large">
+      <IconButton href={"EditDiskPartition?DiskPID="+Partition.DiskP_ID+"&ServerID="+srvrid+"&Disk_ID="+diskid} aria-label="delete" size="large">
   <AddIcon fontSize="inherit" />
 </IconButton>
 

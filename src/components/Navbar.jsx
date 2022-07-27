@@ -72,11 +72,14 @@ super();
         <NavDropdown title="Gérer les serveurs" id="navbarScrollingDropdown">
           <NavDropdown.Item href="ManageServers">Consulter les serveurs</NavDropdown.Item>
           <NavDropdown.Item href="AddServer">Ajouter un nouveau serveur</NavDropdown.Item>
-          <NavDropdown.Item href="AddVirtualMachine">Ajouter une nouvelle machine virtuelle</NavDropdown.Item>
-          <NavDropdown.Item href="AddOS">Ajouter un nouveau système d'exploitation</NavDropdown.Item>
-          <NavDropdown.Item href="AddVMCompany">Ajouter une société de machine virtuelle</NavDropdown.Item>
-          <NavDropdown.Item href="AddOSCompany">Ajouter une société de système d'exploitation</NavDropdown.Item>
           <NavDropdown.Item href="AddServiceProvider">Ajouter un fournisseur de services</NavDropdown.Item>
+          {/*<NavDropdown.Item href="AddVirtualMachine">Ajouter une nouvelle machine virtuelle</NavDropdown.Item>
+          <NavDropdown.Item href="AddVMCompany">Ajouter une société de machine virtuelle</NavDropdown.Item>*/}
+
+          <NavDropdown.Item href="AddOS">Ajouter un nouveau système d'exploitation</NavDropdown.Item>
+          
+          <NavDropdown.Item href="AddOSCompany">Ajouter une société de système d'exploitation</NavDropdown.Item>
+          
           <NavDropdown.Divider />          
         </NavDropdown>
         <NavDropdown title="Gérer le client" id="navbarScrollingDropdown">

@@ -219,7 +219,7 @@ class MangeServer extends Component {
                               
                               <div className="col-md-6 col-sm-1" id="ProductsContainerID">    
                                
-                           <div className="card m-2 shadow">
+                           <div className="card m-2 shadow-lg">
                             
                             <a className="card-img-tiles" href="#" data-abc="true">
                             

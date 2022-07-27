@@ -7,14 +7,23 @@ import AddServer from '../components/AddServer';
 import AddVirtualMachine from '../components/AddVirtualMachine';
 import AddClient from '../components/AddClient';
 import ManageClients from '../components/ManageClients';
-import Image1 from '../components/images/Landing_Page.png'
+import Image1 from '../components/images/Landing_Page.jpg'
 import Image from 'react-bootstrap/Image'
 import Button from '@mui/material/Button';
 import Cookies from 'universal-cookie';
-
+import SimpleImageSlider from "react-simple-image-slider";
 class Home extends Component {
-    state = {  }
+    state = {
 
+      images : [
+        { url: "../components/images/Landing_Page.jpg" },
+        { url: "../components/images/Landing_Page.png" },
+        { url: "../components/images//3.jpg" },
+        { url: "images/4.jpg" },
+        
+      ]
+      }
+     
   CheckIdentification= ()=>
   {
     var CryptoJS = require("crypto-js");
@@ -72,14 +81,17 @@ class Home extends Component {
   }
 
 
+
   
 
     render() { 
       this.CheckIdentification();
+
+     
         return (
             
-            <div class="shadow-lg p-3 m-3  bg-body rounded">
-          <div class="shadow-lg p-3 m-3  bg-body rounded"style={{
+            
+          <div class="shadow-lg p-3 m-3  bg-body rounded" responsive style={{
         backgroundColor:"rgba(237, 238, 240,0.9)",
         /* backgroundImage: `url(${Image})`, */
       
@@ -91,7 +103,7 @@ class Home extends Component {
       ,height:"560px"
       
     }}>
-     {/*
+     
       <div class="d-flex justify-content-center">
          <Image   src={require('../components/images/Digital_Click.gif')} style={{
                 marginTop:"10px",
@@ -103,10 +115,13 @@ class Home extends Component {
             
           
             </div>
-      */}  
+      
+            
+
+          
             
         </div>
-        </div>
+       
         );
     }
 }
