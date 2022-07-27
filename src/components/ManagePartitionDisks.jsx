@@ -12,14 +12,42 @@ import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-export function Popup() {
+export function Popup(props) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+ const CallAPI = async (url) => {
+    try {
+      const response = await fetch(url,{
+        method: "GET",
+        headers: {
+          "access-control-allow-origin" : "*",
+          "Content-type": "application/json; charset=UTF-8"
+        }});
+      const json = await response.json();
+      
+      return(json)
+    } catch (error) {
+      console.log("error", error);
+      return("Error:Yes");
+    }
+  };
 
 
 
+  const handleDelete = ()=>{
+
+let url="http://localhost:8000/api/RemoveDiskByID?DiskID="+props.DiskID
+  CallAPI(url);
+  console.log(url);
+    setShow(false);
+    setTimeout(function () {
+      window.location.replace('ManagePartitionDisks?ServerID='+props.ServerID)
+  }, 1000);
+    
+    
+  }
 
   return (
     <>
@@ -30,15 +58,15 @@ export function Popup() {
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Delete</Modal.Title>
+          <Modal.Title>Suppression de disque</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Are you sure you want to delete?</Modal.Body>
+        <Modal.Body>{"Êtes-vous sûr de vouloir supprimer le disque ?"}</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            No don't delete
+          Non je ne suis pas sûr
           </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Yes Delete
+          <Button variant="primary" onClick={handleDelete}>                       
+Oui, je suis sûr
           </Button>
         </Modal.Footer>
       </Modal>
@@ -101,22 +129,22 @@ this.setState({Disks:Disks_List}
         <div class="shadow-lg p-3 mb-3 bg-body rounded">
            
        
-        <p class="text-justify" style={{color:"Black"}}>The Server disks:</p>
+        <p class="text-justify" style={{color:"Black"}}>Les disques du serveur :</p>
         
-        <a class="btn btn-outline-primary btn-sm" href={"AddDisk?ServerID="+srvid} data-abc="true" style={{margin:"10px",padding:"10px"}}>Add New Disk </a>
-        <a class="btn btn-outline-primary btn-sm" href={"AddDiskProvider?ServerID="+srvid} data-abc="true" style={{margin:"10px",padding:"10px"}}>Add Disk Provider </a>
+        <a class="btn btn-outline-primary btn-sm" href={"AddDisk?ServerID="+srvid} data-abc="true" style={{marginRight:"10px",marginBottom:"10px",padding:"10px"}}>Ajouter un nouveau disque </a>
+        <a class="btn btn-outline-primary btn-sm" href={"AddDiskProvider?ServerID="+srvid} data-abc="true" style={{marginRight:"10px",marginBottom:"10px",padding:"10px"}}>Ajouter un fournisseur de disque </a>
         <Table  bordered hover responsive>
           
       <thead>
         <tr>
           <th class="text-center">#ID</th>
-          <th class="text-center">Disk image:</th> 
-          <th class="text-center">Disk Provider:</th>
-          <th class="text-center">Disk Model:</th> 
+          <th class="text-center">Image disque</th> 
+          <th class="text-center">Fournisseur de disque</th>
+          <th class="text-center">Modèle de disque </th> 
               
-          <th class="text-center">Disk Type:</th>
-          <th class="text-center">Disk Total size:</th>
-          <th class="text-center">Disk Total Usage</th>
+          <th class="text-center">Type de disque </th>
+          <th class="text-center">Taille totale du disque </th>
+          
           <th class="text-center"> Edit</th>
         </tr>
       </thead>
@@ -134,11 +162,8 @@ return(
           <td class="text-center">{Disk.Disk_Model}</td>
           <td class="text-center">{Disk.Disk_Type}</td>
           <td class="text-center">{Disk.Total_Size}</td>
-          <td class="text-center">NOT AVAILABLE</td>
-          
           
           <td>
-
           <Container>
       <Row>
       <Col>
@@ -155,7 +180,9 @@ return(
       </Col>
       <Col>
       <Popup  show={this.state.modalShow}
-        onHide={() => this.state.modalShow=true}/>
+        onHide={() => this.state.modalShow=true}
+        DiskID={Disk.Disk_ID}
+        ServerID={srvid}/>
       </Col>
       
       </Row>

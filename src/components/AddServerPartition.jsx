@@ -8,35 +8,10 @@ import Row from 'react-bootstrap/Row';
 import LoadingSpinner from './LoadingSpinner';
 import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
-
-function AlertDismissible() {
-  const [show, setShow] = useState(true);
-
-  return (
-    <>
-      <Alert show={show} variant="success">
-        <Alert.Heading>How's it going?!</Alert.Heading>
-        <p>
-          Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget
-          lacinia odio sem nec elit. Cras mattis consectetur purus sit amet
-          fermentum.
-        </p>
-        <hr />
-        <div className="d-flex justify-content-end">
-          <Button onClick={() => setShow(false)} variant="outline-success">
-            Close me y'all!
-          </Button>
-        </div>
-      </Alert>
-
-      {!show && <Button onClick={() => setShow(true)}>Show Alert</Button>}
-    </>
-  );
-}
-
+import Modal from 'react-bootstrap/Modal';
 
 class AddServer extends Component {
-  state = { OSs:[], isLoading:true,VMs:[] }
+  state = { OSs:[], isLoading:true,VMs:[],Status:false,Status:false }
   
   
 
@@ -63,6 +38,7 @@ class AddServer extends Component {
   }
   handlesubmit=(props)=>
   {
+    this.setState({Status:true})
     props.preventDefault();
     let PropsString=""
     let i=0
@@ -94,9 +70,10 @@ class AddServer extends Component {
      }
      
     }
-    
+    const queryParams = new URLSearchParams(window.location.search);
+    let srvid = queryParams.get('ServerID');
     this.SERVERAPICALL(url+PropsString)
-
+    setTimeout(() => {window.location.replace("ManageServerPartitions?ServerID="+srvid)}, 2000);
 
   }
   SERVERAPICALL = async (url) => {
@@ -352,8 +329,24 @@ this.setState({VMs:VMs_List},()=>{
 
 
     </div>
+    <Modal
+        size="lg"
+        show={this.state.Status}
+        onHide={() => {this.setState({Status:false})}}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-modal-sizes-title-lg">
+           
+Ajouter un VM
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>VM ajouté avec succès</Modal.Body>
+      </Modal>
 
-     </div>   
+     </div>
+     
+     
 
         );
       }

@@ -58,13 +58,13 @@ let url="http://localhost:8000/api/RemoveDiskPByID?DiskPID="+props.DiskPID
         <Modal.Header closeButton>
           <Modal.Title>Delete</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{"Are you sure you want to delete server ID"}</Modal.Body>
+        <Modal.Body>{"Êtes-vous sûr de vouloir supprimer votre partition de disque ?"}</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            No don't delete
+          Non je ne suis pas sûr
           </Button>
-          <Button variant="primary" onClick={handleDelete}>
-            Yes Delete
+          <Button variant="primary" onClick={handleDelete}>            
+Oui, je suis sûr
           </Button>
         </Modal.Footer>
       </Modal>
@@ -130,17 +130,17 @@ class ManageContract extends Component {
            
        
         
-        <p class="text-justify" style={{color:"Black"}}>The Partitions disks:</p>       
-        <a class="btn btn-outline-primary btn-sm" href={"CreateDiskPartition?DiskID="+diskid+"&ServerID="+srvrid} data-abc="true" style={{margin:"10px",padding:"10px"}}>Create Partition</a>
+        <p class="text-justify" style={{color:"Black"}}>Les disques de partitions :</p>       
+        <a class="btn btn-outline-primary btn-sm" href={"CreateDiskPartition?DiskID="+diskid+"&ServerID="+srvrid} data-abc="true" style={{marginRight:"10px",marginBottom:"10px",padding:"10px"}}>Ajouter une partition</a>
         <Table  bordered hover responsive>
       <thead>
         <tr>
           <th class="text-center">#ID</th>
-          <th class="text-center">Partition Picture:</th>
-          <th class="text-center">Disk Partition Name:</th>
-          <th class="text-center">Disk Allocated Size:</th>
-          <th class="text-center">Assigned to:</th>
-          <th class="text-center"> Edit</th>
+          <th class="text-center">Image de partition</th>
+          <th class="text-center">Nom de la partition de disque</th>
+          <th class="text-center">Taille d'allocation de disque</th>
+          <th class="text-center">Assigné à</th>
+          <th class="text-center"> Éditer</th>
         </tr>
       </thead>
 

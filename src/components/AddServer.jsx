@@ -8,8 +8,9 @@ import Row from 'react-bootstrap/Row';
 import LoadingSpinner from './LoadingSpinner';
 import Col from 'react-bootstrap/Col';
 import Cities from './tn.json';
+import Modal from 'react-bootstrap/Modal';
 class AddServer extends Component {
-  state = { OSs:[], isLoading:true,countries:[],ServiceProviders:[] }
+  state = { OSs:[], isLoading:true,countries:[],ServiceProviders:[],Status:false }
   
   
 
@@ -36,11 +37,13 @@ class AddServer extends Component {
   }
   handlesubmit=(props)=>
   {
+   
+      this.setState({Status:true})
     props.preventDefault();
     let PropsString=""
     let i=0
     let url="http://127.0.0.1:8000/api/AddServer"
-    for(i=0;i<16;i++)
+    for(i=0;i<14;i++)
     {
      if(i==0)
      {
@@ -69,6 +72,8 @@ class AddServer extends Component {
     }
     PropsString=PropsString+"&Backup=Disabled"
     this.SERVERAPICALL(url+PropsString)
+
+    setTimeout(() => {window.location.replace("ManageServers")}, 2000);
 
 
   }
@@ -170,7 +175,7 @@ this.TurnoffLoadingScreen();
         <Col><Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Server name:</Form.Label>
+        >Nom du serveur</Form.Label>
         <Form.Control required type="text" placeholder="Enter Server name"
         name="Server_Name" />
         <Form.Text className="text-muted">
@@ -180,7 +185,7 @@ this.TurnoffLoadingScreen();
         <Col>  <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Server IP Adress:</Form.Label>
+        >Adresse IP du serveur</Form.Label>
         <Form.Control required type="text" minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" placeholder="Enter Server IP " 
         name="Server_IP_Adress" />
         <Form.Text className="text-muted">
@@ -190,7 +195,8 @@ this.TurnoffLoadingScreen();
         <Col> <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Server MAC Adress:</Form.Label>
+        >
+        Adresse MAC du serveur</Form.Label>
         <Form.Control required type="text"  pattern="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$" placeholder="Enter Server MAC address " 
         name="Server_MAC_Adress"/>
         <Form.Text className="text-muted">
@@ -200,7 +206,8 @@ this.TurnoffLoadingScreen();
         <Col> <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Server Country:</Form.Label>
+        >
+        Pays du serveur</Form.Label>
         <Form.Select required
         name="Server_Country"
         >
@@ -224,8 +231,9 @@ this.TurnoffLoadingScreen();
         <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Server City:</Form.Label>
-        <Form.Control required type="text" placeholder="Enter Server name"
+        >
+        Emplacement du serveur</Form.Label>
+        <Form.Control required type="text" placeholder="Emplacement du serveur"
         name="Server_Location" />
         <Form.Text className="text-muted">
           
@@ -258,7 +266,8 @@ this.TurnoffLoadingScreen();
         <Col><Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Number of Sockets:</Form.Label>
+        >
+        Nombre des Sockets:</Form.Label>
         <Form.Control type="number"  placeholder="Enter Number of Sockets "
         name="Nb_Sockets" />
         <Form.Text className="text-muted">
@@ -268,7 +277,7 @@ this.TurnoffLoadingScreen();
         <Col><Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Number of Virtual Cores </Form.Label>
+        >Nombre des Cores </Form.Label>
         <Form.Control type="number"  placeholder="Enter Number of VCores per CPU "
         name="Nb_Cores" />
         <Form.Text className="text-muted">
@@ -281,7 +290,7 @@ this.TurnoffLoadingScreen();
         <Col><Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >BIOS : </Form.Label>
+        >BIOS </Form.Label>
         <Form.Control type="text"  placeholder="Enter BIOS  " 
         name="BIOS" />
         <Form.Text className="text-muted">
@@ -291,8 +300,8 @@ this.TurnoffLoadingScreen();
         <Col><Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >RAM:</Form.Label>
-        <Form.Control type="number"  placeholder="Enter RAM size"
+        >Taille du RAM</Form.Label>
+        <Form.Control type="text"  placeholder="Enter RAM size"
         name="RAM" />
         <Form.Text className="text-muted">
           
@@ -301,7 +310,8 @@ this.TurnoffLoadingScreen();
         <Col> <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Server Type:</Form.Label>
+        >
+        Type de serveur</Form.Label>
         <Form.Select required
         name="Server_Type">
           <option>Real Machine</option>
@@ -316,7 +326,7 @@ this.TurnoffLoadingScreen();
         <Col><Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Service Provider:</Form.Label>
+        >Fournisseur de services</Form.Label>
         <Form.Select required
         name="Service_Provider_ID" onChange={this.onChangeHandler2}>
         {
@@ -335,39 +345,22 @@ this.TurnoffLoadingScreen();
       </Form.Group></Col>
       </Row>
       <Row>
+        
         <Col><Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Bought Date: </Form.Label>
-        <Form.Control type="date" 
-        name="Bought_Date" />
-        <Form.Text className="text-muted">
-          
-        </Form.Text>
-      </Form.Group></Col>
-        <Col><Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label
-        style={{color: 'black'}}
-        >Payment Type:</Form.Label>
+        >
+        Type de paiement</Form.Label>
         <Form.Select required name="PaymentType">
-          <option>Per Month</option>
-          <option>Per Semester</option>
-          <option>Per Year</option>
+          <option>Monthly</option> 
+          <option>Yearly</option>
         </Form.Select>
        
         <Form.Text className="text-muted">
           
         </Form.Text>
       </Form.Group></Col>
-        <Col> <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label
-        style={{color: 'black'}}
-        >Next Facturation Date : </Form.Label>
-        <Form.Control type="date" name="NextFacturationDate" />
-        <Form.Text className="text-muted">
-          
-        </Form.Text>
-      </Form.Group></Col>
+        
         
       </Row>
       <Row>
@@ -381,12 +374,27 @@ this.TurnoffLoadingScreen();
         </Form.Text>
       </Form.Group>
       </Row>
+
+      <Modal
+        size="lg"
+        show={this.state.Status}
+        onHide={() => {this.setState({Status:false})}}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-modal-sizes-title-lg">
+           
+Ajouter un serveur
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Serveur ajouté avec succès</Modal.Body>
+      </Modal>
   
     </Container>
      
 
       <div class="row justify-content-center">
-      <button type="Submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">Add Server</button>
+      <button type="Submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">Ajouter un serveur</button>
 </div>
       
     </Form>

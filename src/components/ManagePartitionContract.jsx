@@ -247,7 +247,7 @@ Json.then((result)=>{
           <Container>
           <Row>
       <Col>
-      <IconButton  href="EditContract" aria-label="delete" size="large">
+      <IconButton  href={"EditContract?ContractID="+Contract.PContract_ID} aria-label="delete" size="large">
   <AddIcon fontSize="inherit" />
 </IconButton>
       </Col>

@@ -5,8 +5,9 @@ import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import Image from 'react-bootstrap/Image'
 import UploadDragDrop from './UploadDragDrop';
 import LoadingSpinner from './LoadingSpinner';
+import Modal from 'react-bootstrap/Modal';
 class AddServer extends Component {
-    state = {Providers:[],isLoading:true,SelectedProviderID:1  } 
+    state = {Providers:[],isLoading:true,SelectedProviderID:1,Status:false  } 
 
 
     onChangeHandler = (e) => {
@@ -19,7 +20,11 @@ class AddServer extends Component {
     }
     handlesubmit=(props)=>
     {
+      
       props.preventDefault();
+      const queryParams = new URLSearchParams(window.location.search);
+      let srvid = queryParams.get('ServerID');
+      this.setState({Status:true})
       let PropsString=""
       let i=0
       let url="http://127.0.0.1:8000/api/CreateDisk"
@@ -37,11 +42,10 @@ class AddServer extends Component {
       }
       console.log(url+PropsString)
       this.SERVERAPICALL(url+PropsString)
+      setTimeout(() => {window.location.replace('/ManagePartitionDisks?ServerID='+srvid)}, 2000);
   
   
     }
-
-
     SERVERAPICALL = async (url) => {
       try {
         const response = await fetch(url,{
@@ -180,6 +184,22 @@ this.TurnoffLoadingScreen();
       
       <div class="row justify-content-center">
       <button type="submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark" style={{margin:"10px"}}>Create Disk</button>
+</div>
+
+<div>
+<Modal
+        size="lg"
+        show={this.state.Status}
+        onHide={() => {this.setState({Status:false})}}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-modal-sizes-title-lg">
+            Disk Management:
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Disk Added successfully</Modal.Body>
+      </Modal>
 </div>
       
     </Form>

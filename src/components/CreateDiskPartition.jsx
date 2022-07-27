@@ -3,9 +3,9 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import Image from 'react-bootstrap/Image'
-
+import Modal from 'react-bootstrap/Modal';
 class AddServer extends Component {
-    state = { Partitions:[],SelectedParitionID:"" }
+    state = { Partitions:[],SelectedParitionID:"",Status:false }
     
     SERVERAPICALL = async (url) => {
       try {
@@ -61,6 +61,10 @@ class AddServer extends Component {
   handlesubmit=(props)=>
   {
     props.preventDefault();
+    const queryParams = new URLSearchParams(window.location.search);
+    this.setState({Status:true})
+    let srvid = queryParams.get('ServerID');
+    let diskid = queryParams.get('DiskID');
     let PropsString=""
     let i=0
     let url="http://127.0.0.1:8000/api/CreateDiskPartition"
@@ -83,6 +87,8 @@ class AddServer extends Component {
     }
     
   this.SERVERAPICALL(url+PropsString)
+
+  setTimeout(() => {window.location.replace('/ManageDiskPartitions?ServerID='+srvid+'&DiskID='+diskid)}, 2000);
 
   }
     render() { 
@@ -109,30 +115,28 @@ class AddServer extends Component {
 <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Partition Name:</Form.Label>
-        <Form.Control type="text"  placeholder="Partition name" name="PartitionValue" />
+        >Nom de la partition :</Form.Label>
+        <Form.Control type="text"   name="PartitionValue" />
         <Form.Text className="text-muted">          
         </Form.Text>
       </Form.Group>  
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Partition Size:</Form.Label>
-        <Form.Control type="text"  placeholder="Partition total size " name="PartitionUsage" />
+        >
+        Taille de la partition:</Form.Label>
+        <Form.Control type="text"   name="PartitionUsage" />
         <Form.Text className="text-muted">         
         </Form.Text>
       </Form.Group>    
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Select The VM partition:</Form.Label>
+        >Sélectionnez la partition VM :</Form.Label>
         <Form.Select required
         name="ServerVMPartition_ID" onChange={this.handlePartitionChange}>
-
           {
-
             this.state.Partitions.map((Partition)=>{
-
               return(
                     <option key={Partition.ServerVMPartition_ID} id={Partition.ServerVMPartition_ID}>{Partition.PartitionName}</option>
               )
@@ -145,14 +149,27 @@ class AddServer extends Component {
         </Form.Text>
       </Form.Group>  
       <div class="row justify-content-center">
-      <button type="submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark" style={{margin:"10px"}}>Create Partition</button>
+      <button type="submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark" style={{margin:"10px"}}>
+Ajouter une partition</button>
 </div>
       
     </Form>
     </MDBContainer>
 
 
-
+    <Modal
+        size="lg"
+        show={this.state.Status}
+        onHide={() => {this.setState({Status:false})}}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-modal-sizes-title-lg">
+          Ajout de partition de disque:
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Partition de disque ajoutée avec succès!</Modal.Body>
+      </Modal>
 
     </div>
     </div>

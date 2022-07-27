@@ -1,19 +1,15 @@
 import React,{Component,useState} from 'react';
 import './ManageServer.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit';
-import { MDBBtn } from 'mdb-react-ui-kit';
 import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/Button';
 import { Container, Row, Col, Table } from 'react-bootstrap';
-import Form from 'react-bootstrap/Form';
 import Cookies from 'universal-cookie';
 import AddIcon from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Modal from 'react-bootstrap/Modal';
 import Image from 'react-bootstrap/Image'
-import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
+
 import LoadingSpinner from './LoadingSpinner';
 export function Popup(props) {
   const [show, setShow] = useState(false);
@@ -44,7 +40,7 @@ let url="http://localhost:8000/api/RemovePartitionByID?PartitionID="+props.Parti
   console.log(url);
     setShow(false);
     setTimeout(function () {
-      //window.location.replace('ManageServerPartitions?ServerID='+props.Server_ID)
+      window.location.replace('ManageServerPartitions?ServerID='+props.Server_ID)
   }, 1000);   
   }
 
@@ -59,13 +55,14 @@ let url="http://localhost:8000/api/RemovePartitionByID?PartitionID="+props.Parti
         <Modal.Header closeButton>
           <Modal.Title>Delete</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Are you sure you want to delete?</Modal.Body>
+        <Modal.Body>Voulez-vous vraiment supprimer la VM ?</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            No don't delete
+            
+Non ne supprimez pas
           </Button>
           <Button variant="primary" onClick={handleDelete}>
-            Yes Delete
+          Oui supprimez
           </Button>
         </Modal.Footer>
       </Modal>
@@ -203,18 +200,13 @@ class MangeServer extends Component {
      let srvid = queryParams.get('ServerID');
         return (
 <div class="container mt-10" >
-<a class="btn btn-outline-primary btn-sm" href={"AddServerPartition?ServerID="+srvid} data-abc="true" style={{margin:"10px",padding:"10px"}}>Add Partition</a>
+<a class="btn btn-outline-primary btn-sm" href={"AddServerPartition?ServerID="+srvid} data-abc="true" style={{margin:"10px",padding:"10px"}}>Ajouter une nouvelle machine virtuelle</a>
                                     <div class="row">
-
-
                                       {
                                         this.state.Paritions.map((Partition)=>
                                         {
-
-
-
                                           return(
-                                            <div class="col-md-4 col-sm-6" id="ProductsContainerID">
+                                            <div class="col-md-6 col-sm-1" id="ProductsContainerID">
                       
                  <div class="card m-2 shadow"><a class="card-img-tiles" href="#" data-abc="true">
                      <div class="inner">
@@ -237,18 +229,19 @@ class MangeServer extends Component {
                      
   </Row>
   <Row>
-  <Col><nobr><label style={{fontSize:"10px"}}>Allocated V-Cores:</label>
+  <Col><nobr><label style={{fontSize:"10px"}}>
+Core alloués</label>
                      <p style={{fontSize:"10px"}} class="text-muted">{Partition.Nb_Allocated_Cores}</p></nobr></Col>
-    <Col><nobr><label style={{fontSize:"10px"}}> Allocated RAM:</label>
+    <Col><nobr><label style={{fontSize:"10px"}}> Taille de RAM alloués:</label>
                      <p style={{fontSize:"10px"}} class="text-muted">{Partition.Allocated_RAM} GB</p></nobr></Col>
                      
   </Row>
   <Row>
-    <Col><nobr><label style={{fontSize:"10px"}}> Allocated Disks:</label>
+    <Col><nobr><label style={{fontSize:"10px"}}> Disks alloués:</label>
                      <p style={{fontSize:"10px"}} class="text-muted">NOT AVAILABLE</p></nobr>
         
                      </Col>
-                     <Col><nobr><label style={{fontSize:"10px"}}> Partition Name:</label>
+                     <Col><nobr><label style={{fontSize:"10px"}}> Nom du VM:</label>
                      <p style={{fontSize:"10px"}} class="text-muted">{Partition.PartitionName}</p></nobr></Col>
   
                      
@@ -277,7 +270,7 @@ class MangeServer extends Component {
       </Row>
                         <Row>
       <Col>
-      <IconButton  href="EditPartition" aria-label="delete" size="large">
+      <IconButton  href={"EditPartition?ServerVMPartition_ID="+Partition.ServerVMPartition_ID+"&ServerID="+srvid} aria-label="delete" size="large">
   <AddIcon fontSize="inherit" />
 </IconButton>
       </Col>
@@ -295,16 +288,19 @@ class MangeServer extends Component {
                    <div class="card-body text-center">
                     <Container>
                     <Row>
-    <Col><nobr><label style={{fontSize:"10px"}}>Creation Date:</label>
+    <Col><nobr><label style={{fontSize:"10px"}}>
+Date d'ajout</label>
                      <p style={{fontSize:"10px"}} class="text-muted">{Partition.SVMP_IP_Adress}</p></nobr></Col>
                      <Col><nobr><label style={{fontSize:"10px"}}>Description:</label>
                      <a href=""><p style={{fontSize:"10px"}} class="text-muted">{Partition.SVMP_IP_Adress}</p></a></nobr></Col>
-    <Col><nobr><label style={{fontSize:"10px"}}>Next Facturation Date:</label>
+    <Col><nobr><label style={{fontSize:"10px"}}>
+Prochaine date de Facturation</label>
                      <p style={{fontSize:"10px"}} class="text-muted">NOT AVAILABLE YET</p></nobr></Col>
                      
   </Row>
   <Row>
-    <Col><nobr><label style={{fontSize:"10px"}}>Payment Type:</label>
+    <Col><nobr><label style={{fontSize:"10px"}}>
+Type de paiement</label>
                      <p style={{fontSize:"10px"}} class="text-muted">NOT AVAILABLE YET</p></nobr></Col>
                      <Col><nobr><label style={{fontSize:"10px"}}>Client:</label>
                      <a href=""><p style={{fontSize:"10px"}} class="text-muted">NOT AVAILABLE YET</p></a></nobr></Col>

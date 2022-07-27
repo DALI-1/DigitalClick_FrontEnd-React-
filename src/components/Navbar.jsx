@@ -67,35 +67,35 @@ super();
         style={{ maxHeight: '100px' }}
         navbarScroll
       >
-        <Nav.Link href="/">Home</Nav.Link>
+        <Nav.Link href="/">Accueil</Nav.Link>
        
-        <NavDropdown title="Manage Servers" id="navbarScrollingDropdown">
-          <NavDropdown.Item href="ManageServers">Consult Servers</NavDropdown.Item>
-          <NavDropdown.Item href="AddServer">Add New Server</NavDropdown.Item>
-          <NavDropdown.Item href="AddVirtualMachine">Add New VirtualMachine</NavDropdown.Item>
-          <NavDropdown.Item href="AddOS">Add New OperatingSystem</NavDropdown.Item>
-          <NavDropdown.Item href="AddVMCompany">Add VM Company</NavDropdown.Item>
-          <NavDropdown.Item href="AddOSCompany">Add OS Company</NavDropdown.Item>
-          <NavDropdown.Item href="AddServiceProvider">Add Service Provider</NavDropdown.Item>
+        <NavDropdown title="Gérer les serveurs" id="navbarScrollingDropdown">
+          <NavDropdown.Item href="ManageServers">Consulter les serveurs</NavDropdown.Item>
+          <NavDropdown.Item href="AddServer">Ajouter un nouveau serveur</NavDropdown.Item>
+          <NavDropdown.Item href="AddVirtualMachine">Ajouter une nouvelle machine virtuelle</NavDropdown.Item>
+          <NavDropdown.Item href="AddOS">Ajouter un nouveau système d'exploitation</NavDropdown.Item>
+          <NavDropdown.Item href="AddVMCompany">Ajouter une société de machine virtuelle</NavDropdown.Item>
+          <NavDropdown.Item href="AddOSCompany">Ajouter une société de système d'exploitation</NavDropdown.Item>
+          <NavDropdown.Item href="AddServiceProvider">Ajouter un fournisseur de services</NavDropdown.Item>
           <NavDropdown.Divider />          
         </NavDropdown>
-        <NavDropdown title="Manage Client" id="navbarScrollingDropdown">
-          <NavDropdown.Item href="ManageClients">Consult Clients</NavDropdown.Item>
-          <NavDropdown.Item href="AddClient">Add New Client</NavDropdown.Item>
+        <NavDropdown title="Gérer le client" id="navbarScrollingDropdown">
+          <NavDropdown.Item href="ManageClients">Consulter les clients</NavDropdown.Item>
+          <NavDropdown.Item href="AddClient">Ajouter un nouveau client</NavDropdown.Item>
           <NavDropdown.Divider />         
         </NavDropdown>
-        <NavDropdown title="Manage Contracts" id="navbarScrollingDropdown">
-          <NavDropdown.Item href="ManagePartitionContracts">Consult Server Parition Contracts</NavDropdown.Item>
-          <NavDropdown.Item href="ManageServersContracts">Consult Server  Contracts</NavDropdown.Item>
-          <NavDropdown.Item href="AddPartitionContract">Add New Server Partition Contract</NavDropdown.Item>
-          <NavDropdown.Item href="AddServerContract">Add New Server Contract</NavDropdown.Item>
+        <NavDropdown title="Gérer les contrats" id="navbarScrollingDropdown">
+          <NavDropdown.Item href="ManagePartitionContracts">Consulter les contrats de VM serveur</NavDropdown.Item>
+          <NavDropdown.Item href="ManageServersContracts">Consulter les contrats de serveur</NavDropdown.Item>
+          <NavDropdown.Item href="AddPartitionContract">Ajouter un nouveau contrat de VM de serveur</NavDropdown.Item>
+          <NavDropdown.Item href="AddServerContract">Ajouter un nouveau contrat de serveur</NavDropdown.Item>
           <NavDropdown.Divider />        
         </NavDropdown>     
-        <NavDropdown title="Profile" id="navbarScrollingDropdown">
-          <NavDropdown.Item href="ManageProfile">Manage Profile</NavDropdown.Item>         
+        <NavDropdown title="Profil" id="navbarScrollingDropdown">
+          <NavDropdown.Item href="ManageProfile">Gérer le profil</NavDropdown.Item>         
           <NavDropdown.Divider />
           <NavDropdown.Item onClick={this.HandleLogout}>
-            Logout
+            Se déconnecter
           </NavDropdown.Item>
         </NavDropdown>
         <Notification/>

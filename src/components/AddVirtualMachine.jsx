@@ -3,8 +3,9 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import LoadingSpinner from './LoadingSpinner';
+import Modal from 'react-bootstrap/Modal';
 class AddVirtualMachine extends Component {
-  state = { VMProviders:null, isLoading:true } 
+  state = { VMProviders:null, isLoading:true,Status:false } 
   constructor()
   {
     super()
@@ -20,6 +21,7 @@ class AddVirtualMachine extends Component {
   }
   handlesubmit=(props)=>
   {
+    this.setState({Status:true})
     props.preventDefault();
     let PropsString=""
     let i=0
@@ -111,7 +113,7 @@ this.TurnoffLoadingScreen();
 <Form.Group className="mb-3" >
         <Form.Label
         style={{color: 'black'}}
-        >VM Company:</Form.Label>
+        >Fournisseur de système d'exploitation du Virtual Machine:</Form.Label>
         <Form.Select required name="VMProvider_ID" onChange={this.onChangeHandler}>
 {
  this.state.VMProviders.map((VMProvider)=>{   
@@ -131,8 +133,8 @@ this.TurnoffLoadingScreen();
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >VM App Name:</Form.Label>
-        <Form.Control type="text" placeholder="VM Company name here"
+        >Nom du Système d'exploitation du Virtual Machine</Form.Label>
+        <Form.Control type="text" placeholder="Nom du Système d'exploitation"
         name="VM_Name" />
         <Form.Text className="text-muted">
           
@@ -143,13 +145,27 @@ this.TurnoffLoadingScreen();
 
 
       <div class="row justify-content-center">
-      <button type="submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">Add Virtual Machine</button>
+      <button type="submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">Ajouter Système d'exploitation du Virtual Machine</button>
 </div>
       
     </Form>
     </MDBContainer>
 
-
+    <Modal
+        size="lg"
+        show={this.state.Status}
+        onHide={() => {this.setState({Status:false})}}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-modal-sizes-title-lg">
+           
+          Système d'exploitation du Virtual Machine
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        Système d'exploitation du Virtual Machine ajouté!</Modal.Body>
+      </Modal>
 
 
     </div>

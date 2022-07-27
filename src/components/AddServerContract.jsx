@@ -8,8 +8,9 @@ import LoadingSpinner from './LoadingSpinner';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Modal from 'react-bootstrap/Modal';
 class addContract extends Component {
-  state = { modalShow:false,Servers:[],Partitions:[],isLoading: true,ServerIDDefault:[],PartitionID:[],Clients:[],ClientID:""} 
+  state = { modalShow:false,Servers:[],Partitions:[],isLoading: true,ServerIDDefault:[],PartitionID:[],Clients:[],ClientID:"",Status:false } 
 
   constructor()
   {
@@ -20,6 +21,7 @@ class addContract extends Component {
 
   handlesubmit=(props)=>
   {
+    this.setState({Status:true})
     props.preventDefault();
     let PropsString=""
     let i=0
@@ -48,7 +50,7 @@ class addContract extends Component {
     }
    
     this.CallServerListAPI(url+PropsString)
-
+    setTimeout(() => {window.location.replace("ManageServersContracts")}, 2000);
 
   }
 
@@ -351,6 +353,19 @@ this.setState({Clients:Clients_List})
     </Row>
     <Row><button type="submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">Create Partition Contract</button></Row>
   </Container>
+  <Modal
+        size="lg"
+        show={this.state.Status}
+        onHide={() => {this.setState({Status:false})}}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-modal-sizes-title-lg">
+            Server Contract Management:
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Contract Added successfully</Modal.Body>
+      </Modal>
 </Form> 
   </div>
 </div>

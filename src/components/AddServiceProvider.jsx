@@ -2,8 +2,9 @@ import React,{Component} from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
+import Modal from 'react-bootstrap/Modal';
 class AddVirtualMachine extends Component {
-    state = {  } 
+    state = { Status:false } 
     SERVERAPICALL = async (url) => {
       try {
         const response = await fetch(url,{
@@ -23,7 +24,7 @@ class AddVirtualMachine extends Component {
 
     handlesubmit=(props)=>
     {
-
+      this.setState({Status:true})
        props.preventDefault();
        let PropsString=""
        let i=0
@@ -65,8 +66,8 @@ class AddVirtualMachine extends Component {
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Service Provider Company name:</Form.Label>
-        <Form.Control type="text" placeholder="Provider Company name" name="Service_Provider_Company_Name" />
+        >Nom du Fournisseur de services</Form.Label>
+        <Form.Control type="text" name="Service_Provider_Company_Name" />
         <Form.Text className="text-muted">
           
         </Form.Text>
@@ -74,8 +75,8 @@ class AddVirtualMachine extends Component {
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Service Provider Email:</Form.Label>
-        <Form.Control type="email" placeholder="xx@gmail.com"
+        >E-mail du Fournisseur de services</Form.Label>
+        <Form.Control type="email" 
         name="Service_Provider_Email" />
         <Form.Text className="text-muted">
           
@@ -84,8 +85,8 @@ class AddVirtualMachine extends Component {
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Service Provider Phone Number</Form.Label>
-        <Form.Control type="number" placeholder="Phone Number here" 
+        >Numéro de téléphone du fournisseur de services</Form.Label>
+        <Form.Control type="number"  
         name="Service_Provider_PhoneNumber"/>
         <Form.Text className="text-muted">
           
@@ -93,11 +94,26 @@ class AddVirtualMachine extends Component {
       </Form.Group>
     
       <div class="row justify-content-center">
-      <button type="submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">Add Service Provider</button>
+      <button type="submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">Ajouter un fournisseur de services</button>
 </div>
       
     </Form>
     </MDBContainer>
+    <Modal
+        size="lg"
+        show={this.state.Status}
+        onHide={() => {this.setState({Status:false})}}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-modal-sizes-title-lg">
+           
+          Fournisseur de services
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>      
+Fournisseur de services ajouté!</Modal.Body>
+      </Modal>
 
 
 

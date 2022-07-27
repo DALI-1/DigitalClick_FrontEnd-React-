@@ -6,12 +6,14 @@ import UploadDragDrop from './UploadDragDrop';
 import Image from 'react-bootstrap/Image'
 import LoadingSpinner from './LoadingSpinner';
 import axios from 'axios';
+import Modal from 'react-bootstrap/Modal';
 class AddClient extends Component {
     state = { 
       PhoneNumberList: [0],
       EmailList: [0],
       isLoading:true,
-      countries:null
+      countries:null,
+      Status:false
      } 
      AddNewEmailInput = () => {
       this.setState({EmailList:[...this.state.EmailList,this.state.EmailList[this.state.EmailList.length-1]+1]})
@@ -37,6 +39,7 @@ class AddClient extends Component {
     handlesubmit=(props)=>
     {
       props.preventDefault();
+      this.setState({Status:true})
       let i=0
       let nbarguments=10+this.state.PhoneNumberList.length+this.state.EmailList.length
     let url="http://127.0.0.1:8000/api/AddClient"
@@ -56,6 +59,7 @@ class AddClient extends Component {
     }
   
     this.SERVERAPICALL(url+PropsString)
+    setTimeout(() => {window.location.replace('/ManageClients')}, 2000);
       
     }
   
@@ -160,8 +164,8 @@ handleUpload = (e) =>{
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >First name:</Form.Label>
-        <Form.Control required type="text" placeholder="Enter Client Name"  name="First_Name" />
+        >Prénom</Form.Label>
+        <Form.Control required type="text" placeholder="Prénom"  name="First_Name" />
         <Form.Text className="text-muted">
           
         </Form.Text>
@@ -170,7 +174,7 @@ handleUpload = (e) =>{
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Last name:</Form.Label>
+        >Nom de famille</Form.Label>
         <Form.Control required type="text" placeholder="Enter Client last name"  name="Last_Name" />
         <Form.Text className="text-muted">
           
@@ -179,7 +183,7 @@ handleUpload = (e) =>{
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Client Adress:</Form.Label>
+        >Adresse client</Form.Label>
         <Form.Control required type="text" placeholder="Client Adress here"  name="Adress" />
         <Form.Text className="text-muted">
           
@@ -190,7 +194,7 @@ handleUpload = (e) =>{
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Client Nationality:</Form.Label>
+        >Nationalité du client</Form.Label>
         <Form.Select required name="C_Nationality">
           {
             this.state.countries.map((Country)=>
@@ -214,7 +218,7 @@ handleUpload = (e) =>{
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >City:</Form.Label>
+        >Ville</Form.Label>
         <Form.Control required type="text" placeholder="Enter City"  name="C_City" />
        
         <Form.Text className="text-muted">
@@ -231,7 +235,7 @@ handleUpload = (e) =>{
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Company Logo:</Form.Label>
+        >Logo d'entreprise</Form.Label>
         <Form.Control  type="file" placeholder="Enter the Company Image"  name="ClientPFP"  />  
         <Form.Text className="text-muted">
           
@@ -250,7 +254,7 @@ handleUpload = (e) =>{
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Company Name:</Form.Label>
+        >Nom de l'entreprise</Form.Label>
         <Form.Control required type="text" placeholder="Enter Company name"  name="Company_Name" />
         <Form.Text className="text-muted">
           
@@ -261,7 +265,7 @@ handleUpload = (e) =>{
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Company Adress:</Form.Label>
+        >Adresse de l'entreprise</Form.Label>
         <Form.Control required type="text" placeholder="Enter Company Adress"  name="	Company_Adress" />
         <Form.Text className="text-muted">
           
@@ -280,7 +284,7 @@ handleUpload = (e) =>{
         <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Phone number {Inputlist}:</Form.Label>
+        >Numéro de téléphone no:{Inputlist}:</Form.Label>
         <Form.Control required type="text" placeholder={'Enter PhoneNumber '+Inputlist}  name={"Phone_Number_"+Inputlist}  />
         <Form.Text className="text-muted">
         
@@ -292,8 +296,9 @@ handleUpload = (e) =>{
       )
       })}
       <Form.Group className="mb-3" controlId="formBasicEmail">
-      <Button variant="outline-primary" onClick={this.AddNewPhoneInput}>Add</Button>{' '}
-      <Button variant="outline-primary" onClick={this.RemoveNewPhoneInput}>Remove</Button>{' '}
+      <Button variant="outline-primary" onClick={this.AddNewPhoneInput}>Ajouter</Button>{' '}
+      <Button variant="outline-primary" onClick={this.RemoveNewPhoneInput}>
+Retirer</Button>{' '}
       </Form.Group>
       </MDBRow>
 
@@ -304,7 +309,7 @@ handleUpload = (e) =>{
         <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Email Adress {Inputlist}:</Form.Label>
+        >Adresse e-mail no:{Inputlist}:</Form.Label>
         <Form.Control required type="Email" placeholder={'Enter Email Adress '+Inputlist} name={"Email_"+Inputlist} />
         <Form.Text className="text-muted">
         
@@ -315,8 +320,10 @@ handleUpload = (e) =>{
       )
       })}
       <Form.Group className="mb-3" controlId="formBasicEmail">
-      <Button variant="outline-primary" onClick={this.AddNewEmailInput}>Add</Button>{' '}
-      <Button variant="outline-primary" onClick={this.RemoveNewEmailInput}>Remove</Button>{' '}
+      <Button variant="outline-primary" onClick={this.AddNewEmailInput}>
+Ajouter</Button>{' '}
+      <Button variant="outline-primary" onClick={this.RemoveNewEmailInput}>
+Retirer</Button>{' '}
       </Form.Group>
       </MDBRow>
 
@@ -334,7 +341,8 @@ handleUpload = (e) =>{
       
       
       <div class="row justify-content-center">
-      <button type="submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">Add Client</button>
+      <button type="submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">
+Ajouter un client</button>
 </div>
 
       
@@ -344,7 +352,20 @@ handleUpload = (e) =>{
     </Form>
     </MDBContainer>
     
-
+    <Modal
+        size="lg"
+        show={this.state.Status}
+        onHide={() => {this.setState({Status:false})}}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-modal-sizes-title-lg">
+           La gestion des clients
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+Client ajouté avec succès!</Modal.Body>
+      </Modal>
 
 
 

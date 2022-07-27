@@ -16,7 +16,6 @@ class MangeServer extends Component {
     constructor()
     {
       super()
-      
       this.inputref=createRef();
     }
     onChangeHandler = (e) => {
@@ -225,9 +224,7 @@ class MangeServer extends Component {
     }
     )
     
-    this.setState({countries:Countries_List}, () => {
-    this.TurnoffLoadingScreen();
-    })
+    this.setState({countries:Countries_List})
     
     }
     );
@@ -291,9 +288,9 @@ class MangeServer extends Component {
             <Row>
               <Col> 
               
-              <TextField id="standard-basic" label="S.Name" name="Server_Name" variant="standard" size="small" contentEditable="true" defaultValue={server.Server_Name}/></Col>
+              <TextField id="standard-basic" label="Nom du serveur" name="Server_Name" variant="standard" size="small" contentEditable="true" defaultValue={server.Server_Name}/></Col>
               <Col> 
-              <TextField id="standard-basic" label="S.Location" name="Server_Location" variant="standard" size="small" defaultValue={server.Server_Location}/></Col>
+              <TextField id="standard-basic" label="Emplacement du serveur" name="Server_Location" variant="standard" size="small" defaultValue={server.Server_Location}/></Col>
                                
             </Row>
             <Row>
@@ -308,14 +305,14 @@ class MangeServer extends Component {
               <TextField id="standard-basic" label="BIOS" name="BIOS" variant="standard" size="small" defaultValue={server.BIOS}/>        
                                </Col>
                                <Col> 
-              <TextField id="standard-basic" name="Nb_Sockets" label="Nb Sockets" variant="standard" size="small" defaultValue={server.Nb_Sockets}/></Col>
+              <TextField id="standard-basic" name="Nb_Sockets" label="Nombre des Sockets" variant="standard" size="small" defaultValue={server.Nb_Sockets}/></Col>
                                
             </Row>
             <Row>
             <Col> 
-              <TextField id="standard-basic" name="Nb_Cores" label="Nb V-Cores" variant="standard" size="small" defaultValue={server.Nb_Cores}/></Col>
+              <TextField id="standard-basic" name="Nb_Cores" label="Nombre des cores" variant="standard" size="small" defaultValue={server.Nb_Cores}/></Col>
               <Col> 
-              <TextField id="standard-basic" name="RAM" label="RAM" variant="standard" size="small" defaultValue={server.RAM}/></Col>
+              <TextField id="standard-basic" name="RAM" label="Taille du RAM" variant="standard" size="small" defaultValue={server.RAM}/></Col>
                                
             </Row>
             
@@ -397,7 +394,8 @@ class MangeServer extends Component {
             </Form.Group>
             </Row>
             <Row>
-            <a class="btn btn-outline-primary btn-sm" href={"ManagePartitionDisks?ServerID="+srvid} data-abc="true"  style={{marginRight:"10px",marginTop:"10px",color:"Black",backgroundColor:"white", borderColor:"#CFD3D6"}}>Manage Server disks</a>
+            <a class="btn btn-outline-primary btn-sm" href={"ManagePartitionDisks?ServerID="+srvid} data-abc="true"  style={{marginRight:"10px",marginTop:"10px",color:"Black",backgroundColor:"white", borderColor:"#CFD3D6"}}>
+Gérer les disques du serveur</a>
             </Row>        
           </Container>               
                                  </div>
@@ -442,7 +440,7 @@ class MangeServer extends Component {
               <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label
                   style={{color: 'black'}}
-                  >Next Facturation Date </Form.Label>
+                  >Prochaine date de Facturation</Form.Label>
                   <Form.Control type="date" name="NextFacturationDate" defaultValue={server.NextFacturationDate} />
                   <Form.Text className="text-muted">
                     
@@ -456,7 +454,7 @@ class MangeServer extends Component {
               <Form.Group className="" controlId="formBasicEmail" style={{marginTop:"10px"}}>
               <Form.Label
                   style={{color: 'black'}}
-                  >Payment Type </Form.Label>
+                  >Type de paiement </Form.Label>
               <Form.Select required name="PaymentType" defaultValue={server.PaymentType}>
                 <option>Per Month</option>
                 <option>Per Year</option>
@@ -474,7 +472,8 @@ class MangeServer extends Component {
               <Form.Group className="mb-1" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black',marginTop:"10px"}}
-        >Service Provider</Form.Label>
+        >
+        Fournisseur de services</Form.Label>
 
 
         <Form.Select required
@@ -499,7 +498,8 @@ class MangeServer extends Component {
             
                               </Container>
                               <Button  type="submit" variant="btn btn-outline-primary  m-4" size="lg">
-                    Save Server Information
+                    
+Enregistrer les informations du serveur
                   </Button>
                 
                              </div>

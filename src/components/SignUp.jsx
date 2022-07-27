@@ -14,7 +14,12 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Cookies from 'universal-cookie';
-
+import Spinner from 'react-bootstrap/Spinner';
+import Modal from 'react-bootstrap/Modal';
+export function BorderExample(props) {
+  if(props==true)
+  return <Spinner variant="primary" animation="border" />;
+}
 
 function Copyright(props) {
   return (
@@ -33,6 +38,8 @@ const theme = createTheme();
 
 export default function SignUp() {
   let [SignInMessage, setSignInMessage] = React.useState("");
+  let [Status,SetStatus] = React.useState(false);
+ 
 
   const CallSignUpAPI = async (url) => {
     try {
@@ -50,16 +57,9 @@ export default function SignUp() {
   useEffect(() => {
    
 }, []);
-
-
-
-
-
-
-
-
   const handleSubmit = (event) => {
     event.preventDefault();
+    SetStatus(true)
     const data = new FormData(event.currentTarget);
     let Username= data.get('Username')
     let First_Name= data.get('First_Name')
@@ -82,16 +82,16 @@ export default function SignUp() {
                cookies.remove("Username");
                cookies.remove("Password");
                cookies.remove("AccessToken");
-
-               
-               window.location.replace('/SignIn')
-               
+               setTimeout(() => {
+                
+                window.location.replace('/SignIn')
+              }, 2000);     
         }
       }
       if(added===0)
       {
         
-        setSignInMessage("Error Username exist or the Password is wrong!")
+        setSignInMessage("User Exist, please pick an other username or the fields are empty, please fill them up.")
       }
       
 
@@ -175,12 +175,7 @@ export default function SignUp() {
                   autoComplete="new-password"
                 />
               </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
-              </Grid>
+              
             </Grid>
             <Button
               type="submit"
@@ -190,9 +185,26 @@ export default function SignUp() {
             >
               Sign Up
             </Button>
+
+            
             <Grid container justifyContent="center">
               <Grid item>
-                <h4>{SignInMessage}</h4>
+              <Modal
+        size="lg"
+        show={Status}
+        onHide={() => {SetStatus(false)}}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-modal-sizes-title-lg">
+            Sign Up
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{SignInMessage}</Modal.Body>
+      </Modal>
+                <h4>{BorderExample(Status)}</h4>
+
+
               </Grid>
             </Grid>
             <Grid container justifyContent="flex-end">

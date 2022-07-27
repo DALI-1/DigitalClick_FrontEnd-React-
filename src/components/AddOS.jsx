@@ -3,9 +3,9 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import LoadingSpinner from './LoadingSpinner';
-
+import Modal from 'react-bootstrap/Modal';
 class AddVirtualMachine extends Component {
-    state = { OSProviders:null, isLoading:true } 
+    state = { OSProviders:null, isLoading:true,Status:false } 
     constructor()
     {
       super()
@@ -23,6 +23,8 @@ class AddVirtualMachine extends Component {
     }
     handlesubmit=(props)=>
     {
+
+      this.setState({Status:true})
       props.preventDefault();
       let PropsString=""
       let i=0
@@ -109,7 +111,7 @@ let url="http://127.0.0.1:8000/api/GetAllOSProviders"
 <Form.Group className="mb-3" >
         <Form.Label
         style={{color: 'black'}}
-        >OS Company:</Form.Label>
+        >Fournisseur de système d'exploitation:</Form.Label>
         <Form.Select required name="OperatingSystemProvider_ID" onChange={this.onChangeHandler}>
 
        {
@@ -121,7 +123,21 @@ let url="http://127.0.0.1:8000/api/GetAllOSProviders"
           )
         })
        } 
-        
+        <Modal
+        size="lg"
+        show={this.state.Status}
+        onHide={() => {this.setState({Status:false})}}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-modal-sizes-title-lg">
+           
+          Système d'exploitation
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+Système d'exploitation ajouté!</Modal.Body>
+      </Modal>
         </Form.Select>
        
         <Form.Text className="text-muted">
@@ -131,13 +147,13 @@ let url="http://127.0.0.1:8000/api/GetAllOSProviders"
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >OS Name:</Form.Label>
-        <Form.Control type="text" placeholder="OS name here" name="OperatingSystem_Name" />
+        >Nom du Système d'exploitation</Form.Label>
+        <Form.Control type="text" placeholder="Nom du Système d'exploitation" name="OperatingSystem_Name" />
         <Form.Text className="text-muted">       
         </Form.Text>
       </Form.Group>
       <div class="row justify-content-center">
-      <button type="submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">Add OperatingSystem</button>
+      <button type="submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">Ajouter Système d'exploitation</button>
 </div>     
     </Form>
     </MDBContainer>

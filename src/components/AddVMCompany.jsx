@@ -2,8 +2,9 @@ import React,{Component} from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
+import Modal from 'react-bootstrap/Modal';
 class AddVirtualMachine extends Component {
-    state = {  } 
+    state = {Status:false  } 
 
 
     SERVERAPICALL = async (url) => {
@@ -25,7 +26,7 @@ class AddVirtualMachine extends Component {
 
     handlesubmit=(props)=>
     {
-
+      this.setState({Status:true})
        props.preventDefault();
        let PropsString=""
        let i=0
@@ -65,8 +66,8 @@ class AddVirtualMachine extends Component {
       <Form.Group className="mb-3" >
         <Form.Label
         style={{color: 'black'}}
-        >Virtual Machine Company Name:</Form.Label>
-        <Form.Control type="text" placeholder="VM Company name here"
+        >Nom du Fournisseur de système d'exploitation du Virtual Machine:</Form.Label>
+        <Form.Control type="text" placeholder=""
         name="VMProvider_Company_Name" />
         <Form.Text className="text-muted">
           
@@ -77,10 +78,25 @@ class AddVirtualMachine extends Component {
 
 
       <div class="row justify-content-center">
-      <button type="submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">Add VM Company</button>
+      <button type="submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">Ajouter Fournisseur de système d'exploitation du Virtual Machine</button>
 </div>
       
     </Form>
+    <Modal
+        size="lg"
+        show={this.state.Status}
+        onHide={() => {this.setState({Status:false})}}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-modal-sizes-title-lg">
+           
+          Fournisseur de système d'exploitation du Virtual Machine
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        Fournisseur de système d'exploitation du Virtual Machine ajouté!</Modal.Body>
+      </Modal>
     </MDBContainer>
 
 

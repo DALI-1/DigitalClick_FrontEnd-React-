@@ -63,15 +63,15 @@ let url="http://localhost:8000/api/RemoveServerByID?ServerID="+props.Server_ID
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Delete</Modal.Title>
+          <Modal.Title>Suppression du serveur</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{"Are you sure you want to delete server ID"}</Modal.Body>
+        <Modal.Body>{"Voulez-vous vraiment supprimer le server et tous les contrats qui s'y rapportent ?"}</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            No don't delete
+           Non ne supprimez pas
           </Button>
           <Button variant="primary" onClick={handleDelete}>
-            Yes Delete
+          Oui Supprimer!
           </Button>
         </Modal.Footer>
       </Modal>
@@ -227,35 +227,35 @@ class MangeServer extends Component {
                                  <div className="main-img">
           <Container>
             <Row>
-              <Col> <nobr><label style={{fontSize:"10px"}}>Server:</label>
+              <Col> <nobr><label style={{fontSize:"10px"}}>Nom du serveur</label>
                                <p style={{fontSize:"10px"}}class="text-muted">{server.Server_Name} </p></nobr></Col>
-              <Col><nobr><label style={{fontSize:"10px"}}>Server Location:</label>
+              <Col><nobr><label style={{fontSize:"10px"}}>Emplacement du serveur</label>
                                <p style={{fontSize:"10px"}} class="text-muted">{server.Server_Location}</p></nobr></Col>
                                
             </Row>
             <Row>
-            <Col><nobr><label style={{fontSize:"10px"}}>IP-Address:</label>
+            <Col><nobr><label style={{fontSize:"10px"}}>IP-Address</label>
                                <p style={{fontSize:"10px"}} class="text-muted">{server.Server_IP_Adress}</p></nobr></Col>
-              <Col><nobr><label style={{fontSize:"10px"}}>MAC-Address:</label>
+              <Col><nobr><label style={{fontSize:"10px"}}>MAC-Address</label>
                                <p style={{fontSize:"10px"}} class="text-muted">{server.Server_MAC_Adress}</p></nobr></Col>
                            
             </Row>
             <Row>
               <Col><nobr><label style={{fontSize:"10px"}}>OS</label>
                                <p style={{fontSize:"10px"}} class="text-muted">{server.OperatingSystem_Company_Name+' '+server.OperatingSystem_Name}</p></nobr></Col>
-              <Col><nobr><label style={{fontSize:"10px"}}>Number of Sockets:</label>
+              <Col><nobr><label style={{fontSize:"10px"}}>Nombre des Sockets</label>
                                <p style={{fontSize:"10px"}} class="text-muted">{server.Nb_Sockets}</p></nobr></Col>
                                
             </Row>
             <Row>
-              <Col><nobr><label style={{fontSize:"10px"}}>Number of V-Cores:</label>
+              <Col><nobr><label style={{fontSize:"10px"}}>Nombre des Cores</label>
                                <p style={{fontSize:"10px"}} class="text-muted">{server.Nb_Cores}</p></nobr></Col>
-              <Col><nobr><label style={{fontSize:"10px"}}>RAM</label>
-                               <p style={{fontSize:"10px"}} class="text-muted">{server.RAM+"GB"}</p></nobr></Col>
+              <Col><nobr><label style={{fontSize:"10px"}}>Taille du RAM</label>
+                               <p style={{fontSize:"10px"}} class="text-muted">{server.RAM}</p></nobr></Col>
                                
             </Row>
             <Row>
-              <Col><nobr><label style={{fontSize:"10px"}}>Number of Disks:</label>
+              <Col><nobr><label style={{fontSize:"10px"}}>Nombre des Disks</label>
                                <p style={{fontSize:"10px"}} class="text-muted">{server.Nb_Harddrive}</p>
                             
                                </nobr></Col>
@@ -265,7 +265,7 @@ class MangeServer extends Component {
                                
             </Row>
             <Row>
-            <Col><nobr><label style={{fontSize:"10px"}}>Server Type:</label>
+            <Col><nobr><label style={{fontSize:"10px"}}>Type de serveur</label>
                                <p style={{fontSize:"10px"}} class="text-muted">{server.Server_Type}</p></nobr></Col>
                                <Col><nobr><label style={{fontSize:"10px"}}>Backup:</label>
                                <p style={{fontSize:"10px"}} class="text-muted">{server.Backup}</p></nobr></Col>  
@@ -310,19 +310,19 @@ class MangeServer extends Component {
                              <div class="card-body text-center">
                               <Container>
                               <Row>
-              <Col><nobr><label style={{fontSize:"10px"}}>Bought Date:</label>
+              <Col><nobr><label style={{fontSize:"10px"}}>Date d'ajout</label>
                                <p style={{fontSize:"10px"}} class="text-muted">{server.created_at}</p></nobr></Col>
-                               <Col><nobr><label style={{fontSize:"10px"}}>Description:</label>
+                               <Col><nobr><label style={{fontSize:"10px"}}>Description</label>
                                <p style={{fontSize:"10px"}} class="text-muted">{server.Description}</p></nobr></Col>
-              <Col><nobr><label style={{fontSize:"10px"}}>Next Facturation Date:</label>
+              <Col><nobr><label style={{fontSize:"10px"}}>Prochaine date de Facturation</label>
                                <p style={{fontSize:"10px"}} class="text-muted">{server.NextFacturationDate}</p></nobr></Col>
                                
             </Row>
             <Row>
-              <Col><nobr><label style={{fontSize:"10px"}}>Payment Type:</label>
-                               <p style={{fontSize:"10px"}} class="text-muted">{server.Server_Type}</p></nobr></Col>
+              <Col><nobr><label style={{fontSize:"10px"}}>Type de paiement</label>
+                               <p style={{fontSize:"10px"}} class="text-muted">{server.PaymentType}</p></nobr></Col>
                                
-              <Col><nobr><label style={{fontSize:"10px"}}>Server Provider:</label>
+              <Col><nobr><label style={{fontSize:"10px"}}>Fournisseur de serveur</label>
                                <p style={{fontSize:"10px"}} class="text-muted">{server.service_Provider_Company_Name}</p></nobr></Col>
                                
             </Row>
@@ -336,9 +336,10 @@ class MangeServer extends Component {
                               
                                
                                
-                               <a class="btn btn-outline-primary btn-sm" href={"ManageServerPartitions?ServerID="+server.Server_ID} data-abc="true" style={{margin:"10px",padding:"10px"}}>View VM Partitions </a>
+                               <a class="btn btn-outline-primary btn-sm" href={"ManageServerPartitions?ServerID="+server.Server_ID} data-abc="true" style={{margin:"10px",padding:"10px"}}>
+Afficher les partitions de machine virtuelle </a>
                                
-                               <a class="btn btn-outline-primary btn-sm" href={"ManageServerContracts?ServerID="+server.Server_ID} data-abc="true" style={{margin:"10px",padding:"10px"}}>View Contracts</a>
+                               <a class="btn btn-outline-primary btn-sm" href={"ManageServerContracts?ServerID="+server.Server_ID} data-abc="true" style={{margin:"10px",padding:"10px"}}>Voir les contrats</a>
                              </div>
                            </div>
                          </div>

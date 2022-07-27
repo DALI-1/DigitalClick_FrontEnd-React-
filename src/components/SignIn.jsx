@@ -15,7 +15,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Cookies from 'universal-cookie';
 import {useEffect} from 'react';
-
+import Spinner from 'react-bootstrap/Spinner';
+import Modal from 'react-bootstrap/Modal';
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -31,39 +32,32 @@ function Copyright(props) {
 
 const theme = createTheme();
 
+
+
+
+export function BorderExample(props) {
+
+  if(props==true)
+  return <Spinner variant="primary" animation="border" />;
+}
 export default function SignIn() {
   let [SignInMessage, setSignInMessage] = React.useState("");
- 
+  let [FailLoad, setFailLoad] = React.useState(false);
   let [Token, setToken] = React.useState("");
   var CryptoJS = require("crypto-js");
   const cookies = new Cookies();
-
-    
   useEffect(() => {
    
     let Username_Check=cookies.get("Username")
     let Password_Check=cookies.get("Password")
     if(Username_Check || Password_Check)
   {
-    
-
-    
-    handleCookie()
-   
-    
+    handleCookie()  
   }
   else
-  {
-    
+  {   
   }  
-
-
   }, []); 
-  
-  
-  
-
-  
   const CallSignInAPI = async (url) => {
     try {
       const response = await fetch(url);
@@ -75,10 +69,9 @@ export default function SignIn() {
       return("Error:Yes");
     }
   };
-
-
   const handleSubmit = (event) => {
     event.preventDefault();
+    setSignInMessage(true)
     const data = new FormData(event.currentTarget);
       let Username=data.get('Username')
       let Password=data.get('Password')
@@ -93,6 +86,9 @@ export default function SignIn() {
                
                     LoggedIn=1;
 
+                    
+ 
+                     
                     setToken(result['Token'])
 
                     var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(Password), 'DigitalClick').toString();
@@ -103,9 +99,11 @@ export default function SignIn() {
                     cookies.set('Username', Username);
                 cookies.set('AccessToken',result['Token']);
                 cookies.set('Password', ciphertext);
+                setFailLoad(true)
                 setSignInMessage("You have been logged in Successfully!")
-                setTimeout(() => {   }, 2000);
-                window.location.replace('/')
+                setTimeout(() => {window.location.replace('/')   }, 2000);
+                
+
                   //  console.Log(result['Token']);
               // console.Log("Logged in!");
                
@@ -114,7 +112,10 @@ export default function SignIn() {
       if(LoggedIn===0)
       {
         setSignInMessage("Error! Wrong password or Username")
-        
+        setFailLoad(true)
+
+
+         
         //console.Log("Wrong password or Username!");
       }
       
@@ -125,6 +126,7 @@ export default function SignIn() {
 
   
   };
+
 
 
 
@@ -159,8 +161,10 @@ export default function SignIn() {
                 cookies.set('AccessToken',result['Token']);
                 cookies.set('Password', ciphertext);
                 setSignInMessage("You have been logged in Successfully!")
+                setTimeout(() => {
+                  window.location.replace('/')
+                }, 5000);
                
-                window.location.replace('/')
                   //  console.Log(result['Token']);
               // console.Log("Logged in!");
                
@@ -169,7 +173,7 @@ export default function SignIn() {
       if(LoggedIn===0)
       {
         setSignInMessage("Error! Wrong password or Username")
-        
+       
         //console.Log("Wrong password or Username!");
       }
       
@@ -199,6 +203,23 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
+
+          <div>
+
+          <Modal
+        size="lg"
+        show={FailLoad}
+        onHide={() => {setFailLoad(false)}}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-modal-sizes-title-lg">
+            Sign in
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{SignInMessage}</Modal.Body>
+      </Modal>
+          </div>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
               margin="normal"
@@ -207,8 +228,7 @@ export default function SignIn() {
               id="Username"
               label="Username"
               name="Username"
-              autoComplete="Username"
-              
+              autoComplete="Username"      
               autoFocus
             />
             
@@ -224,10 +244,8 @@ export default function SignIn() {
               autoComplete="current-password"
             />
            
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+           
+
             <Button
               type="submit"
               fullWidth
@@ -236,17 +254,16 @@ export default function SignIn() {
             >
               Sign In
             </Button>
+            <div className="d-flex justify-content-center" style={{margin:"10px"}}>
+            {BorderExample(SignInMessage)}     
+            </div>
             <Grid container justifyContent="center">
-              <Grid item>
-                <h4>{SignInMessage}</h4>
+              <Grid item>                       
+                
               </Grid>
             </Grid>
             <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
+              
               <Grid item>
                 <Link href="SignUp" variant="body2">
                   {"Don't have an account? Sign Up"}
@@ -258,5 +275,8 @@ export default function SignIn() {
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
+
+
+
   );
 }
