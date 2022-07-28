@@ -173,7 +173,13 @@ class ManageClients extends Component {
                 <a class="card-img-tiles" href="#" data-abc="true">
                    <div class="inner">
                      <div class="main-img">
-                     <img src={require('./images/Delice_Logo.jpg')} alt="Category"/>
+                     <div class="d-flex justify-content-center mb-4">
+                     <img roundedCircle={true} src={'http://localhost:8000/Images/'+Client.ClientPFP} style={{
+                     width:'120px',
+                     height:'120px'
+                     }}
+                      alt="Category"/>
+                      </div>
                      <Container>
 <Row>
   <Col> <nobr><label style={{fontSize:"10px"}}>Prénom</label>
@@ -247,8 +253,8 @@ class ManageClients extends Component {
 </div>
 </div>
 
-                   <a class="btn btn-outline-primary btn-sm" href="ManageClientContracts" data-abc="true">
-Voir les contrats liés au client</a>
+                   {/*<a class="btn btn-outline-primary btn-sm" href="ManageClientContracts" data-abc="true">
+Voir les contrats liés au client</a> */}
 
 
 

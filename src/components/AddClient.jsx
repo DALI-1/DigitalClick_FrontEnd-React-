@@ -13,7 +13,8 @@ class AddClient extends Component {
       EmailList: [0],
       isLoading:true,
       countries:null,
-      Status:false
+      Status:false,
+      PFP:""
      } 
      AddNewEmailInput = () => {
       this.setState({EmailList:[...this.state.EmailList,this.state.EmailList[this.state.EmailList.length-1]+1]})
@@ -41,6 +42,7 @@ class AddClient extends Component {
       props.preventDefault();
       this.setState({Status:true})
       let i=0
+      let CompanyName=""
       let nbarguments=10+this.state.PhoneNumberList.length+this.state.EmailList.length
     let url="http://127.0.0.1:8000/api/AddClient"
     let PropsString=""
@@ -52,14 +54,40 @@ class AddClient extends Component {
        PropsString='?'+props.target[i].name+'='+props.target[i].value
      }
      else if(props.target[i].value!="")
-     {           
-        PropsString=PropsString+"&"+props.target[i].name+"="+props.target[i].value 
+     {    
+          if(props.target[i].name=="ClientPFP")  
+          {
+              
+          } 
+          else if(props.target[i].name=="Company_Name")
+          {
+            CompanyName=props.target[i].value
+            PropsString=PropsString+"&"+props.target[i].name+"="+props.target[i].value 
+          }
+          else
+          {
+            PropsString=PropsString+"&"+props.target[i].name+"="+props.target[i].value 
+          }    
+        
      }
      
     }
-  
-    this.SERVERAPICALL(url+PropsString)
-    setTimeout(() => {window.location.replace('/ManageClients')}, 2000);
+  console.log(url+PropsString)
+   const formData = new FormData();
+   formData.append('ClientPFP', this.state.PFP);
+   formData.append('CompanyName', CompanyName);
+   const optionADDCLIENT = {
+        
+    method: 'POST',
+    body: formData,
+    // If you add this, upload won't work
+    // headers: {
+    //   'Content-Type': 'multipart/form-data',
+    // }
+  };
+   fetch(url+PropsString,optionADDCLIENT );  
+   
+   setTimeout(() => {window.location.replace('/ManageClients')}, 2000);
       
     }
   
@@ -108,34 +136,12 @@ this.TurnoffLoadingScreen();
 
 handleUpload = (e) =>{
 
-  const fd=new FormData()
 
-
-
-  axios.defaults.withCredentials = false;
-  axios.defaults.headers.post['Access-Control-Allow-Origin'] = 'http://127.0.0.1:8000/api/UploadIMG';
-  
-  fd.append(
-   "ClientPFP",e.target.files[0] 
-  )
-    axios({
-      method: 'post',
-      url: "http://127.0.0.1:8000/api/UploadIMG",
-    
-      data: fd,
-  }).then(res => {
-    // listarChamados.innerHTML = res.data;
-    console.log(res);
-})
-.catch(err => {
-    console.error(err);
-})
-  console.log("Posted!")
+  let Data=e.target.files[0]
+  this.setState({PFP:Data})
+ 
+ 
 }
-
-    
-
-
 
     render() { 
       if(this.state.isLoading)
@@ -151,6 +157,7 @@ handleUpload = (e) =>{
       {
         return ( 
             <div class="shadow  p-5  mb-5 mt-5 bg-light rounded" >
+            
                 <div class="shadow  p-1  mb-1  bg-light rounded">
                 <div class="d-flex justify-content-center mb-4">
                 <Image  roundedCircle={true} style={{width: '200px',height:'200px'}} src={require('./images/Client_Logo.gif')}/>
@@ -236,7 +243,7 @@ handleUpload = (e) =>{
         <Form.Label
         style={{color: 'black'}}
         >Logo d'entreprise</Form.Label>
-        <Form.Control  type="file" placeholder="Enter the Company Image"  name="ClientPFP"  />  
+        <Form.Control  type="file" placeholder="Enter the Company Image" onChange={this.handleUpload}  name="ClientPFP"  />  
         <Form.Text className="text-muted">
           
         </Form.Text>
@@ -326,29 +333,10 @@ Ajouter</Button>{' '}
 Retirer</Button>{' '}
       </Form.Group>
       </MDBRow>
-
-
-
-      
-
-
-      
-
-
-
-
-
-      
-      
       <div class="row justify-content-center">
       <button type="submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">
 Ajouter un client</button>
-</div>
-
-      
-      
-
-      
+</div>   
     </Form>
     </MDBContainer>
     
@@ -366,13 +354,7 @@ Ajouter un client</button>
         <Modal.Body>
 Client ajouté avec succès!</Modal.Body>
       </Modal>
-
-
-
     </div>
-
-        
-
         );
     }
     }

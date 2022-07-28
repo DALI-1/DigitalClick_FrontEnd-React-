@@ -25,7 +25,7 @@ class addContract extends Component {
     props.preventDefault();
     let PropsString=""
     let i=0
-    let url="http://127.0.0.1:8000/api/EditPartitionContract"
+    let url="http://127.0.0.1:8000/api/EditServerContract"
     for(i=0;i<8;i++)
     {
      if(i==0)
@@ -57,7 +57,7 @@ class addContract extends Component {
     let CID = queryParams.get('ContractID');
     
     this.CallServerListAPI(url+PropsString+"&PContract_ID="+CID)
-    setTimeout(() => {window.location.replace('/ManagePartitionContracts')}, 2000);
+    setTimeout(() => {window.location.replace('/ManageServersContracts')}, 2000);
 
   }
 
@@ -185,7 +185,7 @@ var bytes = CryptoJS.AES.decrypt(Password_ciphered, 'DigitalClick');
 
   const queryParams = new URLSearchParams(window.location.search);
   let CID = queryParams.get('ContractID');
-  let urls="http://localhost:8000/api/GetPartitionContractsByID?ContractID="+CID
+  let urls="http://localhost:8000/api/GetServersContractsByID?ContractID="+CID
   let Json= this.CallServerListAPI(urls)   
   Json.then((result)=>{
    let Contract_List=[]   
@@ -305,23 +305,7 @@ this.setState({Clients:Clients_List},()=>{
       </Form.Text>
     </Form.Group></Col>
 
-    <Col><Form.Group className="mb-3" controlId="formBasicEmail" name="ServerVMPartition_ID">
-      <Form.Label
-      style={{color: 'black'}}
-      > Server Partition Name:</Form.Label>
-      <Form.Select required onChange={this.onChangeHandler2} name="ServerVMPartition_ID" defaultValue={this.state.Contract[0].PartitionName}>
-      {
-          this.state.Partitions.map((Partition)=>{
-            return(
-<option key={Partition.ServerVMPartition_ID} id={Partition.ServerVMPartition_ID}>{Partition.PartitionName}</option>
-            )
-            
-          })
-        }      
-      </Form.Select>      
-      <Form.Text className="text-muted">         
-      </Form.Text>
-    </Form.Group></Col>
+    
     </Row>
     <Row>
       <Col><Form.Group className="mb-3" controlId="formBasicEmail" name="Client_ID">

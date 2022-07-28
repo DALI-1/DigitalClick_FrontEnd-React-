@@ -203,7 +203,8 @@ this.TurnoffLoadingScreen();
 
     
     <div class="row justify-content-center">
-    <button type="submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark" style={{margin:"10px"}}>Create Disk</button>
+    <button type="submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark" style={{margin:"10px"}}>
+Enregistrer les informations du disque</button>
 </div>
 
 <div>

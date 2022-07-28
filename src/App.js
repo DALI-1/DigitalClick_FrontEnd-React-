@@ -38,6 +38,7 @@ import EditDisk from './WebPages/EditDisk_WebPage.jsx'
 import ManageServerPartitionDisks from './WebPages/ManageServerPartitionDisks_WebPage.jsx'
 import AddDiskProvider from './WebPages/AddDiskProvider_WebPage'
 import AddServerPartition from './WebPages/AddServerPartition_WebPage';
+import EditSrvrContract from './WebPages/EditSrvrContract_WebPage';
 
 import {BrowserRouter as Router,Route,Switch} from "react-router-dom";
 
@@ -80,6 +81,8 @@ function App() {
         <Route exact path="/EditDiskPartition" component={EditDiskPartition}/>
         <Route exact path="/AddDiskProvider" component={AddDiskProvider}/>
         <Route exact path="/AddServerPartition" component={AddServerPartition}/>
+        <Route exact path="/EditSrvrContract" component={EditSrvrContract}/>
+        
         <Route exact path="/" component={Home}/>
         </Switch>
       

@@ -199,7 +199,7 @@ class AddServer extends Component {
       </Form.Group>  
       <div class="row justify-content-center">
       <button type="submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark" style={{margin:"10px"}}>
-Ajouter une partition</button>
+      Enregistrer les informations de la partition de disque</button>
 </div>
       
     </Form>
