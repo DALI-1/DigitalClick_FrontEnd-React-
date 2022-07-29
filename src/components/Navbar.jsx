@@ -50,7 +50,7 @@ super();
 
     render() { 
         return (
-            <reactElement>
+            <>
 
 <Navbar bg="light" expand="lg">
   <Container fluid>
@@ -121,7 +121,7 @@ super();
 </Navbar>
 
 
-            </reactElement>
+            </>
 
         );
     }

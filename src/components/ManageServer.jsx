@@ -282,8 +282,10 @@ class MangeServer extends Component {
                                  </div>
                                 
                                  <div class="thumblist">
-                                 <Image  src={require('./images/Server_Logo.gif')} class="img-fluid" alt="Responsive image"/>
-                                 <Image  src={'https://countryflagsapi.com/png/'+server.Server_Country} class="img-fluid" />
+                                 <Image thumbnail={true} fluid={true} rounded={true }  src={require('./images/Server_Logo.gif')} class="img-fluid" />
+                                 <Image thumbnail={true} fluid={true} rounded={true }src={'https://countryflagsapi.com/png/'+server.Server_Country} class="img-fluid" />
+                                 
+                              
                                   
                                   <Container>
                                   <Row>

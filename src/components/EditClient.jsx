@@ -1,350 +1,423 @@
-import React,{Component,useState} from 'react';
-import './ManageServer.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit';
-import { MDBBtn } from 'mdb-react-ui-kit';
+import React,{Component} from 'react';
 import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/Button';
-import { Container, Row, Col } from 'react-bootstrap';
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import Form from 'react-bootstrap/Form';
-import Cookies from 'universal-cookie';
-import AddIcon from '@mui/icons-material/Edit';
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
-import Modal from 'react-bootstrap/Modal';
-import TextField from '@mui/material/TextField';
+import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import UploadDragDrop from './UploadDragDrop';
 import Image from 'react-bootstrap/Image'
-
-
-
-export function Popup() {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  return (
-    <>
-    <IconButton aria-label="delete" size="large" onClick={handleShow}>
-  <DeleteIcon fontSize="inherit" />
-</IconButton>
-      
-
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Delete</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Are you sure you want to delete?</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            No don't delete
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Yes Delete
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
-  );
-}
-class MangeServer extends Component {
+import LoadingSpinner from './LoadingSpinner';
+import axios from 'axios';
+import Modal from 'react-bootstrap/Modal';
+class AddClient extends Component {
     state = { 
       PhoneNumberList: [0],
       EmailList: [0],
-      modalShow:false
+      isLoading:true,
+      countries:null,
+      Status:false,
+      PFP:"",
+      Client:[],
+      Phones:[],
+      Emails:[]
      } 
-
-
-
      AddNewEmailInput = () => {
       this.setState({EmailList:[...this.state.EmailList,this.state.EmailList[this.state.EmailList.length-1]+1]})
-      
- 
     };
     RemoveNewEmailInput = () => {
       if(this.state.EmailList.length>1)
       {
-
       let NewState=this.state.EmailList.slice(0,this.state.EmailList.length-1);
-      this.setState({EmailList:[...NewState]})
-      
+      this.setState({EmailList:[...NewState]})  
       }
- 
     };
-
-
-
-
-
-
-
     AddNewPhoneInput = () => {
       this.setState({PhoneNumberList:[...this.state.PhoneNumberList,this.state.PhoneNumberList[this.state.PhoneNumberList.length-1]+1]})
-      
- 
-    };
-
-    
+    }; 
     RemoveNewPhoneInput = () => {
       if(this.state.PhoneNumberList.length>1)
       {
-
       let NewState=this.state.PhoneNumberList.slice(0,this.state.PhoneNumberList.length-1);
       this.setState({PhoneNumberList:[...NewState]})
-      
       }
- 
-    };
-
-
-    constructor()
-    {
-      super()
-      this.Servers=null;
     }
-     CallServerListAPI = async (url) => {
-      try {
-        const response = await fetch(url);
-        const json = await response.json();
-        
-        return(json)
-      } catch (error) {
-        console.log("error", error);
-        return("Error:Yes");
-      }
-    };
 
-    CheckIdentification= ()=>
-  {
-    var CryptoJS = require("crypto-js");
-    const cookies = new Cookies();
-    let Username=cookies.get("Username")
-      let Password_ciphered=cookies.get("Password")
-       if(Username || Password)
-       {
-        var bytes = CryptoJS.AES.decrypt(Password_ciphered, 'DigitalClick');
-        var Password = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-        const url = "http://localhost:8000/api/SignIn?Username="+Username+"&Password="+Password
-        const CallSignInAPI = async (url) => {
-          try {
-            const response = await fetch(url);
-            const json = await response.json();
-            
-            return(json)
-          } catch (error) {
-            console.log("error", error);
-            return("Error:Yes");
-          }
-        };
-      let Json=CallSignInAPI(url)
-      let LoggedIn=0
-      Json.then((result)=>{
-        for( var property in result)
-        {
-          if(property==="UserValidated" && result[property]==="Yes")
-          {
-  
-                      LoggedIn=1;  
-          }
-        }
-        if(LoggedIn===0)
-        {
-          window.location.replace('/SignIn')
-         
-        }
-        
-  
-       }
-       );
-     
-       }
-       else
-       {
-        window.location.replace('/SignIn')
-        
-       } 
+    handlesubmit=(props)=>
+    {
+      props.preventDefault();
+      this.setState({Status:true})
+      const queryParams = new URLSearchParams(window.location.search);
+  let CID = queryParams.get('ClientID');
+      let i=0
+      let CompanyName=""
+      let nbarguments=10+this.state.PhoneNumberList.length+this.state.EmailList.length
+    let url="http://127.0.0.1:8000/api/EditClient"
+    let PropsString=""
 
-  }
-  
-    render() {
-    /*  this.CheckIdentification(); 
-      const cookies = new Cookies();
-      var CryptoJS = require("crypto-js");
-      let Username=cookies.get("Username")
-      let Password_ciphered=cookies.get("Password")
-      var bytes = CryptoJS.AES.decrypt(Password_ciphered, 'DigitalClick');
-        var Password = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-      let url ="http://localhost:8000/api/GetAllServers?Username="+Username+"&Password="+Password
-    let Json= this.CallServerListAPI(url) 
-    Json.then((result)=>{
-      
-      for( let key in result)
-      {
-        this.Servers=result
-
-        
-
-        
-        
-        
-      }
-      
-
+    for(i=0;i<nbarguments;i++)
+    {
+     if(i==0 &&props.target[i].value!="")
+     {
+       PropsString='?'+props.target[i].name+'='+props.target[i].value
      }
-     );*/
-     
-
-        return (
-<div class="container mt-10" >
-   <div className=" d-flex align-items-center justify-content-center">                    
-               <div class="col-md-4 col-sm-6" id="ProductsContainerID">
-                      
-                 <div class="card m-2"><a class="card-img-tiles" href="#" data-abc="true">
-                     <div class="inner">
-                       <div class="main-img">
-<Container>
-  <Row>
-    <Col> 
-    <TextField id="standard-basic" label="F.Name" variant="standard" size="small"/></Col>
-    <Col> 
-    <TextField id="standard-basic" label="L.Name" variant="standard" size="small"/></Col>
-                     
-  </Row>
-  <Row>
-  <Col> 
-    <TextField id="standard-basic" label="Company Name" variant="standard" size="small"/></Col>
-    <Col> 
-    <TextField id="standard-basic" label="Company Adress" variant="standard" size="small"/></Col>
-                 
-  </Row>
-  
-  
-  <Row>
-  <Col> 
-    <TextField id="standard-basic" label="Company City" variant="standard" size="small"/></Col>
-    <Col>
-    <Form.Group className="" controlId="formBasicEmail" style={{marginTop:"10px"}}>
-    
-    <Form.Select required>
-      <option>Tunisia</option>
-      <option>USA</option>
-      <option>Libya</option>
-    </Form.Select>
-   
-    <Form.Text className="text-muted">
-      
-    </Form.Text>
-  </Form.Group>
-
-</Col>
-  </Row>
-
-
-
-  
-  
-
-</Container>
-                      
-                     
-                     
-                     
-                       </div>
-                      
-                       <div class="thumblist">
-                       <img src={require('./images/Client_Logo.gif')} class="img-fluid" alt="Responsive image"/>
-                       
-                        </div>
-                     </div></a>
-                   <div class="card-body text-center">
-                    <Container>
-                    <Row>
-    <Col><nobr>
-    <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label
-        style={{color: 'black'}}
-        >Company Logo:</Form.Label>
-        <UploadDragDrop/>
-
-        
-        <Form.Text className="text-muted">
-          
-        </Form.Text>
-      </Form.Group>
-                     </nobr></Col>
-                        
-  </Row>
-  <Row>
-    
-    {this.state.PhoneNumberList.map((Inputlist)=>{ return(
-        <MDBCol size="6">
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label
-        style={{color: 'black'}}
-        >Phone number {Inputlist}:</Form.Label>
-        <Form.Control required type="text" placeholder={'Enter PhoneNumber '+Inputlist}  />
-        <Form.Text className="text-muted">
-        
-          
-        </Form.Text>
-      </Form.Group>
-      </MDBCol>
-
-      )
-      })}
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-      <Button variant="outline-primary" onClick={this.AddNewPhoneInput}>Add</Button>{' '}
-      <Button variant="outline-primary" onClick={this.RemoveNewPhoneInput}>Remove</Button>{' '}
-      </Form.Group>
-    
-                     
-  </Row>
-  <Row>
-    
-  {this.state.EmailList.map((Inputlist)=>{ return(
-        <MDBCol size="6">
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label
-        style={{color: 'black'}}
-        >Email Adress {Inputlist}:</Form.Label>
-        <Form.Control required type="Email" placeholder={'Enter Email Adress '+Inputlist}  />
-        <Form.Text className="text-muted">
-        
-          
-        </Form.Text>
-      </Form.Group>
-      </MDBCol>
-      )
-      })}
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-      <Button variant="outline-primary" onClick={this.AddNewEmailInput}>Add</Button>{' '}
-      <Button variant="outline-primary" onClick={this.RemoveNewEmailInput}>Remove</Button>{' '}
-      </Form.Group>
-                     
-  </Row>
-  
-                    </Container>
-                    <Button variant="primary" size="lg">
-          Save Client Information
-        </Button>
-                   </div>
-                 </div>
-               </div>
-               </div>
-
+     else if(props.target[i].value!="")
+     {    
+          if(props.target[i].name=="ClientPFP")  
+          {
               
-               
-               
-               
-             
-             
-             </div>
+          } 
+          else if(props.target[i].name=="Company_Name")
+          {
+            CompanyName=props.target[i].value
+            PropsString=PropsString+"&"+props.target[i].name+"="+props.target[i].value 
+          }
+          else
+          {
+            PropsString=PropsString+"&"+props.target[i].name+"="+props.target[i].value 
+          }    
+        
+     }
+     
+    }
 
+   const formData = new FormData();
+   console.log(this.state.PFP)
+   formData.append('ClientPFP', this.state.PFP);
+   formData.append('CompanyName', CompanyName);
+   const optionADDCLIENT = { 
+    method: 'POST',
+    body: formData,
+    // If you add this, upload won't work
+    // headers: {
+    //   'Content-Type': 'multipart/form-data',
+    // }
+  };
+
+   fetch(url+PropsString+"&ClientID="+CID,optionADDCLIENT );  
+   
+   setTimeout(() => {window.location.replace('/ManageClients')}, 2000);
+      
+    }
+  
+  SERVERAPICALL = async (url) => {
+    try {
+      const response = await fetch(url,{
+        method: "GET",
+        headers: {
+          "access-control-allow-origin" : "*",
+          "Content-type": "application/json; charset=UTF-8"
+        }});
+      const json = await response.json();
+      
+      return(json)
+    } catch (error) {
+      console.log("error", error);
+      return("Error:Yes");
+    }
+  };
+
+  TurnoffLoadingScreen=()=>{
+
+    this.setState({isLoading: false})
+  }
+
+componentDidMount =()=>
+{
+let Json=null
+let url="https://restcountries.com/v3.1/all" 
+Json=this.SERVERAPICALL(url)
+Json.then((result)=>{
+let Countries_List=[]
+result.map((Country)=>{
+Countries_List.push(Country) 
+}
+)
+this.setState({countries:Countries_List},()=>{
+  const queryParams = new URLSearchParams(window.location.search);
+  let CID = queryParams.get('ClientID');
+ url="http://localhost:8000/api/GetClientByID?ClientID="+CID 
+Json=this.SERVERAPICALL(url)
+Json.then((result)=>{
+let Client_List=[]
+
+result.map((Client)=>{
+Client_List.push(Client) 
+}
+)
+this.setState({Client:Client_List},()=>{
+  let url2="http://127.0.0.1:8000/api/GetClientNumbers?Client_ID="+CID 
+  Json=this.SERVERAPICALL(url2)
+  Json.then((result)=>{
+  let Phone_List=[]
+  result.map((Phone)=>{
+  Phone_List.push(Phone) 
+  }
+  )
+  this.setState({Phones:Phone_List}, () => {
+    url2="http://127.0.0.1:8000/api/GetClientEmails?Client_ID="+CID 
+    Json=this.SERVERAPICALL(url2)
+    Json.then((result)=>{
+    let email_List=[]
+    result.map((email)=>{
+    email_List.push(email) 
+    }
+    )
+    this.setState({Emails:email_List}, () => {
+
+
+      this.state.Phones.map((phones,index)=>{
+        if(index!=0)
+this.AddNewPhoneInput()
+
+      })
+
+      this.state.Emails.map((Emails,index)=>{
+        if(index!=0)
+        this.AddNewEmailInput()
+              })
+    this.TurnoffLoadingScreen();
+    })
+    
+    }
+    );
+
+  })
+  
+  }
+  );
+
+   
+  
+}
+
+
+)})
+
+
+})})
+
+
+}
+
+
+handleUpload = (e) =>{
+
+
+  let Data=e.target.files[0]
+  this.setState({PFP:Data})
+ 
+ 
+}
+    render() { 
+      if(this.state.isLoading)
+      {
+        return (
+          <div class="d-flex justify-content-center" style={{margin:"10px"}}>
+          <LoadingSpinner id="Spinner"/>         
+      </div>
+        )
+      }
+      else
+      {
+        
+        return ( 
+            <div class="shadow  p-5  mb-5 mt-5 bg-light rounded" >
+            
+                <div class="shadow  p-1  mb-1  bg-light rounded">
+                <div class="d-flex justify-content-center mb-4">
+                <Image thumbnail={true} fluid={true} rounded={true } style={{width: '250px',height:'120px'}} src={'http://localhost:8000/Images/'+this.state.Client[0].ClientPFP}/>
+                
+
+                </div>
+                </div>
+                
+                <MDBContainer style={{marginTop:"30px"}}>
+<Form onSubmit={this.handlesubmit}>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label
+        style={{color: 'black'}}
+        >Prénom</Form.Label>
+        <Form.Control required type="text" placeholder="Prénom"  name="First_Name" defaultValue={this.state.Client[0].First_Name} />
+        <Form.Text className="text-muted">
+          
+        </Form.Text>
+      </Form.Group>
+      
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label
+        style={{color: 'black'}}
+        >Nom de famille</Form.Label>
+        <Form.Control required type="text" placeholder="Enter Client last name"  name="Last_Name" defaultValue={this.state.Client[0].Last_Name}   />
+        <Form.Text className="text-muted">
+          
+        </Form.Text>
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label
+        style={{color: 'black'}}
+        >Adresse client</Form.Label>
+        <Form.Control required type="text" placeholder="Client Adress here"  name="Adress" defaultValue={this.state.Client[0].Adress}    />
+        <Form.Text className="text-muted">
+          
+        </Form.Text>
+      </Form.Group>
+      <MDBRow>
+      <MDBCol size="6">
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label
+        style={{color: 'black'}}
+        >Nationalité du client</Form.Label>
+        <Form.Select required name="C_Nationality" defaultValue={this.state.Client[0].C_Nationality}>
+          {
+            this.state.countries.map((Country)=>
+            {
+                return(
+<option>{Country.name.common}</option>
+                ) 
+
+            })
+          }
+          
+          
+        </Form.Select>
+       
+        <Form.Text className="text-muted">
+          
+        </Form.Text>
+      </Form.Group>
+      </MDBCol>
+      <MDBCol size="6">
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label
+        style={{color: 'black'}}
+        >Ville</Form.Label>
+        <Form.Control required type="text" placeholder="Enter City"  name="C_City" defaultValue={this.state.Client[0].C_City}   />
+       
+        <Form.Text className="text-muted">
+          
+        </Form.Text>
+      </Form.Group>
+      </MDBCol>
+      </MDBRow>
+
+
+      <MDBRow>
+      
+      <MDBCol size="50">
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label
+        style={{color: 'black'}}
+        >Logo d'entreprise</Form.Label>
+        <Form.Control  type="file" placeholder="Enter the Company Image" onChange={this.handleUpload}  name="ClientPFP"  />  
+        <Form.Text className="text-muted">
+          
+        </Form.Text>
+      </Form.Group>
+      </MDBCol>
+        
+      </MDBRow>
+
+
+
+
+
+      <MDBRow>
+      <MDBCol size="6">
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label
+        style={{color: 'black'}}
+        >Nom de l'entreprise</Form.Label>
+        <Form.Control required type="text" placeholder="Enter Company name"  name="Company_Name" defaultValue={this.state.Client[0].Company_Name}  />
+        <Form.Text className="text-muted">
+          
+        </Form.Text>
+      </Form.Group>
+      </MDBCol>
+      <MDBCol size="6">
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label
+        style={{color: 'black'}}
+        >Adresse de l'entreprise</Form.Label>
+        <Form.Control required type="text" placeholder="Enter Company Adress"  name="	Company_Adress" defaultValue={this.state.Client[0].Company_Adress}  />
+        <Form.Text className="text-muted">
+          
+        </Form.Text>
+      </Form.Group>
+      </MDBCol>
+      
+      
+      </MDBRow>
+
+      
+
+      <MDBRow>
+      {this.state.PhoneNumberList.map((Inputlist,index)=>{ return(
+        <MDBCol size="6">
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label
+        style={{color: 'black'}}
+        >Numéro de téléphone No:{Inputlist}</Form.Label>
+        <Form.Control required type="text" placeholder={'Enter PhoneNumber '+Inputlist}  name={"Phone_Number_"+Inputlist} defaultValue={(index>this.state.Phones.length-1)?'':this.state.Phones[index].Phone_Number}   />
+        <Form.Text className="text-muted">
+        </Form.Text>
+      </Form.Group>
+      </MDBCol>
+      )
+      })}
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Button variant="outline-primary" onClick={this.AddNewPhoneInput}>Ajouter</Button>{' '}
+      <Button variant="outline-primary" onClick={this.RemoveNewPhoneInput}>
+Retirer</Button>{' '}
+      </Form.Group>
+      </MDBRow>
+
+      <MDBRow>
+
+      {this.state.EmailList.map((Inputlist,index)=>{ return(
+        <MDBCol size="6">
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label
+        style={{color: 'black'}}
+        >Adresse e-mail No:{Inputlist}</Form.Label>
+        <Form.Control required type="Email" placeholder={'Enter Email Adress '+Inputlist} name={"Email_"+Inputlist} defaultValue={(index>this.state.Emails.length-1)?'':this.state.Emails[index].Email}  />
+        <Form.Text className="text-muted">
+        </Form.Text>
+      </Form.Group>
+      </MDBCol>
+      )
+      })}
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Button variant="outline-primary" onClick={this.AddNewEmailInput}>
+Ajouter</Button>{' '}
+      <Button variant="outline-primary" onClick={this.RemoveNewEmailInput}>
+Retirer</Button>{' '}
+      </Form.Group>
+      </MDBRow>
+      <div class="row justify-content-center">
+      <button type="submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">
+
+      Modifier les informations du client</button>
+</div>   
+    </Form>
+    </MDBContainer>
+    
+    <Modal
+        size="lg"
+        show={this.state.Status}
+        onHide={() => {this.setState({Status:false})}}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-modal-sizes-title-lg">
+           La gestion des clients
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+
+        Informations client éditées avec succès</Modal.Body>
+      </Modal>
+    </div>
         );
     }
-}
+    }
+  }
  
-export default MangeServer;
+export default AddClient;

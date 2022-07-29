@@ -72,7 +72,7 @@ class AddClient extends Component {
      }
      
     }
-  console.log(url+PropsString)
+
    const formData = new FormData();
    formData.append('ClientPFP', this.state.PFP);
    formData.append('CompanyName', CompanyName);

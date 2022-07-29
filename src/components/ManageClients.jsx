@@ -16,6 +16,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Modal from 'react-bootstrap/Modal';
 import LoadingSpinner from './LoadingSpinner';
 import Table from 'react-bootstrap/Table';
+import Image from 'react-bootstrap/Image'
 export function Popup(props) {
   const [show, setShow] = useState(false);
 
@@ -168,17 +169,15 @@ class ManageClients extends Component {
                          }) 
                                            
                       return(
-<div class="col-md-6 col-sm-1 ">
+<div class="col-md-4 col-sm-4 ">
                <div class="card m-2 shadow-lg" >
                 <a class="card-img-tiles" href="#" data-abc="true">
                    <div class="inner">
                      <div class="main-img">
                      <div class="d-flex justify-content-center mb-4">
-                     <img roundedCircle={true} src={'http://localhost:8000/Images/'+Client.ClientPFP} style={{
-                     width:'120px',
-                     height:'120px'
-                     }}
-                      alt="Category"/>
+                     <Image thumbnail={true} fluid={true} rounded={true } style={{width: '250px',height:'120px'}} src={'http://localhost:8000/Images/'+Client.ClientPFP}/>
+                     
+                      
                       </div>
                      <Container>
 <Row>
@@ -204,14 +203,14 @@ class ManageClients extends Component {
 </Row>
 </Container>
                      </div>
-                     <div class="thumblist"><img src={require('./images/Client_Logo.gif')} alt="Category"/>
+                     <div class="thumblist"><img  src={require('./images/Client_Logo.gif')} alt="Category"/>
                     
                      <Container>
                       <Row>
     </Row>
                       <Row>
     <Col>
-    <IconButton  href="EditClient" aria-label="delete" size="large">
+    <IconButton  href={"EditClient?ClientID="+Client.Client_ID }aria-label="delete" size="large">
 <AddIcon fontSize="inherit" />
 </IconButton>
     </Col>

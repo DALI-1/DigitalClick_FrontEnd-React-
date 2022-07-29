@@ -6,7 +6,8 @@
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@mui/icons-material": "^5.8.4",
-    "@mui/material": "^5.8.6",
+    "@mui/material": "^5.9.2",
+    "@mui/styled-engine-sc": "^5.8.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
@@ -27,8 +28,11 @@
     "react-icons": "^4.4.0",
     "react-images-uploading": "^3.1.7",
     "react-loader-spinner": "^5.1.5",
+    "react-multi-carousel": "^2.8.2",
     "react-scripts": "5.0.1",
     "react-simple-image-slider": "^2.4.1",
+    "react-slideshow-image": "^4.0.4",
+    "styled-components": "^5.3.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
