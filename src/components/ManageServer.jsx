@@ -221,7 +221,7 @@ class MangeServer extends Component {
                                
                            <div className="card m-2 shadow-lg">
                             
-                            <a className="card-img-tiles" href="#" data-abc="true">
+                            <a className="card-img-tiles"  data-abc="true">
                             
                                <div className="inner">
                                  <div className="main-img">

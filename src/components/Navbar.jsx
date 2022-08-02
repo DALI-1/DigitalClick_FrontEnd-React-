@@ -13,8 +13,10 @@ import FormControl from 'react-bootstrap/FormControl';
 import Image from 'react-bootstrap/Image'
 import Cookies from 'universal-cookie';
 import {Popup} from './Popup2.jsx'
+import { slideInLeft,bounceInRight,fadeInDown,fadeInUp } from 'react-animations';
+import Radium, {StyleRoot} from 'radium';
 class NavBar extends Component {
-    state = { Show:false } 
+    state = { Show:false,Profile:[],isLoading:true } 
 
     constructor()
     {
@@ -47,10 +49,85 @@ super();
        window.location.replace('/SignIn')
       
     }
+    CallServerListAPI = async (url,data) => {
+      try {
+        const response = await fetch(url,data);
+        const json = await response.json();
+        
+        return(json)
+      } catch (error) {
+        console.log("error", error);
+        return("Error:Yes");
+      }
+    };
 
-    render() { 
+    componentDidMount(){
+        
+      const cookies = new Cookies();
+      
+      let Username=cookies.get("Username")
+     
+      let url ="http://localhost:8000/api/GetUserbyusername?Username="+Username
+    let Json= this.CallServerListAPI(url)
+     
+    Json.then((result)=>{
+       let Profile_List=[]
+      
+      result.map((Profile1)=>{
+          Profile_List.push(Profile1) 
+      }
+      )
+      
+      this.setState({Profile:Profile_List}, () => {
+        this.TurnoffLoadingScreen();
+    })
+      
+     }
+     );
+    
+  }
+  TurnoffLoadingScreen=()=>{
+    setTimeout(function () {
+  }, 1000);
+    this.setState({isLoading: false})
+  }
+
+    render() {
+      
+      const styles = {
+        bounce: {
+          animation: 'x 2.5s',
+          animationName: Radium.keyframes(fadeInDown, 'bounce')
+        }
+        ,bounceInRight: {
+          animation: 'x 1.5s',
+          animationName: Radium.keyframes(fadeInUp, 'bounceInRight')
+        }
+
+
+        
+      }
+
+
+      if(this.state.isLoading)
+      {
         return (
-            <>
+          <StyleRoot>
+          <div className="d-flex justify-content-center"  style={styles.bounce}>
+            
+           
+           
+      </div>
+      </StyleRoot>
+        )
+      }
+      else
+      {
+        if(this.state.Profile.length!=0)
+        {
+          return (
+            <StyleRoot>
+            <div style={styles.bounce}>
 
 <Navbar bg="light" expand="lg">
   <Container fluid>
@@ -68,7 +145,7 @@ super();
         navbarScroll
       >
         <Nav.Link href="/">Accueil</Nav.Link>
-       
+      
         <NavDropdown title="Gérer les serveurs" id="navbarScrollingDropdown">
           <NavDropdown.Item href="ManageServers">Consulter les serveurs</NavDropdown.Item>
           <NavDropdown.Item href="AddServer">Ajouter un nouveau serveur</NavDropdown.Item>
@@ -102,7 +179,7 @@ super();
           </NavDropdown.Item>
         </NavDropdown>
         <Notification/>
-        <Image roundedCircle={true} style={{width: '50px',height:'50px'}} src={require('./images/Default_Avatar_Male.png')}/>
+        <Image roundedCircle={true} style={{width: '60px',height:'50px'}} src={this.state.Profile[0].PFP_URL=="Default"? require('./images/Default_Avatar_Male.png'):"http://localhost:8000/Images/"+this.state.Profile[0].PFP_URL}/>
         
       </Nav>
       <Form className="d-flex" onSubmit={this.handlesearch}>
@@ -121,9 +198,58 @@ super();
 </Navbar>
 
 
-            </>
-
+            </div>
+            </StyleRoot>
         );
+
+        }
+        else
+        {
+         return( 
+          <StyleRoot>
+         <div style={styles.bounce}>
+
+          <Navbar bg="light" expand="lg">
+            <Container fluid>
+              <Navbar.Brand href="#">
+              <Image src={require('./images/DigitalClickLogo.png')} style={{
+                          width:200,
+                           height:50
+                        }} alt="Digital Click"/>
+              </Navbar.Brand>
+              <Navbar.Toggle aria-controls="navbarScroll" />
+              <Navbar.Collapse id="navbarScroll">
+                <Nav
+                  className="me-auto my-2 my-lg-0"
+                  style={{ maxHeight: '100px' }}
+                  navbarScroll
+                >
+                  <Nav.Link href="/">Accueil</Nav.Link>
+                  <Nav.Link href="/SignIn">S'identifier</Nav.Link>
+                  <Nav.Link href="/SignUp">S'inscrire</Nav.Link>
+                  
+                </Nav>
+                <Form className="d-flex" onSubmit={this.handlesearch}>
+                  <FormControl
+                    type="search"
+                    placeholder="Search"
+                    className="me-2"
+                    aria-label="Search"
+                    name="SearchInput"
+                  />
+                  <Button variant="outline-success" type='submit'>Search</Button>
+                  <Popup status={this.state.Show}/>
+                </Form>
+              </Navbar.Collapse>
+            </Container>
+          </Navbar>
+         
+          
+                      </div>
+                      </StyleRoot>)
+
+        }
+       }
     }
 }
  

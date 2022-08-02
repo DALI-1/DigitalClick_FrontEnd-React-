@@ -15,16 +15,14 @@ import LoadingSpinner from './LoadingSpinner';
 import './ManageProfile.css'
 import UploadDragDrop from './UploadDragDrop';
 import Cookies from 'universal-cookie';
+
+ 
+
 class ManageProfile extends Component {
-    state = {Profile:[],isLoading: true,PFP:"",Status:false,PFPLocal:"https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"  } 
-    CallServerListAPI = async (url) => {
+    state = {Profile:[],isLoading: true,PFP:"",Status:false,StatusF:false,PFPLocal:"https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"  } 
+    CallServerListAPI = async (url,data) => {
         try {
-          const response = await fetch(url,{
-            method: "GET",
-            headers: {
-              "access-control-allow-origin" : "*",
-              "Content-type": "application/json; charset=UTF-8"
-            }});
+          const response = await fetch(url,data);
           const json = await response.json();
           
           return(json)
@@ -38,7 +36,7 @@ class ManageProfile extends Component {
       handlesubmit=(props)=>
     {
       props.preventDefault();
-      this.setState({Status:true})
+      
       let i=0
       
     let url="http://127.0.0.1:8000/api/EditUser"
@@ -56,6 +54,19 @@ class ManageProfile extends Component {
           {
               
           } 
+          
+          else if(props.target[i].name=="Role")
+          {
+            if(props.target[i].value=="User")
+            {
+              PropsString=PropsString+"&"+props.target[i].name+"="+"Normal_User"
+            }
+            else if(props.target[i].value=="Admin")
+            {
+              PropsString=PropsString+"&"+props.target[i].name+"="+"Admin_User"
+            }
+            
+          }
           
           else
           {
@@ -78,11 +89,27 @@ class ManageProfile extends Component {
     //   'Content-Type': 'multipart/form-data',
     // }
   };
+   let Json=this.CallServerListAPI(url+PropsString,optionADDCLIENT)
+   Json.then((result)=>{
+   if(result.WrongPass=="False")
+   {
+    this.setState({Status:true})
 
-  console.log(url+PropsString)
-   //fetch(url+PropsString,optionADDCLIENT );  
-   
-   //setTimeout(() => {window.location.replace('/ManageClients')}, 2000);
+    var CryptoJS = require("crypto-js");
+    const cookies = new Cookies();
+    
+    var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(result.Password), 'DigitalClick').toString();
+    cookies.set("Username",result.Username)
+    cookies.set("Password",ciphertext)
+    setTimeout(() => {window.location.replace('/ManageProfile')}, 2000);
+   }
+   else
+   {
+    this.setState({StatusF:true})
+   }
+  }
+   );
+  
       
     }
 
@@ -105,6 +132,15 @@ class ManageProfile extends Component {
         }
         )
         
+        if(Profile_List[0].PFP_URL=="Default")
+        {
+          this.setState({PFPLocal:"https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"})
+        }
+        else
+        {
+          this.setState({PFPLocal:"http://localhost:8000/Images/"+Profile_List[0].PFP_URL})
+          
+        }
         this.setState({Profile:Profile_List}, () => {
           this.TurnoffLoadingScreen();
       })
@@ -147,7 +183,7 @@ class ManageProfile extends Component {
             <div class="container rounded bg-white mt-5 mb-5 shadow-lg" >
     <div class="row">
         <div class="col-md-3 border-right">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="200px" src={this.state.PFPLocal}/><span class="font-weight-bold">{this.state.Profile[0].Username}</span><span class="text-black-50"> </span><span> </span></div>
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><Image roundedCircle={true}  fluid={true} rounded={true} width="200px" src={this.state.PFPLocal}/><span class="font-weight-bold">{this.state.Profile[0].Username}</span><span class="text-black-50"> </span><span> </span></div>
         </div>
         <div class="col-md-5 border-right">
             <div class="p-3 py-5">
@@ -157,7 +193,7 @@ class ManageProfile extends Component {
                     
                 </div>
                 <div class="row mt-6">
-                <div class="col-md-6"><label class="labels">UserName</label><input required type="text" class="form-control" placeholder="first name" name='Username' defaultValue={this.state.Profile[0].Username}/></div>
+                <div class="col-md-6"><label class="labels">UserName</label><input required type="text" class="form-control" disabled placeholder="first name" name='Username' defaultValue={this.state.Profile[0].Username}/></div>
                     <div class="col-md-6"><label class="labels">First Name</label><input required type="text" class="form-control" placeholder="first name" name='First_Name' defaultValue={this.state.Profile[0].First_Name} /></div>
                     <div class="col-md-6"><label class="labels">Last Name</label><input required type="text" class="form-control"  placeholder="surname" name='Last_Name'defaultValue={this.state.Profile[0].Last_Name} /></div>
                 </div>
@@ -172,9 +208,46 @@ class ManageProfile extends Component {
                     <div class="col-md-12"><label class="labels">New Password</label><input  type="password" class="form-control" name='NewPassword' /></div>
                 </div>
 
-                <div class="mt-5 text-center"><input type="submit" class="btn btn-primary profile-button" placeholder="Poste" /></div>
+                <div class="mt-5 text-center"><input type="submit" class="btn btn-outline-primary btn-rounded" placeholder="Poste" value="Enregistrer les informations" /> 
+</div>
 
                 </form>
+
+
+                <Modal
+        size="lg"
+        show={this.state.Status}
+        onHide={() => {this.setState({Status:false})}}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-modal-sizes-title-lg">
+           La gestion des utilisateur
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+
+        Informations modifiées avec succès</Modal.Body>
+      </Modal>
+
+
+
+
+      
+      <Modal
+        size="lg"
+        show={this.state.StatusF}
+        onHide={() => {this.setState({StatusF:false})}}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="example-modal-sizes-title-lg">
+          La gestion des utilisateur
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        Mauvais mot de passe, les modifications n'ont pas été modifiées</Modal.Body>
+      </Modal>
             </div>
             
         </div>

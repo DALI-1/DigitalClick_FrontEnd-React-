@@ -171,7 +171,7 @@ class ManageClients extends Component {
                       return(
 <div class="col-md-4 col-sm-4 ">
                <div class="card m-2 shadow-lg" >
-                <a class="card-img-tiles" href="#" data-abc="true">
+                <a class="card-img-tiles"  data-abc="true">
                    <div class="inner">
                      <div class="main-img">
                      <div class="d-flex justify-content-center mb-4">
@@ -229,25 +229,8 @@ class ManageClients extends Component {
                    
                    <div class="container">
 <div class="row">
-  <div class="col-md">
-  <DropdownButton id="dropdown-basic-button" title="Numbers List"style={{margin:"10px"}} >
-
-    {
-      
-     
-    }
-           
-  </DropdownButton>        
-  </div>
-  <div class="col-md">
-   
-     
-<DropdownButton id="dropdown-basic-button" title="E-mails List" style={{margin:"10px"}}>
-<Dropdown.Item >Ahmed@gmail.com</Dropdown.Item>
-<Dropdown.Item >Melek@Yahoo.fr</Dropdown.Item>
-<Dropdown.Item >gb@Outlock.com</Dropdown.Item>
-</DropdownButton>
-  </div>
+  
+ 
   
 </div>
 </div>
