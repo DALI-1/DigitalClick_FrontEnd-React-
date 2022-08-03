@@ -9,6 +9,7 @@ import AddOS from '../components/AddOS';
 import AddClient from '../components/AddClient';
 import ManageClients from '../components/ManageClients';
 import Cookies from 'universal-cookie';
+import Footer from '../components/Footer';
 
 class MainPage extends Component {
     state = {  } 
@@ -90,7 +91,7 @@ class MainPage extends Component {
              {/*<ManageClients/> */}
             {/*<ManageContract/> */}
             <AddOS/>
-         
+            <Footer/>
         </div>
         
         );

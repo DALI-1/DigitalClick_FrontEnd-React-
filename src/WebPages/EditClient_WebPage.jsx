@@ -9,6 +9,7 @@ import ManageClients from '../components/ManageClients';
 import Image from '../components/images/BackgroundImage_Default.jpg'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cookies from 'universal-cookie';
+import Footer from '../components/Footer';
 class MainPage extends Component {
     state = {  } 
     CheckIdentification= ()=>
@@ -90,7 +91,7 @@ class MainPage extends Component {
                {/*<ManageClients/> */}
               {/*<ManageContract/> */}
               <EditClient/>
-           
+              <Footer/>
           </div>
           
         );

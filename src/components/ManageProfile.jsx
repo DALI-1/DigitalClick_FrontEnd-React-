@@ -41,6 +41,7 @@ class ManageProfile extends Component {
       
     let url="http://127.0.0.1:8000/api/EditUser"
     let PropsString=""
+    let NewPasswordS=null
 
     for(i=0;i<8;i++)
     {
@@ -67,9 +68,13 @@ class ManageProfile extends Component {
             }
             
           }
-          
+           
           else
           {
+            if(props.target[i].name=="NewPassword")
+            {
+              NewPasswordS=props.target[i].value
+            }
             PropsString=PropsString+"&"+props.target[i].name+"="+props.target[i].value 
           }    
         
@@ -91,16 +96,19 @@ class ManageProfile extends Component {
   };
    let Json=this.CallServerListAPI(url+PropsString,optionADDCLIENT)
    Json.then((result)=>{
-   if(result.WrongPass=="False")
+   if(result.WrongPass=="False" )
    {
     this.setState({Status:true})
-
-    var CryptoJS = require("crypto-js");
-    const cookies = new Cookies();
+if(NewPasswordS!=null)
+{
+  var CryptoJS = require("crypto-js");
+  const cookies = new Cookies();
+  
+  var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(result.Password), 'DigitalClick').toString();
+  cookies.set("Username",result.Username)
+  cookies.set("Password",ciphertext)
+}
     
-    var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(result.Password), 'DigitalClick').toString();
-    cookies.set("Username",result.Username)
-    cookies.set("Password",ciphertext)
     setTimeout(() => {window.location.replace('/ManageProfile')}, 2000);
    }
    else

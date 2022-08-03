@@ -79,12 +79,19 @@ super();
       )
       
       this.setState({Profile:Profile_List}, () => {
+
+       
         this.TurnoffLoadingScreen();
     })
       
      }
      );
-    
+     let url2 ="http://localhost:8000/api/CheckServerFacturationDate"
+        let url3 ="http://localhost:8000/api/CheckSRVRContractFacturationDate"
+        let url4 ="http://localhost:8000/api/CheckVMContractFacturationDate"
+     this.CallServerListAPI(url2)
+     this.CallServerListAPI(url3)
+     this.CallServerListAPI(url4)
   }
   TurnoffLoadingScreen=()=>{
     setTimeout(function () {
@@ -123,6 +130,7 @@ super();
       }
       else
       {
+      
         if(this.state.Profile.length!=0)
         {
           return (
@@ -178,9 +186,14 @@ super();
             Se déconnecter
           </NavDropdown.Item>
         </NavDropdown>
+        <div style={{marginRight:"20px",marginLeft:"20px",marginTop:"10px"}}>
         <Notification/>
-        <Image roundedCircle={true} style={{width: '60px',height:'50px'}} src={this.state.Profile[0].PFP_URL=="Default"? require('./images/Default_Avatar_Male.png'):"http://localhost:8000/Images/"+this.state.Profile[0].PFP_URL}/>
-        
+        </div>
+        <p style={{fontsize: 'xx-small'}}><small>
+          {this.state.Profile[0].First_Name+" "+this.state.Profile[0].Last_Name}
+          </small></p>   
+        <Image roundedCircle={true} style={{width: '60px',height:'50px',marginRight:"35px"}} src={this.state.Profile[0].PFP_URL=="Default"? require('./images/Default_Avatar_Male.png'):"http://localhost:8000/Images/"+this.state.Profile[0].PFP_URL}/>
+         
       </Nav>
       <Form className="d-flex" onSubmit={this.handlesearch}>
         <FormControl

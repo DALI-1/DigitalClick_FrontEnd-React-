@@ -9,6 +9,7 @@ import ManageClients from '../components/ManageClients';
 import ManageServerPartitionDisks from '../components/ManageServerPartitionDisks';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cookies from 'universal-cookie';
+import Footer from '../components/Footer';
 class MainPage extends Component {
     state = {  }
     CheckIdentification= ()=>
@@ -91,7 +92,7 @@ class MainPage extends Component {
          {/*<ManageClients/> */}
         {/*<ManageContract/> */}
         <ManageServerPartitionDisks/>
-      
+        <Footer/>
     </div>
    
     

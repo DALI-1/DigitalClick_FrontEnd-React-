@@ -28,6 +28,7 @@ import Pic1 from '../assets/img/Team1.jpg'
 import Pic2 from '../assets/img/Team2.jpg'
 import Expertise from '../assets/img/Expertise.jpg'
 import CarouselFadeExample from "../components/ImageSlider.jsx";
+import Footer from '../components/Footer';
 
 class Home extends Component {
     state = {
@@ -113,7 +114,7 @@ class Home extends Component {
           animationName: Radium.keyframes(slideInLeft, 'bounce')
         }
         ,bounceInRight: {
-          animation: 'x 1s',
+          animation: 'x 1.5s',
           animationName: Radium.keyframes(zoomIn, 'bounceInRight')
         }
         
@@ -121,8 +122,6 @@ class Home extends Component {
           animation: 'x 1s',
           animationName: Radium.keyframes(bounceInUp, 'bounceInRight')
         }
-
-        
       }
 
     
@@ -259,7 +258,7 @@ Le concentrateur multi-écrans permet d'accéder à trois écrans à partir d'un
 </Carousel>
 </div>
 </StyleRoot>
-
+<Footer/>
 
 
        </>

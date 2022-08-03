@@ -9,7 +9,7 @@ import AddVMCompany from '../components/AddVMCompany';
 import AddClient from '../components/AddClient';
 import ManageClients from '../components/ManageClients';
 import Cookies from 'universal-cookie';
-
+import Footer from '../components/Footer';
 class MainPage extends Component {
     state = {  } 
     CheckIdentification= ()=>
@@ -90,7 +90,7 @@ class MainPage extends Component {
              {/*<ManageClients/> */}
             {/*<ManageContract/> */}
             <AddVMCompany/>
-         
+            <Footer/>
         </div>
        
         );

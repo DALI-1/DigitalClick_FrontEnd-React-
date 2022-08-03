@@ -16,6 +16,8 @@ import Image from 'react-bootstrap/Image'
 import { render } from '@testing-library/react';
 import LoadingSpinner from './LoadingSpinner';
 import { Route, Redirect } from 'react-router'
+import { slideInLeft,bounceInRight,fadeInUp,zoomIn,bounceInUp,fadeIn } from 'react-animations';
+import Radium, {StyleRoot} from 'radium';
 
 export function Popup(props) {
   const [show, setShow] = useState(false);
@@ -192,7 +194,20 @@ class MangeServer extends Component {
 }
   
     render() {
-             
+
+      const styles = {
+        fadeIn: {
+          animation: 'x 1.5s',
+          animationName: Radium.keyframes(fadeIn, 'fadeIn')
+        }
+        
+        
+        
+      }
+
+     
+       
+          
 
       if(this.state.isLoading)
       {
@@ -216,8 +231,11 @@ class MangeServer extends Component {
                            this.state.Servers.map((server)=>{
           
                             return(
+
+
                               
-                              <div className="col-md-6 col-sm-1" id="ProductsContainerID">    
+                                
+                              <div className="col-md-6 col-sm-1" id="ProductsContainerID" >    
                                
                            <div className="card m-2 shadow-lg">
                             
@@ -345,6 +363,8 @@ Afficher les partitions de machine virtuelle </a>
                              </div>
                            </div>
                          </div>
+                         
+                         
                          
           
                             )

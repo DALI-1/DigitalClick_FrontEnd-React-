@@ -1,7 +1,6 @@
 import React from 'react';
 import { MDBFooter } from 'mdb-react-ui-kit';
 import "./styles.css"
-import 'font-awesome/css/font-awesome.min.css';
 import Image1 from '../components/images/Router.jpg'
 import Image2 from '../components/images/modem.jpg'
 import Image3 from '../components/images/Cables.jpg'
@@ -21,6 +20,7 @@ import Pic1 from '../assets/img/Team1.jpg'
 import Pic2 from '../assets/img/Team2.jpg'
 import Expertise from '../assets/img/Expertise.jpg'
 import CarouselFadeExample from "../components/ImageSlider.jsx";
+import {Helmet} from "react-helmet";
 export default function App() {
 
 
@@ -45,6 +45,13 @@ export default function App() {
    }
   return (
     <>
+
+<Helmet>
+<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
+            </Helmet>
+    
 <section class="about-section text-center" style={{padding:"70px"}} id="about">
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">

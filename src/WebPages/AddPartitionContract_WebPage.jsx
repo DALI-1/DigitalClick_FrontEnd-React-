@@ -11,6 +11,7 @@ import Image from '../components/images/BackgroundImage_Default.jpg'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AddPartitionContract from '../components/AddPartitionContract';
 import Cookies from 'universal-cookie';
+import Footer from '../components/Footer';
 class MainPage extends Component {
     state = {  } 
     CheckIdentification= ()=>
@@ -92,7 +93,7 @@ class MainPage extends Component {
              {/*<ManageClients/> */}
             {/*<ManageContract/> */}
             <AddPartitionContract/> 
-         
+            <Footer/>
         </div>
         
             
