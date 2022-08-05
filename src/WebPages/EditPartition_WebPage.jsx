@@ -91,7 +91,7 @@ class MainPage extends Component {
                {/*<ManageClients/> */}
               {/*<ManageContract/> */}
               <EditPartition/>
-              <Footer/>
+              
           </div>
           
         );

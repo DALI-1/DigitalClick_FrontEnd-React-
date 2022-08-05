@@ -14,6 +14,7 @@ import ManageClients from './WebPages/ManageClients_WebPage.jsx';
 import ManagePartitionContracts from './WebPages/ManagePartitionContracts_WebPage.jsx';
 import ManageServerPartitions from './WebPages/ManageServer_Partitions_WebPage.jsx';
 import ManagePartitionDisks from './WebPages/ManagePartitionDisks_WebPage.jsx';
+import ManageLogicalVolume from './WebPages/ManageLogicalVolume_WebPage';
 import AddServiceProvider from './WebPages/AddServiceProvider_WebPage.jsx';
 import ManageServerContracts from './WebPages/ManageServerContracts_WebPage.jsx';
 import ManageServersContracts from './WebPages/ManageServersContracts_WebPage.jsx';
@@ -39,7 +40,7 @@ import ManageServerPartitionDisks from './WebPages/ManageServerPartitionDisks_We
 import AddDiskProvider from './WebPages/AddDiskProvider_WebPage'
 import AddServerPartition from './WebPages/AddServerPartition_WebPage';
 import EditSrvrContract from './WebPages/EditSrvrContract_WebPage';
-
+import ADDVL from './WebPages/AddVL_WebPage';
 import {BrowserRouter as Router,Route,Switch} from "react-router-dom";
 
 function App() {
@@ -82,7 +83,8 @@ function App() {
         <Route exact path="/AddDiskProvider" component={AddDiskProvider}/>
         <Route exact path="/AddServerPartition" component={AddServerPartition}/>
         <Route exact path="/EditSrvrContract" component={EditSrvrContract}/>
-        
+        <Route exact path="/ManageLogicalVolume" component={ManageLogicalVolume}/>
+       < Route exact path="/AddVL" component={ADDVL}/>
         <Route exact path="/" component={Home}/>
         </Switch>
       

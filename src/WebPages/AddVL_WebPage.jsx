@@ -1,13 +1,15 @@
+
 import React,{Component} from 'react';
 import ManageServer from '../components/ManageServer';
 
 import NotificationBell from '../components/Notification.jsx';
-import AddServerPartition from '../components/AddServerPartition';
+import AddServer from '../components/AddServer';
 import AddVirtualMachine from '../components/AddVirtualMachine';
 import AddClient from '../components/AddClient';
-import ManageClients from '../components/ManageClients';
+import ADDVL from '../components/AddVL';
 import Image from '../components/images/BackgroundImage_Default.jpg'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import AddServerContract from '../components/AddServerContract';
 import Cookies from 'universal-cookie';
 import Footer from '../components/Footer';
 class MainPage extends Component {
@@ -18,10 +20,6 @@ class MainPage extends Component {
     const cookies = new Cookies();
     let Username=cookies.get("Username")
       let Password_ciphered=cookies.get("Password")
-
-
-     
-
        if(Username || Password)
        {
         var bytes = CryptoJS.AES.decrypt(Password_ciphered, 'DigitalClick');
@@ -71,7 +69,7 @@ class MainPage extends Component {
       this.CheckIdentification();
         return (
           
-          
+         
           <div class="shadow-lg p-3 m-3  bg-body rounded"style={{
         backgroundColor:"rgba(237, 238, 240,0.9)",
         /* backgroundImage: `url(${Image})`, */
@@ -90,8 +88,8 @@ class MainPage extends Component {
               {/*<AddClient/> */}
              {/*<ManageClients/> */}
             {/*<ManageContract/> */}
-            <AddServerPartition/> 
-            
+            <ADDVL/> 
+           
         </div>
        
             

@@ -90,7 +90,7 @@ class MainPage extends Component {
              {/*<ManageClients/> */}
             {/*<ManageContract/> */}
             <AddOSCompany/>
-            <Footer/>
+            
         </div>
         
         );

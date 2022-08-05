@@ -1,12 +1,12 @@
 import React,{Component} from 'react';
 import ManageServer from '../components/ManageServer';
-
+import Image from '../components/images/BackgroundImage_Default.jpg';
 import NotificationBell from '../components/Notification.jsx';
-import AddServerPartition from '../components/AddServerPartition';
+import AddServer from '../components/AddServer';
 import AddVirtualMachine from '../components/AddVirtualMachine';
 import AddClient from '../components/AddClient';
 import ManageClients from '../components/ManageClients';
-import Image from '../components/images/BackgroundImage_Default.jpg'
+import ManageLogicalVolume from '../components/ManageLogicalVolume';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cookies from 'universal-cookie';
 import Footer from '../components/Footer';
@@ -71,7 +71,6 @@ class MainPage extends Component {
       this.CheckIdentification();
         return (
           
-          
           <div class="shadow-lg p-3 m-3  bg-body rounded"style={{
         backgroundColor:"rgba(237, 238, 240,0.9)",
         /* backgroundImage: `url(${Image})`, */
@@ -83,18 +82,20 @@ class MainPage extends Component {
       borderwidth:"20px"
       
     }}>
-          {/* <ManageServer/> */}
-          
-            {/*<AddServer/> */}
-             {/*<AddVirtualMachine/> */}
-              {/*<AddClient/> */}
-             {/*<ManageClients/> */}
-            {/*<ManageContract/> */}
-            <AddServerPartition/> 
-            
-        </div>
+           
+      
+      {/* <ManageServer/> */}
+      
+        {/*<AddServer/> */}
+         {/*<AddVirtualMachine/> */}
+          {/*<AddClient/> */}
+         {/*<ManageClients/> */}
+        {/*<ManageContract/> */}
+        <ManageLogicalVolume/>
        
-            
+    </div>
+    
+    
         );
     }
 }

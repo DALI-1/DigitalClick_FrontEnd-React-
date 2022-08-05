@@ -18,10 +18,10 @@ class AddServer extends Component {
     let url="http://127.0.0.1:8000/api/CreateDiskProvider"
     let PropsString=""
        PropsString='?'+props.target[0].name+'='+props.target[0].value
-       console.log(url+PropsString)
+       
     this.SERVERAPICALL(url+PropsString)   
     
-    setTimeout(() => {window.location.replace('/ManagePartitionDisks?ServerID='+srvid)}, 2000);
+    setTimeout(() => {window.location.replace('/ManagePartitionDisks?ServerID='+srvid)}, 3000);
     }
     SERVERAPICALL = async (url) => {
       try {

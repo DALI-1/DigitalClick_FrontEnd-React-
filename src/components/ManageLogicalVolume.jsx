@@ -100,9 +100,8 @@ class ManageContract extends Component {
 {
   const queryParams = new URLSearchParams(window.location.search);
       let srvid = queryParams.get('ServerID');
-      let VLID = queryParams.get('VLID');
 let Json=null 
-let url="http://127.0.0.1:8000/api/GetServerDisks?ServerID="+srvid+"&VL_ID="+VLID
+let url="http://127.0.0.1:8000/api/GetAllVLs"
 Json=this.SERVERAPICALL(url)
 Json.then((result)=>{
 let Disks_List=[]
@@ -119,7 +118,6 @@ this.setState({Disks:Disks_List}
     { 
       const queryParams = new URLSearchParams(window.location.search);
       let srvid = queryParams.get('ServerID');
-      let VLID = queryParams.get('VLID');
         return (
             <reactElement>
 <Container>
@@ -131,19 +129,17 @@ this.setState({Disks:Disks_List}
        
         <p class="text-justify" style={{color:"Black"}}>Les disques du serveur :</p>
         
-        <a class="btn btn-outline-primary btn-sm" href={"AddDisk?ServerID="+srvid+"&VLID="+VLID} data-abc="true" style={{marginRight:"10px",marginBottom:"10px",padding:"10px"}}>Ajouter un nouveau disque </a>
-        <a class="btn btn-outline-primary btn-sm" href={"AddDiskProvider?ServerID="+srvid} data-abc="true" style={{marginRight:"10px",marginBottom:"10px",padding:"10px"}}>Ajouter un fournisseur de disque </a>
+        <a class="btn btn-outline-primary btn-sm" href={"AddVL?ServerID="+srvid} data-abc="true" style={{marginRight:"10px",marginBottom:"10px",padding:"10px"}}>Ajouter un nouveau VL </a>
+
         <Table  bordered hover responsive>
           
       <thead>
         <tr>
           <th class="text-center">#ID</th>
-          <th class="text-center">Image disque</th> 
-          <th class="text-center">Fournisseur de disque</th>
-          <th class="text-center">Modèle de disque </th> 
-              
-          <th class="text-center">Type de disque </th>
-          <th class="text-center">Taille totale du disque </th>
+          <th class="text-center">Image VL</th> 
+          <th class="text-center">Nom du Volume Logique</th> 
+          <th class="text-center">Espace Volume Logique</th>
+          
           
           <th class="text-center"> Edit</th>
         </tr>
@@ -156,18 +152,17 @@ this.setState({Disks:Disks_List}
 
 return(
 <tr>
-          <td class="text-center">{Disk.Disk_ID}</td>
-          <td class="text-center"><a href="#"><Image  roundedCircle={true} style={{width: '50px',height:'50px'}} src={require('./images/Disk_Default_Picture.jpg')}/></a></td>
-          <td class="text-center">{Disk.DProvider_Company_Name}</td>
-          <td class="text-center">{Disk.Disk_Model}</td>
-          <td class="text-center">{Disk.Disk_Type}</td>
+          <td class="text-center">{Disk.VL_ID}</td>
+          <td class="text-center"><a href="#"><Image  roundedCircle={true} style={{width: '50px',height:'50px'}} src={require('./images/VLDefault.png')}/></a></td>
+          <td class="text-center">{Disk.VL_Name}</td>
           <td class="text-center">{Disk.Total_Size}</td>
+          
           
           <td>
           <Container>
       <Row>
       <Col>
-      <IconButton href={"ManageDiskPartitions?DiskID="+Disk.Disk_ID+"&ServerID="+srvid} aria-label="delete" size="large">
+      <IconButton href={"ManagePartitionDisks?VLID="+Disk.VL_ID+"&ServerID="+srvid} aria-label="delete" size="large">
   <Split fontSize="inherit" />
 </IconButton>
 

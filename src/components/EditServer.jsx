@@ -399,7 +399,7 @@ class MangeServer extends Component {
             </Form.Group>
             </Row>
             <Row>
-            <a class="btn btn-outline-primary btn-sm" href={"ManagePartitionDisks?ServerID="+srvid} data-abc="true"  style={{marginRight:"10px",marginTop:"10px",color:"Black",backgroundColor:"white", borderColor:"#CFD3D6"}}>
+            <a class="btn btn-outline-primary btn-sm" href={"managelogicalvolume?ServerID="+srvid} data-abc="true"  style={{marginRight:"10px",marginTop:"10px",color:"Black",backgroundColor:"white", borderColor:"#CFD3D6"}}>
 Gérer les disques du serveur</a>
             </Row>        
           </Container>               

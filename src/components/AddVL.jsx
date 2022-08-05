@@ -15,8 +15,6 @@ class AddServer extends Component {
         const el = e.target.childNodes[index]     
         const option =  el.getAttribute('id');
         this.state.SelectedProviderID=option;  
-        
-     
     }
     handlesubmit=(props)=>
     {
@@ -24,17 +22,16 @@ class AddServer extends Component {
       props.preventDefault();
       const queryParams = new URLSearchParams(window.location.search);
       let srvid = queryParams.get('ServerID');
-      let VLID = queryParams.get('VLID');
       this.setState({Status:true})
       let PropsString=""
       let i=0
-      let url="http://127.0.0.1:8000/api/CreateDisk"
-      for(i=0;i<7;i++)
+      let url="http://127.0.0.1:8000/api/CreateVL"
+      for(i=0;i<3;i++)
       {
         
        if(i==0)
        {
-         PropsString='?'+props.target[i].name+'='+this.state.SelectedProviderID
+         PropsString='?'+props.target[i].name+'='+props.target[i].value
        }
        else 
        {
@@ -43,9 +40,7 @@ class AddServer extends Component {
       }
       console.log(url+PropsString)
       this.SERVERAPICALL(url+PropsString)
-     setTimeout(() => {window.location.replace('/ManagePartitionDisks?ServerID='+srvid+"&VLID="+VLID)}, 2000);
-  
-  
+      setTimeout(() => {window.location.replace('/managelogicalvolume?ServerID='+srvid)}, 2000);
     }
     SERVERAPICALL = async (url) => {
       try {
@@ -101,7 +96,7 @@ this.TurnoffLoadingScreen();
       {
       const queryParams = new URLSearchParams(window.location.search);
       let srvid = queryParams.get('ServerID');
-      let VLID = queryParams.get('VLID');
+      
         return ( 
           <div class="d-flex justify-content-center" style={{margin:"10px"}}>
           <div class="shadow  p-5  mb-5 mt-5 bg-light rounded" >
@@ -114,80 +109,30 @@ this.TurnoffLoadingScreen();
                 <MDBContainer style={{marginTop:"30px"}}>
 
 <Form onSubmit={this.handlesubmit}>
-<Form.Group className="mb-3" controlId="formBasicEmail">
+
+
+      <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Disk Providers:</Form.Label>
-        <Form.Select required name="DProvider_ID" onChange={this.onChangeHandler}>
-          {
-            this.state.Providers.map((Provider)=>
-            {
-                return(
-<option id={Provider.DProvider_ID}>{Provider.DProvider_Company_Name}</option>
-                ) 
+        >Nom du Volume Logique</Form.Label>
+        <Form.Control required name="VL_Name" type="text"   />
+        <Form.Text className="text-muted">
+          
+        </Form.Text>
+      </Form.Group>
 
-            })
-          }          
-        </Form.Select>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
        
-        <Form.Text className="text-muted">
-          
-        </Form.Text>
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label
-        style={{color: 'black'}}
-        >Disk Model:</Form.Label>
-        <Form.Control required name="Disk_Model" type="text"  placeholder="Enter Disk Model" />
-        <Form.Text className="text-muted">
-          
-        </Form.Text>
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label
-        style={{color: 'black'}}
-        >Disk Total Size:</Form.Label>
-        <Form.Control required name="Total_Size" type="number"   placeholder="Enter Disk Size " />
+        <Form.Control hidden required name="Total_Size" type="number" value="0" />
         <Form.Text className="text-muted">     
         </Form.Text>
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         
-        <Form.Control  name="Server_ID" type="hidden" value={srvid} />
+        <Form.Control  hidden name="Server_ID" type="text" value={srvid} />
         <Form.Text className="text-muted">     
         </Form.Text>
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        
-        <Form.Control  name="VL_ID" type="hidden" value={VLID} />
-        <Form.Text className="text-muted">     
-        </Form.Text>
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        
-        <Form.Control  name="Disk_IMG_URL" type="hidden" value="/Images/DefaultDiskIMG" />
-        <Form.Text className="text-muted">     
-        </Form.Text>
-      </Form.Group>
-      
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label
-        style={{color: 'black'}}
-        >Disk Type:</Form.Label>
-        <Form.Select required name="Disk_Type">
-          <option>HDD</option>
-          <option>SSD</option>
-          <option>M.2</option>
-        </Form.Select>
-       
-        <Form.Text className="text-muted">
-          
-        </Form.Text>
-      </Form.Group>
-
-
       
       <div class="row justify-content-center">
       <button type="submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark" style={{margin:"10px"}}>Create Disk</button>

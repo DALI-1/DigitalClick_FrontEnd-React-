@@ -127,6 +127,7 @@ class Home extends Component {
     
         return (    
           <>
+       
           <StyleRoot>
           <div class="shadow-lg p-3 m-3  bg-body rounded" responsive style={{
         backgroundColor:"rgba(237, 238, 240,0.9)",
@@ -139,131 +140,16 @@ class Home extends Component {
       borderwidth:"20px"
       
     }}>
-      <div style={styles.bounceInRight}>
-      <CarouselFadeExample />
-      </div>
-    
-        </div>
-        </StyleRoot>
-        <StyleRoot>
-        <div style={styles.bounceInRight}>
-        <Carousel
-  swipeable={false}
-  draggable={false}
-  showDots={true}
-  responsive={this.state.responsive}
-  ssr={true} // means to render carousel on server-side.
-  infinite={true}
-  autoPlay={this.props.deviceType !== "mobile" ? true : false}
-  autoPlaySpeed={1000}
-  keyBoardControl={true}
-  customTransition="all .5"
-  transitionDuration={1000}
-  containerClass="carousel-container"
-  removeArrowOnDeviceType={["tablet", "mobile"]}
-  deviceType={this.props.deviceType}
-  dotListClass="custom-dot-list-style"
-  itemClass="carousel-item-padding-40-px"
- 
->
-
-
-<div className="col-md-9 col-sm-9"  style={{margin:"20px"}} id="ProductsContainerID">    
-                               
-                               <div className="card m-2 shadow-lg">
-                                
-                                <a className="card-img-tiles" href="#" data-abc="true">
-                                
-                                   <div className="inner">
-                                     <div className="main-img">
-                                     <Image rounded={true} src={Image3}/>
-                                     </div>
-                                    
-                                     
-                                   </div></a>
-                                 <div class="card-body text-center">
-
-                                  
-DANS LA BOÎTE : câble Internet RJ45 Cat-6 Ethernet pour les réseaux domestiques et de bureau câblés
-                                 </div>
-                               </div>
-                             </div>
-   
-                             <div className="col-md-9 col-sm-9" style={{margin:"20px"}} id="ProductsContainerID">    
-                               
-                               <div className="card m-2 shadow-lg">
-                                
-                                <a className="card-img-tiles" href="#" data-abc="true">
-                                
-                                   <div className="inner">
-                                     <div className="main-img">
-                                     <Image rounded={true} src={Image1}/>
-                                     </div>
-                                    
-                                     
-                                   </div></a>
-                                 <div class="card-body text-center">
-
-                                 Routeur compatible OneMesh - Formez un WiFi transparent lorsque vous travaillez avec les extensions WiFi TP-Link OneMesh
-
-                                 </div>
-                               </div>
-                             </div>
-
- 
-                             <div className="col-md-9 col-sm-9" style={{margin:"20px"}} id="ProductsContainerID">    
-                               
-                               <div className="card m-2 shadow-lg">
-                                
-                                <a className="card-img-tiles" href="#" data-abc="true">
-                                
-                                   <div className="inner">
-                                     <div className="main-img">
-                                     <Image rounded={true} src={Image4}/>
-                                     </div>
-                                    
-                                     
-                                   </div></a>
-                                 <div class="card-body text-center">
-
-                                 
-Le concentrateur multi-écrans permet d'accéder à trois écrans à partir d'un concentrateur. Cela élimine le besoin de basculer constamment entre les écrans
-                                 </div>
-                               </div>
-                             </div>
-
-
-                             <div className="col-md-9 col-sm-9" style={{margin:"20px"}} id="ProductsContainerID">    
-                               
-                               <div className="card m-2 shadow-lg">
-                                
-                                <a className="card-img-tiles" href="#" data-abc="true">
-                                
-                                   <div className="inner">
-                                     <div className="main-img">
-                                     <Image rounded={true} src={Image5}/>
-                                     </div>
-                                    
-                                     
-                                   </div></a>
-                                 <div class="card-body text-center">
-
-                                 Câble HDMI A mâle vers A mâle : prend en charge Ethernet, 3D, vidéo 4K et canal de retour audio (ARC)
-                                 </div>
-                               </div>
-                             </div>
-                             
-                            
- 
-</Carousel>
+      
+     
 </div>
 </StyleRoot>
-<Footer/>
 
 
+  
        </>
-        );
+     );
     }
 }
- 
+
 export default Home;

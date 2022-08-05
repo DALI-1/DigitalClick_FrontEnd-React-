@@ -120,6 +120,7 @@ class ManageContract extends Component {
       const queryParams = new URLSearchParams(window.location.search);
             let diskid = queryParams.get('DiskID');
             let srvrid = queryParams.get('ServerID');
+          
         return (
             <reactElement>
 <Container>
