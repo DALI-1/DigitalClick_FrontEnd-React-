@@ -9,6 +9,7 @@ import LoadingSpinner from './LoadingSpinner';
 import Col from 'react-bootstrap/Col';
 import Cities from './tn.json';
 import Modal from 'react-bootstrap/Modal';
+import NavBar from "./Navbar"
 class AddServer extends Component {
   state = { OSs:[], isLoading:true,countries:[],ServiceProviders:[],Status:false }
   
@@ -149,15 +150,23 @@ this.TurnoffLoadingScreen();
       if(this.state.isLoading)
       {
         return (
+          <>
+          <NavBar/>
+          
           <div class="d-flex justify-content-center" style={{margin:"10px"}}>
           <LoadingSpinner id="Spinner"/>         
       </div>
+      
+          </>
         )
        
       }
       else
       {
         return ( 
+          <>
+          <NavBar/>
+          
           <div class="d-flex justify-content-center" style={{margin:"10px"}}>
           <div class="shadow  p-5  mb-5 mt-5 bg-light rounded" >
                 <div class="shadow  p-1  mb-1  bg-light rounded">
@@ -406,7 +415,8 @@ Ajouter un serveur
     </div>
 
      </div>   
-
+     
+          </>
         );
       }
     }

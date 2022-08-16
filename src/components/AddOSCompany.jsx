@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import Modal from 'react-bootstrap/Modal';
+import NavBar from "./Navbar"
 class AddVirtualMachine extends Component {
     state = { Status:false  } 
     SERVERAPICALL = async (url) => {
@@ -51,6 +52,9 @@ class AddVirtualMachine extends Component {
 
 
         return ( 
+          <>
+          <NavBar/>
+          
           <div class="shadow  p-5  mb-5 mt-5 bg-light rounded" >
                 <div class="shadow  p-1  mb-1  bg-light rounded">
                 <div class="d-flex justify-content-center mb-4">
@@ -108,6 +112,7 @@ class AddVirtualMachine extends Component {
 
         
 
+          </>
         );
     }
 }

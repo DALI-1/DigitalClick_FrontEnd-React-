@@ -5,7 +5,7 @@ import { MDBContainer, MDBRow, MDBCol } from 'mdb-react-ui-kit';
 import { MDBBtn } from 'mdb-react-ui-kit';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/Button';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Nav } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import Cookies from 'universal-cookie';
 import AddIcon from '@mui/icons-material/Edit';
@@ -18,6 +18,8 @@ import LoadingSpinner from './LoadingSpinner';
 import { Route, Redirect } from 'react-router'
 import { slideInLeft,bounceInRight,fadeInUp,zoomIn,bounceInUp,fadeIn } from 'react-animations';
 import Radium, {StyleRoot} from 'radium';
+import FormControl from 'react-bootstrap/FormControl';
+import NavBar from "./Navbar"
 
 export function Popup(props) {
   const [show, setShow] = useState(false);
@@ -41,6 +43,8 @@ export function Popup(props) {
     }
   };
 
+
+ 
 
 
   const handleDelete = ()=>{
@@ -83,9 +87,55 @@ let url="http://localhost:8000/api/RemoveServerByID?ServerID="+props.Server_ID
 
 
 class MangeServer extends Component {
-    state = { modalShow:false,Servers:[],isLoading: true
+    state = { modalShow:false,Servers:[],isLoading: true,nbdisk:"0",ServersBackup:[]
       
     } 
+
+
+    handlesearch=(props)=>
+    {
+      
+     if(props.target.value!="")
+     {
+      let NewTab=[]
+      let Servers=this.state.ServersBackup;
+      Servers.map((Server,key)=>{
+     let MatchingFound="0"
+
+
+    Object.values(Server).map((val) => {
+      
+     if(val.toString().toLowerCase().includes(props.target.value.toLowerCase()))
+     {
+         MatchingFound="1"
+     }
+     
+     })
+     if(MatchingFound=="1")
+     {
+      NewTab.push(Server)
+     }
+     
+ 
+ 
+      })
+      this.setState({Servers:NewTab})
+     }
+     else
+     {
+
+      this.setState({Servers:this.state.ServersBackup})
+     } 
+     
+   
+ 
+    }
+
+    constructor()
+    {
+      super();
+      this.nb="0";
+    }
  
 
      CallServerListAPI = async (url) => {
@@ -174,6 +224,7 @@ class MangeServer extends Component {
     var bytes = CryptoJS.AES.decrypt(Password_ciphered, 'DigitalClick');
       var Password = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
     let url ="http://localhost:8000/api/GetAllServers?Username="+Username+"&Password="+Password
+   
   let Json= this.CallServerListAPI(url)
    
   Json.then((result)=>{
@@ -185,6 +236,7 @@ class MangeServer extends Component {
     )
     
     this.setState({Servers:Server_List}, () => {
+      this.setState({ServersBackup:Server_List})
       this.TurnoffLoadingScreen();
   })
     
@@ -199,22 +251,17 @@ class MangeServer extends Component {
         fadeIn: {
           animation: 'x 1.5s',
           animationName: Radium.keyframes(fadeIn, 'fadeIn')
-        }
-        
-        
-        
+        } 
       }
-
-     
-       
-          
-
       if(this.state.isLoading)
       {
         return (
+          <>
+          <NavBar/>
           <div className="d-flex justify-content-center" style={{margin:"10px"}}>
           <LoadingSpinner id="Spinner"/>         
       </div>
+      </>
         )
        
       }
@@ -222,14 +269,16 @@ class MangeServer extends Component {
       {
         return (
          
-
+              <>
+              <NavBar key="Navy" CallSearchFunction={(props)=>{this.handlesearch(props)}}/>
           <div className="container mt-10" >
+            
  
                                               <div class="row">                       
                           {
           
                            this.state.Servers.map((server)=>{
-          
+
                             return(
 
 
@@ -383,7 +432,7 @@ Afficher les partitions de machine virtuelle </a>
                        </div>
                        
                        </div>
-          
+                       </>
                   );
       }
 

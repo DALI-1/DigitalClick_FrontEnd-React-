@@ -5,6 +5,7 @@ import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import Image from 'react-bootstrap/Image'
 import UploadDragDrop from './UploadDragDrop';
 import Modal from 'react-bootstrap/Modal';
+import NavBar from "./Navbar"
 class AddServer extends Component {
     state = {Status:false  } 
 
@@ -42,7 +43,10 @@ class AddServer extends Component {
     render() { 
 
 
-        return ( 
+        return (
+          <>
+          <NavBar/>
+          
           <div class="d-flex justify-content-center" style={{margin:"10px"}}>
           <div class="shadow  p-5  mb-5 mt-5 bg-light rounded" >
                 <div class="shadow  p-1  mb-1  bg-light rounded">
@@ -93,7 +97,8 @@ class AddServer extends Component {
 
         
 
-        );
+   
+          </>  );
     }
 }
  

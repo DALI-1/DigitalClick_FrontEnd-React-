@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import LoadingSpinner from './LoadingSpinner';
 import Modal from 'react-bootstrap/Modal';
+import NavBar from "./Navbar"
 class AddVirtualMachine extends Component {
   state = { VMProviders:null, isLoading:true,Status:false } 
   constructor()
@@ -89,15 +90,23 @@ this.TurnoffLoadingScreen();
       if(this.state.isLoading)
       {
         return (
+          <>
+          <NavBar/>
+          
           <div class="d-flex justify-content-center" style={{margin:"10px"}}>
           <LoadingSpinner id="Spinner"/>         
       </div>
+      
+          </>
         )
        
       }
       else
       {
         return ( 
+          <>
+          <NavBar/>
+          
           <div class="shadow  p-5  mb-5 mt-5 bg-light rounded" >
                 <div class="shadow  p-1  mb-1  bg-light rounded">
                 <div class="d-flex justify-content-center mb-4">
@@ -170,7 +179,8 @@ this.TurnoffLoadingScreen();
 
     </div>
 
-        
+    
+          </>
 
         );
       }

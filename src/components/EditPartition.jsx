@@ -10,8 +10,11 @@ import Image from 'react-bootstrap/Image'
 import LoadingSpinner from './LoadingSpinner';
 import { createRef } from 'react';
 import Modal from 'react-bootstrap/Modal';
+import NavBar from "./Navbar"
 class MangeServer extends Component {
-  state = { modalShow:false,Servers:[[]],isLoading: true,OSs:[],countries:[],ServiceProviders:[],SOS:[],Provider_ID:"",OperatingSystem_ID:"",Server_Country:"",Status:false } 
+  state = { modalShow:false,Servers:[[]],isLoading: true,OSs:[],countries:[],ServiceProviders:[],SOS:[],Provider_ID:"",OperatingSystem_ID:"",Server_Country:"",Status:false,VLS:[],SVLM:[{VL_ID:"-1",VL_Name:'None'}]
+,NSLVM:"-1"
+} 
   constructor()
   {
     super()
@@ -29,6 +32,14 @@ class MangeServer extends Component {
       const option =  el.getAttribute('id');
       this.state.Provider_ID=option;   
   }
+
+  onChangeHandler3 = (e) => {
+    const index = e.target.selectedIndex;   
+      const el = e.target.childNodes[index]     
+      const option =  el.getAttribute('id');
+      this.state.NSLVM=option;   
+      
+  }
   handleflagchange=(e)=>
   {
     const index = e.target.selectedIndex;   
@@ -42,11 +53,12 @@ class MangeServer extends Component {
   props.preventDefault();
   const queryParams = new URLSearchParams(window.location.search);
   let srvid = queryParams.get('ServerID');
+  let pid = queryParams.get('ServerVMPartition_ID');
   this.setState({Status:true})
   let PropsString=""
   let i=0
   let url="http://127.0.0.1:8000/api/EditServerVM"
-  for(i=0;i<10;i++)
+  for(i=0;i<11;i++)
   {
    if(i==0)
    {
@@ -66,8 +78,24 @@ class MangeServer extends Component {
    }
    
   }
-console.log(url+PropsString)
+
   this.SERVERAPICALL(url+PropsString)
+if(this.state.NSLVM!=this.state.SVLM[0].VL_ID)
+{
+  if(this.state.SVLM!="-1")
+  {
+    let url2="http://127.0.0.1:8000/api/DeAssociateDiskToVL?ServerVMPartition_ID="+pid;
+    this.SERVERAPICALL(url2)
+  }
+ 
+  if(this.state.NSLVM!="-1")
+  {
+    let url3="http://127.0.0.1:8000/api/AssociateDiskToVL?VL_ID="+this.state.NSLVM+"&ServerVMPartition_ID="+pid;
+    this.SERVERAPICALL(url3)
+  }
+  
+}
+
   setTimeout(() => {window.location.replace('/ManageServerPartitions?ServerID='+srvid)}, 2000);
 
 
@@ -163,6 +191,8 @@ componentDidMount(){
   let url1="http://127.0.0.1:8000/api/GetAllOSs"
   let url3="http://127.0.0.1:8000/api/GetAllServiceProviders"
   let url4 ="http://localhost:8000/api/GetServerOSProvider?&ServerID="+id
+  let url7 ="http://localhost:8000/api/GetAllVLs?Server_ID="+id
+  let url5 ="http://localhost:8000/api/GetPartitionVL?ServerVMPartition_ID="+pid
   let Res=null
   Res=this.SERVERAPICALL(url1)
   Res.then((result)=>{
@@ -197,6 +227,34 @@ componentDidMount(){
   this.setState({ServiceProviders:ServiceProviders_List})
   }
   );
+
+
+  Res=this.SERVERAPICALL(url5)
+  Res.then((result)=>{
+  let V=[]
+  result.map((server)=>{
+  V.push(server) 
+  }
+  )
+  if(V.length!=0)
+  {
+    this.setState({SVLM:V})
+    this.setState({NSLVM:V[0].VL_ID})
+  }
+  }
+  );
+
+
+  Res=this.SERVERAPICALL(url7)
+  Res.then((result)=>{
+  let VL=[]
+  result.map((server)=>{
+  VL.push(server) 
+  }
+  )
+  this.setState({VLS:VL})
+  }
+  );
   
  
 
@@ -229,9 +287,14 @@ Json.then(
     if(this.state.isLoading)
     {
       return (
+        <>
+        <NavBar/>
+        
         <div class="d-flex justify-content-center" style={{margin:"10px"}}>
         <LoadingSpinner id="Spinner"/>         
     </div>
+    
+          </>
       )
      
     }
@@ -243,9 +306,12 @@ Json.then(
           const queryParams = new URLSearchParams(window.location.search);
           let srvid = queryParams.get('ServerID');
           let pid = queryParams.get('ServerVMPartition_ID');
+          console.log(this.state.SVLM);
           return(
                     
-                    
+            <>
+            <NavBar/>
+                  
 <div class="container mt-10" >
            <div className=" d-flex align-items-center justify-content-center">                          
                        <div class="col-md-8 col-sm-6" id="ProductsContainerID">
@@ -324,6 +390,31 @@ Json.then(
             <Form.Select required name="Backup" defaultValue={server.Backup}>
               <option>Enabled</option>
               <option>Disabled</option>
+              
+            </Form.Select>
+           
+            <Form.Text className="text-muted">
+              
+            </Form.Text>
+          </Form.Group>
+          </Row>
+          <Row>
+          <Form.Group className="" controlId="formBasicEmail" style={{marginTop:"10px"}}>  
+          <Form.Label
+                style={{color: 'black'}}
+                >Logical Volume </Form.Label>      
+            <Form.Select required name="VL" defaultValue={this.state.SVLM[0].VL_Name} onChange={this.onChangeHandler3}>
+              
+            <option id="-1" >None</option>
+              {               
+                this.state.VLS.map((VL)=>{
+                  return(
+                      <option id={VL.VL_ID} key={VL.VL_ID}>{VL.VL_Name}</option>
+                  )
+                })
+              }
+              
+              
               
             </Form.Select>
            
@@ -411,7 +502,8 @@ Enregistrer les informations du Partition
                        </div>  
                         
                      </div>
-          )
+               
+          </>)
         }
                 ))
     } 

@@ -17,6 +17,7 @@ import Modal from 'react-bootstrap/Modal';
 import LoadingSpinner from './LoadingSpinner';
 import Table from 'react-bootstrap/Table';
 import Image from 'react-bootstrap/Image'
+import NavBar from "./Navbar"
 export function Popup(props) {
   const [show, setShow] = useState(false);
 
@@ -84,14 +85,51 @@ Oui Supprimer
 }
 
 class ManageClients extends Component {
-    state = {  modalShow:false,Clients:[],isLoading: true,NumbersAll:[{}]} 
+    state = {  modalShow:false,Clients:[],isLoading: true,NumbersAll:[{}],ClientsBackup:[]} 
     constructor()
     {
       super()
       this.PhoneNumbers=[];
     }
      
+    handlesearch=(props)=>
+    {
+      
+     if(props.target.value!="")
+     {
+      let NewTab=[]
+      let Clients=this.state.ClientsBackup;
+      Clients.map((Client,key)=>{
+     let MatchingFound="0"
 
+
+    Object.values(Client).map((val) => {
+      
+     if(val.toString().toLowerCase().includes(props.target.value.toLowerCase()))
+     {
+         MatchingFound="1"
+     }
+     
+     })
+     if(MatchingFound=="1")
+     {
+      NewTab.push(Client)
+     }
+     
+ 
+ 
+      })
+      this.setState({Clients:NewTab})
+     }
+     else
+     {
+
+      this.setState({Clients:this.state.ClientsBackup})
+     } 
+     
+   
+ 
+    }
     CallServerListAPI = async (url) => {
       try {
         const response = await fetch(url,{
@@ -126,6 +164,7 @@ class ManageClients extends Component {
         Client_List.push(Client) 
       })
       this.setState({Clients:Client_List})
+      this.setState({ClientsBackup:Client_List})
      }
      );
      let urlS="http://localhost:8000/api/GetAllClientNumbers"
@@ -149,16 +188,23 @@ class ManageClients extends Component {
       if(this.state.isLoading)
       {
         return (
+          <>
+          <NavBar/>
+          
           <div class="d-flex justify-content-center" style={{margin:"10px"}}>
           <LoadingSpinner id="Spinner"/>         
       </div>
+     
+          </>
         )
        
       }
       else
       {
         return (
-
+          <>
+          <NavBar CallSearchFunction={(props)=>{this.handlesearch(props)}}/>
+          
 
           <div class="container mt-10"  >
               <div class="row">
@@ -270,7 +316,8 @@ Voir les contrats liés au client</a> */}
            </div>
 
 
-
+           
+          </>
 
 
       );

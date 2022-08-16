@@ -15,6 +15,7 @@ import LoadingSpinner from './LoadingSpinner';
 import './ManageProfile.css'
 import UploadDragDrop from './UploadDragDrop';
 import Cookies from 'universal-cookie';
+import NavBar from "./Navbar"
 
  
 
@@ -180,14 +181,22 @@ if(NewPasswordS!=null)
         if(this.state.isLoading)
         {
           return (
+            <>
+            <NavBar/>
+            
             <div className="d-flex justify-content-center" style={{margin:"10px"}}>
             <LoadingSpinner id="Spinner"/>         
         </div>
+       
+          </>
           )
         }
         else
         {
         return (
+          <>
+          <NavBar/>
+          
             <div class="container rounded bg-white mt-5 mb-5 shadow-lg" >
     <div class="row">
         <div class="col-md-3 border-right">
@@ -263,6 +272,7 @@ if(NewPasswordS!=null)
     </div>
 </div>
 
+          </>
 
 
 

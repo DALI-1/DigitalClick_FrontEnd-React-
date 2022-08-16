@@ -16,6 +16,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Cookies from 'universal-cookie';
 import Spinner from 'react-bootstrap/Spinner';
 import Modal from 'react-bootstrap/Modal';
+import NavBar from "./Navbar"
 export function BorderExample(props) {
   if(props==true)
   return <Spinner variant="primary" animation="border" />;
@@ -102,6 +103,9 @@ export default function SignUp() {
   };
 
   return (
+    <>
+    <NavBar/>
+    
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -219,5 +223,7 @@ export default function SignUp() {
         <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
+    
+     </>
   );
 }

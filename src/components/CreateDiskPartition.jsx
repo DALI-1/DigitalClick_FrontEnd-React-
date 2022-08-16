@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import { MDBContainer, MDBRow, MDBCol } from "mdb-react-ui-kit";
 import Image from 'react-bootstrap/Image'
 import Modal from 'react-bootstrap/Modal';
+import NavBar from "./Navbar"
 class AddServer extends Component {
     state = { Partitions:[],SelectedParitionID:"",Status:false }
     
@@ -96,6 +97,9 @@ class AddServer extends Component {
       const queryParams = new URLSearchParams(window.location.search);
       let diskid = queryParams.get('DiskID');
         return ( 
+          <>
+          <NavBar/>
+          
           <div class="d-flex justify-content-center" style={{margin:"10px"}}>
           <div class="shadow  p-5  mb-5 mt-5 bg-light rounded" >
                 <div class="shadow  p-1  mb-1  bg-light rounded">
@@ -124,7 +128,7 @@ class AddServer extends Component {
         <Form.Label
         style={{color: 'black'}}
         >
-        Taille de la partition:</Form.Label>
+        Taille de la partition (MB):</Form.Label>
         <Form.Control type="text"   name="PartitionUsage" />
         <Form.Text className="text-muted">         
         </Form.Text>
@@ -174,7 +178,8 @@ Ajouter une partition</button>
     </div>
     </div>
 
-        
+   
+          </> 
 
         );
     }

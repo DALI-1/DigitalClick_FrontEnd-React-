@@ -12,6 +12,7 @@ import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import NavBar from "./Navbar"
 export function Popup(props) {
   const [show, setShow] = useState(false);
 
@@ -76,7 +77,45 @@ Oui, je suis sûr
 
 
 class ManageContract extends Component {
-    state = { modalShow:false,Partitions:[] } 
+    state = { modalShow:false,Partitions:[],PartitionsBackup:[] } 
+    handlesearch=(props)=>
+    {
+      
+     if(props.target.value!="")
+     {
+      let NewTab=[]
+      let Servers=this.state.PartitionsBackup
+      Servers.map((Server,key)=>{
+     let MatchingFound="0"
+
+
+    Object.values(Server).map((val) => {
+      
+     if(val.toString().toLowerCase().includes(props.target.value.toLowerCase()))
+     {
+         MatchingFound="1"
+     }
+     
+     })
+     if(MatchingFound=="1")
+     {
+      NewTab.push(Server)
+     }
+     
+ 
+ 
+      })
+      this.setState({Partitions:NewTab})
+     }
+     else
+     {
+
+      this.setState({PartitionsBackup:this.state.PartitionsBackup})
+     } 
+     
+   
+ 
+    }
     SERVERAPICALL = async (url) => {
       try {
         const response = await fetch(url,{
@@ -107,7 +146,7 @@ class ManageContract extends Component {
         Partitions_List.push(server) 
       }
       )
-      
+      this.setState({PartitionsBackup:Partitions_List})
       this.setState({Partitions:Partitions_List})
       
      }
@@ -122,6 +161,9 @@ class ManageContract extends Component {
             let srvrid = queryParams.get('ServerID');
           
         return (
+          <>
+          <NavBar CallSearchFunction={(props)=>{this.handlesearch(props)}}/>
+          
             <reactElement>
 <Container>
       <Row>
@@ -158,7 +200,7 @@ class ManageContract extends Component {
           <td class="text-center"><a href="#"><Image  roundedCircle={true} style={{width: '50px',height:'50px'}} src={require('./images/Partition_Logo.webp')}/></a></td>
           <td class="text-center">{Partition.PartitionValue}</td>
           
-          <td class="text-center">{Partition.PartitionUsage}</td>
+          <td class="text-center">{Partition.PartitionUsage+" MB"}</td>
           <td class="text-center">{Partition.PartitionName}</td>
           <td>
           <Container>
@@ -205,6 +247,8 @@ class ManageContract extends Component {
       
     
             </reactElement>
+          
+          </>
         );
     }
 }

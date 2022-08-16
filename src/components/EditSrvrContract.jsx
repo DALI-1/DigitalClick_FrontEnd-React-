@@ -11,6 +11,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Modal from 'react-bootstrap/Modal';
+import NavBar from "./Navbar"
 
 
 class addContract extends Component {
@@ -266,9 +267,14 @@ this.setState({Clients:Clients_List},()=>{
     if(this.state.isLoading)
     {
       return (
+        <>
+        <NavBar/>
+        
         <div class="d-flex justify-content-center" style={{margin:"10px"}}>
         <LoadingSpinner id="Spinner"/>         
     </div>
+    
+          </>
       )
      
     }
@@ -276,6 +282,9 @@ this.setState({Clients:Clients_List},()=>{
     {
       
       return (
+        <>
+        <NavBar/>
+        
         <div class="d-flex justify-content-center" style={{margin:"10px"}}>
           <div class="shadow  p-5  mb-5 mt-5 bg-light rounded" >
               <div class="shadow  p-1  mb-1  bg-light rounded">
@@ -404,6 +413,8 @@ this.setState({Clients:Clients_List},()=>{
     </Modal>
   </div>
 </div>
+
+          </>
       );
     }
   }

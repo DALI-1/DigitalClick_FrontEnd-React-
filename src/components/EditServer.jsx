@@ -10,6 +10,7 @@ import Image from 'react-bootstrap/Image'
 import LoadingSpinner from './LoadingSpinner';
 import { createRef } from 'react';
 import Modal from 'react-bootstrap/Modal';
+import NavBar from "./Navbar"
 
 class MangeServer extends Component {
   state = { modalShow:false,Servers:[[]],isLoading: true,OSs:[],countries:[],ServiceProviders:[],SOS:[],Provider_ID:"",OperatingSystem_ID:"",Server_Country:"",Status:false} 
@@ -261,9 +262,14 @@ class MangeServer extends Component {
       if(this.state.isLoading)
       {
         return (
+          <>
+          <NavBar/>
+          
           <div class="d-flex justify-content-center" style={{margin:"10px"}}>
           <LoadingSpinner id="Spinner"/>         
       </div>
+     
+          </>
         )
        
       }
@@ -274,11 +280,13 @@ class MangeServer extends Component {
           this.state.Servers[0].map((server)=>{   
             const queryParams = new URLSearchParams(window.location.search);
             let srvid = queryParams.get('ServerID');
-            console.log(server.NextFacturationDate)
+            
 
             return(
                       
-                      
+              <>
+              <NavBar/>
+                           
 <div class="container mt-10" >
              <div className=" d-flex align-items-center justify-content-center">                          
                          <div class="col-md-8 col-sm-6" id="ProductsContainerID">
@@ -533,6 +541,8 @@ Enregistrer les informations du serveur
                          </div>  
                           
                        </div>
+            
+          </>
             )
           }
                   ))

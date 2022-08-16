@@ -5,6 +5,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Toast from 'react-bootstrap/Toast';
 import Notifications from "react-notifications-menu";
 import Image1 from '../components/images/PaymentIcon.jpg'
+import Image2 from '../components/images/MakeMoneyIcon.png'
 import { tab } from '@testing-library/user-event/dist/tab';
 class Notification extends Component {
     state = { ServerNotification:[],ServerContractNotification:[],VMContractNotification:[],Data:[]} 
@@ -91,7 +92,7 @@ class Notification extends Component {
           Tab.push(
             {
               image:
-                Image1,
+              Image2,
               message: (
                 <div style={{margin:'1px'}}>
                   <div className="displayflex">
@@ -132,7 +133,7 @@ class Notification extends Component {
           Tab.push(
             {
               image:
-                Image1,
+              Image2,
               message: (
                 <div style={{margin:'1px'}}>
                   <div className="displayflex">
@@ -173,6 +174,7 @@ class Notification extends Component {
         return (
 
           <Notifications
+          key="EEEEEEEEE"
           style={{zIndex:15}}
           data={this.state.Data}
           header={{

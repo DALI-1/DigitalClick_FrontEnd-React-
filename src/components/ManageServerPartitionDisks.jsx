@@ -11,6 +11,7 @@ import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import NavBar from "./Navbar"
 export function Popup() {
   const [show, setShow] = useState(false);
 
@@ -53,6 +54,9 @@ class ManageContract extends Component {
     render()
     { 
         return (
+          <>
+          <NavBar/>
+          
             <reactElement>
 <Container>
       <Row>
@@ -205,6 +209,8 @@ class ManageContract extends Component {
       
     
             </reactElement>
+          
+          </>
         );
     }
 }

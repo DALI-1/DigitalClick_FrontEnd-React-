@@ -9,6 +9,7 @@ import LoadingSpinner from './LoadingSpinner';
 import Col from 'react-bootstrap/Col';
 import Alert from 'react-bootstrap/Alert';
 import Modal from 'react-bootstrap/Modal';
+import NavBar from "./Navbar"
 
 class AddServer extends Component {
   state = { OSs:[], isLoading:true,VMs:[],Status:false }
@@ -144,6 +145,9 @@ this.setState({VMs:VMs_List},()=>{
         const queryParams = new URLSearchParams(window.location.search);
      let srvid = queryParams.get('ServerID');
         return ( 
+          <>
+          <NavBar/>
+          
           <div class="d-flex justify-content-center" style={{margin:"10px"}}>
           <div class="shadow  p-5  mb-5 mt-5 bg-light rounded" >
                 <div class="shadow  p-1  mb-1  bg-light rounded">
@@ -321,7 +325,8 @@ Ajouter un VM
      </div>
      
      
-
+    
+          </>
         );
       }
     }

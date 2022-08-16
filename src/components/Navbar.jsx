@@ -26,8 +26,13 @@ super();
     handlesearch=(props)=>
     {
       props.preventDefault();
+      this.props.CallSearchFunction(props)   
+    }
+    handlesearchDefault=(props)=>
+    {
+      props.preventDefault();
      let Res=window.find(props.target[0].value)
-    
+ 
      if(Res==false)
      {
       
@@ -40,6 +45,7 @@ super();
 
       
     }
+    doNothing=(props)=>{}
 
     HandleLogout= ()=>{
        const cookies = new Cookies()
@@ -195,13 +201,15 @@ super();
         <Image roundedCircle={true} style={{width: '60px',height:'50px',marginRight:"35px"}} src={this.state.Profile[0].PFP_URL=="Default"? require('./images/Default_Avatar_Male.png'):"http://localhost:8000/Images/"+this.state.Profile[0].PFP_URL}/>
          
       </Nav>
-      <Form className="d-flex" onSubmit={this.handlesearch}>
+      
+      <Form className="d-flex" show="false" onSubmit={(this.props.CallSearchFunction)? this.handlesearch:this.handlesearchDefault}>
         <FormControl
           type="search"
           placeholder="Search"
           className="me-2"
           aria-label="Search"
           name="SearchInput"
+          onChange={(this.props.CallSearchFunction)? this.handlesearch:this.handlesearchDefault}
         />
         <Button variant="outline-success" type='submit'>Search</Button>
         <Popup status={this.state.Show}/>
@@ -242,13 +250,17 @@ super();
                   <Nav.Link href="/SignUp">S'inscrire</Nav.Link>
                   
                 </Nav>
-                <Form className="d-flex" onSubmit={this.handlesearch}>
-                  <FormControl
+
+                
+                <Form className="d-flex">
+                  <FormControl onSubmit={this.handlesearchDefault}
+                  
                     type="search"
                     placeholder="Search"
                     className="me-2"
                     aria-label="Search"
                     name="SearchInput"
+                  
                   />
                   <Button variant="outline-success" type='submit'>Search</Button>
                   <Popup status={this.state.Show}/>

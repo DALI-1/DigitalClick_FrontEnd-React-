@@ -9,11 +9,25 @@ import ManageServer from './components/ManageServer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+document.title="Digital Click Management"
+
+
 root.render(
 <>
-    <Navbar/>
-    <App/>
+   {/*<Navbar/> */} 
+   <helmet>
+
+   
+   <head>
+    <meta charset="utf-8" />
     
+    <link rel="icon" href="http://example.com/favicon.png"/>
+    
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Oxygen:300,400,500,700,400italic"/>
+</head>
+</helmet>
+    <App/>
+    <Footer/>
     </>
 );
 

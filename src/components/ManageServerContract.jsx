@@ -13,6 +13,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Cookies from 'universal-cookie';
 import LoadingSpinner from './LoadingSpinner';
+import NavBar from "./Navbar"
 export function Popup(props) {
   const [show, setShow] = useState(false);
 
@@ -188,15 +189,23 @@ Json.then((result)=>{
       if(this.state.isLoading)
       {
         return (
+          <>
+          <NavBar/>
+          
           <div class="d-flex justify-content-center" style={{margin:"10px"}}>
           <LoadingSpinner id="Spinner"/>         
       </div>
+      
+          </>
         )
        
       }
       else
       {
         return (
+          <>
+          <NavBar/>
+          
             <reactElement>
 <Container>
       <Row>
@@ -268,6 +277,8 @@ Json.then((result)=>{
       
     
             </reactElement>
+            
+          </>
         );
       }
     }

@@ -29,6 +29,7 @@ import Pic2 from '../assets/img/Team2.jpg'
 import Expertise from '../assets/img/Expertise.jpg'
 import CarouselFadeExample from "../components/ImageSlider.jsx";
 import Footer from '../components/Footer';
+import Nav from '../components/Navbar'
 
 class Home extends Component {
     state = {
@@ -127,7 +128,7 @@ class Home extends Component {
     
         return (    
           <>
-       
+       <Nav/>
           <StyleRoot>
           <div class="shadow-lg p-3 m-3  bg-body rounded" responsive style={{
         backgroundColor:"rgba(237, 238, 240,0.9)",
@@ -258,7 +259,7 @@ Le concentrateur multi-écrans permet d'accéder à trois écrans à partir d'un
 </div>
 </StyleRoot>
 
-
+<Footer/>
   
        </>
      );

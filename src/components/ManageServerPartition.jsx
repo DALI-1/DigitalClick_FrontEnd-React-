@@ -9,6 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Modal from 'react-bootstrap/Modal';
 import Image from 'react-bootstrap/Image'
+import NavBar from "./Navbar"
 
 import LoadingSpinner from './LoadingSpinner';
 export function Popup(props) {
@@ -70,7 +71,46 @@ Non ne supprimez pas
   );
 }
 class MangeServer extends Component {
-    state = { modalShow:false,isLoading: true,Paritions:[] } 
+    state = { modalShow:false,isLoading: true,Paritions:[],ParitionsBackup:[] } 
+
+    handlesearch=(props)=>
+    {
+      
+     if(props.target.value!="")
+     {
+      let NewTab=[]
+      let Servers=this.state.ParitionsBackup;
+      Servers.map((Server,key)=>{
+     let MatchingFound="0"
+
+
+    Object.values(Server).map((val) => {
+      
+     if(val.toString().toLowerCase().includes(props.target.value.toLowerCase()))
+     {
+         MatchingFound="1"
+     }
+     
+     })
+     if(MatchingFound=="1")
+     {
+      NewTab.push(Server)
+     }
+     
+ 
+ 
+      })
+      this.setState({Paritions:NewTab})
+     }
+     else
+     {
+
+      this.setState({Paritions:this.state.ParitionsBackup})
+     } 
+     
+   
+ 
+    }
 
     constructor()
     {
@@ -176,7 +216,7 @@ class MangeServer extends Component {
       Partitions_List.push(server) 
     }
     )
-    
+    this.setState({ParitionsBackup:Partitions_List})
     this.setState({Paritions:Partitions_List}, () => {
       this.TurnoffLoadingScreen();
   })
@@ -189,9 +229,14 @@ class MangeServer extends Component {
       if(this.state.isLoading)
       {
         return (
+          <>
+          <NavBar/>
+          
           <div class="d-flex justify-content-center" style={{margin:"10px"}}>
           <LoadingSpinner id="Spinner"/>         
       </div>
+     
+          </>
         )
       }
       else
@@ -199,6 +244,9 @@ class MangeServer extends Component {
      const queryParams = new URLSearchParams(window.location.search);
      let srvid = queryParams.get('ServerID');
         return (
+          <>
+          <NavBar CallSearchFunction={(props)=>{this.handlesearch(props)}}/>
+          
 <div class="container mt-10" >
 <a class="btn btn-outline-primary btn-sm" href={"AddServerPartition?ServerID="+srvid} data-abc="true" style={{margin:"10px",padding:"10px"}}>Ajouter une nouvelle machine virtuelle</a>
                                     <div class="row">
@@ -240,9 +288,7 @@ Core alloués</label>
                      
   </Row>
   <Row>
-    <Col><nobr><label style={{fontSize:"10px"}}> Disks alloués:</label>
-                     <p style={{fontSize:"10px"}} class="text-muted">NOT AVAILABLE</p></nobr>
-                     </Col>
+    
                      <Col><nobr><label style={{fontSize:"10px"}}>MAC-Address:</label>
                      <p style={{fontSize:"10px"}} class="text-muted">{Partition.SVMP_MAC_Adress}</p></nobr></Col>
                      
@@ -291,16 +337,20 @@ Core alloués</label>
     <Col><nobr><label style={{fontSize:"10px"}}>
 Date d'ajout</label>
                      <p style={{fontSize:"10px"}} class="text-muted">{Partition.created_at}</p></nobr></Col>
-                
-    <Col><nobr><label style={{fontSize:"10px"}}>
+        {/*
+          <Col><nobr><label style={{fontSize:"10px"}}>
 Prochaine date de Facturation</label>
                      <p style={{fontSize:"10px"}} class="text-muted">NOT AVAILABLE YET</p></nobr></Col>
+        */}        
+  
                      
   </Row>
   <Row>
    
+                    {/*
                      <Col><nobr><label style={{fontSize:"10px"}}>Client:</label>
                      <a href=""><p style={{fontSize:"10px"}} class="text-muted">NOT AVAILABLE YET</p></a></nobr></Col>
+                     */}
                      
     <Col><nobr><label style={{fontSize:"10px"}}>Description:</label>
                      <p style={{fontSize:"10px"}} class="text-muted">{Partition.Description}</p></nobr></Col>
@@ -334,7 +384,8 @@ Prochaine date de Facturation</label>
              </div>
              
              </div>
-
+             
+          </>
         );
       }
     }

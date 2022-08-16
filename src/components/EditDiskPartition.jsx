@@ -6,6 +6,7 @@ import Image from 'react-bootstrap/Image'
 import UploadDragDrop from './UploadDragDrop';
 import Modal from 'react-bootstrap/Modal';
 import LoadingSpinner from './LoadingSpinner';
+import NavBar from "./Navbar"
 class AddServer extends Component {
   state = { Partitions:[],SelectedParitionID:"",Status:false,Partition:[],isLoading: true }
     
@@ -135,9 +136,14 @@ class AddServer extends Component {
       if(this.state.isLoading)
       {
         return (
+          <>
+          <NavBar/>
+          
           <div className="d-flex justify-content-center" style={{margin:"10px"}}>
           <LoadingSpinner id="Spinner"/>         
       </div>
+      
+          </>
         )
        
       }
@@ -145,6 +151,9 @@ class AddServer extends Component {
       {
       
         return ( 
+          <>
+          <NavBar/>
+          
           <div class="d-flex justify-content-center" style={{margin:"10px"}}>
           <div class="shadow  p-5  mb-5 mt-5 bg-light rounded" >
                 <div class="shadow  p-1  mb-1  bg-light rounded">
@@ -222,7 +231,8 @@ class AddServer extends Component {
 
     </div>
     </div>
-
+ =
+          </>
         
 
         );}

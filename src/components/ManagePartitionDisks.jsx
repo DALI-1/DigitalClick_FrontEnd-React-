@@ -12,6 +12,7 @@ import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import NavBar from "./Navbar"
 export function Popup(props) {
   const [show, setShow] = useState(false);
 
@@ -37,13 +38,16 @@ export function Popup(props) {
 
 
   const handleDelete = ()=>{
+    const queryParams = new URLSearchParams(window.location.search);
+      let srvid = queryParams.get('ServerID');
+      let VLID = queryParams.get('VLID');
 
 let url="http://localhost:8000/api/RemoveDiskByID?DiskID="+props.DiskID
   CallAPI(url);
   console.log(url);
     setShow(false);
     setTimeout(function () {
-      window.location.replace('ManagePartitionDisks?ServerID='+props.ServerID)
+      window.location.replace('ManagePartitionDisks?ServerID='+props.ServerID+"&VLID="+VLID)
   }, 1000);
     
     
@@ -78,8 +82,45 @@ Oui, je suis sûr
 
 
 class ManageContract extends Component {
-    state = { modalShow:false,Disks:[] } 
-    
+    state = { modalShow:false,Disks:[],DisksBackup:[]} 
+    handlesearch=(props)=>
+    {
+      
+     if(props.target.value!="")
+     {
+      let NewTab=[]
+      let Servers=this.state.DisksBackup;
+      Servers.map((Server,key)=>{
+     let MatchingFound="0"
+
+
+    Object.values(Server).map((val) => {
+      
+     if(val.toString().toLowerCase().includes(props.target.value.toLowerCase()))
+     {
+         MatchingFound="1"
+     }
+     
+     })
+     if(MatchingFound=="1")
+     {
+      NewTab.push(Server)
+     }
+     
+ 
+ 
+      })
+      this.setState({Disks:NewTab})
+     }
+     else
+     {
+
+      this.setState({DisksBackup:this.state.DisksBackup})
+     } 
+     
+   
+ 
+    }
     SERVERAPICALL = async (url) => {
       try {
         const response = await fetch(url,{
@@ -110,6 +151,7 @@ result.map((Disk)=>{
 Disks_List.push(Disk) 
 }
 )
+this.setState({DisksBackup:Disks_List})
 this.setState({Disks:Disks_List}
 )
 }
@@ -121,6 +163,9 @@ this.setState({Disks:Disks_List}
       let srvid = queryParams.get('ServerID');
       let VLID = queryParams.get('VLID');
         return (
+          <>
+          <NavBar CallSearchFunction={(props)=>{this.handlesearch(props)}}/>
+          
             <reactElement>
 <Container>
       <Row>
@@ -161,7 +206,7 @@ return(
           <td class="text-center">{Disk.DProvider_Company_Name}</td>
           <td class="text-center">{Disk.Disk_Model}</td>
           <td class="text-center">{Disk.Disk_Type}</td>
-          <td class="text-center">{Disk.Total_Size}</td>
+          <td class="text-center">{Disk.Total_Size+" MB"}</td>
           
           <td>
           <Container>
@@ -216,6 +261,8 @@ return(
       
     
             </reactElement>
+            
+          </>
         );
     }
 }

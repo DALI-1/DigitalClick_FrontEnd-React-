@@ -13,6 +13,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Cookies from 'universal-cookie';
 import LoadingSpinner from './LoadingSpinner';
+import NavBar from "./Navbar"
 export function Popup(props) {
   const [show, setShow] = useState(false);
 
@@ -72,9 +73,49 @@ let url="http://localhost:8000/api/RemovePartitionContractByID?PartitionContract
 }
 
 class ManageContract extends Component {
-  state = { modalShow:false,Contracts:[],isLoading: true
+  state = { modalShow:false,Contracts:[],isLoading: true,ContractsBackup:[]
       
-  } 
+  }
+
+  handlesearch=(props)=>
+    {
+      
+     if(props.target.value!="")
+     {
+      let NewTab=[]
+      let Servers=this.state.ContractsBackup
+      Servers.map((Server,key)=>{
+     let MatchingFound="0"
+
+
+    Object.values(Server).map((val) => {
+      
+     if(val.toString().toLowerCase().includes(props.target.value.toLowerCase()))
+     {
+         MatchingFound="1"
+     }
+     
+     })
+     if(MatchingFound=="1")
+     {
+      NewTab.push(Server)
+     }
+     
+ 
+ 
+      })
+      this.setState({Contracts:NewTab})
+     }
+     else
+     {
+
+      this.setState({Contracts:this.state.ContractsBackup})
+     } 
+     
+   
+ 
+    }
+
 
 
    CallServerListAPI = async (url) => {
@@ -167,7 +208,7 @@ Json.then((result)=>{
     Contract_List.push(server) 
   }
   )
-  
+  this.setState({ContractsBackup:Contract_List})
   this.setState({Contracts:Contract_List}, () => {
     this.TurnoffLoadingScreen();
 })
@@ -181,15 +222,23 @@ Json.then((result)=>{
       if(this.state.isLoading)
       {
         return (
+          <>
+          <NavBar/>
+          
           <div class="d-flex justify-content-center" style={{margin:"10px"}}>
           <LoadingSpinner id="Spinner"/>         
       </div>
+      
+          </>
         )
        
       }
       else
       {
         return (
+          <>
+          <NavBar CallSearchFunction={(props)=>{this.handlesearch(props)}}/>
+          
             <reactElement>
 <Container>
       <Row>
@@ -281,6 +330,8 @@ Json.then((result)=>{
       
     
             </reactElement>
+           
+          </>
         );
       }
     }

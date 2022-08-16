@@ -6,6 +6,7 @@ import Image from 'react-bootstrap/Image'
 import UploadDragDrop from './UploadDragDrop';
 import LoadingSpinner from './LoadingSpinner';
 import Modal from 'react-bootstrap/Modal';
+import NavBar from "./Navbar"
 class AddServer extends Component {
   state = {Providers:[],isLoading:true,SelectedProviderID:1,Status:false,DiskI:[]  } 
 
@@ -104,9 +105,14 @@ this.TurnoffLoadingScreen();
     if(this.state.isLoading)
     {
       return (
+        <>
+        <NavBar/>
+        
         <div class="d-flex justify-content-center" style={{margin:"10px"}}>
         <LoadingSpinner id="Spinner"/>         
     </div>
+    
+          </>
       )
      
     }
@@ -117,6 +123,9 @@ this.TurnoffLoadingScreen();
     
     
       return ( 
+        <>
+        <NavBar/>
+        
         <div class="d-flex justify-content-center" style={{margin:"10px"}}>
         <div class="shadow  p-5  mb-5 mt-5 bg-light rounded" >
               <div class="shadow  p-1  mb-1  bg-light rounded">
@@ -232,7 +241,8 @@ Enregistrer les informations du disque</button>
   </div>
   </div>
 
-      
+
+          </>
 
       );
     }

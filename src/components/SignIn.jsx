@@ -17,6 +17,7 @@ import Cookies from 'universal-cookie';
 import {useEffect} from 'react';
 import Spinner from 'react-bootstrap/Spinner';
 import Modal from 'react-bootstrap/Modal';
+import NavBar from "./Navbar"
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -186,6 +187,9 @@ export default function SignIn() {
   };
 
   return (
+    <>
+    <NavBar/>
+    
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -275,6 +279,8 @@ export default function SignIn() {
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
+   
+          </>
 
 
 

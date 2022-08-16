@@ -7,6 +7,7 @@ import Image from 'react-bootstrap/Image'
 import LoadingSpinner from './LoadingSpinner';
 import axios from 'axios';
 import Modal from 'react-bootstrap/Modal';
+import NavBar from "./Navbar"
 class AddClient extends Component {
     state = { 
       PhoneNumberList: [0],
@@ -147,15 +148,22 @@ handleUpload = (e) =>{
       if(this.state.isLoading)
       {
         return (
+          <>
+          <NavBar/>
+          
           <div class="d-flex justify-content-center" style={{margin:"10px"}}>
           <LoadingSpinner id="Spinner"/>         
       </div>
+      </>
         )
        
       }
       else
       {
         return ( 
+          <>
+          <NavBar/>
+          
             <div class="shadow  p-5  mb-5 mt-5 bg-light rounded" >
             
                 <div class="shadow  p-1  mb-1  bg-light rounded">
@@ -355,7 +363,7 @@ Ajouter un client</button>
 Client ajouté avec succès!</Modal.Body>
       </Modal>
     </div>
-        );
+    </>);
     }
     }
   }
