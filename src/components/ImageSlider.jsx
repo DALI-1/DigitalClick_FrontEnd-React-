@@ -1,5 +1,5 @@
 import Carousel from 'react-bootstrap/Carousel';
-
+import React,{Component} from "react";
 function CarouselFadeExample() {
   return (
     <Carousel fade variant="dark">

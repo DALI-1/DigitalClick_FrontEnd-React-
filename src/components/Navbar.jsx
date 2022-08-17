@@ -13,11 +13,13 @@ import FormControl from 'react-bootstrap/FormControl';
 import Image from 'react-bootstrap/Image'
 import Cookies from 'universal-cookie';
 import {Popup} from './Popup2.jsx'
+import { useNavigate } from 'react-router-dom';
 import { slideInLeft,bounceInRight,fadeInDown,fadeInUp } from 'react-animations';
+
 import Radium, {StyleRoot} from 'radium';
 class NavBar extends Component {
     state = { Show:false,Profile:[],isLoading:true } 
-
+   
     constructor()
     {
 
@@ -52,6 +54,7 @@ super();
        cookies.remove("Username")
        cookies.remove("Password")
        cookies.remove("AccessToken")
+       cookies.remove("Priv")
        window.location.replace('/SignIn')
       
     }
@@ -85,8 +88,8 @@ super();
       )
       
       this.setState({Profile:Profile_List}, () => {
-
-       
+        if(this.state.Profile[0]!=null)
+        cookies.set('Priv', this.state.Profile[0].Role);
         this.TurnoffLoadingScreen();
     })
       
@@ -106,22 +109,22 @@ super();
   }
 
     render() {
-      
+      const cookies = new Cookies();
       const styles = {
         bounce: {
-          animation: 'x 2.5s',
+          animation: 'x 1.0s',
           animationName: Radium.keyframes(fadeInDown, 'bounce')
         }
         ,bounceInRight: {
-          animation: 'x 1.5s',
+          animation: 'x 1.0s',
           animationName: Radium.keyframes(fadeInUp, 'bounceInRight')
         }
 
 
         
       }
-
-
+      
+     
       if(this.state.isLoading)
       {
         return (
@@ -136,16 +139,19 @@ super();
       }
       else
       {
-      
+        var oldURL = document.referrer;
+        
         if(this.state.Profile.length!=0)
         {
+          
           return (
             <StyleRoot>
             <div style={styles.bounce}>
 
 <Navbar bg="light" expand="lg">
   <Container fluid>
-    <Navbar.Brand href="#">
+  
+    <Navbar.Brand  href={oldURL}>
     <Image src={require('./images/DigitalClickLogo.png')} style={{
                 width:200,
                  height:50
@@ -155,8 +161,9 @@ super();
     <Navbar.Collapse id="navbarScroll">
       <Nav
         className="me-auto my-2 my-lg-0"
-        style={{ maxHeight: '100px' }}
+        style={{ maxHeight: '100px',zIndex:9 }}
         navbarScroll
+        
       >
         <Nav.Link href="/">Accueil</Nav.Link>
       
@@ -186,6 +193,8 @@ super();
           <NavDropdown.Divider />        
         </NavDropdown>     
         <NavDropdown title="Profil" id="navbarScrollingDropdown">
+          {(cookies.get("Priv")=="Admin_User")? <NavDropdown.Item href="Admin">Admin Management</NavDropdown.Item> :<></>}
+          
           <NavDropdown.Item href="ManageProfile">Gérer le profil</NavDropdown.Item>         
           <NavDropdown.Divider />
           <NavDropdown.Item onClick={this.HandleLogout}>
@@ -220,7 +229,9 @@ super();
 
 
             </div>
+           
             </StyleRoot>
+            
         );
 
         }
@@ -232,7 +243,7 @@ super();
 
           <Navbar bg="light" expand="lg">
             <Container fluid>
-              <Navbar.Brand href="#">
+              <Navbar.Brand href={oldURL}>
               <Image src={require('./images/DigitalClickLogo.png')} style={{
                           width:200,
                            height:50

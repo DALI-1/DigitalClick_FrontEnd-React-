@@ -1,5 +1,5 @@
 
-
+import React,{ Component } from 'react'
 import ManageServers from './WebPages/ManageServers_WebPage.jsx';
 
 import Image from './components/images/BackgroundImage_Default.jpg';
@@ -41,52 +41,58 @@ import AddDiskProvider from './WebPages/AddDiskProvider_WebPage'
 import AddServerPartition from './WebPages/AddServerPartition_WebPage';
 import EditSrvrContract from './WebPages/EditSrvrContract_WebPage';
 import ADDVL from './WebPages/AddVL_WebPage';
-import {BrowserRouter as Router,Route,Switch} from "react-router-dom";
+import Admin from './WebPages/Admin_WebPage';
+import UnAuth from './WebPages/UnAuthorized_WebPage';
+import {BrowserRouter as Router,Route,Routes} from "react-router-dom";
 
 function App() {
   return (
+
+
+    
     <Router>
-        <Switch>
        
-        <Route exact path="/Dev" component={DevPage}/>
-        <Route exact path="/ManagePartitionContracts" component={ManagePartitionContracts}/>
-        <Route exact path="/ManageServerContracts" component={ManageServerContracts}/>
-        <Route exact path="/SignIn" component={SignIn}/>
-        <Route exact path="/SignUp" component={SignUp}/>
-        <Route exact path="/ManagePartitionDisks" component={ManagePartitionDisks}/>
-        
-        <Route exact path="/ManageClientContracts" component={ManageClientContracts}/>
-        <Route exact path="/ManageClients" component={ManageClients}/>
-        <Route exact path="/ManageServers" component={ManageServers}/>
-        <Route exact path="/ManageProfile" component={ManageProfile}/>
-        <Route exact path="/EditServer" component={EditServer}/>
-        <Route exact path="/AddClient" component={AddClient}/>
-        <Route exact path="/AddServer" component={AddServer}/>
-        <Route exact path="/AddVirtualMachine" component={AddVirtualMachine}/>
-        <Route exact path="/AddPartitionContract" component={AddPartitionContract}/>
-        <Route exact path="/EditContract" component={EditContract}/>
-        <Route exact path="/AddOS" component={AddOS}/>
-        <Route exact path="/AddVMCompany" component={AddVMCompany}/>
-        <Route exact path="/AddOSCompany" component={AddOSCompany}/>
-        <Route exact path="/AddServiceProvider" component={AddServiceProvider}/>
-        <Route exact path="/ManageServerPartitions" component={ManageServerPartitions}/>
-        <Route exact path="/ManageServersContracts" component={ManageServersContracts}/>
-        <Route exact path="/EditClient" component={EditClient}/>
-        <Route exact path="/EditPartition" component={EditPartition}/>
-        <Route exact path="/AddServerContract" component={AddServerContract}/>
-        <Route exact path="/AddDisk" component={AddDisk}/>
-        <Route exact path="/CreateDiskPartition" component={CreateDiskPartition}/>
-        <Route exact path="/ManageServerPartitionDisks" component={ManageServerPartitionDisks}/>
-        <Route exact path="/ManageDiskPartitions" component={ManageDiskParitions}/>
-        <Route exact path="/EditDisk" component={EditDisk}/>
-        <Route exact path="/EditDiskPartition" component={EditDiskPartition}/>
-        <Route exact path="/AddDiskProvider" component={AddDiskProvider}/>
-        <Route exact path="/AddServerPartition" component={AddServerPartition}/>
-        <Route exact path="/EditSrvrContract" component={EditSrvrContract}/>
-        <Route exact path="/ManageLogicalVolume" component={ManageLogicalVolume}/>
-       < Route exact path="/AddVL" component={ADDVL}/>
-        <Route exact path="/" component={Home}/>
-        </Switch>
+       <Routes>
+       <Route exact path="/Admin" element={<Admin/>}/>
+        <Route exact path="/Dev" element={<DevPage/>}/>
+        <Route exact path="/ManagePartitionContracts" element={<ManagePartitionContracts/>}/>
+        <Route exact path="/ManageServerContracts" element={<ManageServerContracts/>}/>
+        <Route exact path="/SignIn" element={<SignIn/>}/>
+        <Route exact path="/SignUp" element={<SignUp/>}/>
+        <Route exact path="/ManagePartitionDisks" element={<ManagePartitionDisks/>}/>
+        <Route exact path="/ManageClientContracts" element={<ManageClientContracts/>}/>
+        <Route exact path="/ManageClients" element={<ManageClients/>}/>
+        <Route exact path="/ManageServers" element={<ManageServers/>}/>
+        <Route exact path="/ManageProfile" element={<ManageProfile/>}/>
+        <Route exact path="/EditServer" element={<EditServer/>}/>
+        <Route exact path="/AddClient" element={<AddClient/>}/>
+        <Route exact path="/AddServer" element={<AddServer/>}/>
+        <Route exact path="/AddVirtualMachine" element={<AddVirtualMachine/>}/>
+        <Route exact path="/AddPartitionContract" element={<AddPartitionContract/>}/>
+        <Route exact path="/EditContract" element={<EditContract/>}/>
+        <Route exact path="/AddOS" element={<AddOS/>}/>
+        <Route exact path="/AddVMCompany" element={<AddVMCompany/>}/>
+        <Route exact path="/AddOSCompany" element={<AddOSCompany/>}/>
+        <Route exact path="/AddServiceProvider" element={<AddServiceProvider/>}/>
+        <Route exact path="/ManageServerPartitions" element={<ManageServerPartitions/>}/>
+        <Route exact path="/ManageServersContracts" element={<ManageServersContracts/>}/>
+        <Route exact path="/EditClient" element={<EditClient/>}/>
+        <Route exact path="/EditPartition" element={<EditPartition/>}/>
+        <Route exact path="/AddServerContract" element={<AddServerContract/>}/>
+        <Route exact path="/AddDisk" element={<AddDisk/>}/>
+        <Route exact path="/CreateDiskPartition" element={<CreateDiskPartition/>}/>
+        <Route exact path="/ManageServerPartitionDisks" element={<ManageServerPartitionDisks/>}/>
+        <Route exact path="/ManageDiskPartitions" element={<ManageDiskParitions/>}/>
+        <Route exact path="/EditDisk" element={<EditDisk/>}/>
+        <Route exact path="/EditDiskPartition" element={<EditDiskPartition/>}/>
+        <Route exact path="/AddDiskProvider" element={<AddDiskProvider/>}/>
+        <Route exact path="/AddServerPartition" element={<AddServerPartition/>}/>
+        <Route exact path="/EditSrvrContract" element={<EditSrvrContract/>}/>
+        <Route exact path="/ManageLogicalVolume" element={<ManageLogicalVolume/>}/>
+       <Route exact path="/AddVL" element={<ADDVL/>}/>
+       <Route exact path="/" element={<Home/>}/>
+       <Route exact path="/UnauthorizedAccess" element={<UnAuth/>}/>
+        </Routes>
       
     </Router>
   );

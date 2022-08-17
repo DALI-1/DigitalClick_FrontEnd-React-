@@ -18,6 +18,7 @@ import LoadingSpinner from './LoadingSpinner';
 import Table from 'react-bootstrap/Table';
 import Image from 'react-bootstrap/Image'
 import NavBar from "./Navbar"
+import Cookies from 'universal-cookie';
 export function Popup(props) {
   const [show, setShow] = useState(false);
 
@@ -43,6 +44,15 @@ export function Popup(props) {
 
 
   const handleDelete = ()=>{
+    const cookies = new Cookies();
+      let Priv= cookies.get("Priv")
+      if(Priv=="Normal_User")
+      {
+       window.location.replace('UnauthorizedAccess')
+       
+      }
+      else
+      {
 
 let url="http://localhost:8000/api/RemoveClientByID?ClientID="+props.Client_ID
   CallAPI(url);
@@ -54,6 +64,7 @@ let url="http://localhost:8000/api/RemoveClientByID?ClientID="+props.Client_ID
     
     
   }
+}
 
   return (
     <>

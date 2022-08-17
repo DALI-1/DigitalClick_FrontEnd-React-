@@ -6,7 +6,7 @@ import AddServer from '../components/AddServer';
 import AddVirtualMachine from '../components/AddVirtualMachine';
 import AddClient from '../components/AddClient';
 import ManageClients from '../components/ManageClients';
-import ManageServerContract from '../components/ManageServerContract';
+import Admin from '../components/Admin';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cookies from 'universal-cookie';
 import Footer from '../components/Footer';
@@ -71,7 +71,7 @@ class MainPage extends Component {
       this.CheckIdentification();
       const cookies = new Cookies();
       let Priv= cookies.get("Priv")
-      if(Priv=="Normal_User" || Priv=="Moderator_User")
+      if(Priv=="Moderator_User" ||Priv=="Normal_User" )
       {
        window.location.replace('UnauthorizedAccess')
        
@@ -98,7 +98,7 @@ class MainPage extends Component {
           {/*<AddClient/> */}
          {/*<ManageClients/> */}
         {/*<ManageContract/> */}
-        <ManageServerContract/>
+        <Admin/>
         
     </div>
     

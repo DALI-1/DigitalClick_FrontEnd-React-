@@ -71,6 +71,13 @@ class MainPage extends Component {
   }
     render() { 
       this.CheckIdentification();
+      const cookies = new Cookies();
+      let Priv= cookies.get("Priv")
+      if(Priv=="Normal_User")
+      {
+       window.location.replace('UnauthorizedAccess')
+       
+      }
         return (
           
          
@@ -85,6 +92,7 @@ class MainPage extends Component {
       borderwidth:"20px"
       
     }}>
+      
           {/* <ManageServer/> */}
           
             {/*<AddServer/> */}

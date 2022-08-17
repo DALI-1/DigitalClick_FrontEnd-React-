@@ -70,6 +70,13 @@ class MainPage extends Component {
 
   } 
     render() { 
+      const cookies = new Cookies();
+      let Priv= cookies.get("Priv")
+      if(Priv=="Normal_User")
+      {
+       window.location.replace('UnauthorizedAccess')
+       
+      }
       this.CheckIdentification();
         return (
           

@@ -83,15 +83,9 @@ export default function SignIn() {
       for( var property in result)
       {
         if(property==="UserValidated" && result[property]==="Yes")
-        {
-               
+        {   
                     LoggedIn=1;
-
-                    
- 
-                     
                     setToken(result['Token'])
-
                     var ciphertext = CryptoJS.AES.encrypt(JSON.stringify(Password), 'DigitalClick').toString();
                   // var bytes = CryptoJS.AES.decrypt(ciphertext, 'my-secret-key@123');
                   // var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
@@ -100,6 +94,7 @@ export default function SignIn() {
                     cookies.set('Username', Username);
                 cookies.set('AccessToken',result['Token']);
                 cookies.set('Password', ciphertext);
+                
                 setFailLoad(true)
                 setSignInMessage("You have been logged in Successfully!")
                 setTimeout(() => {window.location.replace('/')   }, 2000);

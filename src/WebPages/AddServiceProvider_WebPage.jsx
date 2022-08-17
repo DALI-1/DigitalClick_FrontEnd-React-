@@ -69,7 +69,15 @@ class MainPage extends Component {
 
   }
     render() { 
+      
       this.CheckIdentification();
+      const cookies = new Cookies();
+      let Priv= cookies.get("Priv")
+      if(Priv=="Normal_User")
+      {
+       window.location.replace('UnauthorizedAccess')
+       
+      }
         return (
           
           <div class="shadow-lg p-3 m-3  bg-body rounded"style={{

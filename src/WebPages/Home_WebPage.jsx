@@ -259,7 +259,7 @@ Le concentrateur multi-écrans permet d'accéder à trois écrans à partir d'un
 </div>
 </StyleRoot>
 
-<Footer/>
+
   
        </>
      );

@@ -36,15 +36,24 @@ export function Popup(props) {
     }
   };
   const handleDelete = ()=>{
+   
+    const cookies = new Cookies();
+   let Priv= cookies.get("Priv");
+   if(Priv=="Normal_User")
+   {
+    window.location.replace('UnauthorizedAccess')
+   }
+   else
+   {
 let url="http://localhost:8000/api/RemovePartitionByID?PartitionID="+props.Partition_ID
   CallAPI(url);
-  console.log(url);
+  
     setShow(false);
     setTimeout(function () {
       window.location.replace('ManageServerPartitions?ServerID='+props.Server_ID)
   }, 1000);   
   }
-
+  }
   return (
     <>
     <IconButton aria-label="delete" size="large" onClick={handleShow}>

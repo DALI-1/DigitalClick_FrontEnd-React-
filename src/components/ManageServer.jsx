@@ -48,14 +48,25 @@ export function Popup(props) {
 
 
   const handleDelete = ()=>{
+    const cookies = new Cookies();
+      let Priv= cookies.get("Priv")
+      if(Priv=="Normal_User")
+      {
+       window.location.replace('UnauthorizedAccess')
+       
+      }
+      else
+      {
+        let url="http://localhost:8000/api/RemoveServerByID?ServerID="+props.Server_ID
+        CallAPI(url);
+        console.log(url);
+          setShow(false);
+          setTimeout(function () {
+            window.location.replace('ManageServers')
+        }, 1000);
+      }
 
-let url="http://localhost:8000/api/RemoveServerByID?ServerID="+props.Server_ID
-  CallAPI(url);
-  console.log(url);
-    setShow(false);
-    setTimeout(function () {
-      window.location.replace('ManageServers')
-  }, 1000);
+
     
     
   }

@@ -109,6 +109,13 @@ class Home extends Component {
 
   }
     render() { 
+      const cookies = new Cookies();
+      let Priv= cookies.get("Priv")
+      if(Priv=="Normal_User")
+      {
+       window.location.replace('UnauthorizedAccess')
+       
+      }
       const styles = {
         bounce: {
           animation: 'x 1.5s',
