@@ -193,7 +193,8 @@ super();
           <NavDropdown.Divider />        
         </NavDropdown>     
         <NavDropdown title="Profil" id="navbarScrollingDropdown">
-          {(cookies.get("Priv")=="Admin_User")? <NavDropdown.Item href="Admin">Admin Management</NavDropdown.Item> :<></>}
+          {(cookies.get("Priv")=="Admin_User")? <NavDropdown.Item href="Admin">
+Gestion administrative</NavDropdown.Item> :<></>}
           
           <NavDropdown.Item href="ManageProfile">Gérer le profil</NavDropdown.Item>         
           <NavDropdown.Divider />

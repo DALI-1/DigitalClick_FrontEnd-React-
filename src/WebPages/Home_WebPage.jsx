@@ -111,16 +111,16 @@ class Home extends Component {
     render() { 
       const styles = {
         bounce: {
-          animation: 'x 1.5s',
+          animation: 'x 0.5s',
           animationName: Radium.keyframes(slideInLeft, 'bounce')
         }
         ,bounceInRight: {
-          animation: 'x 1.5s',
+          animation: 'x 0.5s',
           animationName: Radium.keyframes(zoomIn, 'bounceInRight')
         }
         
         ,bounceInUp: {
-          animation: 'x 1s',
+          animation: 'x 0.5s',
           animationName: Radium.keyframes(bounceInUp, 'bounceInRight')
         }
       }
