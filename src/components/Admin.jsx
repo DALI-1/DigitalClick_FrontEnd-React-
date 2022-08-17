@@ -280,7 +280,7 @@ Json.then((result)=>{
         <Col>
         <div class="shadow-lg p-3 mb-3 bg-body rounded">
         <div class="d-flex justify-content-center mt-1">
-                <Image roundedCircle={true} style={{width: '70px',height:'70px'}} src={require('./images/Contract_Logo.gif')}/>
+                <Image roundedCircle={true} style={{width: '200px',height:'100px'}} src={require('./images/AdminIcon.gif')}/>
                 
                 </div>
         
