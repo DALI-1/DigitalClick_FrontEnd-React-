@@ -26,14 +26,8 @@ class MainPage extends Component {
       borderwidth:"20px"
       
     }}>
-          {/* <ManageServer/> */}
           
-            {/*<AddServer/> */}
-             {/*<AddVirtualMachine/> */}
-              {/*<AddClient/> */}
-             {/*<ManageClients/> */}
-            {/*<ManageContract/> */}
-            <SignIn/> 
+          <SignIn/> 
          
         </div>
        

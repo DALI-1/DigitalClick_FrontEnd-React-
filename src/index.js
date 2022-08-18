@@ -27,7 +27,7 @@ root.render(
 </head>
 </helmet>
     <App/>
-    {(window.location.pathname!="/UnauthorizedAccess")?<Footer/>:<></>}
+    {(window.location.pathname!="/UnauthorizedAccess" &&window.location.pathname!="/SignUp" && window.location.pathname!="/SignIn")?<Footer/>:<></>}
     
     </>
 );
