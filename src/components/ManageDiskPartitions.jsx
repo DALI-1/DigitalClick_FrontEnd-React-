@@ -173,7 +173,7 @@ class ManageContract extends Component {
            
        
         
-        <p class="text-justify" style={{color:"Black"}}>Les disques de partitions :</p>       
+        <p class="text-justify" style={{color:"Black"}}>Partitions de disque</p>       
         <a class="btn btn-outline-primary btn-sm" href={"CreateDiskPartition?DiskID="+diskid+"&ServerID="+srvrid} data-abc="true" style={{marginRight:"10px",marginBottom:"10px",padding:"10px"}}>Ajouter une partition</a>
         <Table  bordered hover responsive>
       <thead>

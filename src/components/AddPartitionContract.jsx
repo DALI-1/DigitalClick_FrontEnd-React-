@@ -287,7 +287,7 @@ Json.then((result)=>{
         <Col><Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        > Server name:</Form.Label>
+        > Nom du serveur:</Form.Label>
         <Form.Select required onChange={this.onChangeHandler} name="Server_ID">
           {
             this.state.Servers.map((Server)=>{
@@ -305,7 +305,8 @@ Json.then((result)=>{
       <Col><Form.Group className="mb-3" controlId="formBasicEmail" name="ServerVMPartition_ID">
         <Form.Label
         style={{color: 'black'}}
-        > Server Partition Name:</Form.Label>
+        > 
+        Nom de la VM</Form.Label>
         <Form.Select required onChange={this.onChangeHandler2} name="ServerVMPartition_ID" >
         {
             this.state.Partitions.map((Partition)=>{
@@ -346,7 +347,7 @@ Json.then((result)=>{
         <Col> <Form.Group className="mb-3" controlId="formBasicEmail" name="Payment_Type">
         <Form.Label
         style={{color: 'black'}}
-        >Payment Type: </Form.Label>
+        >Type de paiement: </Form.Label>
         <Form.Select required name="Payment_Type">
           <option>Monthly</option>
           <option>Yearly</option>  
@@ -370,7 +371,7 @@ Json.then((result)=>{
         <Col><Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Price</Form.Label>
+        >Prix:</Form.Label>
         <Form.Control required  type="number" min="0.00" max="10000.00" step="0.01" placeholder="Enter the price" name="Rent_price"/>
         <Form.Text className="text-muted">
           
@@ -379,13 +380,13 @@ Json.then((result)=>{
         <Col> <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >Access Status Temppass</Form.Label>
+        >A.Status Temppass</Form.Label>
         <Form.Control   type="text"  placeholder="Enter Access Status Temppass" name="Access_status_Temppass" />
         <Form.Text className="text-muted">       
         </Form.Text>
       </Form.Group></Col>
       </Row>
-      <Row><button type="submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">Create Partition Contract</button></Row>
+      <Row><button type="submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">Créer un contrat de machine virtuelle</button></Row>
     </Container>
 </Form>
 <Modal
@@ -396,10 +397,11 @@ Json.then((result)=>{
       >
         <Modal.Header closeButton>
           <Modal.Title id="example-modal-sizes-title-lg">
-            Contract Management:
+           
+La gestion des contrats
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>Contract Added successfully</Modal.Body>
+        <Modal.Body>Contrat ajouté avec succès</Modal.Body>
       </Modal>
     </div>
 </div>

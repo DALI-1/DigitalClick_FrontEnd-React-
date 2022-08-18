@@ -299,7 +299,7 @@ this.setState({Clients:Clients_List},()=>{
       <Col><Form.Group className="mb-3" controlId="formBasicEmail">
       <Form.Label
       style={{color: 'black'}}
-      > Server name:</Form.Label>
+      > Nom du Server</Form.Label>
       <Form.Select required onChange={this.onChangeHandler} name="Server_ID" defaultValue={this.state.Contract[0].Server_Name}>
         {
           this.state.Servers.map((Server)=>{
@@ -320,7 +320,7 @@ this.setState({Clients:Clients_List},()=>{
       <Col><Form.Group className="mb-3" controlId="formBasicEmail" name="Client_ID">
       <Form.Label
       style={{color: 'black'}}
-      >Client:</Form.Label>
+      >Client</Form.Label>
       <Form.Select required name="Client_ID" onChange={this.onChangeHandler3} defaultValue={this.state.Contract[0].First_Name+" "+this.state.Contract[0].Last_Name}>
       {
           this.state.Clients.map((Client)=>{
@@ -343,7 +343,7 @@ this.setState({Clients:Clients_List},()=>{
     <Col> <Form.Group className="mb-3" controlId="formBasicEmail">
       <Form.Label
       style={{color: 'black'}}
-      >	Next Facturation Date</Form.Label>
+      >	Prochaine date de facturation</Form.Label>
       <Form.Control    type="Date" name="Next_Facturation_Date" defaultValue={this.state.Contract[0].Next_Facturation_Date}  />
       <Form.Text className="text-muted">
         
@@ -355,7 +355,7 @@ this.setState({Clients:Clients_List},()=>{
       <Col> <Form.Group className="mb-3" controlId="formBasicEmail" name="Payment_Type">
       <Form.Label
       style={{color: 'black'}}
-      >Payment Type: </Form.Label>
+      >Type de paiement </Form.Label>
       <Form.Select required name="Payment_Type" defaultValue={this.state.Contract[0].Payment_Type}>
         <option>Monthly</option>
         <option>Yearly</option>  
@@ -379,7 +379,7 @@ this.setState({Clients:Clients_List},()=>{
       <Col><Form.Group className="mb-3" controlId="formBasicEmail">
       <Form.Label
       style={{color: 'black'}}
-      >Price</Form.Label>
+      >Prix</Form.Label>
       <Form.Control required  type="number" min="0.00" max="10000.00" step="0.01" placeholder="Enter the price" name="Rent_price"
       defaultValue={this.state.Contract[0].Rent_price}/>
       <Form.Text className="text-muted">       
@@ -388,7 +388,7 @@ this.setState({Clients:Clients_List},()=>{
       <Col> <Form.Group className="mb-3" controlId="formBasicEmail">
       <Form.Label
       style={{color: 'black'}}
-      >Access Status Temppass</Form.Label>
+      >A.Status Temppass</Form.Label>
       <Form.Control   type="text"  placeholder="Enter Access Status Temppass" name="Access_status_Temppass"
       defaultValue={this.state.Contract[0].Access_status_Temppass} />
       <Form.Text className="text-muted">       

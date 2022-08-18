@@ -171,7 +171,8 @@ this.setState({Disks:Disks_List}
         <div class="shadow-lg p-3 mb-3 bg-body rounded">
            
        
-        <p class="text-justify" style={{color:"Black"}}>Les disques du serveur :</p>
+        <p class="text-justify" style={{color:"Black"}}>
+Volumes logiques du serveur</p>
         
         <a class="btn btn-outline-primary btn-sm" href={"AddVL?ServerID="+srvid} data-abc="true" style={{marginRight:"10px",marginBottom:"10px",padding:"10px"}}>Ajouter un nouveau VL </a>
 

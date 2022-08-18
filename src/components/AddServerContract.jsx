@@ -278,7 +278,8 @@ this.setState({Clients:Clients_List})
       <Col><Form.Group className="mb-3" controlId="formBasicEmail">
       <Form.Label
       style={{color: 'black'}}
-      > Server name:</Form.Label>
+      > 
+      Nom du serveur</Form.Label>
       <Form.Select required onChange={this.onChangeHandler} name="Server_ID">
         {
           this.state.Servers.map((Server)=>{
@@ -299,7 +300,7 @@ this.setState({Clients:Clients_List})
       <Col><Form.Group className="mb-3" controlId="formBasicEmail" name="Client_ID">
       <Form.Label
       style={{color: 'black'}}
-      >Client:</Form.Label>
+      >Client</Form.Label>
       <Form.Select required name="Client_ID" onChange={this.onChangeHandler3}>
       {
           this.state.Clients.map((Client)=>{
@@ -321,7 +322,8 @@ this.setState({Clients:Clients_List})
       <Col> <Form.Group className="mb-3" controlId="formBasicEmail" name="Payment_Type">
       <Form.Label
       style={{color: 'black'}}
-      >Payment Type: </Form.Label>
+      >
+      Type de paiement </Form.Label>
       <Form.Select required name="Payment_Type">
         <option>Monthly</option>
         <option>Yearly</option>  
@@ -345,7 +347,7 @@ this.setState({Clients:Clients_List})
       <Col><Form.Group className="mb-3" controlId="formBasicEmail">
       <Form.Label
       style={{color: 'black'}}
-      >Price</Form.Label>
+      >Prix</Form.Label>
       <Form.Control required  type="number" min="0.00" max="10000.00" step="0.01" placeholder="Enter the price" name="Rent_price"/>
       <Form.Text className="text-muted">
         
@@ -354,13 +356,13 @@ this.setState({Clients:Clients_List})
       <Col> <Form.Group className="mb-3" controlId="formBasicEmail">
       <Form.Label
       style={{color: 'black'}}
-      >Access Status Temppass</Form.Label>
+      >A.Status Temppass</Form.Label>
       <Form.Control   type="text"  placeholder="Enter Access Status Temppass" name="Access_status_Temppass" />
       <Form.Text className="text-muted">       
       </Form.Text>
     </Form.Group></Col>
     </Row>
-    <Row><button type="submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">Create Partition Contract</button></Row>
+    <Row><button type="submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark">Créer un contrat de serveur</button></Row>
   </Container>
   <Modal
         size="lg"
@@ -370,10 +372,11 @@ this.setState({Clients:Clients_List})
       >
         <Modal.Header closeButton>
           <Modal.Title id="example-modal-sizes-title-lg">
-            Server Contract Management:
+          Gestion des contrats de serveur :
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>Contract Added successfully</Modal.Body>
+        <Modal.Body>
+Contrat ajouté avec succès</Modal.Body>
       </Modal>
 </Form> 
   </div>

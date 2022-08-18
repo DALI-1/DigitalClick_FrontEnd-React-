@@ -206,13 +206,13 @@ if(NewPasswordS!=null)
             <div class="p-3 py-5">
             <form onSubmit={this.handlesubmit}>
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-right">Profile Settings</h4>
+                    <h4 class="text-right">Paramètres de profil</h4>
                     
                 </div>
                 <div class="row mt-6">
                 <div class="col-md-6"><label class="labels">UserName</label><input required type="text" class="form-control" disabled placeholder="first name" name='Username' defaultValue={this.state.Profile[0].Username}/></div>
-                    <div class="col-md-6"><label class="labels">First Name</label><input required type="text" class="form-control" placeholder="first name" name='First_Name' defaultValue={this.state.Profile[0].First_Name} /></div>
-                    <div class="col-md-6"><label class="labels">Last Name</label><input required type="text" class="form-control"  placeholder="surname" name='Last_Name'defaultValue={this.state.Profile[0].Last_Name} /></div>
+                    <div class="col-md-6"><label class="labels">Prenom</label><input required type="text" class="form-control" placeholder="first name" name='First_Name' defaultValue={this.state.Profile[0].First_Name} /></div>
+                    <div class="col-md-6"><label class="labels">Nom</label><input required type="text" class="form-control"  placeholder="surname" name='Last_Name'defaultValue={this.state.Profile[0].Last_Name} /></div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-12"><label class="labels">Role</label><input required type="text" class="form-control" placeholder="Role" name='Role' value={(this.state.Profile[0].Role=="Normal_User")? "User":"Admin"} /></div>
@@ -220,9 +220,9 @@ if(NewPasswordS!=null)
                    
                 </div>
                 <div class="row mt-3">
-                <div class="col-md-12"><label class="labels"> Profile Picture </label><input  type="file" class="form-control" name='PFP_URL' onChange={this.handleUpload}  /></div>
-                    <div class="col-md-12"><label class="labels">Current Password</label><input required type="password" name='Password' class="form-control"   /></div>
-                    <div class="col-md-12"><label class="labels">New Password</label><input  type="password" class="form-control" name='NewPassword' /></div>
+                <div class="col-md-12"><label class="labels"> Image de profil </label><input  type="file" class="form-control" name='PFP_URL' onChange={this.handleUpload}  /></div>
+                    <div class="col-md-12"><label class="labels">Mot de passe actuel</label><input required type="password" name='Password' class="form-control"   /></div>
+                    <div class="col-md-12"><label class="labels">Nouveau mot de passe</label><input  type="password" class="form-control" name='NewPassword' /></div>
                 </div>
 
                 <div class="mt-5 text-center"><input type="submit" class="btn btn-outline-primary btn-rounded" placeholder="Poste" value="Enregistrer les informations" /> 

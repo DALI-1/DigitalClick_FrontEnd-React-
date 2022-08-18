@@ -254,19 +254,21 @@ Json.then((result)=>{
         <Table  bordered hover responsive>
       <thead>
         <tr>
-          <th># Contract ID</th>
-          <th>Server Name</th>
-          <th>Partition Name</th>
-          <th>Client Name</th>
-          <th>Payment Type</th>
-          <th>Price</th>
-          <th>Start Facturation Date</th>
-          <th>Next Facturation date</th>
+          <th>Contract ID</th>
+          <th>Nom du Server</th>
+          <th>Nom du VM</th>
+          <th>Nom du Client</th>
+          <th>Type de paiement</th>
+          <th>Prix</th>
+          <th>Date de début de facturation</th>
+          <th>
+Prochaine date de facturation</th>
           
           <th>SSL Ending date</th>
-          <th>Access status tempass</th>
+          <th>A.status tempass</th>
           
-          <th> Edit</th>
+          <th>
+Modification</th>
         </tr>
       </thead>
       <tbody>

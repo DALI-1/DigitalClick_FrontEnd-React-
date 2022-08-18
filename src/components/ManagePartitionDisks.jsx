@@ -174,7 +174,8 @@ this.setState({Disks:Disks_List}
         <div class="shadow-lg p-3 mb-3 bg-body rounded">
            
        
-        <p class="text-justify" style={{color:"Black"}}>Les disques du serveur :</p>
+        <p class="text-justify" style={{color:"Black"}}>
+Disques de volumes logiques</p>
         
         <a class="btn btn-outline-primary btn-sm" href={"AddDisk?ServerID="+srvid+"&VLID="+VLID} data-abc="true" style={{marginRight:"10px",marginBottom:"10px",padding:"10px"}}>Ajouter un nouveau disque </a>
         <a class="btn btn-outline-primary btn-sm" href={"AddDiskProvider?ServerID="+srvid+"&VLID="+VLID} data-abc="true" style={{marginRight:"10px",marginBottom:"10px",padding:"10px"}}>Ajouter un fournisseur de disque </a>

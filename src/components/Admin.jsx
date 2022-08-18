@@ -284,21 +284,22 @@ Json.then((result)=>{
                 
                 </div>
         
-        <p class="text-justify" style={{color:"Black"}}>Human Resources Management Table</p>
+        <p class="text-justify" style={{color:"Black"}}>
+Tableau de gestion des ressources humaines </p>
         
         <Table  bordered hover responsive>
       <thead>
         <tr>
-          <th># User ID</th>
+          <th>Identifiant d'utilisateur</th>
           <th>Username</th>
           
-          <th>First_Name</th>
-          <th>Last_Name</th>
+          <th>Prénom</th>
+          <th>Nom</th>
           <th>Role</th>
           <th>Poste</th>
         
           
-          <th> Edit</th>
+          <th> Modification</th>
         </tr>
       </thead>
       <tbody>

@@ -111,7 +111,7 @@ this.TurnoffLoadingScreen();
           <div class="shadow  p-5  mb-5 mt-5 bg-light rounded" >
                 <div class="shadow  p-1  mb-1  bg-light rounded">
                 <div class="d-flex justify-content-center mb-4">
-                <Image  style={{width: '150px',height:'150px'}} src={require('./images/SSD_Logo.gif')}/>
+                <Image  style={{width: '150px',height:'150px'}} src={require('./images/VLDefault.png')}/>
                 
                 </div>
                 </div>
@@ -144,7 +144,7 @@ this.TurnoffLoadingScreen();
       </Form.Group>
       
       <div class="row justify-content-center">
-      <button type="submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark" style={{margin:"10px"}}>Create Disk</button>
+      <button type="submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark" style={{margin:"10px"}}>Créer un volume logique</button>
 </div>
 
 <div>
@@ -156,10 +156,11 @@ this.TurnoffLoadingScreen();
       >
         <Modal.Header closeButton>
           <Modal.Title id="example-modal-sizes-title-lg">
-            Disk Management:
+          Gestion des volumes logiques
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>Disk Added successfully</Modal.Body>
+        <Modal.Body>Volume logique ajouté avec succès
+</Modal.Body>
       </Modal>
 </div>
       
