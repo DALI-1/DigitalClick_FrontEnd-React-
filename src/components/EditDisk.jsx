@@ -25,6 +25,7 @@ class AddServer extends Component {
     props.preventDefault();
     const queryParams = new URLSearchParams(window.location.search);
     let srvid = queryParams.get('ServerID');
+    let VLID = queryParams.get('VLID');
     this.setState({Status:true})
     let PropsString=""
     let i=0
@@ -41,9 +42,9 @@ class AddServer extends Component {
         PropsString=PropsString+"&"+props.target[i].name+"="+props.target[i].value
      }      
     }
-    console.log(url+PropsString)
+  
     this.SERVERAPICALL(url+PropsString)
-    setTimeout(() => {window.location.replace('/ManagePartitionDisks?ServerID='+srvid)}, 2000);
+    setTimeout(() => {window.location.replace('/ManagePartitionDisks?ServerID='+srvid+"&VLID="+VLID)}, 2000);
 
 
   }
@@ -72,6 +73,7 @@ class AddServer extends Component {
 {
   const queryParams = new URLSearchParams(window.location.search);
     let DID = queryParams.get('DiskID');
+    let VLID = queryParams.get('VLID');
 let Json=null 
 let url="http://127.0.0.1:8000/api/GetAllDiskProviders"
 Json=this.SERVERAPICALL(url)
@@ -130,7 +132,7 @@ this.TurnoffLoadingScreen();
         <div class="shadow  p-5  mb-5 mt-5 bg-light rounded" >
               <div class="shadow  p-1  mb-1  bg-light rounded">
               <div class="d-flex justify-content-center mb-4">
-              <Image  style={{width: '150px',height:'150px'}} src={require('./images/SSD_Logo.gif')}/>
+              <Image  style={{width: '150px',height:'150px'}} src={require('./images/HardDrive.png')}/>
               
               </div>
               </div>
@@ -140,7 +142,7 @@ this.TurnoffLoadingScreen();
 <Form.Group className="mb-3" controlId="formBasicEmail">
       <Form.Label
       style={{color: 'black'}}
-      >Disk Providers:</Form.Label>
+      >Fournisseurs de disques :</Form.Label>
       <Form.Select required name="DProvider_ID" onChange={this.onChangeHandler} defaultValue={this.state.DiskI[0].DProvider_Company_Name}>
         {
           this.state.Providers.map((Provider)=>
@@ -161,7 +163,7 @@ this.TurnoffLoadingScreen();
     <Form.Group className="mb-3" controlId="formBasicEmail">
       <Form.Label
       style={{color: 'black'}}
-      >Disk Model:</Form.Label>
+      >Modèle de disque :</Form.Label>
       <Form.Control required name="Disk_Model" type="text"  placeholder="Enter Disk Model" defaultValue={this.state.DiskI[0].Disk_Model}/>
       <Form.Text className="text-muted">
         
@@ -171,7 +173,8 @@ this.TurnoffLoadingScreen();
     <Form.Group className="mb-3" controlId="formBasicEmail">
       <Form.Label
       style={{color: 'black'}}
-      >Disk Total Size:</Form.Label>
+      >
+      Taille du disque :</Form.Label>
       <Form.Control required name="Total_Size" type="number"   placeholder="Enter Disk Size "defaultValue={this.state.DiskI[0].Total_Size} />
       <Form.Text className="text-muted">     
       </Form.Text>
@@ -197,7 +200,8 @@ this.TurnoffLoadingScreen();
     <Form.Group className="mb-3" controlId="formBasicEmail">
       <Form.Label
       style={{color: 'black'}}
-      >Disk Type:</Form.Label>
+      >
+      Type de disque :</Form.Label>
       <Form.Select required name="Disk_Type" defaultValue={this.state.DiskI[0].Disk_Type}>
         <option>HDD</option>
         <option>SSD</option>
@@ -225,10 +229,10 @@ Enregistrer les informations du disque</button>
     >
       <Modal.Header closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">
-          Disk Management:
+        Gestion de disque:
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>Disk Informations updated successfully!</Modal.Body>
+      <Modal.Body>Informations sur le disque mises à jour avec succès !</Modal.Body>
     </Modal>
 </div>
     

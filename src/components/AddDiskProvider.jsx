@@ -16,13 +16,14 @@ class AddServer extends Component {
       this.setState({Status:true})
       const queryParams = new URLSearchParams(window.location.search);
       let srvid = queryParams.get('ServerID');
+      let pid = queryParams.get('VLID');
     let url="http://127.0.0.1:8000/api/CreateDiskProvider"
     let PropsString=""
        PropsString='?'+props.target[0].name+'='+props.target[0].value
        
     this.SERVERAPICALL(url+PropsString)   
     
-    setTimeout(() => {window.location.replace('/ManagePartitionDisks?ServerID='+srvid)}, 3000);
+    setTimeout(() => {window.location.replace('/ManagePartitionDisks?ServerID='+srvid+"&VLID="+pid)}, 3000);
     }
     SERVERAPICALL = async (url) => {
       try {
@@ -51,7 +52,7 @@ class AddServer extends Component {
           <div class="shadow  p-5  mb-5 mt-5 bg-light rounded" >
                 <div class="shadow  p-1  mb-1  bg-light rounded">
                 <div class="d-flex justify-content-center mb-4">
-                <Image  style={{width: '150px',height:'150px'}} src={require('./images/SSD_Logo.gif')}/>
+                <Image  style={{width: '150px',height:'150px'}} src={require('./images/Company.jpg')}/>
                 
                 </div>
                 </div>
@@ -63,8 +64,8 @@ class AddServer extends Component {
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label
         style={{color: 'black'}}
-        >DProvider_Company_Name:</Form.Label>
-        <Form.Control required type="text"  placeholder="Disk Provider Company Name " name="DProvider_Company_Name"/>
+        >Nom de la société du fournisseur de disques:</Form.Label>
+        <Form.Control required type="text"  name="DProvider_Company_Name"/>
         <Form.Text className="text-muted">
           
         </Form.Text>
@@ -77,13 +78,13 @@ class AddServer extends Component {
       >
         <Modal.Header closeButton>
           <Modal.Title id="example-modal-sizes-title-lg">
-            Disk Management:
+          Gestion de disque:
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>Disk Provider Added successfully</Modal.Body>
+        <Modal.Body>Fournisseur de services ajouté avec succès</Modal.Body>
       </Modal>      
       <div class="row justify-content-center">
-      <button type="submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark" style={{margin:"10px"}}>Create Disk</button>
+      <button type="submit" class="btn btn-outline-primary btn-rounded" data-mdb-ripple-color="dark" style={{margin:"10px"}}>Créer un fournisseur de disque</button>
 </div>
       
     </Form>

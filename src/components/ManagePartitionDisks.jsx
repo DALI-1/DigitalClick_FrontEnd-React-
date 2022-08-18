@@ -177,7 +177,7 @@ this.setState({Disks:Disks_List}
         <p class="text-justify" style={{color:"Black"}}>Les disques du serveur :</p>
         
         <a class="btn btn-outline-primary btn-sm" href={"AddDisk?ServerID="+srvid+"&VLID="+VLID} data-abc="true" style={{marginRight:"10px",marginBottom:"10px",padding:"10px"}}>Ajouter un nouveau disque </a>
-        <a class="btn btn-outline-primary btn-sm" href={"AddDiskProvider?ServerID="+srvid} data-abc="true" style={{marginRight:"10px",marginBottom:"10px",padding:"10px"}}>Ajouter un fournisseur de disque </a>
+        <a class="btn btn-outline-primary btn-sm" href={"AddDiskProvider?ServerID="+srvid+"&VLID="+VLID} data-abc="true" style={{marginRight:"10px",marginBottom:"10px",padding:"10px"}}>Ajouter un fournisseur de disque </a>
         <Table  bordered hover responsive>
           
       <thead>
@@ -202,7 +202,7 @@ this.setState({Disks:Disks_List}
 return(
 <tr>
           <td class="text-center">{Disk.Disk_ID}</td>
-          <td class="text-center"><a href="#"><Image  roundedCircle={true} style={{width: '50px',height:'50px'}} src={require('./images/Disk_Default_Picture.jpg')}/></a></td>
+          <td class="text-center"><a href="#"><Image   style={{width: '50px',height:'50px'}} src={require('./images/HardDrive.png')}/></a></td>
           <td class="text-center">{Disk.DProvider_Company_Name}</td>
           <td class="text-center">{Disk.Disk_Model}</td>
           <td class="text-center">{Disk.Disk_Type}</td>
@@ -218,7 +218,7 @@ return(
 
       </Col>
       <Col>
-      <IconButton href={"EditDisk?DiskID="+Disk.Disk_ID+"&ServerID="+srvid} aria-label="delete" size="large">
+      <IconButton href={"EditDisk?DiskID="+Disk.Disk_ID+"&ServerID="+srvid+"&VLID="+VLID} aria-label="delete" size="large">
   <AddIcon fontSize="inherit" />
 </IconButton>
 

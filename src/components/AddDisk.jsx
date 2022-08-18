@@ -115,7 +115,7 @@ this.TurnoffLoadingScreen();
           <div class="shadow  p-5  mb-5 mt-5 bg-light rounded" >
                 <div class="shadow  p-1  mb-1  bg-light rounded">
                 <div class="d-flex justify-content-center mb-4">
-                <Image  style={{width: '150px',height:'150px'}} src={require('./images/SSD_Logo.gif')}/>
+                <Image  style={{width: '150px',height:'150px'}} src={require('./images/HardDrive.png')}/>
                 
                 </div>
                 </div>
