@@ -25,104 +25,100 @@ npm start
 
 To get started with the project, follow these steps:
 
-1. **Installing XAAMP**: First, download and install XAAMP from [here](https://www.apachefriends.org/download.html), this will include PHP, PHPMYADMIN, MYSQL, make sure to include PHP's path as an enviorment variable so it becomes accessible through the terminal and keep MYSQL's port to 3306
+1. **Installing XAAMP**:
+   - First, download and install XAAMP from [here](https://www.apachefriends.org/download.html). This will include PHP, PHPMYADMIN, MYSQL. Make sure to include PHP's path as an environment variable so it becomes accessible through the terminal and keep MYSQL's port to 3306.
 
 2. **Installing Composer**:
-   - Composer is PHP's depenency manager, you need to install that in order for PHP to be able to read your composer.json and composer.lock files and download the dependencies for your project, so make sure first that PHP is installed     and working globally via
+   - Composer is PHP's dependency manager, you need to install that in order for PHP to be able to read your composer.json and composer.lock files and download the dependencies for your project, so make sure first that PHP is installed globally via:
      ```bash
-      php -v
-      ```
-     
-   - Once that is sorted out, download and install Composer from [here](https://getcomposer.org/download/), ( it shouldn't ask you PHP's path if you configred PHP properly to your enviorment)
+     php -v
+     ```
+   - Once that is sorted out, download and install Composer from [here](https://getcomposer.org/download/). (It shouldn't ask you for PHP's path if you configured PHP properly in your environment).
 
 3. **Installing dependencies**:
-   - Now after getting Composer installed, go to folder server, open it with VS code and then run the following command to install the depencendies
+   - Now after getting Composer installed, go to the 'server' folder, open it with VS code and then run the following command to install the dependencies:
      ```bash
-      composer install
-      ```
+     composer install
+     ```
    - Once everything is set, your project's dependencies should be installed.
-   
-4. **configure .env**:
-   - create a .env file inside the server folder and add the following configuration to it     
-   ```bash
-    APP_NAME=Laravel
-    APP_ENV=local
-    APP_KEY=
-    APP_DEBUG=true
-    APP_URL=http://localhost
-    
-    LOG_CHANNEL=stack
-    LOG_DEPRECATIONS_CHANNEL=null
-    LOG_LEVEL=debug
-    
-    DB_CONNECTION=mysql
-    DB_HOST=localhost
-    DB_PORT=3306
-    DB_DATABASE=digitalclick
-    DB_USERNAME="root"
-    DB_PASSWORD=
-    
-    BROADCAST_DRIVER=log
-    CACHE_DRIVER=file
-    FILESYSTEM_DISK=local
-    QUEUE_CONNECTION=sync
-    SESSION_DRIVER=file
-    SESSION_LIFETIME=120
-    
-    MEMCACHED_HOST=127.0.0.1
-    
-    REDIS_HOST=127.0.0.1
-    REDIS_PASSWORD=null
-    REDIS_PORT=6379
-    
-    MAIL_MAILER=smtp
-    MAIL_HOST=mailhog
-    MAIL_PORT=1025
-    MAIL_USERNAME=null
-    MAIL_PASSWORD=null
-    MAIL_ENCRYPTION=null
-    MAIL_FROM_ADDRESS="hello@example.com"
-    MAIL_FROM_NAME="${APP_NAME}"
-    
-    AWS_ACCESS_KEY_ID=
-    AWS_SECRET_ACCESS_KEY=
-    AWS_DEFAULT_REGION=us-east-1
-    AWS_BUCKET=
-    AWS_USE_PATH_STYLE_ENDPOINT=false
-    
-    PUSHER_APP_ID=
-    PUSHER_APP_KEY=
-    PUSHER_APP_SECRET=
-    PUSHER_HOST=
-    PUSHER_PORT=443
-    PUSHER_SCHEME=https
-    PUSHER_APP_CLUSTER=mt1
-    
-    VITE_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
-    VITE_PUSHER_HOST="${PUSHER_HOST}"
-    VITE_PUSHER_PORT="${PUSHER_PORT}"
-    VITE_PUSHER_SCHEME="${PUSHER_SCHEME}"
-    VITE_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
 
-    ```
-   - After creating the .env, feel free to edit, change your DB name, DB port and so on, now you need to change the APP_KEY so that it uses this key to encrypte the session, use the following command to generate an app encryption key
-      ```bash
-      php artisan key:generate
-      ```
-      This command will generate a value for you.
-     
-      
-
-5. **migration**:
-   - Once that sorted simply use this command to start a migration which will create all the tables and collumns to the DB
+4. **Configure .env**:
+   - Create a .env file inside the 'server' folder and add the following configuration to it:
      ```bash
-      php artisan migrate
-      ```
-   - Once the migration finish simply start the Laravel Project with this
-      ```bash
-      php artisan serve
-      ```
+     APP_NAME=digitalclick
+       APP_ENV=local
+       APP_KEY=
+       APP_DEBUG=true
+       APP_URL=http://localhost
+       
+       LOG_CHANNEL=stack
+       LOG_DEPRECATIONS_CHANNEL=null
+       LOG_LEVEL=debug
+       
+       DB_CONNECTION=mysql
+       DB_HOST=localhost
+       DB_PORT=3306
+       DB_DATABASE=digitalclickDB
+       DB_USERNAME="root"
+       DB_PASSWORD=
+       
+       BROADCAST_DRIVER=log
+       CACHE_DRIVER=file
+       FILESYSTEM_DISK=local
+       QUEUE_CONNECTION=sync
+       SESSION_DRIVER=file
+       SESSION_LIFETIME=120
+       
+       MEMCACHED_HOST=127.0.0.1
+       
+       REDIS_HOST=127.0.0.1
+       REDIS_PASSWORD=null
+       REDIS_PORT=6379
+       
+       MAIL_MAILER=smtp
+       MAIL_HOST=mailhog
+       MAIL_PORT=1025
+       MAIL_USERNAME=null
+       MAIL_PASSWORD=null
+       MAIL_ENCRYPTION=null
+       MAIL_FROM_ADDRESS="hello@example.com"
+       MAIL_FROM_NAME="${APP_NAME}"
+       
+       AWS_ACCESS_KEY_ID=
+       AWS_SECRET_ACCESS_KEY=
+       AWS_DEFAULT_REGION=us-east-1
+       AWS_BUCKET=
+       AWS_USE_PATH_STYLE_ENDPOINT=false
+       
+       PUSHER_APP_ID=
+       PUSHER_APP_KEY=
+       PUSHER_APP_SECRET=
+       PUSHER_HOST=
+       PUSHER_PORT=443
+       PUSHER_SCHEME=https
+       PUSHER_APP_CLUSTER=mt1
+       
+       VITE_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
+       VITE_PUSHER_HOST="${PUSHER_HOST}"
+       VITE_PUSHER_PORT="${PUSHER_PORT}"
+       VITE_PUSHER_SCHEME="${PUSHER_SCHEME}"
+       VITE_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+     ```
+   - After creating the .env file, feel free to edit it, change your DB name, DB port, and other settings. Now you need to change the `APP_KEY` so that it uses this key to encrypt the session. Use the following command to generate an app encryption key:
+     ```bash
+     php artisan key:generate
+     ```
+     This command will generate a value for you.
 
+5. **Migration**:
+   - Once that's sorted, simply use this command to start a migration which will create all the tables and columns in the DB:
+     ```bash
+     php artisan migrate
+     ```
+   - Once the migration finishes, you can start the Laravel project with this command:
+     ```bash
+     php artisan serve
+     ```
 ## Pictures
 
 <details>
