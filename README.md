@@ -47,7 +47,7 @@ To get started with the project, follow these steps:
      ```bash
      APP_NAME=digitalclick
        APP_ENV=local
-       APP_KEY=
+       APP_KEY=base64:bDvyPLaGEaaEaCfzaQsIp/rr7CHyb4v1q0DYWdafVdk=
        APP_DEBUG=true
        APP_URL=http://localhost
        
@@ -124,58 +124,59 @@ To get started with the project, follow these steps:
 <details>
 <summary>Authentification</summary>
    
-   
-![Screenshot 2023-11-06 210630](https://github.com/DALI-1/Service-Pneumatique-Hydraulique/assets/99611104/03a212c3-5f01-432b-ba8f-3ca9ce1e561d)
-   
-![Screenshot 2023-11-06 210649](https://github.com/DALI-1/Service-Pneumatique-Hydraulique/assets/99611104/e17b4e35-ad7b-456f-a4df-2e685d9a796a)
+![Screenshot 2023-11-07 013227](https://github.com/DALI-1/DigitalClick_FrontEnd-React-/assets/99611104/1165bd42-e4ac-4880-8c2c-f256e5f9695e)
+
+![Screenshot 2023-11-07 013245](https://github.com/DALI-1/DigitalClick_FrontEnd-React-/assets/99611104/904ec7a4-5d1c-40ab-b995-698f6843f435)
 
 </details>
 
 <details>
 <summary>Presentation</summary>
    
-![Screenshot 2023-11-06 210423](https://github.com/DALI-1/Service-Pneumatique-Hydraulique/assets/99611104/0de1c0b1-6041-410e-8ae6-358ce8cdf069)
-   
-![Screenshot 2023-11-06 210536](https://github.com/DALI-1/Service-Pneumatique-Hydraulique/assets/99611104/e3963a54-f800-437c-9d89-41493e1d0b17)
-   
-![Screenshot 2023-11-06 210553](https://github.com/DALI-1/Service-Pneumatique-Hydraulique/assets/99611104/125cdc66-1624-4a87-a8bd-6903d9750c48)
+![Screenshot 2023-11-07 013336](https://github.com/DALI-1/DigitalClick_FrontEnd-React-/assets/99611104/e65f64aa-8d03-4ce9-9071-2e3ba63d7d11)
 
-![Screenshot 2023-11-06 210611](https://github.com/DALI-1/Service-Pneumatique-Hydraulique/assets/99611104/a122b733-2f82-41e6-928a-32f76bc92a03)
+![Screenshot 2023-11-07 013355](https://github.com/DALI-1/DigitalClick_FrontEnd-React-/assets/99611104/eca8bb54-63d3-4a9e-a7f0-20f59a833d2e)
 
 </details>
 
 <details>
-<summary>Products</summary>
+<summary>Manage Servers</summary>
    
-![Screenshot 2023-11-06 210715](https://github.com/DALI-1/Service-Pneumatique-Hydraulique/assets/99611104/ad8e3122-3a5f-4ecc-b32f-bca768a1b671)
+   ![Screenshot 2023-11-07 013736](https://github.com/DALI-1/DigitalClick_FrontEnd-React-/assets/99611104/648c857b-28ca-4f62-bad2-dfc2652c559d)
+
+![Screenshot 2023-11-07 014655](https://github.com/DALI-1/DigitalClick_FrontEnd-React-/assets/99611104/29d86c9d-c5b2-4138-9a34-81b1bbf391e3)
+
+![Screenshot 2023-11-07 015010](https://github.com/DALI-1/DigitalClick_FrontEnd-React-/assets/99611104/94e12927-8057-49ab-a1d1-78be03fa579c)
+
+![Screenshot 2023-11-07 014717](https://github.com/DALI-1/DigitalClick_FrontEnd-React-/assets/99611104/b0502770-4594-4373-ac2a-1cd41eff99be)
    
-![Screenshot 2023-11-06 211810](https://github.com/DALI-1/Service-Pneumatique-Hydraulique/assets/99611104/94874b8a-380e-44be-8b63-6665c4dc9925)
-   
+![Screenshot 2023-11-07 014751](https://github.com/DALI-1/DigitalClick_FrontEnd-React-/assets/99611104/5eb79438-5650-46e6-bfe7-0ea70990a683)
+
+![Screenshot 2023-11-07 014836](https://github.com/DALI-1/DigitalClick_FrontEnd-React-/assets/99611104/db24282c-9ac3-4480-899e-5bd3bb2198bd)
+
+![Screenshot 2023-11-07 014945](https://github.com/DALI-1/DigitalClick_FrontEnd-React-/assets/99611104/02b0af4d-c9db-4f8b-a1b7-e816761df227)
 
 </details>
 
 <details>
-<summary>Control Center</summary>
+<summary>Manage Clients</summary>
    
-![Screenshot 2023-11-06 210751](https://github.com/DALI-1/Service-Pneumatique-Hydraulique/assets/99611104/7735aa68-b4ed-4b23-84de-fd6177aa6487)
-   
-![Screenshot 2023-11-06 210813](https://github.com/DALI-1/Service-Pneumatique-Hydraulique/assets/99611104/22cb0d6f-9746-48b8-b0d7-78508e99b3a2)
-   
-![Screenshot 2023-11-06 210905](https://github.com/DALI-1/Service-Pneumatique-Hydraulique/assets/99611104/92983891-b50e-4004-a39f-32af33894285)
-   
-![Screenshot 2023-11-06 210931](https://github.com/DALI-1/Service-Pneumatique-Hydraulique/assets/99611104/df9853df-eacb-46da-b1c4-13f2aaf2aec9)
-   
-![Screenshot 2023-11-06 211004](https://github.com/DALI-1/Service-Pneumatique-Hydraulique/assets/99611104/a1664f1c-d42c-4022-b440-31e20d4b41ea)
-   
-![Screenshot 2023-11-06 211204](https://github.com/DALI-1/Service-Pneumatique-Hydraulique/assets/99611104/faa50977-a3fa-43a6-9fa7-5f7a18964b82)
+![Screenshot 2023-11-07 014123](https://github.com/DALI-1/DigitalClick_FrontEnd-React-/assets/99611104/73c5bb41-7a09-4079-a1cf-c1c5b3be5c49)
 
-![Screenshot 2023-11-06 211220](https://github.com/DALI-1/Service-Pneumatique-Hydraulique/assets/99611104/d0be11dd-087b-4477-b19e-7c78d984c5a8)
-![Screenshot 2023-11-06 211239](https://github.com/DALI-1/Service-Pneumatique-Hydraulique/assets/99611104/abadacca-5440-4712-a3fa-aae2c11b63e9)
+![Screenshot 2023-11-07 015027](https://github.com/DALI-1/DigitalClick_FrontEnd-React-/assets/99611104/1426de09-0aac-4aed-84d4-122b0029a175)
 
-![Screenshot 2023-11-06 211351](https://github.com/DALI-1/Service-Pneumatique-Hydraulique/assets/99611104/e9fcdfbb-7f40-442e-80a3-22d5aad74f23)
 
-![Screenshot 2023-11-06 211515](https://github.com/DALI-1/Service-Pneumatique-Hydraulique/assets/99611104/b356904b-0b2f-47c7-88fc-2af49f5a6673)
+</details>
 
+<details>
+<summary> Manage Contracts, Profiles</summary>
+   
+![Screenshot 2023-11-07 015131](https://github.com/DALI-1/DigitalClick_FrontEnd-React-/assets/99611104/06f76058-c13a-4b9c-aded-c1872c90c537)
+   
+
+![Screenshot 2023-11-07 015327](https://github.com/DALI-1/DigitalClick_FrontEnd-React-/assets/99611104/d0d738b6-b12e-4317-9376-35d925244ef6)
+
+![Screenshot 2023-11-07 014418](https://github.com/DALI-1/DigitalClick_FrontEnd-React-/assets/99611104/45b760c6-0427-4870-919d-d76fa1a921b1)
 
 </details>
 
